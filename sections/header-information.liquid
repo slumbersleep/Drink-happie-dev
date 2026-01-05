@@ -1,0 +1,41 @@
+<style>
+  .header-info-slider{
+    visibility: hidden;
+  }
+</style>
+<div class="cstm-container">
+  <div class="info-slider">
+    {% for block in section.blocks %}
+      <div class="info">
+        {% if block.settings.item_text != blank %}
+          <p>{{ block.settings.item_text }}</p>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Header Information",
+  "tag": "section",
+  "class": "header-info-slider",
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "item_text",
+          "label": "Item Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Header Information"
+    }
+  ]
+}
+{% endschema %}

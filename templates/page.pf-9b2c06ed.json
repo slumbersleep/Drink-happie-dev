@@ -1,0 +1,19 @@
+{
+  "sections": {
+    "pf-9b2c06ed": {
+      "type": "pf-9b2c06ed",
+      "settings": {}
+    },
+    "wavy_divier_qRnppP": {
+      "type": "wavy-divier",
+      "name": "Wavy Divider",
+      "settings": {
+        "image": "shopify://shop_images/divider-top-peach-bottom-dark-purple_38718afc-9380-4ab4-8339-ae61c3b5b942.svg"
+      }
+    }
+  },
+  "order": [
+    "pf-9b2c06ed",
+    "wavy_divier_qRnppP"
+  ]
+}

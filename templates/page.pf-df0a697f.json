@@ -1,0 +1,19 @@
+{
+  "sections": {
+    "pf-df0a697f": {
+      "type": "pf-df0a697f",
+      "settings": {}
+    },
+    "wavy_divier_Ad33RX": {
+      "type": "wavy-divier",
+      "name": "Wavy Divider",
+      "settings": {
+        "image": "shopify://shop_images/divider-top-cream-bottom-dark-purple.svg"
+      }
+    }
+  },
+  "order": [
+    "pf-df0a697f",
+    "wavy_divier_Ad33RX"
+  ]
+}

@@ -1,0 +1,638 @@
+{% doc %}
+  @prompt
+    I'm looking for you to generate me a simple table. This table should have on the left side product and on the right side link to COA. On the columns and rows underneath product, I need to be able to add an image with a title (this will be a product image). We can certainly link this to the product pages on the right-hand side. I will have a link (it's a button) that I need to be able to set an external link to, this external link will be a file held in the Shopify content section and needs to open properly. This button will say "View COA". I need to be able to control the background colors of this section
+    
+    
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-coa-table-{{ ai_gen_id }} {
+    background-color: {{ block.settings.background_color }};
+    padding: 40px 20px;
+  }
+
+  .ai-coa-table-container-{{ ai_gen_id }} {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .ai-coa-table-wrapper-{{ ai_gen_id }} {
+    overflow-x: auto;
+  }
+
+  .ai-coa-table-element-{{ ai_gen_id }} {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: {{ block.settings.table_background_color }};
+  }
+
+  .ai-coa-table-element-{{ ai_gen_id }} th {
+    background-color: {{ block.settings.header_background_color }};
+    color: {{ block.settings.header_text_color }};
+    padding: 16px;
+    text-align: left;
+    font-weight: 600;
+    border: 1px solid {{ block.settings.border_color }};
+  }
+
+  .ai-coa-table-element-{{ ai_gen_id }} td {
+    padding: 16px;
+    border: 1px solid {{ block.settings.border_color }};
+    vertical-align: middle;
+  }
+
+  .ai-coa-table-element-{{ ai_gen_id }} tbody tr {
+    background-color: {{ block.settings.row_background_color }};
+  }
+
+  .ai-coa-table-element-{{ ai_gen_id }} tbody tr:nth-child(even) {
+    background-color: {{ block.settings.row_alt_background_color }};
+  }
+
+  .ai-coa-product-cell-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .ai-coa-product-image-{{ ai_gen_id }} {
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+    overflow: hidden;
+    border-radius: 4px;
+  }
+
+  .ai-coa-product-image-{{ ai_gen_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-coa-product-image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-coa-product-image-placeholder-{{ ai_gen_id }} svg {
+    width: 40px;
+    height: 40px;
+  }
+
+  .ai-coa-product-info-{{ ai_gen_id }} {
+    flex-grow: 1;
+  }
+
+  .ai-coa-product-title-{{ ai_gen_id }} {
+    font-weight: 600;
+    margin: 0;
+    color: {{ block.settings.text_color }};
+  }
+
+  .ai-coa-product-title-{{ ai_gen_id }} a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .ai-coa-product-title-{{ ai_gen_id }} a:hover {
+    text-decoration: underline;
+  }
+
+  .ai-coa-button-{{ ai_gen_id }} {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: {{ block.settings.button_background_color }};
+    color: {{ block.settings.button_text_color }};
+    text-decoration: none;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+  }
+
+  .ai-coa-button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_background_color }};
+    color: {{ block.settings.button_text_color }};
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-coa-product-cell-{{ ai_gen_id }} {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .ai-coa-product-image-{{ ai_gen_id }} {
+      width: 60px;
+      height: 60px;
+    }
+
+    .ai-coa-table-element-{{ ai_gen_id }} th,
+    .ai-coa-table-element-{{ ai_gen_id }} td {
+      padding: 12px;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-coa-table-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-coa-table-container-{{ ai_gen_id }}">
+    <div class="ai-coa-table-wrapper-{{ ai_gen_id }}">
+      <table class="ai-coa-table-element-{{ ai_gen_id }}">
+        <thead>
+          <tr>
+            <th>{{ block.settings.column_1_header }}</th>
+            <th>{{ block.settings.column_2_header }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in (1..10) %}
+            {% liquid
+              assign row_enabled_key = 'row_' | append: i | append: '_enabled'
+              assign product_key = 'row_' | append: i | append: '_product'
+              assign product_title_key = 'row_' | append: i | append: '_product_title'
+              assign product_image_key = 'row_' | append: i | append: '_product_image'
+              assign coa_link_key = 'row_' | append: i | append: '_coa_link'
+
+              assign row_enabled = block.settings[row_enabled_key]
+              assign product = block.settings[product_key]
+              assign product_title = block.settings[product_title_key]
+              assign product_image = block.settings[product_image_key]
+              assign coa_link = block.settings[coa_link_key]
+            %}
+
+            {% if row_enabled %}
+              <tr>
+                <td>
+                  <div class="ai-coa-product-cell-{{ ai_gen_id }}">
+                    <div class="ai-coa-product-image-{{ ai_gen_id }}">
+                      {% if product_image %}
+                        <img
+                          src="{{ product_image | image_url: width: 160 }}"
+                          alt="{{ product_image.alt | escape }}"
+                          loading="lazy"
+                          width="80"
+                          height="80"
+                        >
+                      {% else %}
+                        <div class="ai-coa-product-image-placeholder-{{ ai_gen_id }}">
+                          {{ 'product-1' | placeholder_svg_tag }}
+                        </div>
+                      {% endif %}
+                    </div>
+                    <div class="ai-coa-product-info-{{ ai_gen_id }}">
+                      <h3 class="ai-coa-product-title-{{ ai_gen_id }}">
+                        {% if product %}
+                          <a href="{{ product.url }}">{{ product.title }}</a>
+                        {% elsif product_title != blank %}
+                          {{ product_title }}
+                        {% else %}
+                          Product {{ i }}
+                        {% endif %}
+                      </h3>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  {% if coa_link != blank %}
+                    <a
+                      href="{{ coa_link }}"
+                      class="ai-coa-button-{{ ai_gen_id }}"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {{ block.settings.button_text }}
+                    </a>
+                  {% else %}
+                    <span style="color: #999; font-style: italic;">No COA available</span>
+                  {% endif %}
+                </td>
+              </tr>
+            {% endif %}
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product COA table",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Table headers"
+    },
+    {
+      "type": "text",
+      "id": "column_1_header",
+      "label": "Product column header",
+      "default": "Product"
+    },
+    {
+      "type": "text",
+      "id": "column_2_header",
+      "label": "COA column header",
+      "default": "Link to COA"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "View COA"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Section background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "table_background_color",
+      "label": "Table background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "header_background_color",
+      "label": "Header background",
+      "default": "#f4f4f4"
+    },
+    {
+      "type": "color",
+      "id": "header_text_color",
+      "label": "Header text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "row_background_color",
+      "label": "Row background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "row_alt_background_color",
+      "label": "Alternate row background",
+      "default": "#f9f9f9"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "color",
+      "id": "button_background_color",
+      "label": "Button background",
+      "default": "#000f9f"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_background_color",
+      "label": "Button hover background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Button border radius",
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "Row 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "row_1_enabled",
+      "label": "Enable row 1",
+      "default": true
+    },
+    {
+      "type": "product",
+      "id": "row_1_product",
+      "label": "Product"
+    },
+    {
+      "type": "text",
+      "id": "row_1_product_title",
+      "label": "Product title override"
+    },
+    {
+      "type": "image_picker",
+      "id": "row_1_product_image",
+      "label": "Product image override"
+    },
+    {
+      "type": "url",
+      "id": "row_1_coa_link",
+      "label": "COA link"
+    },
+    {
+      "type": "header",
+      "content": "Row 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "row_2_enabled",
+      "label": "Enable row 2",
+      "default": true
+    },
+    {
+      "type": "product",
+      "id": "row_2_product",
+      "label": "Product"
+    },
+    {
+      "type": "text",
+      "id": "row_2_product_title",
+      "label": "Product title override"
+    },
+    {
+      "type": "image_picker",
+      "id": "row_2_product_image",
+      "label": "Product image override"
+    },
+    {
+      "type": "url",
+      "id": "row_2_coa_link",
+      "label": "COA link"
+    },
+    {
+      "type": "header",
+      "content": "Row 3"
+    },
+    {
+      "type": "checkbox",
+      "id": "row_3_enabled",
+      "label": "Enable row 3",
+      "default": true
+    },
+    {
+      "type": "product",
+      "id": "row_3_product",
+      "label": "Product"
+    },
+    {
+      "type": "text",
+      "id": "row_3_product_title",
+      "label": "Product title override"
+    },
+    {
+      "type": "image_picker",
+      "id": "row_3_product_image",
+      "label": "Product image override"
+    },
+    {
+      "type": "url",
+      "id": "row_3_coa_link",
+      "label": "COA link"
+    },
+    {
+      "type": "header",
+      "content": "Row 4"
+    },
+    {
+      "type": "checkbox",
+      "id": "row_4_enabled",
+      "label": "Enable row 4",
+      "default": true
+    },
+    {
+      "type": "product",
+      "id": "row_4_product",
+      "label": "Product"
+    },
+    {
+      "type": "text",
+      "id": "row_4_product_title",
+      "label": "Product title override"
+    },
+    {
+      "type": "image_picker",
+      "id": "row_4_product_image",
+      "label": "Product image override"
+    },
+    {
+      "type": "url",
+      "id": "row_4_coa_link",
+      "label": "COA link"
+    },
+    {
+      "type": "header",
+      "content": "Row 5"
+    },
+    {
+      "type": "checkbox",
+      "id": "row_5_enabled",
+      "label": "Enable row 5",
+      "default": true
+    },
+    {
+      "type": "product",
+      "id": "row_5_product",
+      "label": "Product"
+    },
+    {
+      "type": "text",
+      "id": "row_5_product_title",
+      "label": "Product title override"
+    },
+    {
+      "type": "image_picker",
+      "id": "row_5_product_image",
+      "label": "Product image override"
+    },
+    {
+      "type": "url",
+      "id": "row_5_coa_link",
+      "label": "COA link"
+    },
+    {
+      "type": "header",
+      "content": "Row 6"
+    },
+    {
+      "type": "checkbox",
+      "id": "row_6_enabled",
+      "label": "Enable row 6"
+    },
+    {
+      "type": "product",
+      "id": "row_6_product",
+      "label": "Product"
+    },
+    {
+      "type": "text",
+      "id": "row_6_product_title",
+      "label": "Product title override"
+    },
+    {
+      "type": "image_picker",
+      "id": "row_6_product_image",
+      "label": "Product image override"
+    },
+    {
+      "type": "url",
+      "id": "row_6_coa_link",
+      "label": "COA link"
+    },
+    {
+      "type": "header",
+      "content": "Row 7"
+    },
+    {
+      "type": "checkbox",
+      "id": "row_7_enabled",
+      "label": "Enable row 7"
+    },
+    {
+      "type": "product",
+      "id": "row_7_product",
+      "label": "Product"
+    },
+    {
+      "type": "text",
+      "id": "row_7_product_title",
+      "label": "Product title override"
+    },
+    {
+      "type": "image_picker",
+      "id": "row_7_product_image",
+      "label": "Product image override"
+    },
+    {
+      "type": "url",
+      "id": "row_7_coa_link",
+      "label": "COA link"
+    },
+    {
+      "type": "header",
+      "content": "Row 8"
+    },
+    {
+      "type": "checkbox",
+      "id": "row_8_enabled",
+      "label": "Enable row 8"
+    },
+    {
+      "type": "product",
+      "id": "row_8_product",
+      "label": "Product"
+    },
+    {
+      "type": "text",
+      "id": "row_8_product_title",
+      "label": "Product title override"
+    },
+    {
+      "type": "image_picker",
+      "id": "row_8_product_image",
+      "label": "Product image override"
+    },
+    {
+      "type": "url",
+      "id": "row_8_coa_link",
+      "label": "COA link"
+    },
+    {
+      "type": "header",
+      "content": "Row 9"
+    },
+    {
+      "type": "checkbox",
+      "id": "row_9_enabled",
+      "label": "Enable row 9"
+    },
+    {
+      "type": "product",
+      "id": "row_9_product",
+      "label": "Product"
+    },
+    {
+      "type": "text",
+      "id": "row_9_product_title",
+      "label": "Product title override"
+    },
+    {
+      "type": "image_picker",
+      "id": "row_9_product_image",
+      "label": "Product image override"
+    },
+    {
+      "type": "url",
+      "id": "row_9_coa_link",
+      "label": "COA link"
+    },
+    {
+      "type": "header",
+      "content": "Row 10"
+    },
+    {
+      "type": "checkbox",
+      "id": "row_10_enabled",
+      "label": "Enable row 10"
+    },
+    {
+      "type": "product",
+      "id": "row_10_product",
+      "label": "Product"
+    },
+    {
+      "type": "text",
+      "id": "row_10_product_title",
+      "label": "Product title override"
+    },
+    {
+      "type": "image_picker",
+      "id": "row_10_product_image",
+      "label": "Product image override"
+    },
+    {
+      "type": "url",
+      "id": "row_10_coa_link",
+      "label": "COA link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product COA table"
+    }
+  ]
+}
+{% endschema %}

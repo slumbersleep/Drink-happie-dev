@@ -1,0 +1,19 @@
+{
+  "sections": {
+    "pf-9172fb4f": {
+      "type": "pf-9172fb4f",
+      "settings": {}
+    },
+    "wavy_divier_NWX4pc": {
+      "type": "wavy-divier",
+      "name": "Wavy Divider",
+      "settings": {
+        "image": "shopify://shop_images/divider-top-cream-bottom-dark-purple.svg"
+      }
+    }
+  },
+  "order": [
+    "pf-9172fb4f",
+    "wavy_divier_NWX4pc"
+  ]
+}

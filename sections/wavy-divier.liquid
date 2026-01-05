@@ -1,0 +1,51 @@
+<section id="wavy-divider" class="wavy-divider mixed-shape-top-divider">
+  {% if section.settings.image != blank %}
+    <div class="wavy-divider__wrapper">
+      <img
+        src="{{ section.settings.image | image_url: width: 2000 }}"
+        alt="{{ section.settings.image.alt | escape }}"
+        width="{{ section.settings.image.width }}"
+        height="{{ section.settings.image.height }}"
+        loading="lazy"
+        class="wavy-divider__image"
+      >
+    </div>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Wavy Divider",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Select image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Wavy Divider",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+  .wavy-divider.mixed-shape-top-divider {
+    overflow: hidden;
+    position: relative;
+    margin-top: -48px;
+    margin-bottom: -1px;
+    z-index: 11;
+  }
+
+  .wavy-divider__image {
+    width: 5000px;
+    height: auto;
+    max-width: none;
+    display: block;
+    margin: 0 auto;
+  }
+{% endstylesheet %}

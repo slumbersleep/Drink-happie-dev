@@ -1,0 +1,151 @@
+{
+  "sections": {
+    "image-with-text-overlay": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "shape-divider-image-with-text-overlay-0": {
+          "type": "shape_divider",
+          "settings": {
+            "target_section": "above",
+            "target_section_color_scheme": "scheme1",
+            "style": "waves-2-patterned_1200x43",
+            "flip_horizontal": false,
+            "enable_animation": false,
+            "animation_direction": ""
+          }
+        },
+        "shape-divider-image-with-text-overlay-1": {
+          "type": "shape_divider",
+          "settings": {
+            "target_section": "below",
+            "target_section_color_scheme": "scheme1",
+            "style": "waves-2-patterned_1200x43",
+            "flip_horizontal": false,
+            "enable_animation": false,
+            "animation_direction": ""
+          }
+        }
+      },
+      "block_order": [
+        "shape-divider-image-with-text-overlay-0",
+        "shape-divider-image-with-text-overlay-1"
+      ],
+      "settings": {
+        "display_on_card": false,
+        "display_content_below_image_on_mobile": true,
+        "style": "full",
+        "height": "pt-600",
+        "place_content": "place-content-center-center",
+        "text_align": "text-center",
+        "title": "About Aura",
+        "heading_size": "heading-feature",
+        "richtext": "",
+        "cta_url": "",
+        "cta_text": "Shop Now",
+        "color_scheme": "scheme5",
+        "use_gradient_background": false
+      }
+    },
+    "rich-text": {
+      "type": "rich-text",
+      "settings": {
+        "title": "Our Story",
+        "heading_size": "heading-standard",
+        "rich_text": "<p>Aura was born from a simple belief: skincare should be a holistic experience that nurtures both the skin and the planet. Founded in 2024, our journey began with a commitment to create products that align with the principles of sustainability, wellness, and ethical beauty. We set out to harness the power of nature’s finest ingredients, crafting skincare that not only enhances your natural glow but also respects the environment we all share.</p>",
+        "display_on_card": false,
+        "content_width_desktop": "lg:w-2/3",
+        "button_link": "",
+        "button_label": "Shop Now",
+        "color_scheme": "",
+        "use_gradient_background": false
+      }
+    },
+    "image-with-text-0": {
+      "type": "image-with-text",
+      "settings": {
+        "display_on_card": false,
+        "crop": "",
+        "image_shape": "blob",
+        "blob_type": 1,
+        "rotate_image": 0,
+        "image_position": "right",
+        "image_size": "half",
+        "disable_media_style": false,
+        "title": "Our mission",
+        "heading_size": "heading-standard",
+        "richtext": "<p>At Aura, our mission is to empower you to feel confident in your skin while making a positive impact on the world around us. We believe that true beauty comes from within and that caring for your skin should never come at the expense of the earth. That’s why we’re dedicated to creating high-performance, plant-based skincare that is as good for you as it is for the planet. With every product, we strive to bring you closer to a more radiant you, while contributing to a more sustainable and beautiful world.</p>",
+        "text_alignment": "text-left",
+        "button_link": "",
+        "button_label": "Shop Now",
+        "color_scheme": "",
+        "use_gradient_background": false
+      }
+    },
+    "image-with-text-1": {
+      "type": "image-with-text",
+      "settings": {
+        "display_on_card": false,
+        "crop": "",
+        "image_shape": "blob",
+        "blob_type": 18,
+        "rotate_image": 0,
+        "image_position": "left",
+        "image_size": "half",
+        "disable_media_style": false,
+        "title": "Our commitment",
+        "heading_size": "heading-standard",
+        "richtext": "<p>We’re committed to transparency, sustainability, and innovation. Each of our formulas is meticulously crafted with ethically sourced, cruelty-free ingredients, and packaged in eco-friendly materials. We take pride in our small-batch production, ensuring that every product you receive is fresh and effective. Our AuraBoost™ technology, developed through years of research, delivers consistent results that you can see and feel.</p><p></p>",
+        "text_alignment": "text-left",
+        "button_link": "",
+        "button_label": "Shop Now",
+        "color_scheme": "",
+        "use_gradient_background": false
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "blocks": {
+        "shape-divider-newsletter-0": {
+          "type": "shape_divider",
+          "settings": {
+            "target_section": "above",
+            "target_section_color_scheme": "scheme1",
+            "style": "waves-3-patterned_1200x84",
+            "flip_horizontal": false,
+            "enable_animation": false,
+            "animation_direction": ""
+          }
+        },
+        "shape-divider-newsletter-1": {
+          "type": "shape_divider",
+          "settings": {
+            "target_section": "below",
+            "target_section_color_scheme": "scheme1",
+            "style": "waves-3-patterned_1200x84",
+            "flip_horizontal": false,
+            "enable_animation": false,
+            "animation_direction": ""
+          }
+        }
+      },
+      "block_order": [
+        "shape-divider-newsletter-0",
+        "shape-divider-newsletter-1"
+      ],
+      "settings": {
+        "title": "Sign up to our newsletter",
+        "richtext": "<p>Receive special offers and first look at new products.</p>",
+        "display_on_card": false,
+        "color_scheme": "scheme3",
+        "use_gradient_background": false
+      }
+    }
+  },
+  "order": [
+    "image-with-text-overlay",
+    "rich-text",
+    "image-with-text-0",
+    "image-with-text-1",
+    "newsletter"
+  ]
+}

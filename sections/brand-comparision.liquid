@@ -1,0 +1,197 @@
+<div class="partical-box partical-bottom">
+  <img
+    width=""
+    height=""
+    src="https://cdn.shopify.com/s/files/1/0698/6108/1223/files/purpal-bottom-dark.png?v=1762861819"
+    alt="icon"
+  >
+</div>
+<div class="cstm-container">
+  <div class="cstm-row">
+    <div class="cstm-col-4">
+      <div class="why-happie-left-text">
+        {% if section.settings.section_heading != blank %}
+          <h2>{{ section.settings.section_heading }}</h2>
+        {% endif %}
+        {% if section.settings.content != blank %}
+          <p>{{ section.settings.content }}</p>
+        {% endif %}
+        {% if section.settings.button_text != blank %}
+          <a href="{{ section.settings.button_link }}" class="cstm-btn blue-btn">{{ section.settings.button_text }}</a>
+        {% endif %}
+      </div>
+    </div>
+    <div class="cstm-col-8">
+      <div class="right-table-box">
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th>
+                {% if section.settings.own_brand != blank %}
+                  {{ section.settings.own_brand | image_url: width: 3000 | image_tag: alt: 'icon' }}
+                {% endif %}
+              </th>
+              <th>
+                {% if section.settings.other_brand_text != blank %}
+                  {{ section.settings.other_brand_text }}
+                {% endif %}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for block in section.blocks %}
+              <tr>
+                <td>
+                  {% if block.settings.information != blank %}{{ block.settings.information }}{% endif %}
+                </td>
+                <td>
+                  {% if block.settings.own_brand_have == 'yes' %}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" fill="none">
+                      <path d="M17.8558 31.7576C24.4295 31.7576 29.7586 26.4286 29.7586 19.8549C29.7586 13.2812 24.4295 7.95215 17.8558 7.95215C11.2822 7.95215 5.95312 13.2812 5.95312 19.8549C5.95312 26.4286 11.2822 31.7576 17.8558 31.7576Z" fill="#FFF2E4"/>
+                      <path d="M14.1329 19.8546L16.9508 22.6726C16.9927 22.7143 17.0494 22.7378 17.1086 22.7378C17.1677 22.7378 17.2244 22.7143 17.2663 22.6726L23.0599 16.8789" stroke="#962F80" stroke-width="1.33906"/>
+                    </svg>
+                  {% else %}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                      <g clip-path="url(#clip0_56_786)">
+                        <path d="M16.0026 28.6663C21.8936 28.6663 26.6693 23.8907 26.6693 17.9997C26.6693 12.1086 21.8936 7.33301 16.0026 7.33301C10.1116 7.33301 5.33594 12.1086 5.33594 17.9997C5.33594 23.8907 10.1116 28.6663 16.0026 28.6663Z" fill="#FFF2E4"/>
+                        <path d="M8.92654 11.3956C5.10132 15.2208 5.10132 21.4227 8.92654 25.248C12.7518 29.0732 18.9537 29.0732 22.7789 25.248C26.6041 21.4227 26.6041 15.2208 22.7789 11.3956C18.9537 7.57038 12.7518 7.57038 8.92654 11.3956Z" stroke="#1A1A1A" stroke-width="1.46667"/>
+                        <mask id="mask0_56_786" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="8" y="11" width="16" height="15">
+                          <path d="M15.8528 25.612L23.1436 18.3213L15.8528 11.0306L8.56213 18.3213L15.8528 25.612Z" fill="white"/>
+                        </mask>
+                        <g mask="url(#mask0_56_786)">
+                          <path d="M13.1149 21.967L15.8524 19.2295L18.59 21.967C18.7104 22.0874 18.8737 22.1551 19.0439 22.1551C19.2141 22.1551 19.3774 22.0874 19.4979 21.967C19.6182 21.8467 19.6858 21.6833 19.6858 21.5131C19.6858 21.3429 19.6182 21.1796 19.4979 21.0592L16.7603 18.3217L19.4979 15.5841C19.6182 15.4638 19.6858 15.3004 19.6858 15.1302C19.6858 14.96 19.6182 14.7967 19.4979 14.6763C19.3774 14.5559 19.2141 14.4883 19.0439 14.4883C18.8737 14.4883 18.7104 14.5559 18.59 14.6763L15.8524 17.4138L13.1149 14.6763C12.9945 14.5559 12.8312 14.4883 12.661 14.4883C12.4908 14.4883 12.3274 14.5559 12.2071 14.6763C12.0867 14.7967 12.019 14.96 12.019 15.1302C12.019 15.3004 12.0867 15.4638 12.2071 15.5841L14.9447 18.3217L12.2071 21.0592C12.0867 21.1796 12.019 21.3429 12.019 21.5131C12.019 21.6833 12.0867 21.8467 12.2071 21.967C12.3274 22.0874 12.4908 22.1551 12.661 22.1551C12.8312 22.1551 12.9945 22.0874 13.1149 21.967Z" fill="#1A1A1A"/>
+                        </g>
+                      </g>
+                      <defs>
+                        <clipPath id="clip0_56_786">
+                          <rect width="32" height="32" fill="white"/>
+                        </clipPath>
+                      </defs>
+                    </svg>
+                  {% endif %}
+                </td>
+                <td>
+                  {% if block.settings.other_brand_have == 'yes' %}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" fill="none">
+                      <path d="M17.8558 31.7576C24.4295 31.7576 29.7586 26.4286 29.7586 19.8549C29.7586 13.2812 24.4295 7.95215 17.8558 7.95215C11.2822 7.95215 5.95312 13.2812 5.95312 19.8549C5.95312 26.4286 11.2822 31.7576 17.8558 31.7576Z" fill="#FFF2E4"/>
+                      <path d="M14.1329 19.8546L16.9508 22.6726C16.9927 22.7143 17.0494 22.7378 17.1086 22.7378C17.1677 22.7378 17.2244 22.7143 17.2663 22.6726L23.0599 16.8789" stroke="#962F80" stroke-width="1.33906"/>
+                    </svg>
+                  {% else %}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                      <g clip-path="url(#clip0_56_786)">
+                        <path d="M16.0026 28.6663C21.8936 28.6663 26.6693 23.8907 26.6693 17.9997C26.6693 12.1086 21.8936 7.33301 16.0026 7.33301C10.1116 7.33301 5.33594 12.1086 5.33594 17.9997C5.33594 23.8907 10.1116 28.6663 16.0026 28.6663Z" fill="#FFF2E4"/>
+                        <path d="M8.92654 11.3956C5.10132 15.2208 5.10132 21.4227 8.92654 25.248C12.7518 29.0732 18.9537 29.0732 22.7789 25.248C26.6041 21.4227 26.6041 15.2208 22.7789 11.3956C18.9537 7.57038 12.7518 7.57038 8.92654 11.3956Z" stroke="#1A1A1A" stroke-width="1.46667"/>
+                        <mask id="mask0_56_786" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="8" y="11" width="16" height="15">
+                          <path d="M15.8528 25.612L23.1436 18.3213L15.8528 11.0306L8.56213 18.3213L15.8528 25.612Z" fill="white"/>
+                        </mask>
+                        <g mask="url(#mask0_56_786)">
+                          <path d="M13.1149 21.967L15.8524 19.2295L18.59 21.967C18.7104 22.0874 18.8737 22.1551 19.0439 22.1551C19.2141 22.1551 19.3774 22.0874 19.4979 21.967C19.6182 21.8467 19.6858 21.6833 19.6858 21.5131C19.6858 21.3429 19.6182 21.1796 19.4979 21.0592L16.7603 18.3217L19.4979 15.5841C19.6182 15.4638 19.6858 15.3004 19.6858 15.1302C19.6858 14.96 19.6182 14.7967 19.4979 14.6763C19.3774 14.5559 19.2141 14.4883 19.0439 14.4883C18.8737 14.4883 18.7104 14.5559 18.59 14.6763L15.8524 17.4138L13.1149 14.6763C12.9945 14.5559 12.8312 14.4883 12.661 14.4883C12.4908 14.4883 12.3274 14.5559 12.2071 14.6763C12.0867 14.7967 12.019 14.96 12.019 15.1302C12.019 15.3004 12.0867 15.4638 12.2071 15.5841L14.9447 18.3217L12.2071 21.0592C12.0867 21.1796 12.019 21.3429 12.019 21.5131C12.019 21.6833 12.0867 21.8467 12.2071 21.967C12.3274 22.0874 12.4908 22.1551 12.661 22.1551C12.8312 22.1551 12.9945 22.0874 13.1149 21.967Z" fill="#1A1A1A"/>
+                        </g>
+                      </g>
+                      <defs>
+                        <clipPath id="clip0_56_786">
+                          <rect width="32" height="32" fill="white"/>
+                        </clipPath>
+                      </defs>
+                    </svg>
+                  {% endif %}
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Brand Comparision",
+  "tag": "section",
+  "class": "why-happie-sec",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_heading",
+      "label": "Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "content",
+      "label": "Content"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "image_picker",
+      "id": "own_brand",
+      "label": "Brand Image"
+    },
+    {
+      "type": "text",
+      "id": "other_brand_text",
+      "label": "Other Brand Text"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "brand",
+      "name": "Brand",
+      "settings": [
+        {
+          "type": "text",
+          "id": "information",
+          "label": "Brand Information"
+        },
+        {
+          "type": "select",
+          "id": "own_brand_have",
+          "label": "Own brand have?",
+          "options": [
+            {
+              "value": "yes",
+              "label": "Yes"
+            },
+            {
+              "value": "no",
+              "label": "No"
+            }
+          ],
+          "default": "yes"
+        },
+        {
+          "type": "select",
+          "id": "other_brand_have",
+          "label": "Other brand have?",
+          "options": [
+            {
+              "value": "yes",
+              "label": "Yes"
+            },
+            {
+              "value": "no",
+              "label": "No"
+            }
+          ],
+          "default": "no"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Brand Comparision"
+    }
+  ]
+}
+{% endschema %}

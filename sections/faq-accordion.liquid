@@ -1,0 +1,114 @@
+{% comment %} <div class="partical partical-bottom">
+    <img src="images/perple.png" alt="img">
+</div> {% endcomment %}
+<div class="cstm-container">
+  <div class="common-heading-wrap text-center">
+    <h2 class="text-white">{{ section.settings.heading | default: 'Questions? We got you' }}</h2>
+  </div>
+  <div class="faq-box-wrapper">
+    {% for block in section.blocks %}
+      <div class="faq-single-box" {{ block.shopify_attributes }}>
+        <button class="faq-box" aria-expanded="false" aria-controls="faq-{{ block.id }}">
+          {{ block.settings.question }}
+          <span class="faq-icon">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="0.4" y="0.4" width="27.2" height="27.2" rx="13.6" fill="#FF9F31"/>
+              <rect x="0.4" y="0.4" width="27.2" height="27.2" rx="13.6" stroke="#FF9F31" stroke-width="0.8"/>
+              <path d="M10.4053 13.4465H13.4386V10.2919H14.5458V13.4465H17.5943V14.5234H14.5458V17.7084H13.4386V14.5234H10.4053V13.4465Z" fill="#1A1A1A"/>
+            </svg>
+          </span>
+        </button>
+        <div class="faq-answer" id="faq-{{ block.id }}">
+          <p>{{ block.settings.answer }}</p>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- FAQ Schema Markup -->
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {% for block in section.blocks %}
+      {
+        "@type": "Question",
+        "name": {{ block.settings.question | json }},
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": {{ block.settings.answer | json }}
+        }
+      }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ]
+  }
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const faqBoxes = document.querySelectorAll('.faq-box');
+
+    faqBoxes.forEach(function (faqBox) {
+      faqBox.addEventListener('click', function () {
+        const parent = this.parentElement;
+        const isActive = parent.classList.contains('active');
+
+        // Close all other FAQs
+        document.querySelectorAll('.faq-single-box').forEach(function (box) {
+          box.classList.remove('active');
+          const btn = box.querySelector('.faq-box');
+          if (btn) btn.setAttribute('aria-expanded', 'false');
+        });
+
+        // Toggle current FAQ
+        if (!isActive) {
+          parent.classList.add('active');
+          this.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "FAQ Section",
+  "tag": "section",
+  "class": "faq-sec",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "Questions? We got you"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "FAQ Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "Are these THC shelters legal in my state?"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer",
+          "default": "Lorem ipsum dolor sit amet consectetur adipisicing elit."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ Section"
+    }
+  ]
+}
+{% endschema %}

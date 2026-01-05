@@ -1,0 +1,65 @@
+<div class="cstm-container-fluid">
+  <div class="common-heading-wrap text-center">
+    {% if section.settings.heading_icon != blank %}
+      {{ section.settings.heading_icon | image_url: width: 3000 | image_tag: alt: 'icon' }}
+    {% endif %}
+    <p class="text-white">
+      {% if section.settings.rating_image != blank %}
+        <span class="start-icon">
+          {{ section.settings.rating_image | image_url: width: 3000 | image_tag: alt: 'icon' }}
+        </span>
+      {% endif %}
+      {% if section.settings.rating_text != blank %}{{ section.settings.rating_text }}{% endif %}
+    </p>
+    {% if section.settings.heading != blank %}
+      <h2 class="text-white">{{ section.settings.heading }}</h2>
+    {% endif %}
+  </div>
+  <div class="app-reel-main">
+    {% for block in section.blocks %}
+      {% case block.type %}
+        {% when '@app' %}
+          {% render block %}
+      {% endcase %}
+    {% endfor %}
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Moast App",
+  "tag": "section",
+  "class": "app-sec",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "heading_icon",
+      "label": "Heading Icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "rating_image",
+      "label": "Rating Image"
+    },
+    {
+      "type": "text",
+      "id": "rating_text",
+      "label": "Rating Text"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Moast App"
+    }
+  ]
+}
+{% endschema %}

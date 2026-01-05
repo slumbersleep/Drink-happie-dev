@@ -1,0 +1,83 @@
+<div class="product-tile mt-5 break-words {{ settings.product_tile_text_align }}">
+  <a
+    href="{{ product.url | within: collection }}"
+    class="block h-full w-full"
+  >
+    <h3 class="font-body text-base">{{ product.title | escape }}</h3>
+    {% if product.metafields.custom.tagline != blank %}
+      <div class="mt-2.5 text-scheme-text rte normal-case">
+        {{ product.metafields.custom.tagline }}
+      </div>
+    {% endif %}
+    <p class="mt-3 text-sm text-scheme-text product-description">
+      {{ product.description | strip_html }}
+    </p>
+    {%- if settings.product_tiles_show_vendor -%}
+      <p class="mt-1">{{ product.vendor }}</p>
+    {%- endif -%}
+
+    {%- liquid
+      assign metafield_namespace = settings.product_tiles_metafield_content | split: '.' | first
+      assign metafield_key = settings.product_tiles_metafield_content | split: '.' | last
+      assign metafield = product.metafields[metafield_namespace][metafield_key]
+    -%}
+    {% if metafield != blank %}
+      <div class="mt-2.5 text-scheme-text rte normal-case">
+        {{ metafield | metafield_tag }}
+      </div>
+    {% endif %}
+
+
+    {%- assign product_in_collects = '[' -%}
+{%- for collection in product.collections -%} 
+{%- assign product_in_collects = product_in_collects | append: '{"collection_id":"' | append: collection.id | append: '","product_id":"' | append: product.id | append: '"' | append: ',"product_handle":"' | append: product.handle | append: '"}' -%}
+{% if forloop.last == false %}
+{%- assign product_in_collects =  product_in_collects | append: ',' -%}
+{% endif %}
+{%- endfor -%}
+{%- assign product_in_collects =  product_in_collects | append: ']' -%}
+<span class="col_clct" clct='{{product_in_collects}}'></span>
+
+    {%- if enable_quick_buy -%}
+          <span class="collection_design">
+      <span
+        class="mt-2.5 inline-block"
+        x-html="formatMoney(currentPrice)"
+        :class="{ 'invisible': !currentVariant }"
+        data-product-price
+      >
+        {{ current_variant.price | money }}
+      </span>
+      {% if product.compare_at_price_max > product.price %}
+        <span x-show="currentVariant && product.compare_at_price_max && currentVariant.compare_at_price > currentVariant.price">
+          <span>
+            <span class="sr-only">
+              {{- 'products.general.sale_price' | t -}}
+            </span>
+            <s
+              data-compare-price
+              class="text-scheme-text"
+              x-html="formatMoney(currentVariant.compare_at_price)"
+            >
+              {% if current_variant.compare_at_price > current_variant.price %}
+                {{ current_variant.compare_at_price | money }}
+              {% endif %}
+            </s>
+          </span>
+        </span>
+      {% endif %}
+    </span>
+    {%- else -%}
+
+      {%- render 'price',
+        product: product,
+        price_class: 'mt-2.5',
+        compare_at_price: compare_at_price,
+        price: price,
+        money_price: money_price,
+        on_sale: on_sale
+      -%}
+   
+    {%- endif -%}
+  </a>
+</div>

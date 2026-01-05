@@ -1,0 +1,19 @@
+{
+  "sections": {
+    "pf-53b90246": {
+      "type": "pf-53b90246",
+      "settings": {}
+    },
+    "wavy_divier_8An3fr": {
+      "type": "wavy-divier",
+      "name": "Wavy Divider",
+      "settings": {
+        "image": "shopify://shop_images/divider-top-cream-bottom-dark-purple.svg"
+      }
+    }
+  },
+  "order": [
+    "pf-53b90246",
+    "wavy_divier_8An3fr"
+  ]
+}

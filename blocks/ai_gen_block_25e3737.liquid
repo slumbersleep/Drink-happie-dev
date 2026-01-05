@@ -1,0 +1,449 @@
+{% doc %}
+  @prompt
+    I'm looking for you to generate me a simple table. This table should have on the left side product and on the right side link to COA. On the columns and rows underneath product, I need to be able to add an image with a title (this will be a product image). We can certainly link this to the product pages on the right-hand side. I will have a link (it's a button) that I need to be able to set an external link to. This button will say "View COA". I need to be able to control the background colors of this section
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-coa-table-{{ ai_gen_id }} {
+    width: 100%;
+    padding: 40px 20px;
+    background-color: {{ block.settings.background_color }};
+  }
+
+  .ai-coa-table-container-{{ ai_gen_id }} {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .ai-coa-table-heading-{{ ai_gen_id }} {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 32px;
+  }
+
+  .ai-coa-table-grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    border: 1px solid {{ block.settings.border_color }};
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .ai-coa-table-header-{{ ai_gen_id }} {
+    background-color: {{ block.settings.header_background_color }};
+    color: {{ block.settings.header_text_color }};
+    padding: 20px;
+    font-weight: 600;
+    font-size: 18px;
+    text-align: center;
+    border-bottom: 1px solid {{ block.settings.border_color }};
+  }
+
+  .ai-coa-table-row-{{ ai_gen_id }} {
+    display: contents;
+  }
+
+  .ai-coa-table-cell-{{ ai_gen_id }} {
+    padding: 20px;
+    border-bottom: 1px solid {{ block.settings.border_color }};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-coa-table-cell-{{ ai_gen_id }}:nth-child(odd) {
+    border-right: 1px solid {{ block.settings.border_color }};
+  }
+
+  .ai-coa-table-product-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    text-align: center;
+    width: 100%;
+  }
+
+  .ai-coa-table-product-image-{{ ai_gen_id }} {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  .ai-coa-table-product-image-placeholder-{{ ai_gen_id }} {
+    width: 100px;
+    height: 100px;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+  }
+
+  .ai-coa-table-product-image-placeholder-{{ ai_gen_id }} svg {
+    width: 60px;
+    height: 60px;
+  }
+
+  .ai-coa-table-product-title-{{ ai_gen_id }} {
+    font-size: 16px;
+    font-weight: 500;
+    color: {{ block.settings.text_color }};
+  }
+
+  .ai-coa-table-product-link-{{ ai_gen_id }} {
+    color: {{ block.settings.text_color }};
+    text-decoration: none;
+  }
+
+  .ai-coa-table-product-link-{{ ai_gen_id }}:hover {
+    opacity: 0.8;
+  }
+
+  .ai-coa-table-coa-button-{{ ai_gen_id }} {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: {{ block.settings.button_background_color }};
+    color: {{ block.settings.button_text_color }};
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+  }
+
+  .ai-coa-table-coa-button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_background_color }};
+  }
+
+  .ai-coa-table-empty-state-{{ ai_gen_id }} {
+    grid-column: 1 / -1;
+    padding: 40px;
+    text-align: center;
+    color: #999;
+    font-style: italic;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-coa-table-grid-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+    }
+
+    .ai-coa-table-header-{{ ai_gen_id }}:nth-child(2) {
+      display: none;
+    }
+
+    .ai-coa-table-cell-{{ ai_gen_id }} {
+      border-right: none;
+    }
+
+    .ai-coa-table-cell-{{ ai_gen_id }}:nth-child(odd) {
+      border-right: none;
+      border-bottom: none;
+    }
+
+    .ai-coa-table-row-{{ ai_gen_id }} {
+      display: grid;
+      grid-template-columns: 1fr;
+      border-bottom: 1px solid {{ block.settings.border_color }};
+    }
+
+    .ai-coa-table-row-{{ ai_gen_id }}:last-child {
+      border-bottom: none;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-coa-table-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-coa-table-container-{{ ai_gen_id }}">
+    {% if block.settings.heading != blank %}
+      <h2 class="ai-coa-table-heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
+    {% endif %}
+
+    <div class="ai-coa-table-grid-{{ ai_gen_id }}">
+      <div class="ai-coa-table-header-{{ ai_gen_id }}">Product</div>
+      <div class="ai-coa-table-header-{{ ai_gen_id }}">Link to COA</div>
+
+      {% assign has_products = false %}
+      {% for i in (1..10) %}
+        {% liquid
+          assign product_key = 'product_' | append: i
+          assign coa_link_key = 'coa_link_' | append: i
+          assign product = block.settings[product_key]
+          assign coa_link = block.settings[coa_link_key]
+        %}
+
+        {% if product != blank %}
+          {% assign has_products = true %}
+          <div class="ai-coa-table-row-{{ ai_gen_id }}">
+            <div class="ai-coa-table-cell-{{ ai_gen_id }}">
+              <div class="ai-coa-table-product-{{ ai_gen_id }}">
+                <a href="{{ product.url }}" class="ai-coa-table-product-link-{{ ai_gen_id }}">
+                  {% if product.featured_image %}
+                    <img
+                      src="{{ product.featured_image | image_url: width: 200 }}"
+                      alt="{{ product.featured_image.alt | escape }}"
+                      class="ai-coa-table-product-image-{{ ai_gen_id }}"
+                      loading="lazy"
+                      width="100"
+                      height="100"
+                    >
+                  {% else %}
+                    <div class="ai-coa-table-product-image-placeholder-{{ ai_gen_id }}">
+                      {{ 'product-1' | placeholder_svg_tag }}
+                    </div>
+                  {% endif %}
+                  <div class="ai-coa-table-product-title-{{ ai_gen_id }}">{{ product.title }}</div>
+                </a>
+              </div>
+            </div>
+
+            <div class="ai-coa-table-cell-{{ ai_gen_id }}">
+              {% if coa_link != blank %}
+                <a
+                  href="{{ coa_link }}"
+                  class="ai-coa-table-coa-button-{{ ai_gen_id }}"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {{ block.settings.button_text }}
+                </a>
+              {% else %}
+                <span style="color: #999; font-style: italic;">No COA link</span>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+
+      {% unless has_products %}
+        <div class="ai-coa-table-empty-state-{{ ai_gen_id }}">
+          Add products to display in the table
+        </div>
+      {% endunless %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product COA table",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Certificate of Analysis"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "header_background_color",
+      "label": "Header background",
+      "default": "#f4f4f4"
+    },
+    {
+      "type": "color",
+      "id": "header_text_color",
+      "label": "Header text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "View COA"
+    },
+    {
+      "type": "color",
+      "id": "button_background_color",
+      "label": "Button background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_background_color",
+      "label": "Button hover background",
+      "default": "#333333"
+    },
+    {
+      "type": "header",
+      "content": "Product 1"
+    },
+    {
+      "type": "product",
+      "id": "product_1",
+      "label": "Product"
+    },
+    {
+      "type": "url",
+      "id": "coa_link_1",
+      "label": "COA link"
+    },
+    {
+      "type": "header",
+      "content": "Product 2"
+    },
+    {
+      "type": "product",
+      "id": "product_2",
+      "label": "Product"
+    },
+    {
+      "type": "url",
+      "id": "coa_link_2",
+      "label": "COA link"
+    },
+    {
+      "type": "header",
+      "content": "Product 3"
+    },
+    {
+      "type": "product",
+      "id": "product_3",
+      "label": "Product"
+    },
+    {
+      "type": "url",
+      "id": "coa_link_3",
+      "label": "COA link"
+    },
+    {
+      "type": "header",
+      "content": "Product 4"
+    },
+    {
+      "type": "product",
+      "id": "product_4",
+      "label": "Product"
+    },
+    {
+      "type": "url",
+      "id": "coa_link_4",
+      "label": "COA link"
+    },
+    {
+      "type": "header",
+      "content": "Product 5"
+    },
+    {
+      "type": "product",
+      "id": "product_5",
+      "label": "Product"
+    },
+    {
+      "type": "url",
+      "id": "coa_link_5",
+      "label": "COA link"
+    },
+    {
+      "type": "header",
+      "content": "Product 6"
+    },
+    {
+      "type": "product",
+      "id": "product_6",
+      "label": "Product"
+    },
+    {
+      "type": "url",
+      "id": "coa_link_6",
+      "label": "COA link"
+    },
+    {
+      "type": "header",
+      "content": "Product 7"
+    },
+    {
+      "type": "product",
+      "id": "product_7",
+      "label": "Product"
+    },
+    {
+      "type": "url",
+      "id": "coa_link_7",
+      "label": "COA link"
+    },
+    {
+      "type": "header",
+      "content": "Product 8"
+    },
+    {
+      "type": "product",
+      "id": "product_8",
+      "label": "Product"
+    },
+    {
+      "type": "url",
+      "id": "coa_link_8",
+      "label": "COA link"
+    },
+    {
+      "type": "header",
+      "content": "Product 9"
+    },
+    {
+      "type": "product",
+      "id": "product_9",
+      "label": "Product"
+    },
+    {
+      "type": "url",
+      "id": "coa_link_9",
+      "label": "COA link"
+    },
+    {
+      "type": "header",
+      "content": "Product 10"
+    },
+    {
+      "type": "product",
+      "id": "product_10",
+      "label": "Product"
+    },
+    {
+      "type": "url",
+      "id": "coa_link_10",
+      "label": "COA link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product COA table"
+    }
+  ]
+}
+{% endschema %}

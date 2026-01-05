@@ -1,0 +1,95 @@
+<div class="cstm-container p-relative">
+  <div class="common-heading-wrap text-center">
+    {% if section.settings.heading_icon != blank %}
+      {% comment %} <img src="images/cloud.svg" alt="icon"> {% endcomment %}
+      {{ section.settings.heading_icon | image_url: width: 3000 | image_tag: alt: 'icon' }}
+    {% endif %}
+    {% if section.settings.heading != blank %}
+      <h2 class="text-white">{{ section.settings.heading }}</h2>
+    {% endif %}
+  </div>
+  <div class="cstm-row">
+    <div class="cstm-col-6">
+      <div class="text-list-box">
+        <ul>
+          {% for block in section.blocks %}
+            <li>
+              {% if block.settings.content_heading != blank %}
+                <p>{{ block.settings.content_heading }}</p>
+              {% endif %}
+              {% if block.settings.content != blank %}
+                <span>{{ block.settings.content | remove: '<p>' | remove: '</p>' }}</span>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    <div class="cstm-col-6">
+      {% if section.settings.image != blank %}
+        <div class="right-img-wrapper img-box">
+          {{ section.settings.image | image_url: width: 3000 | image_tag: alt: 'img' }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+  {% if section.settings.button_text != blank %}
+      <div class="text-center">
+        <a href="#happie-product-section" class="cstm-btn btn-white">{{ section.settings.button_text }}</a>
+      </div>
+  {% endif %}
+</div>
+{% schema %}
+{
+  "name": "Image Text Block",
+  "tag": "section",
+  "class": "difference-sec",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "heading_icon",
+      "label": "Heading Icon"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The happie difference"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Ready to Drink happie?"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image_content",
+      "name": "Image Content",
+      "settings": [
+        {
+          "type": "text",
+          "id": "content_heading",
+          "label": "Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image Text Block"
+    }
+  ]
+}
+{% endschema %}

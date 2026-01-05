@@ -1,0 +1,243 @@
+.updated-pdp main {overflow: initial !important;}
+
+/*------Common Structure*---------*/
+
+.cstm-container { max-width: 1300px; margin: 0 auto; padding: 0 15px; position: relative; z-index: 22; }
+.cstm-row { display: flex; flex-wrap: wrap; padding: 0 15px; margin-left: -15px; margin-right: 15px; gap: 0;}
+.cstm-row>*{ padding: 0 15px;}
+.cstm-col-6 { flex: 0 0 auto; width: 50%; }
+.cstm-col-4 { width: 33%; }
+.cstm-col-8 { width: 67%; }
+.cstm-col-20 {width: 20%; flex: 0 0 auto;}
+
+.Justify-content-center {justify-content: center;}
+
+.common-heading-wrap { margin-bottom: 50px; }
+.common-heading-wrap img { max-width: 105px; margin: 0 auto 15px; }
+.common-heading-wrap h2 { font-size: clamp(1.75rem, 0.5rem + 3.333vw, 3.5rem); font-weight: 600; color: #1A1A1A}
+
+.partical-box { position: absolute; left: 0; right: 0; }
+.partical-box img { width: 100%;}
+.partical-box.partical-top {top: 0;}
+.partical-box.partical-bottom {bottom: -2px; width: 100%;}
+
+.text-white{color: #fff !important;}
+
+.img-box { position: relative; overflow: hidden; border-radius: 20px; }
+.img-box img { position: absolute; width: 100%; height: 100%; object-fit: cover; }
+
+.cstm-btn { background-color: #50B2BD; color: #fff; text-align: center; font-size: 22px; font-weight: 600; padding: 21px; display: inline-block; border-radius: 50px; transition: all 0.5s; -webkit-transition: all 0.5s; -moz-transition: all 0.5s; -ms-transition: all 0.5s; -o-transition: all 0.5s; }
+.cstm-btn:hover {background-color: #317c85;}
+.cstm-btn.btn-white { background-color: #fff; color: #50B2BD;}
+.cstm-btn.btn-white:hover {background-color: #317c85; color: #fff}
+/*------Common Structure*---------*/
+
+.header-info-slider button.slick-arrow { display: none !important; }
+.header-info-slider { background: rgb(74 139 118 / 30%); padding: 10px; }
+.header-info-slider .info.slick-slide { text-align: center; }
+.header-info-slider .info.slick-slide p { font-size: 18px; font-weight: 600; }
+.happie-product-section .flavor-option {background-color: #e1be97; }
+.happie-product-section { background: #ffe6cb; padding: 100px 0 150px; }
+.happie-product-section .cstm-container { max-width: 1300px; margin: 0 auto; padding: 0 15px; position: relative; z-index: 22; background-color: transparent; }
+.happie-product-section .main-product-image { max-width: 100%; }
+.happie-product-section .product-images-container {top: 120px;}
+.happie-product-section .thumbnail-grid { max-width: 100%; }
+.raeting-box {margin-bottom: 15px; display: flex; justify-content: space-between; gap: 15px;}
+.raeting-box .product-rating, 
+.raeting-box .top-seller-badge { margin-bottom: 0; }
+.happie-product-section .size-selector .size-option .save-badge { left: 50%; transform: translateX(-50%); }
+.happie-product-section .accordion-tabs { margin-bottom: 20px; }
+.shipping-info { margin-bottom: 25px; }
+.coa-button { margin-bottom: 0 !important; }
+.happie-product-section .thumbnail-item { background-color: #e1be97; }
+
+.price-outer-wrapp { display: flex; align-items: center; gap: 10px; }
+.price-outer-wrapp .product-price { margin-bottom: 0; margin-right: 0 !important; }
+.price-outer-wrapp .product-price span { color: #999999; font-size: 20px;}
+.price-outer-wrapp .appstle_subscription_save { margin-left: 0; }
+
+.difference-sec { background-color: #50B2BD; padding: 0 0 50px; }
+.difference-sec .cstm-row { margin-bottom: 50px; }
+.difference-sec .right-img-wrapper { padding-bottom: 100%;}
+.difference-sec .text-list-box ul li { background-color: #fff; border-radius: 20px; padding: 24px; }
+.difference-sec .text-list-box ul li:not(:last-child) { margin-bottom: 18px; }
+.difference-sec .text-list-box ul li p { font-size: 24px !important; font-weight: 600; margin-bottom: 20px;}
+.difference-sec .text-list-box ul li span { font-size: 17px; padding-left: 38px; display: block; }
+.difference-sec .cstm-btn.btn-white { max-width: 490px; width: 100%; }
+
+.people-sec { position: relative; overflow: hidden; padding: 70px 0 100px; }
+.people-sec .sm-box-wrapper { text-align: center; }
+.people-sec .sm-box-wrapper img { max-width: 75px; margin: 0 auto 10px; min-height: 100px; }
+.people-sec .sm-box-wrapper h4 { font-weight: 600; font-size: 25px; color: #1A1A1A; }
+
+.app-sec { padding: 80px 0; background-color: #50b2bd; }
+.app-sec .common-heading-wrap p { display: flex; justify-content: center; align-items: center; }
+.app-sec .common-heading-wrap p span.start-icon img { margin-bottom: 0; margin-right: 15px; max-width: 90px;}
+
+.why-happie-sec { background-color: #FFE6CB; padding: 100px 0 200px; position: relative; }
+.why-happie-sec .why-happie-left-text h2 { font-size: clamp(1.75rem,.5rem + 3.333vw,3.5rem); font-weight: 700; margin-bottom: 15px; }
+.why-happie-sec .why-happie-left-text p { font-size: 18px; margin-bottom: 20px; }
+.why-happie-sec .why-happie-left-text .cstm-btn { width: 100%; }
+.why-happie-sec .right-table-box { border: 1px solid #181818; border-radius: 16px;}
+.why-happie-sec .right-table-box table { width: 100%; }
+.why-happie-sec .right-table-box table thead tr th { font-size: 32px; font-weight: 500; border-bottom: 1px solid #181818; }
+.why-happie-sec .right-table-box table tbody tr td { font-size: 24px;font-weight: 500;  }
+.why-happie-sec .right-table-box table thead tr th img { max-width: 185px; }
+.why-happie-sec .right-table-box table thead tr th, 
+.why-happie-sec .right-table-box table tbody tr td { vertical-align: middle; padding: 18px; }
+.why-happie-sec .right-table-box table tbody tr td:last-child { background-color: #fff; width: 200px; }
+.why-happie-sec .right-table-box table tbody tr:last-child td:last-child { border-bottom-right-radius: 15px; }
+.why-happie-sec .right-table-box table tbody tr td:not(:first-child) svg { margin: 0 auto; }
+.why-happie-sec .right-table-box table tbody tr:not(:last-child) td { border-bottom: 1px solid #181818; }
+.why-happie-sec .right-table-box table thead tr th:nth-child(2), 
+.why-happie-sec .right-table-box table tbody tr td:nth-child(2) { background-color: #962F80; border-color: #FFE6CB; }
+.why-happie-sec .right-table-box table thead tr th:nth-child(2), 
+.why-happie-sec .right-table-box table tbody tr:last-child td:nth-child(2) { position: relative; }
+.why-happie-sec .right-table-box table thead tr th:nth-child(2)::after { content: ''; position: absolute; width: 100%; height: 18px; background-color: #962F80; left: 0; top: -18px; border-radius: 15px 15px 0 0; }
+.why-happie-sec .right-table-box table tbody tr:last-child td:nth-child(2)::after { content: ''; position: absolute; width: 100%; height: 18px; background-color: #962F80; left: 0; bottom: -18px; border-radius: 0 0 15px 15px; }
+
+.faq-sec { background-color: #AD8CB3; position: relative; padding: 50px 0 20px; }
+.faq-sec .faq-single-box { margin-bottom: 15px; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; background-color: #fff;}
+.faq-sec .faq-box { width: 100%; background: #fff; border: none; padding: 20px; text-align: left; font-size: 20px; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: background-color 0.3s ease; }
+.faq-sec .faq-box:hover { background-color: #f9f9f9; }
+.faq-sec .faq-icon { font-size: 24px; transition: transform 0.3s ease; flex-shrink: 0; margin-left: 15px; }
+.faq-sec .faq-single-box.active .faq-icon { transform: rotate(45deg); }
+.faq-sec .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; padding: 0 20px; }
+.faq-sec .faq-single-box.active .faq-answer { max-height: 500px; padding: 10px 20px 20px; }
+.faq-sec .faq-answer p { margin: 0; line-height: 1.6; color: #666; }
+
+.product-feature-collection-wrapper { padding: 130px 0; position: relative;}
+.product-feature-collection-wrapper .section-content { padding: 0; }
+.product-feature-collection-wrapper .product-tile__container .product-tile__quick-buy button.sold-out { transition: 0.3s ease-in-out; background-color: #7FB540; color: #fff;}
+.product-feature-collection-wrapper .product-tile__container .product-tile__quick-buy button .push-btn__surface { background-color: #7FB540; transition: 0.3s ease-in-out;}
+
+footer form button[type='submit'] span.push-btn__surface {transition: 0.3s ease-in-out all;}
+footer form button[type='submit']:hover span.push-btn__surface { color: #962f80 !important; }
+
+
+@media screen and (max-width: 1199px) {
+    .cstm-btn { font-size: 20px; padding: 16px 20px; }
+
+    .happie-product-section { padding: 80px 0 120px; }
+    .happie-product-section .product-title { font-size: 46px; }
+    .happie-product-section .product-subtitle { font-size: 28px; }
+    .happie-product-section .coa-button {font-size: 18px;}
+    .happie-product-section .product-info-card {padding: 30px; }
+
+    .add-to-cart-button { height: 54px; font-size: 20px; }
+    .why-happie-sec { padding: 80px 0 170px; }
+}
+
+@media screen and (max-width: 1024px) {
+    .happie-product-section { padding: 60px 0 100px; }
+    .people-sec { padding: 60px 0 80px; }
+    .app-sec { padding: 60px 0; }
+    .why-happie-sec { padding: 70px 0 130px; }
+    .why-happie-sec .right-table-box table thead tr th { font-size: 25px; }
+    .why-happie-sec .right-table-box table tbody tr td { font-size: 18px; }
+    .why-happie-sec .right-table-box table thead tr th, 
+    .why-happie-sec .right-table-box table tbody tr td { padding: 12px; }
+    .faq-sec { padding: 30px 0 20px; }
+    .product-feature-collection-wrapper { padding: 90px 0; }
+}
+
+@media screen and (max-width: 991px) {
+    .common-heading-wrap img { max-width: 80px; }
+    .common-heading-wrap { margin-bottom: 30px; }
+
+    .cstm-row>* { padding: 0; }
+    .cstm-col-4 { width: 100%; }
+    .cstm-col-8 { width: 100%; }
+    .cstm-col-6 { width: 100%; }
+    .cstm-row { padding: 0; margin-left: 0; margin-right: 0; }
+
+    .price-outer-wrapp .product-price span {font-size: 18px;}
+    .happie-product-section .product-title { font-size: 42px; }
+    .happie-product-section .product-images-container {top: 0; padding: 0 !important; margin: 0 !important; width: 100% !important; max-width: 100% !important;}
+    .happie-product-section .product-subtitle { font-size: 24px; }
+    .happie-product-section .product-price { font-size: 20px; }
+    .happie-product-section .size-selector { flex-wrap: wrap !important; flex-direction: column !important; width: 100% !important; }
+    .happie-product-section .size-option { width: 100% !important; min-width: auto !important; box-sizing: border-box !important; }
+    .happie-product-section .add-to-cart-button { height: 55px; width: 100% !important; box-sizing: border-box !important; }
+    .happie-product-section .shipping-info { margin-bottom: 15px; }
+    .happie-product-section { padding: 15px 0 90px; }
+    .happie-product-section .thumbnail-grid { display: flex !important; flex-direction: row !important; overflow-x: auto !important; width: 100% !important; padding: 0 !important; box-sizing: border-box !important; gap: 8px !important; scroll-behavior: smooth !important; scrollbar-width: none !important; -webkit-overflow-scrolling: touch !important; }
+    .happie-product-section .thumbnail-grid::-webkit-scrollbar { display: none !important; }
+    .happie-product-section .thumbnail-item { flex: 0 0 calc(25% - 6px) !important; }
+    .happie-product-section .main-product-image { width: 100% !important; max-width: 100% !important; padding: 0 !important; margin-left: 0 !important; margin-right: 0 !important; }
+    .happie-product-section .carousel-container { width: 100% !important; max-width: 100% !important; margin: 0 !important; padding: 0 !important; box-sizing: border-box !important; }
+    .happie-product-section .carousel-track { width: 100% !important; }
+    .happie-product-section .carousel-slide { min-width: 100% !important; max-width: 100% !important; width: 100% !important; flex-shrink: 0 !important; box-sizing: border-box !important; }
+    .happie-product-section .product-info-card { width: 100% !important; max-width: 100% !important; box-sizing: border-box !important; margin: 0 !important; }
+    .happie-product-section .happie-pdp-grid { padding: 0 !important; margin: 0 !important; }
+    .happie-product-section.cstm-container { padding: 15px 15px 90px !important; max-width: 100% !important; }
+    .happie-product-section .flavor-selector { width: 100% !important; box-sizing: border-box !important; }
+    .happie-product-section .subscription-container,
+    .happie-product-section .onetime-container { width: 100% !important; box-sizing: border-box !important; }
+    .happie-product-section .accordion-tabs,
+    .happie-product-section .accordion-item,
+    .happie-product-section .accordion-tab { width: 100% !important; box-sizing: border-box !important; }
+
+    .difference-sec .text-list-box { margin-bottom: 25px; }
+    .difference-sec .cstm-row { margin-bottom: 25px; }
+    .difference-sec .text-list-box ul li span { padding-left: 22px; }
+
+    .people-sec { padding: 50px 0; }
+    .people-sec .sm-box-wrapper h4 { font-size: 20px; }
+    .app-sec { padding: 50px 0; }
+
+    .why-happie-left-text { max-width: 460px; text-align: center; margin: 0 auto 50px; }
+    .why-happie-sec .why-happie-left-text .cstm-btn { width: auto; }
+    .why-happie-sec { padding: 50px 0 110px; }
+    .product-feature-collection-wrapper { padding: 70px 0 60px; }
+}
+
+@media screen and (max-width: 767px) {
+    .happie-product-section { padding: 15px 0 70px; }
+    .happie-product-section.cstm-container { padding: 15px 15px 70px !important; }
+    .happie-product-section .product-info-card { padding: 20px !important; width: 100% !important; max-width: 100% !important; box-sizing: border-box !important; }
+    .happie-product-section .carousel-container { width: 100% !important; max-width: 100% !important; }
+    .happie-product-section .carousel-slide { min-width: 100% !important; max-width: 100% !important; width: 100% !important; }
+    .happie-product-section .main-product-image { width: 100% !important; max-width: 100% !important; }
+    .happie-product-section .product-images-container { width: 100% !important; max-width: 100% !important; padding: 0 !important; }
+    .difference-sec { padding: 0 0 40px; }
+    .people-sec, .app-sec { padding: 40px 0; }
+    .cstm-col-20 { width: 33%;}
+    .why-happie-sec { padding: 40px 0 90px; }
+    .faq-sec { padding: 20px 0 10px; }
+    .product-feature-collection-wrapper { padding: 60px 0 50px; }
+    .faq-sec .faq-box { padding: 15px; }
+
+    .why-happie-sec .right-table-box table tbody tr td:last-child { width: auto; }
+    .why-happie-sec .right-table-box table thead tr th img { max-width: 120px; }
+
+}
+
+@media screen and (max-width: 575px) {
+    .cstm-col-20 {width: 50%;}
+    .cstm-btn { font-size: 18px; padding: 12px 20px; }
+
+    .happie-product-section .accordion-tab-title {font-size: 18px;}
+    .happie-product-section .add-to-cart-button { height: 45px; font-size: 20px; width: 100% !important; }
+    .happie-product-section .flavor-option { width: 70px; height: 70px; border-radius: 10px; flex-shrink: 0 !important; }
+    .happie-product-section .thumbnail-item { width: auto !important; border-radius: 10px; flex: 0 0 calc(25% - 6px) !important; box-sizing: border-box !important; }
+    .happie-product-section .thumbnail-grid { display: flex !important; flex-direction: row !important; overflow-x: auto !important; gap: 8px !important; width: 100% !important; }
+    .happie-product-section .size-selector .size-option .save-badge span { font-size: 12px; }
+    .happie-product-section .carousel-container { width: 100% !important; max-width: 100% !important; }
+    .happie-product-section .carousel-slide { min-width: 100% !important; max-width: 100% !important; width: 100% !important; }
+    .happie-product-section .main-product-image { width: 100% !important; max-width: 100% !important; }
+    
+    .difference-sec .text-list-box ul li { padding: 20px; }
+    .faq-sec .faq-box { font-size: 18px!important; }
+    .difference-sec .cstm-btn.btn-white { max-width: max-content; width: 100%; }
+
+    .why-happie-sec .right-table-box table thead tr th, 
+    .why-happie-sec .right-table-box table tbody tr td { padding: 5px; }
+    .why-happie-sec .right-table-box table thead tr th img { max-width: 90px; }
+    .why-happie-sec .right-table-box table tbody tr td { font-size: 16px; }
+    .why-happie-sec .right-table-box table thead tr th { font-size: 20px; }
+}
+
+@media screen and (max-width: 360px) {
+
+}
