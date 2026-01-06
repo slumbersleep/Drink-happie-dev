@@ -1005,7 +1005,7 @@
               <div class="main-product-image desktop-image-view">
                 <img
                   id="main-image"
-                  src="{% if product.handle == 'happie-thc-social-4-pack' %}{{ product.featured_image | image_url: width: 1200 }}{% elsif product.images.size > 1 %}{{ product.images[1] | image_url: width: 1200 }}{% else %}{{ product.featured_image | image_url: width: 1200 }}{% endif %}"
+                  src="{% if product.handle == 'happie-social-4-pack' %}{{ product.featured_image | image_url: width: 1200 }}{% elsif product.images.size > 1 %}{{ product.images[1] | image_url: width: 1200 }}{% else %}{{ product.featured_image | image_url: width: 1200 }}{% endif %}"
                   alt="{{ product.title }}"
                   width=""
                   height=""
@@ -1016,7 +1016,7 @@
               <div class="main-product-image mobile-carousel-view" style="display: none;">
                 <div class="carousel-container">
                   <div class="carousel-track" id="carousel-track">
-                    {% if product.handle == 'happie-thc-social-4-pack' %}
+                    {% if product.handle == 'happie-social-4-pack' %}
                       {% comment %} THC Variety Pack: Show featured image first, then other images {% endcomment %}
                       <div class="carousel-slide">
                         <img src="{{ product.featured_image | image_url: width: 1200 }}" alt="{{ product.title }}" width="" height="" class="zoom-icon" data-image-index="0">
@@ -1404,12 +1404,12 @@
     </svg>
   </button>
   <div class="lightbox-counter">
-    <span id="current-image">1</span> / <span id="total-images">{% if product.handle == 'happie-thc-social-4-pack' %}{{ product.images.size }}{% elsif product.images.size > 1 %}{{ product.images.size | minus: 1 }}{% else %}1{% endif %}</span>
+    <span id="current-image">1</span> / <span id="total-images">{% if product.handle == 'happie-social-4-pack' %}{{ product.images.size }}{% elsif product.images.size > 1 %}{{ product.images.size | minus: 1 }}{% else %}1{% endif %}</span>
   </div>
 </div>
 
 <div id="product-images-data" style="display: none;">
-  {% if product.handle == 'happie-thc-social-4-pack' %}
+  {% if product.handle == 'happie-social-4-pack' %}
     {% comment %} THC Variety Pack: Include featured image first, then other images {% endcomment %}
     <span data-image-url="{{ product.featured_image | image_url: width: 1200 }}"></span>
     {% for image in product.images offset: 1 %}
