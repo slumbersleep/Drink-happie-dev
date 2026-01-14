@@ -1,7 +1,65 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
+    "featured_collection_DgrftB": {
+      "type": "featured-collection",
+      "name": "t:sections.featured_collection.name",
+      "settings": {
+        "title": "THC-infused Seltzers.",
+        "subheading": "Flavor-First, Function-Always",
+        "collection": "frontpage",
+        "no_products": 6,
+        "show_view_all": true,
+        "enable_quick_buy": false,
+        "display_on_card": true,
+        "layout": "grid",
+        "products_per_row_mobile": "1",
+        "products_per_row_desktop": 4,
+        "slideshow_focus": "center",
+        "mobile_slide_width": "three_fifths",
+        "desktop_slide_width": 40,
+        "autoscroll_mode": "1",
+        "product_tiles_aspect_ratio": "",
+        "image_shape": "",
+        "color_scheme": "",
+        "use_gradient_background": false
+      }
+    },
+    "featured_collection_JYtegA": {
+      "type": "featured-collection",
+      "name": "t:sections.featured_collection.name",
+      "settings": {
+        "title": "Fungi Fusion",
+        "subheading": "These aren’t your average wellness drinks. Each Happie Mushroom Beverage blends juicy, nostalgic flavor with powerful functional mushrooms and ocean-derived magnesium — for daily focus, calm, and energy without the crash. No THC. No caffeine. Just functional fun.",
+        "collection": "homepage-shrine",
+        "no_products": 12,
+        "show_view_all": true,
+        "enable_quick_buy": false,
+        "display_on_card": true,
+        "layout": "grid",
+        "products_per_row_mobile": "1",
+        "products_per_row_desktop": 4,
+        "slideshow_focus": "center",
+        "mobile_slide_width": "three_fifths",
+        "desktop_slide_width": 40,
+        "autoscroll_mode": "1",
+        "product_tiles_aspect_ratio": "",
+        "image_shape": "",
+        "color_scheme": "scheme1",
+        "use_gradient_background": false
+      }
+    },
     "pf-df0a697f": {
       "type": "pf-df0a697f",
+      "disabled": true,
       "settings": {}
     },
     "wavy_divier_Ad33RX": {
@@ -13,6 +71,8 @@
     }
   },
   "order": [
+    "featured_collection_DgrftB",
+    "featured_collection_JYtegA",
     "pf-df0a697f",
     "wavy_divier_Ad33RX"
   ]
