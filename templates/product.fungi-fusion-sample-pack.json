@@ -77,16 +77,6 @@
           "type": "product_details",
           "settings": {}
         },
-        "flavor_selector": {
-          "type": "flavor_selector",
-          "disabled": true,
-          "settings": {
-            "flavor_product_1": "influencer-sample-pack-thc-copy",
-            "flavor_product_2": "",
-            "flavor_product_3": "",
-            "flavor_product_4": ""
-          }
-        },
         "subscription": {
           "type": "subscription",
           "disabled": true,
@@ -94,7 +84,6 @@
         },
         "onetime": {
           "type": "onetime",
-          "disabled": true,
           "settings": {}
         },
         "size_selector_4d4paF": {
@@ -107,7 +96,6 @@
         },
         "add_to_cart": {
           "type": "add_to_cart",
-          "disabled": true,
           "settings": {}
         },
         "shipping_info": {
@@ -152,7 +140,6 @@
         "price",
         "description",
         "product_details",
-        "flavor_selector",
         "subscription",
         "onetime",
         "size_selector_4d4paF",
