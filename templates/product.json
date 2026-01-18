@@ -48,6 +48,7 @@
         },
         "price": {
           "type": "price",
+          "disabled": true,
           "settings": {
             "display_on_card": false,
             "show_on_sale_sticker": false,
