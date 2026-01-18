@@ -79,16 +79,13 @@
         },
         "flavor_selector": {
           "type": "flavor_selector",
+          "disabled": true,
           "settings": {
-            "flavor_product_1": "mango-mimosa",
-            "flavor_product_2": "watermelon",
-            "flavor_product_3": "blue-razzberry",
+            "flavor_product_1": "influencer-sample-pack-thc-copy",
+            "flavor_product_2": "",
+            "flavor_product_3": "",
             "flavor_product_4": ""
           }
-        },
-        "size_selector": {
-          "type": "size_selector",
-          "settings": {}
         },
         "subscription": {
           "type": "subscription",
@@ -150,7 +147,6 @@
         "description",
         "product_details",
         "flavor_selector",
-        "size_selector",
         "subscription",
         "onetime",
         "appstle_widget",
