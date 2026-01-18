@@ -94,6 +94,11 @@
         },
         "onetime": {
           "type": "onetime",
+          "disabled": true,
+          "settings": {}
+        },
+        "size_selector_4d4paF": {
+          "type": "size_selector",
           "settings": {}
         },
         "appstle_widget": {
@@ -150,6 +155,7 @@
         "flavor_selector",
         "subscription",
         "onetime",
+        "size_selector_4d4paF",
         "appstle_widget",
         "add_to_cart",
         "shipping_info",
