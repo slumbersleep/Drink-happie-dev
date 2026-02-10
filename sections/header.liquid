@@ -1141,19 +1141,6 @@
   </style>
 {% endif %}
 
-{%- comment -%} Mobile header cart icon contrast fix {%- endcomment -%}
-<style>
-  @media (max-width: 1023px) {
-    .site-header [data-utility-links] #CartButton,
-    .site-header [data-utility-links] #CartButton .pointer-events-none {
-      color: #1A1A1A;
-    }
-    .site-header [data-utility-links] #CartButton .bg-scheme-text {
-      background-color: #1A1A1A;
-    }
-  }
-</style>
-
 {%- comment -%} Custom navigation styling - floating pill design {%- endcomment -%}
 <style>
   /* Desktop: Floating pill navigation */
@@ -1163,24 +1150,64 @@
       top: 0 !important;
       z-index: 40 !important;
       background: transparent !important;
-      padding: 16px 24px;
+      padding-top: 32px;
+      padding-left: 0;
+      padding-right: 0;
+      padding-bottom: 0;
+      border: none !important;
     }
     
     #shopify-section-{{ section.id }} .site-header {
       background: transparent !important;
+      border: none !important;
     }
     
     #shopify-section-{{ section.id }} .headerBorderWrap {
       background: #FFFFFF;
       border-radius: 999px;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-      max-width: 1200px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+      max-width: 1105px;
+      width: calc(100% - 298px); /* 149px on each side on 1440px */
+      height: 72px;
       margin: 0 auto;
-      padding: 8px 32px;
+      display: flex;
+      align-items: center;
     }
     
     #shopify-section-{{ section.id }} #headerContainer {
       background: transparent;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+    
+    #shopify-section-{{ section.id }} #headerContainer > div {
+      padding-top: 0;
+      padding-bottom: 0;
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+    
+    /* Dark text for navigation links */
+    #shopify-section-{{ section.id }} .site-header,
+    #shopify-section-{{ section.id }} .site-header a,
+    #shopify-section-{{ section.id }} .site-header button,
+    #shopify-section-{{ section.id }} .site-header nav {
+      color: #1A1A1A !important;
+    }
+    
+    /* Dark cart icon */
+    #shopify-section-{{ section.id }} #CartButton,
+    #shopify-section-{{ section.id }} #CartButton svg,
+    #shopify-section-{{ section.id }} [data-utility-links] a,
+    #shopify-section-{{ section.id }} [data-utility-links] button {
+      color: #1A1A1A !important;
+    }
+    
+    #shopify-section-{{ section.id }} #CartButton .bg-scheme-text {
+      background-color: #1A1A1A !important;
     }
   }
   
@@ -1192,18 +1219,48 @@
       z-index: 40 !important;
       transition: transform 0.3s ease-in-out;
       background: transparent !important;
-      padding: 12px 16px;
+      padding: 16px;
+      border: none !important;
     }
     
     #shopify-section-{{ section.id }} .site-header {
       background: transparent !important;
+      border: none !important;
     }
     
     #shopify-section-{{ section.id }} .headerBorderWrap {
       background: #FFFFFF;
       border-radius: 999px;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-      padding: 8px 20px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+      height: 56px;
+      display: flex;
+      align-items: center;
+    }
+    
+    #shopify-section-{{ section.id }} #headerContainer {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+    
+    #shopify-section-{{ section.id }} #headerContainer > div {
+      padding-top: 0;
+      padding-bottom: 0;
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+    
+    /* Dark text for mobile */
+    #shopify-section-{{ section.id }} .site-header,
+    #shopify-section-{{ section.id }} .site-header a,
+    #shopify-section-{{ section.id }} .site-header button {
+      color: #1A1A1A !important;
+    }
+    
+    #shopify-section-{{ section.id }} #CartButton .bg-scheme-text {
+      background-color: #1A1A1A !important;
     }
     
     #shopify-section-{{ section.id }}.header-hidden {
