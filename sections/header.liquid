@@ -1143,126 +1143,170 @@
 
 {%- comment -%} Custom navigation styling - floating pill design {%- endcomment -%}
 <style>
-  /* Desktop: Floating pill navigation */
+  /* ========================================
+     DESKTOP: Floating pill navigation
+     ======================================== */
   @media (min-width: 1024px) {
+    /* Section wrapper - transparent background with top spacing */
     #shopify-section-{{ section.id }} {
       position: sticky !important;
       top: 0 !important;
       z-index: 40 !important;
       background: transparent !important;
-      padding-top: 32px;
-      padding-left: 0;
-      padding-right: 0;
-      padding-bottom: 0;
+      padding: 32px 0 0 0 !important;
       border: none !important;
     }
     
+    /* Remove default site-header background */
     #shopify-section-{{ section.id }} .site-header {
       background: transparent !important;
       border: none !important;
     }
     
+    /* The pill container */
     #shopify-section-{{ section.id }} .headerBorderWrap {
       background: #FFFFFF;
       border-radius: 999px;
       box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
       max-width: 1105px;
-      width: calc(100% - 298px); /* 149px on each side on 1440px */
+      width: calc(100% - 80px);
       height: 72px;
       margin: 0 auto;
-      display: flex;
-      align-items: center;
+      overflow: hidden;
     }
     
+    /* Header container inside pill */
     #shopify-section-{{ section.id }} #headerContainer {
       background: transparent;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
+      height: 72px;
     }
     
+    /* Inner content wrapper */
     #shopify-section-{{ section.id }} #headerContainer > div {
-      padding-top: 0;
-      padding-bottom: 0;
-      height: 100%;
-      display: flex;
+      padding: 0 24px !important;
+      height: 72px;
+    }
+    
+    /* Flex container for nav items */
+    #shopify-section-{{ section.id }} #headerContainer .flex {
+      height: 72px;
       align-items: center;
     }
     
-    /* Dark text for navigation links */
+    /* Prevent nav wrapping */
+    #shopify-section-{{ section.id }} nav ul {
+      flex-wrap: nowrap !important;
+      gap: 24px !important;
+    }
+    
+    /* Smaller nav text to prevent overflow */
+    #shopify-section-{{ section.id }} nav a,
+    #shopify-section-{{ section.id }} nav button {
+      font-size: 14px !important;
+      padding: 8px 12px !important;
+      white-space: nowrap;
+    }
+    
+    /* Dark text for all navigation elements */
     #shopify-section-{{ section.id }} .site-header,
     #shopify-section-{{ section.id }} .site-header a,
     #shopify-section-{{ section.id }} .site-header button,
-    #shopify-section-{{ section.id }} .site-header nav {
+    #shopify-section-{{ section.id }} .site-header nav,
+    #shopify-section-{{ section.id }} .site-header span {
       color: #1A1A1A !important;
     }
     
-    /* Dark cart icon */
-    #shopify-section-{{ section.id }} #CartButton,
-    #shopify-section-{{ section.id }} #CartButton svg,
-    #shopify-section-{{ section.id }} [data-utility-links] a,
-    #shopify-section-{{ section.id }} [data-utility-links] button {
+    /* Cart icon - accent blue background with white text */
+    #shopify-section-{{ section.id }} #CartButton {
       color: #1A1A1A !important;
     }
     
-    #shopify-section-{{ section.id }} #CartButton .bg-scheme-text {
-      background-color: #1A1A1A !important;
+    #shopify-section-{{ section.id }} #CartButton svg {
+      color: #1A1A1A !important;
+      fill: #1A1A1A !important;
+    }
+    
+    /* Cart count badge - accent blue with white text */
+    #shopify-section-{{ section.id }} #CartButton .bg-scheme-text,
+    #shopify-section-{{ section.id }} #CartButton span[x-text] {
+      background-color: #4FB1BD !important;
+      color: #FFFFFF !important;
+    }
+    
+    /* Hide search icon if present */
+    #shopify-section-{{ section.id }} [data-open-search] {
+      display: none !important;
     }
   }
   
-  /* Mobile: sticky + scroll-to-reveal */
+  /* ========================================
+     MOBILE: Sticky + scroll-to-reveal
+     ======================================== */
   @media (max-width: 1023px) {
+    /* Section wrapper */
     #shopify-section-{{ section.id }} {
       position: sticky !important;
       top: 0 !important;
       z-index: 40 !important;
       transition: transform 0.3s ease-in-out;
       background: transparent !important;
-      padding: 16px;
+      padding: 16px !important;
       border: none !important;
     }
     
+    /* Remove default backgrounds */
     #shopify-section-{{ section.id }} .site-header {
       background: transparent !important;
       border: none !important;
     }
     
+    /* Mobile pill container */
     #shopify-section-{{ section.id }} .headerBorderWrap {
       background: #FFFFFF;
       border-radius: 999px;
       box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
       height: 56px;
-      display: flex;
-      align-items: center;
+      overflow: hidden;
     }
     
+    /* Header container */
     #shopify-section-{{ section.id }} #headerContainer {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
+      height: 56px;
     }
     
+    /* Inner wrapper */
     #shopify-section-{{ section.id }} #headerContainer > div {
-      padding-top: 0;
-      padding-bottom: 0;
-      height: 100%;
-      display: flex;
-      align-items: center;
+      padding: 0 16px !important;
+      height: 56px;
     }
     
-    /* Dark text for mobile */
+    /* Dark text */
     #shopify-section-{{ section.id }} .site-header,
     #shopify-section-{{ section.id }} .site-header a,
-    #shopify-section-{{ section.id }} .site-header button {
+    #shopify-section-{{ section.id }} .site-header button,
+    #shopify-section-{{ section.id }} .site-header span {
       color: #1A1A1A !important;
     }
     
-    #shopify-section-{{ section.id }} #CartButton .bg-scheme-text {
-      background-color: #1A1A1A !important;
+    /* Cart icon dark */
+    #shopify-section-{{ section.id }} #CartButton svg {
+      color: #1A1A1A !important;
+      fill: #1A1A1A !important;
     }
     
+    /* Cart count badge - accent blue */
+    #shopify-section-{{ section.id }} #CartButton .bg-scheme-text,
+    #shopify-section-{{ section.id }} #CartButton span[x-text] {
+      background-color: #4FB1BD !important;
+      color: #FFFFFF !important;
+    }
+    
+    /* Hide search on mobile */
+    #shopify-section-{{ section.id }} [data-open-search] {
+      display: none !important;
+    }
+    
+    /* Scroll behavior classes */
     #shopify-section-{{ section.id }}.header-hidden {
       transform: translateY(-100%);
     }
