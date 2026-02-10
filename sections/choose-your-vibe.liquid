@@ -34,20 +34,20 @@
     <!-- Header -->
     <div class="choose-vibe__header">
       {%- if show_cloud_icon -%}
-        <div class="choose-vibe__icon">
-          <svg width="64" height="48" viewBox="0 0 64 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <div class="choose-vibe__icon" style="width: {{ section.settings.icon_size }}px;">
+          <svg viewBox="0 0 64 48" fill="none" xmlns="http://www.w3.org/2000/svg">
             <!-- Rainbow arc -->
-            <path d="M16 32C16 23.163 23.163 16 32 16C40.837 16 48 23.163 48 32" stroke="#E85A4F" stroke-width="4" stroke-linecap="round"/>
-            <path d="M20 32C20 25.373 25.373 20 32 20C38.627 20 44 25.373 44 32" stroke="#F7CD46" stroke-width="4" stroke-linecap="round"/>
-            <path d="M24 32C24 27.582 27.582 24 32 24C36.418 24 40 27.582 40 32" stroke="#4FB1BD" stroke-width="4" stroke-linecap="round"/>
+            <path d="M16 32C16 23.163 23.163 16 32 16C40.837 16 48 23.163 48 32" stroke="{{ section.settings.icon_rainbow_red }}" stroke-width="4" stroke-linecap="round"/>
+            <path d="M20 32C20 25.373 25.373 20 32 20C38.627 20 44 25.373 44 32" stroke="{{ section.settings.icon_rainbow_yellow }}" stroke-width="4" stroke-linecap="round"/>
+            <path d="M24 32C24 27.582 27.582 24 32 24C36.418 24 40 27.582 40 32" stroke="{{ section.settings.icon_rainbow_blue }}" stroke-width="4" stroke-linecap="round"/>
             <!-- Cloud -->
-            <ellipse cx="32" cy="38" rx="16" ry="10" fill="#F7CD46"/>
-            <ellipse cx="22" cy="36" rx="10" ry="8" fill="#F7CD46"/>
-            <ellipse cx="42" cy="36" rx="10" ry="8" fill="#F7CD46"/>
-            <ellipse cx="32" cy="34" rx="12" ry="8" fill="#F7CD46"/>
+            <ellipse cx="32" cy="38" rx="16" ry="10" fill="{{ section.settings.icon_cloud_fill }}"/>
+            <ellipse cx="22" cy="36" rx="10" ry="8" fill="{{ section.settings.icon_cloud_fill }}"/>
+            <ellipse cx="42" cy="36" rx="10" ry="8" fill="{{ section.settings.icon_cloud_fill }}"/>
+            <ellipse cx="32" cy="34" rx="12" ry="8" fill="{{ section.settings.icon_cloud_fill }}"/>
             <!-- Cloud outline -->
-            <ellipse cx="32" cy="38" rx="16" ry="10" stroke="#1A1A1A" stroke-width="2"/>
-            <path d="M16 36C16 36 14 34 14 32C14 28 18 26 22 26C22 22 26 20 30 20C30 20 32 18 36 18C40 18 44 22 44 26C48 26 52 28 52 32C52 34 50 36 50 36" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round"/>
+            <ellipse cx="32" cy="38" rx="16" ry="10" stroke="{{ section.settings.icon_cloud_stroke }}" stroke-width="2"/>
+            <path d="M16 36C16 36 14 34 14 32C14 28 18 26 22 26C22 22 26 20 30 20C30 20 32 18 36 18C40 18 44 22 44 26C48 26 52 28 52 32C52 34 50 36 50 36" stroke="{{ section.settings.icon_cloud_stroke }}" stroke-width="2" stroke-linecap="round"/>
           </svg>
         </div>
       {%- endif -%}
@@ -219,7 +219,9 @@
 <style>
   #choose-vibe-{{ section.id }} {
     --vibe-bg: {{ section.settings.background_color }};
-    --vibe-text: {{ section.settings.text_color }};
+    --vibe-title-color: {{ section.settings.title_color }};
+    --vibe-subtitle-color: {{ section.settings.subtitle_color }};
+    --vibe-trust-bar-color: {{ section.settings.trust_bar_color }};
     --vibe-thc-accent: {{ section.settings.thc_accent_color }};
     --vibe-thc-bg: {{ section.settings.thc_card_bg }};
     --vibe-fungi-accent: {{ section.settings.fungi_accent_color }};
@@ -246,21 +248,27 @@
   }
 
   #choose-vibe-{{ section.id }} .choose-vibe__icon {
-    margin-bottom: 16px;
+    margin: 0 auto 16px;
+    display: flex;
+    justify-content: center;
+  }
+
+  #choose-vibe-{{ section.id }} .choose-vibe__icon svg {
+    width: 100%;
+    height: auto;
   }
 
   #choose-vibe-{{ section.id }} .choose-vibe__title {
     font-size: clamp(32px, 4vw, 48px);
     font-weight: 800;
-    color: var(--vibe-text);
+    color: var(--vibe-title-color);
     margin: 0 0 16px;
     letter-spacing: -0.5px;
   }
 
   #choose-vibe-{{ section.id }} .choose-vibe__subtitle {
     font-size: 17px;
-    color: var(--vibe-text);
-    opacity: 0.7;
+    color: var(--vibe-subtitle-color);
     max-width: 500px;
     margin: 0 auto;
     line-height: 1.6;
@@ -498,11 +506,12 @@
     align-items: center;
     gap: 8px;
     font-size: 14px;
-    color: var(--vibe-text);
+    color: var(--vibe-trust-bar-color);
   }
 
   #choose-vibe-{{ section.id }} .choose-vibe__trust-icon {
-    opacity: 0.6;
+    color: var(--vibe-trust-bar-color);
+    opacity: 0.7;
   }
 
   #choose-vibe-{{ section.id }} .choose-vibe__trust-item strong {
@@ -566,6 +575,16 @@
       "id": "show_cloud_icon",
       "label": "Show Cloud Icon",
       "default": true
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Icon Size",
+      "min": 40,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
     },
     {
       "type": "text",
@@ -691,7 +710,7 @@
     },
     {
       "type": "header",
-      "content": "Colors"
+      "content": "Section Colors"
     },
     {
       "type": "color",
@@ -701,9 +720,59 @@
     },
     {
       "type": "color",
-      "id": "text_color",
-      "label": "Text Color",
+      "id": "title_color",
+      "label": "Header Title Color",
       "default": "#1A1A1A"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Header Subtitle Color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "trust_bar_color",
+      "label": "Trust Bar Text Color",
+      "default": "#1A1A1A"
+    },
+    {
+      "type": "header",
+      "content": "Cloud Icon Colors"
+    },
+    {
+      "type": "color",
+      "id": "icon_cloud_fill",
+      "label": "Cloud Fill Color",
+      "default": "#F7CD46"
+    },
+    {
+      "type": "color",
+      "id": "icon_cloud_stroke",
+      "label": "Cloud Outline Color",
+      "default": "#1A1A1A"
+    },
+    {
+      "type": "color",
+      "id": "icon_rainbow_red",
+      "label": "Rainbow - Red/Coral",
+      "default": "#E85A4F"
+    },
+    {
+      "type": "color",
+      "id": "icon_rainbow_yellow",
+      "label": "Rainbow - Yellow",
+      "default": "#F7CD46"
+    },
+    {
+      "type": "color",
+      "id": "icon_rainbow_blue",
+      "label": "Rainbow - Blue",
+      "default": "#4FB1BD"
+    },
+    {
+      "type": "header",
+      "content": "Card Colors"
     },
     {
       "type": "color",
