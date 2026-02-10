@@ -47,8 +47,10 @@
       <h3 class="best-sellers__product-title">{{ product.title }}</h3>
     </a>
     
-    {%- if product.metafields.custom.short_description != blank -%}
-      <p class="best-sellers__product-desc">{{ product.metafields.custom.short_description }}</p>
+    {%- if product.metafields.custom.subheading != blank -%}
+      <p class="best-sellers__product-desc">{{ product.metafields.custom.subheading }}</p>
+    {%- elsif product.metafields.descriptors.subtitle != blank -%}
+      <p class="best-sellers__product-desc">{{ product.metafields.descriptors.subtitle.value }}</p>
     {%- elsif product.description != blank -%}
       <p class="best-sellers__product-desc">{{ product.description | strip_html | truncate: 60 }}</p>
     {%- endif -%}
