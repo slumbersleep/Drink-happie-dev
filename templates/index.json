@@ -22,6 +22,7 @@
         "cta_2_url": "shopify://collections/homepage-shrine",
         "show_social_proof": true,
         "social_proof_text": "2,400+ Happy Customers",
+        "hero_image": "shopify://shop_images/Happie_Drinks_Hero_1.png",
         "show_wave_divider": true,
         "wave_color": "#962f80",
         "background_color": "#ffe6cb",
