@@ -1147,25 +1147,30 @@
      DESKTOP: Floating pill navigation
      ======================================== */
   @media (min-width: 1024px) {
-    /* Section wrapper */
+    /* Section wrapper - MUST be transparent */
     #shopify-section-{{ section.id }} {
       position: sticky !important;
       top: 0 !important;
       z-index: 40 !important;
       background: transparent !important;
-      padding: 32px 40px 0 40px !important;
+      background-color: transparent !important;
       border: none !important;
+      padding: 0 !important;
     }
     
-    /* Site header element */
+    /* The data-island site-header element */
+    #shopify-section-{{ section.id }} > data-island,
     #shopify-section-{{ section.id }} .site-header {
       background: transparent !important;
+      background-color: transparent !important;
       border: none !important;
+      padding: 32px 40px 0 40px !important;
     }
     
     /* The pill container */
     #shopify-section-{{ section.id }} .headerBorderWrap {
-      background: #FFFFFF;
+      background: #FFFFFF !important;
+      background-color: #FFFFFF !important;
       border-radius: 999px;
       box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
       max-width: 1105px;
@@ -1177,12 +1182,12 @@
     
     /* Header container */
     #shopify-section-{{ section.id }} #headerContainer {
-      background: transparent;
+      background: transparent !important;
       height: 72px !important;
       max-height: 72px !important;
     }
     
-    /* Inner wrapper - critical fix */
+    /* Inner wrapper */
     #shopify-section-{{ section.id }} #headerContainer > div {
       padding: 0 32px !important;
       height: 72px !important;
@@ -1196,7 +1201,7 @@
       align-items: center !important;
     }
     
-    /* CRITICAL: Force nav to single line */
+    /* Force nav to single line */
     #shopify-section-{{ section.id }} nav ul {
       flex-wrap: nowrap !important;
       gap: 8px !important;
@@ -1221,12 +1226,12 @@
     }
     
     /* Dark text everywhere */
-    #shopify-section-{{ section.id }},
-    #shopify-section-{{ section.id }} .site-header,
-    #shopify-section-{{ section.id }} .site-header *,
-    #shopify-section-{{ section.id }} a,
-    #shopify-section-{{ section.id }} button,
-    #shopify-section-{{ section.id }} span {
+    #shopify-section-{{ section.id }} .headerBorderWrap,
+    #shopify-section-{{ section.id }} .headerBorderWrap *,
+    #shopify-section-{{ section.id }} .site-header a,
+    #shopify-section-{{ section.id }} .site-header button,
+    #shopify-section-{{ section.id }} .site-header span,
+    #shopify-section-{{ section.id }} nav {
       color: #1A1A1A !important;
     }
     
@@ -1247,7 +1252,7 @@
       display: none !important;
     }
     
-    /* Dropdown menus need to escape the pill */
+    /* Dropdown menus */
     #shopify-section-{{ section.id }} [data-header-dropdown],
     #shopify-section-{{ section.id }} .no-js-focus-container {
       border-radius: 16px;
@@ -1264,17 +1269,22 @@
       z-index: 40 !important;
       transition: transform 0.3s ease-in-out;
       background: transparent !important;
-      padding: 16px !important;
+      background-color: transparent !important;
       border: none !important;
+      padding: 0 !important;
     }
     
+    #shopify-section-{{ section.id }} > data-island,
     #shopify-section-{{ section.id }} .site-header {
       background: transparent !important;
+      background-color: transparent !important;
       border: none !important;
+      padding: 16px !important;
     }
     
     #shopify-section-{{ section.id }} .headerBorderWrap {
-      background: #FFFFFF;
+      background: #FFFFFF !important;
+      background-color: #FFFFFF !important;
       border-radius: 999px;
       box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
       height: 56px !important;
@@ -1291,12 +1301,11 @@
     }
     
     /* Dark text */
-    #shopify-section-{{ section.id }},
-    #shopify-section-{{ section.id }} .site-header,
-    #shopify-section-{{ section.id }} .site-header *,
-    #shopify-section-{{ section.id }} a,
-    #shopify-section-{{ section.id }} button,
-    #shopify-section-{{ section.id }} span {
+    #shopify-section-{{ section.id }} .headerBorderWrap,
+    #shopify-section-{{ section.id }} .headerBorderWrap *,
+    #shopify-section-{{ section.id }} .site-header a,
+    #shopify-section-{{ section.id }} .site-header button,
+    #shopify-section-{{ section.id }} .site-header span {
       color: #1A1A1A !important;
     }
     
