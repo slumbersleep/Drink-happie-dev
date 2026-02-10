@@ -104,12 +104,14 @@
         "title": "Choose Your Vibe",
         "subtitle": "Two product lines, one mission — plant-powered happiness for every moment.",
         "card_1_badge": "MOST POPULAR",
+        "card_1_image": "shopify://shop_images/26ec9a03-e9a4-4bcb-8535-daab34053ca4_2_1_-min.png",
         "card_1_title": "THC Infused Seltzers",
         "card_1_subtitle": "5mg THC + 5mg CBD or 10mg THC + 5mg CBD",
         "card_1_cta_text": "Shop THC Seltzers",
         "card_1_cta_url": "",
         "card_1_price": "$19.99",
         "card_2_badge": "ZERO THC",
+        "card_2_image": "shopify://shop_images/Happie_A_Creatives_17.png",
         "card_2_title": "Fungi Fusion",
         "card_2_subtitle": "Functional mushrooms + adaptogens",
         "card_2_cta_text": "Shop Fungi Fusion",
@@ -132,9 +134,9 @@
         "show_top_curve": false,
         "top_curve_style": "wave",
         "top_curve_color": "#ffffff",
-        "show_bottom_curve": false,
+        "show_bottom_curve": true,
         "bottom_curve_style": "wave",
-        "bottom_curve_color": "#ffffff"
+        "bottom_curve_color": "#962f80"
       }
     },
     "video_with_text_overlay_wQYeEJ": {
