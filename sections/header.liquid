@@ -1154,12 +1154,14 @@
   }
 </style>
 
-{%- comment -%} Mobile scroll-to-show header behavior {%- endcomment -%}
-{% if section.settings.sticky_header %}
+{%- comment -%} Mobile scroll-to-show header + Desktop sticky behavior {%- endcomment -%}
 <style>
-  /* Mobile: header slides up/down based on scroll direction */
+  /* Mobile: sticky + scroll-to-reveal */
   @media (max-width: 1023px) {
     #shopify-section-{{ section.id }} {
+      position: sticky !important;
+      top: 0 !important;
+      z-index: 40 !important;
       transition: transform 0.3s ease-in-out;
     }
     #shopify-section-{{ section.id }}.header-hidden {
@@ -1173,19 +1175,27 @@
   /* Desktop: always visible sticky */
   @media (min-width: 1024px) {
     #shopify-section-{{ section.id }} {
+      position: sticky !important;
+      top: 0 !important;
+      z-index: 40 !important;
       transform: translateY(0) !important;
     }
   }
 </style>
 
 <script>
-  (function() {
+  document.addEventListener('DOMContentLoaded', function() {
     const MOBILE_BREAKPOINT = 1024;
-    const SCROLL_THRESHOLD = 10; // Minimum scroll distance to trigger hide/show
+    const SCROLL_THRESHOLD = 10;
     
     let lastScrollY = window.scrollY;
     let ticking = false;
     let headerSection = document.getElementById('shopify-section-{{ section.id }}');
+    
+    if (!headerSection) {
+      console.warn('Header section not found');
+      return;
+    }
     
     function isMobile() {
       return window.innerWidth < MOBILE_BREAKPOINT;
@@ -1194,9 +1204,10 @@
     function updateHeader() {
       const currentScrollY = window.scrollY;
       
-      // Only apply on mobile
+      // Only apply scroll-to-reveal on mobile
       if (!isMobile()) {
         headerSection.classList.remove('header-hidden', 'header-visible');
+        ticking = false;
         return;
       }
       
@@ -1205,6 +1216,7 @@
         headerSection.classList.remove('header-hidden');
         headerSection.classList.add('header-visible');
         lastScrollY = currentScrollY;
+        ticking = false;
         return;
       }
       
@@ -1233,10 +1245,8 @@
       }
     }
     
-    // Listen for scroll events
     window.addEventListener('scroll', onScroll, { passive: true });
     
-    // Handle resize (switching between mobile/desktop)
     window.addEventListener('resize', function() {
       if (!isMobile()) {
         headerSection.classList.remove('header-hidden', 'header-visible');
@@ -1247,9 +1257,8 @@
     if (isMobile() && window.scrollY < 50) {
       headerSection.classList.add('header-visible');
     }
-  })();
+  });
 </script>
-{% endif %}
 {%- if enable_overlay -%}
   <script>
     document.getElementById('shopify-section-{{ section.id }}').classList.add('has-no-height');
