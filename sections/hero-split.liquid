@@ -1,0 +1,561 @@
+{%- liquid
+  assign eyebrow = section.settings.eyebrow
+  assign title = section.settings.title
+  assign title_highlight = section.settings.title_highlight
+  assign richtext = section.settings.richtext
+  assign cta_1_text = section.settings.cta_1_text
+  assign cta_1_url = section.settings.cta_1_url
+  assign cta_2_text = section.settings.cta_2_text
+  assign cta_2_url = section.settings.cta_2_url
+  assign show_social_proof = section.settings.show_social_proof
+  assign social_proof_text = section.settings.social_proof_text
+  assign hero_image = section.settings.hero_image
+-%}
+
+<section
+  id="hero-split-{{ section.id }}"
+  class="hero-split"
+  data-color-scheme="{{ section.settings.color_scheme }}"
+>
+  <div class="hero-split__container">
+    <!-- Left Content Column -->
+    <div class="hero-split__content">
+      {%- if eyebrow != blank -%}
+        <div class="hero-split__eyebrow">
+          <svg class="hero-split__eyebrow-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+            <circle cx="9" cy="9" r="1" fill="currentColor"/>
+            <circle cx="15" cy="9" r="1" fill="currentColor"/>
+          </svg>
+          {{ eyebrow }}
+        </div>
+      {%- endif -%}
+
+      <h1 class="hero-split__title">
+        {{ title }}
+        {%- if title_highlight != blank -%}
+          <em class="hero-split__title-highlight">{{ title_highlight }}</em>
+        {%- endif -%}
+      </h1>
+
+      {%- if richtext != blank -%}
+        <p class="hero-split__text">{{ richtext }}</p>
+      {%- endif -%}
+
+      <div class="hero-split__ctas">
+        {%- if cta_1_text != blank and cta_1_url != blank -%}
+          <a href="{{ cta_1_url }}" class="hero-split__btn hero-split__btn--primary">
+            {{ cta_1_text }}
+          </a>
+        {%- endif -%}
+        {%- if cta_2_text != blank and cta_2_url != blank -%}
+          <a href="{{ cta_2_url }}" class="hero-split__btn hero-split__btn--secondary">
+            {{ cta_2_text }}
+          </a>
+        {%- endif -%}
+      </div>
+
+      {%- if show_social_proof -%}
+        <div class="hero-split__social-proof">
+          <div class="hero-split__stars">
+            {%- for i in (1..5) -%}
+              <svg viewBox="0 0 24 24" width="18" height="18">
+                <path fill="currentColor" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              </svg>
+            {%- endfor -%}
+          </div>
+          <span class="hero-split__proof-text">{{ social_proof_text }}</span>
+        </div>
+      {%- endif -%}
+    </div>
+
+    <!-- Right Image Column -->
+    <div class="hero-split__image-wrapper">
+      {%- if hero_image != blank -%}
+        <img
+          src="{{ hero_image | image_url: width: 1200 }}"
+          alt="{{ hero_image.alt | escape }}"
+          width="{{ hero_image.width }}"
+          height="{{ hero_image.height }}"
+          loading="eager"
+          class="hero-split__image"
+        >
+      {%- else -%}
+        <div class="hero-split__image-placeholder">
+          <span>Hero Image</span>
+          <span class="hero-split__placeholder-sub">Upload your cans image</span>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <!-- Bottom Wave Divider -->
+  {%- if section.settings.show_wave_divider -%}
+    <div class="hero-split__wave">
+      <svg viewBox="0 0 1200 84" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M600 39.1293C800 84.6351 1000 84.6351 1200 39.1294V84.0001H0L3.48561e-06 39.1293C200 -6.37645 400 -6.37643 600 39.1293Z" fill="{{ section.settings.wave_color }}"/>
+      </svg>
+    </div>
+  {%- endif -%}
+</section>
+
+<style>
+  #hero-split-{{ section.id }} {
+    --hero-bg: {{ section.settings.background_color }};
+    --hero-text: {{ section.settings.text_color }};
+    --hero-highlight: {{ section.settings.highlight_color }};
+    --hero-eyebrow-bg: {{ section.settings.eyebrow_bg_color }};
+    --hero-eyebrow-text: {{ section.settings.eyebrow_text_color }};
+    --hero-btn-primary-bg: {{ section.settings.cta_1_bg_color }};
+    --hero-btn-primary-text: {{ section.settings.cta_1_text_color }};
+    --hero-btn-secondary-bg: {{ section.settings.cta_2_bg_color }};
+    --hero-btn-secondary-text: {{ section.settings.cta_2_text_color }};
+    --hero-stars-color: {{ section.settings.stars_color }};
+  }
+
+  #hero-split-{{ section.id }}.hero-split {
+    background: var(--hero-bg);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: 120px 0 100px;
+  }
+
+  #hero-split-{{ section.id }} .hero-split__container {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    width: 100%;
+  }
+
+  #hero-split-{{ section.id }} .hero-split__content {
+    max-width: 560px;
+  }
+
+  #hero-split-{{ section.id }} .hero-split__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--hero-eyebrow-bg);
+    color: var(--hero-eyebrow-text);
+    padding: 8px 18px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  #hero-split-{{ section.id }} .hero-split__eyebrow-icon {
+    flex-shrink: 0;
+  }
+
+  #hero-split-{{ section.id }} .hero-split__title {
+    font-size: clamp(36px, 4.5vw, 56px);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    letter-spacing: -1px;
+    color: var(--hero-text);
+  }
+
+  #hero-split-{{ section.id }} .hero-split__title-highlight {
+    font-style: italic;
+    color: var(--hero-highlight);
+    display: block;
+  }
+
+  #hero-split-{{ section.id }} .hero-split__text {
+    font-size: 17px;
+    color: var(--hero-text);
+    opacity: 0.85;
+    margin-bottom: 32px;
+    max-width: 440px;
+    line-height: 1.7;
+  }
+
+  #hero-split-{{ section.id }} .hero-split__ctas {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+  }
+
+  #hero-split-{{ section.id }} .hero-split__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 32px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+  }
+
+  #hero-split-{{ section.id }} .hero-split__btn--primary {
+    background: var(--hero-btn-primary-bg);
+    color: var(--hero-btn-primary-text);
+  }
+
+  #hero-split-{{ section.id }} .hero-split__btn--primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(247, 205, 70, 0.4);
+    filter: brightness(0.95);
+  }
+
+  #hero-split-{{ section.id }} .hero-split__btn--secondary {
+    background: var(--hero-btn-secondary-bg);
+    color: var(--hero-btn-secondary-text);
+  }
+
+  #hero-split-{{ section.id }} .hero-split__btn--secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(79, 177, 189, 0.4);
+    filter: brightness(0.95);
+  }
+
+  #hero-split-{{ section.id }} .hero-split__social-proof {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  #hero-split-{{ section.id }} .hero-split__stars {
+    display: flex;
+    gap: 2px;
+    color: var(--hero-stars-color);
+  }
+
+  #hero-split-{{ section.id }} .hero-split__proof-text {
+    font-size: 14px;
+    color: var(--hero-text);
+    opacity: 0.7;
+  }
+
+  #hero-split-{{ section.id }} .hero-split__proof-text strong {
+    font-weight: 600;
+    opacity: 1;
+  }
+
+  #hero-split-{{ section.id }} .hero-split__image-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  #hero-split-{{ section.id }} .hero-split__image {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  #hero-split-{{ section.id }} .hero-split__image-placeholder {
+    width: 100%;
+    aspect-ratio: 1;
+    max-width: 500px;
+    background: rgba(255, 255, 255, 0.5);
+    border: 3px dashed rgba(0, 0, 0, 0.15);
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: rgba(0, 0, 0, 0.4);
+    font-weight: 600;
+    font-size: 18px;
+  }
+
+  #hero-split-{{ section.id }} .hero-split__placeholder-sub {
+    font-size: 14px;
+    font-weight: 400;
+    opacity: 0.7;
+  }
+
+  #hero-split-{{ section.id }} .hero-split__wave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    line-height: 0;
+    pointer-events: none;
+  }
+
+  #hero-split-{{ section.id }} .hero-split__wave svg {
+    display: block;
+    width: 100%;
+    height: 80px;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    #hero-split-{{ section.id }} .hero-split__container {
+      grid-template-columns: 1fr;
+      text-align: center;
+      gap: 48px;
+    }
+
+    #hero-split-{{ section.id }} .hero-split__content {
+      max-width: 100%;
+      order: 2;
+    }
+
+    #hero-split-{{ section.id }} .hero-split__image-wrapper {
+      order: 1;
+    }
+
+    #hero-split-{{ section.id }} .hero-split__text {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #hero-split-{{ section.id }} .hero-split__ctas {
+      justify-content: center;
+    }
+
+    #hero-split-{{ section.id }} .hero-split__social-proof {
+      justify-content: center;
+    }
+
+    #hero-split-{{ section.id }} .hero-split__title-highlight {
+      display: inline;
+    }
+  }
+
+  @media (max-width: 768px) {
+    #hero-split-{{ section.id }}.hero-split {
+      padding: 100px 0 80px;
+      min-height: auto;
+    }
+
+    #hero-split-{{ section.id }} .hero-split__ctas {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #hero-split-{{ section.id }} .hero-split__btn {
+      width: 100%;
+      max-width: 280px;
+    }
+
+    #hero-split-{{ section.id }} .hero-split__wave svg {
+      height: 50px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Hero Split",
+  "tag": "section",
+  "class": "hero-split-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "California Crafted"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Plant Powered Happiness in Every"
+    },
+    {
+      "type": "text",
+      "id": "title_highlight",
+      "label": "Title Highlight (italic)",
+      "default": "Sip"
+    },
+    {
+      "type": "textarea",
+      "id": "richtext",
+      "label": "Description",
+      "default": "Flavor-forward beverages infused with functional mushrooms & hemp-derived cannabinoids — made for the good-vibe seekers."
+    },
+    {
+      "type": "header",
+      "content": "Primary CTA"
+    },
+    {
+      "type": "text",
+      "id": "cta_1_text",
+      "label": "Button Text",
+      "default": "Shop THC Seltzers"
+    },
+    {
+      "type": "url",
+      "id": "cta_1_url",
+      "label": "Button Link"
+    },
+    {
+      "type": "header",
+      "content": "Secondary CTA"
+    },
+    {
+      "type": "text",
+      "id": "cta_2_text",
+      "label": "Button Text",
+      "default": "Shop Fungi Fusion"
+    },
+    {
+      "type": "url",
+      "id": "cta_2_url",
+      "label": "Button Link"
+    },
+    {
+      "type": "header",
+      "content": "Social Proof"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social_proof",
+      "label": "Show Social Proof",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "social_proof_text",
+      "label": "Social Proof Text",
+      "default": "<strong>2,400+</strong> Happy Customers"
+    },
+    {
+      "type": "header",
+      "content": "Hero Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero Image",
+      "info": "Upload your cans/product image for the right side"
+    },
+    {
+      "type": "header",
+      "content": "Wave Divider"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_wave_divider",
+      "label": "Show Wave Divider",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "wave_color",
+      "label": "Wave Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#FFE6CB"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#1A1A1A"
+    },
+    {
+      "type": "color",
+      "id": "highlight_color",
+      "label": "Highlight Color (Italic Text)",
+      "default": "#4FB1BD"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_bg_color",
+      "label": "Eyebrow Background",
+      "default": "rgba(79, 177, 189, 0.15)"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_text_color",
+      "label": "Eyebrow Text Color",
+      "default": "#3A9BA6"
+    },
+    {
+      "type": "color",
+      "id": "cta_1_bg_color",
+      "label": "Primary CTA Background",
+      "default": "#F7CD46"
+    },
+    {
+      "type": "color",
+      "id": "cta_1_text_color",
+      "label": "Primary CTA Text",
+      "default": "#1A1A1A"
+    },
+    {
+      "type": "color",
+      "id": "cta_2_bg_color",
+      "label": "Secondary CTA Background",
+      "default": "#4FB1BD"
+    },
+    {
+      "type": "color",
+      "id": "cta_2_text_color",
+      "label": "Secondary CTA Text",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "stars_color",
+      "label": "Stars Color",
+      "default": "#F7CD46"
+    },
+    {
+      "type": "header",
+      "content": "Color Scheme"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "default": "scheme1",
+      "label": "Color Scheme"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Split",
+      "settings": {
+        "eyebrow": "California Crafted",
+        "title": "Plant Powered Happiness in Every",
+        "title_highlight": "Sip",
+        "richtext": "Flavor-forward beverages infused with functional mushrooms & hemp-derived cannabinoids — made for the good-vibe seekers.",
+        "cta_1_text": "Shop THC Seltzers",
+        "cta_2_text": "Shop Fungi Fusion",
+        "show_social_proof": true,
+        "social_proof_text": "<strong>2,400+</strong> Happy Customers",
+        "show_wave_divider": true
+      }
+    }
+  ],
+  "disabled_on": {
+    "groups": ["header", "footer", "aside"]
+  }
+}
+{% endschema %}
