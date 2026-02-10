@@ -16,6 +16,28 @@
   class="best-sellers"
   x-data="{ activeTab: 'collection1' }"
 >
+  <!-- Top Curve Divider -->
+  {%- if section.settings.show_top_curve -%}
+    <div class="best-sellers__curve best-sellers__curve--top">
+      <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        {%- case section.settings.top_curve_style -%}
+          {%- when 'wave' -%}
+            <path d="M0 80V60C240 20 480 0 720 20C960 40 1200 60 1440 40V80H0Z" fill="{{ section.settings.top_curve_color }}"/>
+          {%- when 'wave-smooth' -%}
+            <path d="M0 80V40C360 80 720 0 1080 40C1260 60 1350 70 1440 60V80H0Z" fill="{{ section.settings.top_curve_color }}"/>
+          {%- when 'arc' -%}
+            <path d="M0 80V60Q720 0 1440 60V80H0Z" fill="{{ section.settings.top_curve_color }}"/>
+          {%- when 'slope-left' -%}
+            <path d="M0 80V0L1440 60V80H0Z" fill="{{ section.settings.top_curve_color }}"/>
+          {%- when 'slope-right' -%}
+            <path d="M0 80V60L1440 0V80H0Z" fill="{{ section.settings.top_curve_color }}"/>
+          {%- else -%}
+            <path d="M0 80V60C240 20 480 0 720 20C960 40 1200 60 1440 40V80H0Z" fill="{{ section.settings.top_curve_color }}"/>
+        {%- endcase -%}
+      </svg>
+    </div>
+  {%- endif -%}
+
   <div class="best-sellers__container">
     <!-- Header -->
     <div class="best-sellers__header">
@@ -116,6 +138,28 @@
       </div>
     {%- endif -%}
   </div>
+
+  <!-- Bottom Curve Divider -->
+  {%- if section.settings.show_bottom_curve -%}
+    <div class="best-sellers__curve best-sellers__curve--bottom">
+      <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        {%- case section.settings.bottom_curve_style -%}
+          {%- when 'wave' -%}
+            <path d="M0 0V20C240 60 480 80 720 60C960 40 1200 20 1440 40V0H0Z" fill="{{ section.settings.bottom_curve_color }}"/>
+          {%- when 'wave-smooth' -%}
+            <path d="M0 0V40C360 0 720 80 1080 40C1260 20 1350 10 1440 20V0H0Z" fill="{{ section.settings.bottom_curve_color }}"/>
+          {%- when 'arc' -%}
+            <path d="M0 0V20Q720 80 1440 20V0H0Z" fill="{{ section.settings.bottom_curve_color }}"/>
+          {%- when 'slope-left' -%}
+            <path d="M0 0V80L1440 20V0H0Z" fill="{{ section.settings.bottom_curve_color }}"/>
+          {%- when 'slope-right' -%}
+            <path d="M0 0V20L1440 80V0H0Z" fill="{{ section.settings.bottom_curve_color }}"/>
+          {%- else -%}
+            <path d="M0 0V20C240 60 480 80 720 60C960 40 1200 20 1440 40V0H0Z" fill="{{ section.settings.bottom_curve_color }}"/>
+        {%- endcase -%}
+      </svg>
+    </div>
+  {%- endif -%}
 </section>
 
 <style>
@@ -137,6 +181,40 @@
   #best-sellers-{{ section.id }}.best-sellers {
     background: var(--bs-bg);
     padding: 80px 0;
+    position: relative;
+  }
+
+  /* Curve Dividers */
+  #best-sellers-{{ section.id }} .best-sellers__curve {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    line-height: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__curve svg {
+    display: block;
+    width: 100%;
+    height: {{ section.settings.curve_height }}px;
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__curve--top {
+    top: 0;
+    transform: translateY(-99%);
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__curve--bottom {
+    bottom: 0;
+    transform: translateY(99%);
+  }
+
+  @media (max-width: 768px) {
+    #best-sellers-{{ section.id }} .best-sellers__curve svg {
+      height: {{ section.settings.curve_height | divided_by: 2 }}px;
+    }
   }
 
   #best-sellers-{{ section.id }} .best-sellers__container {
@@ -591,6 +669,80 @@
       "id": "badge_text_color",
       "label": "Badge Text",
       "default": "#1A1A1A"
+    },
+    {
+      "type": "header",
+      "content": "Curve Dividers"
+    },
+    {
+      "type": "range",
+      "id": "curve_height",
+      "label": "Curve Height",
+      "min": 30,
+      "max": 150,
+      "step": 10,
+      "default": 80,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Top Curve"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_top_curve",
+      "label": "Show Top Curve",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "top_curve_style",
+      "label": "Top Curve Style",
+      "options": [
+        { "value": "wave", "label": "Wave" },
+        { "value": "wave-smooth", "label": "Wave (Smooth)" },
+        { "value": "arc", "label": "Arc" },
+        { "value": "slope-left", "label": "Slope (Left to Right)" },
+        { "value": "slope-right", "label": "Slope (Right to Left)" }
+      ],
+      "default": "wave"
+    },
+    {
+      "type": "color",
+      "id": "top_curve_color",
+      "label": "Top Curve Color",
+      "default": "#FFFFFF",
+      "info": "Should match the section above"
+    },
+    {
+      "type": "header",
+      "content": "Bottom Curve"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_bottom_curve",
+      "label": "Show Bottom Curve",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "bottom_curve_style",
+      "label": "Bottom Curve Style",
+      "options": [
+        { "value": "wave", "label": "Wave" },
+        { "value": "wave-smooth", "label": "Wave (Smooth)" },
+        { "value": "arc", "label": "Arc" },
+        { "value": "slope-left", "label": "Slope (Left to Right)" },
+        { "value": "slope-right", "label": "Slope (Right to Left)" }
+      ],
+      "default": "wave"
+    },
+    {
+      "type": "color",
+      "id": "bottom_curve_color",
+      "label": "Bottom Curve Color",
+      "default": "#FFFFFF",
+      "info": "Should match the section below"
     }
   ],
   "blocks": [
