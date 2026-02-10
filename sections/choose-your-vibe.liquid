@@ -33,22 +33,16 @@
   <div class="choose-vibe__container">
     <!-- Header -->
     <div class="choose-vibe__header">
-      {%- if show_cloud_icon -%}
+      {%- if section.settings.header_icon != blank -%}
         <div class="choose-vibe__icon" style="width: {{ section.settings.icon_size }}px;">
-          <svg viewBox="0 0 64 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Rainbow arc -->
-            <path d="M16 32C16 23.163 23.163 16 32 16C40.837 16 48 23.163 48 32" stroke="{{ section.settings.icon_rainbow_red }}" stroke-width="4" stroke-linecap="round"/>
-            <path d="M20 32C20 25.373 25.373 20 32 20C38.627 20 44 25.373 44 32" stroke="{{ section.settings.icon_rainbow_yellow }}" stroke-width="4" stroke-linecap="round"/>
-            <path d="M24 32C24 27.582 27.582 24 32 24C36.418 24 40 27.582 40 32" stroke="{{ section.settings.icon_rainbow_blue }}" stroke-width="4" stroke-linecap="round"/>
-            <!-- Cloud -->
-            <ellipse cx="32" cy="38" rx="16" ry="10" fill="{{ section.settings.icon_cloud_fill }}"/>
-            <ellipse cx="22" cy="36" rx="10" ry="8" fill="{{ section.settings.icon_cloud_fill }}"/>
-            <ellipse cx="42" cy="36" rx="10" ry="8" fill="{{ section.settings.icon_cloud_fill }}"/>
-            <ellipse cx="32" cy="34" rx="12" ry="8" fill="{{ section.settings.icon_cloud_fill }}"/>
-            <!-- Cloud outline -->
-            <ellipse cx="32" cy="38" rx="16" ry="10" stroke="{{ section.settings.icon_cloud_stroke }}" stroke-width="2"/>
-            <path d="M16 36C16 36 14 34 14 32C14 28 18 26 22 26C22 22 26 20 30 20C30 20 32 18 36 18C40 18 44 22 44 26C48 26 52 28 52 32C52 34 50 36 50 36" stroke="{{ section.settings.icon_cloud_stroke }}" stroke-width="2" stroke-linecap="round"/>
-          </svg>
+          <img 
+            src="{{ section.settings.header_icon | image_url: width: 240 }}"
+            alt="{{ section.settings.header_icon.alt | default: 'Section icon' }}"
+            width="{{ section.settings.header_icon.width }}"
+            height="{{ section.settings.header_icon.height }}"
+            loading="lazy"
+            class="choose-vibe__icon-image"
+          >
         </div>
       {%- endif -%}
       
@@ -253,9 +247,11 @@
     justify-content: center;
   }
 
-  #choose-vibe-{{ section.id }} .choose-vibe__icon svg {
+  #choose-vibe-{{ section.id }} .choose-vibe__icon svg,
+  #choose-vibe-{{ section.id }} .choose-vibe__icon-image {
     width: 100%;
     height: auto;
+    object-fit: contain;
   }
 
   #choose-vibe-{{ section.id }} .choose-vibe__title {
@@ -571,17 +567,17 @@
       "content": "Header"
     },
     {
-      "type": "checkbox",
-      "id": "show_cloud_icon",
-      "label": "Show Cloud Icon",
-      "default": true
+      "type": "image_picker",
+      "id": "header_icon",
+      "label": "Header Icon",
+      "info": "Upload a custom icon image (PNG or SVG recommended)"
     },
     {
       "type": "range",
       "id": "icon_size",
       "label": "Icon Size",
       "min": 40,
-      "max": 120,
+      "max": 200,
       "step": 4,
       "unit": "px",
       "default": 64
@@ -735,40 +731,6 @@
       "id": "trust_bar_color",
       "label": "Trust Bar Text Color",
       "default": "#1A1A1A"
-    },
-    {
-      "type": "header",
-      "content": "Cloud Icon Colors"
-    },
-    {
-      "type": "color",
-      "id": "icon_cloud_fill",
-      "label": "Cloud Fill Color",
-      "default": "#F7CD46"
-    },
-    {
-      "type": "color",
-      "id": "icon_cloud_stroke",
-      "label": "Cloud Outline Color",
-      "default": "#1A1A1A"
-    },
-    {
-      "type": "color",
-      "id": "icon_rainbow_red",
-      "label": "Rainbow - Red/Coral",
-      "default": "#E85A4F"
-    },
-    {
-      "type": "color",
-      "id": "icon_rainbow_yellow",
-      "label": "Rainbow - Yellow",
-      "default": "#F7CD46"
-    },
-    {
-      "type": "color",
-      "id": "icon_rainbow_blue",
-      "label": "Rainbow - Blue",
-      "default": "#4FB1BD"
     },
     {
       "type": "header",
