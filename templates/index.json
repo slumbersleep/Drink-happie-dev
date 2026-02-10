@@ -265,6 +265,47 @@
         "bottom_curve_color": "#ffffff"
       }
     },
+    "moast_app_wxMn7C": {
+      "type": "moast-app",
+      "blocks": {
+        "moast_carousel_N9Bgbi": {
+          "type": "shopify://apps/moast/blocks/carousel/1ac7547b-5443-446c-868c-7fab4566ee16",
+          "settings": {
+            "dynamic": false,
+            "feed": "default",
+            "feed_usage": "back_up",
+            "header": "",
+            "slide_type": "cards",
+            "product_cards": "none",
+            "autoplay_mode": "all",
+            "autoscroll_duration": 0,
+            "slide_size": "250",
+            "border": 0,
+            "border_color": "linear-gradient(to right, #833ab4, #fd1d1d, #fcb045)",
+            "slide_rounding": "20",
+            "slide_spacing": 16,
+            "padding_top": 0,
+            "pagination": "none",
+            "alignment": "center",
+            "click_action": "fullscreen",
+            "float_location": "bottom_right",
+            "float_size": "medium",
+            "show_captions": false,
+            "custom_css": ""
+          }
+        }
+      },
+      "block_order": [
+        "moast_carousel_N9Bgbi"
+      ],
+      "name": "Moast App",
+      "settings": {
+        "heading_icon": "shopify://shop_images/happie-cloud.png",
+        "rating_image": "shopify://shop_images/rating.png",
+        "rating_text": "Loved by 1,200+ Happy Drinkers",
+        "heading": "Real people. Real vibes. Real results."
+      }
+    },
     "ingredients_showcase_Gf3aRd": {
       "type": "ingredients-showcase",
       "blocks": {
@@ -1012,6 +1053,7 @@
     "video_with_text_overlay_TNNMbb",
     "image-with-text-overlay",
     "best_sellers_mJyW9V",
+    "moast_app_wxMn7C",
     "ingredients_showcase_Gf3aRd",
     "featured-collection",
     "pagefly_section_bMT8Ud",
