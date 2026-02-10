@@ -1,0 +1,632 @@
+{%- liquid
+  assign section_title = section.settings.title
+  assign section_subtitle = section.settings.subtitle
+  assign collection_1 = section.settings.collection_1
+  assign collection_1_label = section.settings.collection_1_label
+  assign collection_2 = section.settings.collection_2
+  assign collection_2_label = section.settings.collection_2_label
+  assign products_to_show = section.settings.products_to_show
+  assign show_shop_all = section.settings.show_shop_all
+  assign shop_all_text = section.settings.shop_all_text
+  assign shop_all_url = section.settings.shop_all_url
+-%}
+
+<section
+  id="best-sellers-{{ section.id }}"
+  class="best-sellers"
+  x-data="{ activeTab: 'collection1' }"
+>
+  <div class="best-sellers__container">
+    <!-- Header -->
+    <div class="best-sellers__header">
+      <h2 class="best-sellers__title">{{ section_title }}</h2>
+      
+      {%- if section_subtitle != blank -%}
+        <p class="best-sellers__subtitle">{{ section_subtitle }}</p>
+      {%- endif -%}
+      
+      <!-- Tab Switcher -->
+      {%- if collection_2 != blank -%}
+        <div class="best-sellers__tabs">
+          <button 
+            class="best-sellers__tab"
+            :class="{ 'best-sellers__tab--active': activeTab === 'collection1' }"
+            @click="activeTab = 'collection1'"
+          >
+            {{ collection_1_label | default: collection_1.title | default: 'THC Seltzers' }}
+          </button>
+          <button 
+            class="best-sellers__tab"
+            :class="{ 'best-sellers__tab--active': activeTab === 'collection2' }"
+            @click="activeTab = 'collection2'"
+          >
+            {{ collection_2_label | default: collection_2.title | default: 'Fungi Fusion' }}
+          </button>
+        </div>
+      {%- endif -%}
+    </div>
+
+    <!-- Products Grid - Collection 1 -->
+    <div 
+      class="best-sellers__grid"
+      x-show="activeTab === 'collection1'"
+      x-transition:enter="transition ease-out duration-200"
+      x-transition:enter-start="opacity-0"
+      x-transition:enter-end="opacity-100"
+    >
+      {%- if collection_1 != blank -%}
+        {%- for product in collection_1.products limit: products_to_show -%}
+          {% render 'best-sellers-product-card', product: product, index: forloop.index, section: section %}
+        {%- endfor -%}
+      {%- else -%}
+        {%- for i in (1..4) -%}
+          <div class="best-sellers__card best-sellers__card--placeholder">
+            <div class="best-sellers__card-image">
+              <div class="best-sellers__placeholder-image">
+                <span>Product {{ i }}</span>
+              </div>
+            </div>
+            <div class="best-sellers__card-content">
+              <h3 class="best-sellers__product-title">Product Name</h3>
+              <p class="best-sellers__product-desc">Product description here</p>
+              <div class="best-sellers__card-footer">
+                <div class="best-sellers__variant-select">
+                  <select disabled>
+                    <option>Select variant</option>
+                  </select>
+                </div>
+                <span class="best-sellers__price">$19.99</span>
+              </div>
+              <button class="best-sellers__add-to-cart" disabled>ADD TO CART →</button>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+
+    <!-- Products Grid - Collection 2 -->
+    {%- if collection_2 != blank -%}
+      <div 
+        class="best-sellers__grid"
+        x-show="activeTab === 'collection2'"
+        x-cloak
+        x-transition:enter="transition ease-out duration-200"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+      >
+        {%- for product in collection_2.products limit: products_to_show -%}
+          {% render 'best-sellers-product-card', product: product, index: forloop.index, section: section %}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    <!-- Shop All CTA -->
+    {%- if show_shop_all -%}
+      <div class="best-sellers__shop-all">
+        <a 
+          href="{{ shop_all_url | default: collection_1.url }}" 
+          class="best-sellers__shop-all-btn"
+          x-bind:href="activeTab === 'collection1' ? '{{ collection_1.url | default: shop_all_url }}' : '{{ collection_2.url | default: shop_all_url }}'"
+        >
+          {{ shop_all_text | default: 'Shop All' }}
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+<style>
+  #best-sellers-{{ section.id }} {
+    --bs-bg: {{ section.settings.background_color }};
+    --bs-title-color: {{ section.settings.title_color }};
+    --bs-subtitle-color: {{ section.settings.subtitle_color }};
+    --bs-card-bg: {{ section.settings.card_bg_color }};
+    --bs-text-color: {{ section.settings.text_color }};
+    --bs-price-color: {{ section.settings.price_color }};
+    --bs-btn-bg: {{ section.settings.button_bg_color }};
+    --bs-btn-text: {{ section.settings.button_text_color }};
+    --bs-tab-active-bg: {{ section.settings.tab_active_bg }};
+    --bs-tab-active-text: {{ section.settings.tab_active_text }};
+    --bs-badge-bg: {{ section.settings.badge_bg_color }};
+    --bs-badge-text: {{ section.settings.badge_text_color }};
+  }
+
+  #best-sellers-{{ section.id }}.best-sellers {
+    background: var(--bs-bg);
+    padding: 80px 0;
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Header */
+  #best-sellers-{{ section.id }} .best-sellers__header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__title {
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 800;
+    color: var(--bs-title-color);
+    margin: 0 0 12px;
+    letter-spacing: -0.5px;
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__subtitle {
+    font-size: 17px;
+    color: var(--bs-subtitle-color);
+    max-width: 500px;
+    margin: 0 auto 32px;
+    line-height: 1.6;
+  }
+
+  /* Tabs */
+  #best-sellers-{{ section.id }} .best-sellers__tabs {
+    display: inline-flex;
+    background: #F5F5F0;
+    border-radius: 999px;
+    padding: 4px;
+    gap: 4px;
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__tab {
+    padding: 12px 28px;
+    border: none;
+    background: transparent;
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--bs-text-color);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__tab--active {
+    background: var(--bs-tab-active-bg);
+    color: var(--bs-tab-active-text);
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__tab:hover:not(.best-sellers__tab--active) {
+    background: rgba(0, 0, 0, 0.05);
+  }
+
+  /* Products Grid */
+  #best-sellers-{{ section.id }} .best-sellers__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+
+  /* Product Card */
+  #best-sellers-{{ section.id }} .best-sellers__card {
+    background: var(--bs-card-bg);
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__card-image {
+    position: relative;
+    aspect-ratio: 1;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__card-image img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    padding: 6px 12px;
+    background: var(--bs-badge-bg);
+    color: var(--bs-badge-text);
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: capitalize;
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__placeholder-image {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #E8EBE0;
+    border-radius: 12px;
+    color: #6B725C;
+    font-weight: 500;
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__card-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__product-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--bs-text-color);
+    margin: 0 0 4px;
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__product-desc {
+    font-size: 14px;
+    color: var(--bs-subtitle-color);
+    margin: 0 0 16px;
+    line-height: 1.4;
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 16px;
+    margin-top: auto;
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__variant-select {
+    flex: 1;
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__variant-select select {
+    width: 100%;
+    padding: 10px 32px 10px 12px;
+    border: 1px solid #E0E0E0;
+    border-radius: 8px;
+    background: #FFFFFF url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 12px center;
+    font-size: 14px;
+    color: var(--bs-text-color);
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__price {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--bs-price-color);
+    white-space: nowrap;
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__add-to-cart {
+    width: 100%;
+    padding: 14px 24px;
+    background: var(--bs-btn-bg);
+    color: var(--bs-btn-text);
+    border: none;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__add-to-cart:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(107, 114, 92, 0.3);
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__add-to-cart:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+  /* Shop All CTA */
+  #best-sellers-{{ section.id }} .best-sellers__shop-all {
+    text-align: center;
+    padding-top: 16px;
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__shop-all-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 32px;
+    background: transparent;
+    color: var(--bs-btn-bg);
+    border: 2px solid var(--bs-btn-bg);
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__shop-all-btn:hover {
+    background: var(--bs-btn-bg);
+    color: var(--bs-btn-text);
+    transform: translateY(-2px);
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__shop-all-btn svg {
+    transition: transform 0.2s ease;
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__shop-all-btn:hover svg {
+    transform: translateX(4px);
+  }
+
+  /* Responsive */
+  @media (max-width: 1100px) {
+    #best-sellers-{{ section.id }} .best-sellers__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    #best-sellers-{{ section.id }}.best-sellers {
+      padding: 60px 0;
+    }
+
+    #best-sellers-{{ section.id }} .best-sellers__header {
+      margin-bottom: 32px;
+    }
+
+    #best-sellers-{{ section.id }} .best-sellers__tabs {
+      width: 100%;
+      max-width: 320px;
+    }
+
+    #best-sellers-{{ section.id }} .best-sellers__tab {
+      flex: 1;
+      padding: 10px 16px;
+      font-size: 14px;
+    }
+
+    #best-sellers-{{ section.id }} .best-sellers__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    #best-sellers-{{ section.id }} .best-sellers__card-content {
+      padding: 16px;
+    }
+
+    #best-sellers-{{ section.id }} .best-sellers__product-title {
+      font-size: 16px;
+    }
+
+    #best-sellers-{{ section.id }} .best-sellers__card-footer {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 8px;
+    }
+
+    #best-sellers-{{ section.id }} .best-sellers__price {
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 480px) {
+    #best-sellers-{{ section.id }} .best-sellers__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Alpine cloak */
+  [x-cloak] {
+    display: none !important;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Best Sellers",
+  "tag": "section",
+  "class": "best-sellers-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Header"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Best Sellers"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Our most-loved flavors, chosen by the Happie community."
+    },
+    {
+      "type": "header",
+      "content": "Collections"
+    },
+    {
+      "type": "collection",
+      "id": "collection_1",
+      "label": "Collection 1 (Tab 1)"
+    },
+    {
+      "type": "text",
+      "id": "collection_1_label",
+      "label": "Tab 1 Label",
+      "default": "THC Seltzers"
+    },
+    {
+      "type": "collection",
+      "id": "collection_2",
+      "label": "Collection 2 (Tab 2)",
+      "info": "Leave empty to hide tabs"
+    },
+    {
+      "type": "text",
+      "id": "collection_2_label",
+      "label": "Tab 2 Label",
+      "default": "Fungi Fusion"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Products to Show",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "Shop All Button"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_shop_all",
+      "label": "Show Shop All Button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "shop_all_text",
+      "label": "Button Text",
+      "default": "Shop All"
+    },
+    {
+      "type": "url",
+      "id": "shop_all_url",
+      "label": "Button Link",
+      "info": "Defaults to active collection URL if not set"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#FFFBF5"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#1A1A1A"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle Color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color",
+      "label": "Card Background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Card Text Color",
+      "default": "#1A1A1A"
+    },
+    {
+      "type": "color",
+      "id": "price_color",
+      "label": "Price Color",
+      "default": "#1A1A1A"
+    },
+    {
+      "type": "color",
+      "id": "tab_active_bg",
+      "label": "Active Tab Background",
+      "default": "#6B725C"
+    },
+    {
+      "type": "color",
+      "id": "tab_active_text",
+      "label": "Active Tab Text",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Button Background",
+      "default": "#6B725C"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "badge_bg_color",
+      "label": "Badge Background",
+      "default": "#F7CD46"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Badge Text",
+      "default": "#1A1A1A"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product_badge",
+      "name": "Product Badge",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "text",
+          "id": "badge_text",
+          "label": "Badge Text",
+          "default": "Best Seller"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Best Sellers",
+      "settings": {
+        "title": "Best Sellers",
+        "subtitle": "Our most-loved flavors, chosen by the Happie community.",
+        "collection_1_label": "THC Seltzers",
+        "collection_2_label": "Fungi Fusion",
+        "show_shop_all": true,
+        "shop_all_text": "Shop All"
+      }
+    }
+  ],
+  "disabled_on": {
+    "groups": ["header", "footer", "aside"]
+  }
+}
+{% endschema %}
