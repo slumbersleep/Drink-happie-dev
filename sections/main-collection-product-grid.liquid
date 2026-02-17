@@ -139,60 +139,80 @@
       {%- endif -%}
 
       <div
-        class="{% if settings.product_tiles_scatter %}py-4{% endif %}"
+        class="{% if settings.product_tiles_scatter and section.settings.use_happie_cards == false %}py-4{% endif %}"
         id="facets-results"
       >
         {%- if collection.products.size == 0 -%}
           <p class="text-center">{{ 'collections.general.no_matches' | t }}</p>
         {%- else -%}
-          <ul class="grid gap-theme {% if mobile_grid_cols == '2' %}grid-cols-2{% else %}grid-cols-1{% endif %} {{ desktop_grid_cols }}">
-            {%- for product in collection.products -%}
-              <li class="">
+          {%- if section.settings.use_happie_cards -%}
+            <!-- Happie Standardized Product Cards -->
+            {%- render 'happie-product-card-styles' -%}
+            <div class="happie-product-grid">
+              {%- for product in collection.products -%}
                 {%- liquid
-                  if settings.product_tiles_scatter
-                    capture class
-                      case section.settings.products_per_row_mobile
-                        when '2'
-                          cycle 'max-lg:-translate-y-4 ', 'max-lg:translate-y-4 '
-                      endcase
-                      case section.settings.products_per_row_desktop
-                        when 3
-                          cycle 'lg:translate-y-4 ', 'lg:-translate-y-4 ', 'lg:translate-y-4 '
-                        when 2, 4
-                          cycle 'lg:-translate-y-4 ', 'lg:translate-y-4 '
-                        when 5
-                          cycle 'lg:translate-y-4 ', 'lg:-translate-y-4 ', 'lg:translate-y-4 ', 'lg:-translate-y-4 ', 'lg:translate-y-4 '
-                      endcase
-                    endcapture
-                  endif
-                  capture odd_even
-                    cycle 'odd', 'even'
-                  endcapture
-
-                  if settings.product_tile_media_shape == 'blob'
-                    assign shape_id = section.id | append: '-' | append: forloop.index0
-                  endif
-
-                  assign product_tile_loading = 'lazy'
+                  assign lazy_load = true
                   if section.index <= 3 and forloop.index <= eager_loading_limit
-                    assign product_tile_loading = 'eager'
+                    assign lazy_load = false
                   endif
                 -%}
-                {%- render 'product-tile',
+                {%- render 'happie-product-card',
                   product: product,
-                  shape_id: shape_id,
-                  display_on_card: section.settings.display_on_card,
-                  class: class,
-                  odd_even: odd_even,
-                  index: forloop.index0,
-                  products_per_row_mobile: section.settings.products_per_row_mobile,
-                  enable_quick_buy: section.settings.enable_quick_buy,
-                  loading: product_tile_loading,
-                  sizes: sizes
+                  lazy_load: lazy_load
                 -%}
-              </li>
-            {%- endfor -%}
-          </ul>
+              {%- endfor -%}
+            </div>
+          {%- else -%}
+            <!-- Original Theme Product Tiles -->
+            <ul class="grid gap-theme {% if mobile_grid_cols == '2' %}grid-cols-2{% else %}grid-cols-1{% endif %} {{ desktop_grid_cols }}">
+              {%- for product in collection.products -%}
+                <li class="">
+                  {%- liquid
+                    if settings.product_tiles_scatter
+                      capture class
+                        case section.settings.products_per_row_mobile
+                          when '2'
+                            cycle 'max-lg:-translate-y-4 ', 'max-lg:translate-y-4 '
+                        endcase
+                        case section.settings.products_per_row_desktop
+                          when 3
+                            cycle 'lg:translate-y-4 ', 'lg:-translate-y-4 ', 'lg:translate-y-4 '
+                          when 2, 4
+                            cycle 'lg:-translate-y-4 ', 'lg:translate-y-4 '
+                          when 5
+                            cycle 'lg:translate-y-4 ', 'lg:-translate-y-4 ', 'lg:translate-y-4 ', 'lg:-translate-y-4 ', 'lg:translate-y-4 '
+                        endcase
+                      endcapture
+                    endif
+                    capture odd_even
+                      cycle 'odd', 'even'
+                    endcapture
+
+                    if settings.product_tile_media_shape == 'blob'
+                      assign shape_id = section.id | append: '-' | append: forloop.index0
+                    endif
+
+                    assign product_tile_loading = 'lazy'
+                    if section.index <= 3 and forloop.index <= eager_loading_limit
+                      assign product_tile_loading = 'eager'
+                    endif
+                  -%}
+                  {%- render 'product-tile',
+                    product: product,
+                    shape_id: shape_id,
+                    display_on_card: section.settings.display_on_card,
+                    class: class,
+                    odd_even: odd_even,
+                    index: forloop.index0,
+                    products_per_row_mobile: section.settings.products_per_row_mobile,
+                    enable_quick_buy: section.settings.enable_quick_buy,
+                    loading: product_tile_loading,
+                    sizes: sizes
+                  -%}
+                </li>
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
         {%- endif -%}
       </div>
 
@@ -235,6 +255,13 @@
 {
   "name": "t:sections.product_grid.name",
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "use_happie_cards",
+      "label": "Use Happie Product Cards",
+      "default": true,
+      "info": "Enable the standardized Happie product card design with teal Shop Now buttons"
+    },
     {
       "type": "range",
       "id": "no_products",
