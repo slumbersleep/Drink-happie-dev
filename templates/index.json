@@ -23,8 +23,11 @@
         "show_social_proof": true,
         "social_proof_text": "2,400+ Happy Customers",
         "hero_image": "shopify://shop_images/Happie_Drinks_Hero_1.png",
-        "show_wave_divider": true,
-        "wave_color": "#962f80",
+        "show_wave_divider": false,
+        "wave_height": 120,
+        "wave_color": "#f6e7d6",
+        "wave_animate": false,
+        "wave_animation_speed": 8,
         "background_color": "#ffe6cb",
         "text_color": "#1a1a1a",
         "highlight_color": "#4fb1bd",
@@ -122,12 +125,15 @@
         "cta_bg_color": "#f7cd46",
         "cta_text_color": "#1a1a1a",
         "curve_height": 80,
-        "show_top_curve": false,
+        "curve_animation_speed": 8,
+        "show_top_curve": true,
         "top_curve_style": "wave",
-        "top_curve_color": "#ffffff",
+        "top_curve_color": "#962f80",
+        "top_curve_animate": true,
         "show_bottom_curve": true,
         "bottom_curve_style": "wave",
-        "bottom_curve_color": "#962f80"
+        "bottom_curve_color": "#962f80",
+        "bottom_curve_animate": true
       }
     },
     "video_with_text_overlay_wQYeEJ": {
@@ -252,12 +258,15 @@
         "badge_bg_color": "#f7cd46",
         "badge_text_color": "#1a1a1a",
         "curve_height": 80,
+        "curve_animation_speed": 8,
         "show_top_curve": false,
         "top_curve_style": "wave",
         "top_curve_color": "#ffffff",
-        "show_bottom_curve": false,
+        "top_curve_animate": true,
+        "show_bottom_curve": true,
         "bottom_curve_style": "wave",
-        "bottom_curve_color": "#ffffff"
+        "bottom_curve_color": "#fffbf5",
+        "bottom_curve_animate": true
       }
     },
     "moast_app_wxMn7C": {
@@ -360,12 +369,15 @@
         "icon_color": "#7b3f9e",
         "icon_bg_color": "#7b3f9e14",
         "curve_height": 80,
+        "curve_animation_speed": 8,
         "show_top_curve": true,
         "top_curve_style": "wave",
         "top_curve_color": "#ffcb08",
+        "top_curve_animate": true,
         "show_bottom_curve": true,
         "bottom_curve_style": "wave",
-        "bottom_curve_color": "#ffcb08"
+        "bottom_curve_color": "#ffcb08",
+        "bottom_curve_animate": true
       }
     },
     "featured-collection": {
