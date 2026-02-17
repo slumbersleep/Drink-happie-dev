@@ -106,17 +106,43 @@
     </div>
 
     {%- comment -%} Navigation Links {%- endcomment -%}
+    {%- liquid
+      # Get the menu handle from settings and access via linklists global
+      assign nav_menu_handle = section.settings.mobile_nav_menu
+      assign nav_menu = linklists[nav_menu_handle]
+      
+      # Fallback chain if no menu selected or menu is empty
+      if nav_menu.links.size == 0
+        assign nav_menu = linklists['left-main-menu']
+      endif
+      
+      if nav_menu.links.size == 0
+        assign nav_menu = linklists['main-menu']
+      endif
+      
+      if nav_menu.links.size == 0
+        assign nav_menu = linklists['footer']
+      endif
+    -%}
     <nav class="sidebar-nav-happie__nav" aria-label="Main navigation">
       <ul class="sidebar-nav-happie__list">
-        {%- if mobile_menu.links.size > 0 -%}
-          {%- for link in mobile_menu.links -%}
+        {%- for link in nav_menu.links -%}
+          {%- liquid
+            assign link_title_downcase = link.title | downcase | strip
+            assign skip_link = false
+            if link_title_downcase contains 'shop'
+              assign skip_link = true
+            endif
+          -%}
+          {%- unless skip_link -%}
             <li class="sidebar-nav-happie__item">
               {%- if link.links.size > 0 -%}
-                <data-island x-data="{ expanded: false }">
+                <div x-data="{ expanded: false }">
                   <button
                     class="sidebar-nav-happie__link sidebar-nav-happie__link--parent"
                     @click="expanded = !expanded"
                     :aria-expanded="expanded"
+                    type="button"
                   >
                     <span>{{ link.title }}</span>
                     <svg 
@@ -147,78 +173,15 @@
                       </li>
                     {%- endfor -%}
                   </ul>
-                </data-island>
+                </div>
               {%- else -%}
                 <a href="{{ link.url }}" class="sidebar-nav-happie__link">
                   {{ link.title }}
                 </a>
               {%- endif -%}
             </li>
-          {%- endfor -%}
-        {%- else -%}
-          {%- comment -%} Fallback to default menu if none selected {%- endcomment -%}
-          {%- assign fallback_handle = section.settings.mobile_main_linklist -%}
-          {%- assign fallback_menu = linklists[fallback_handle] -%}
-          {%- if fallback_menu.links.size == 0 -%}
-            {%- assign fallback_handle2 = section.settings.left_linklist -%}
-            {%- assign fallback_menu = linklists[fallback_handle2] -%}
-          {%- endif -%}
-          {%- for link in fallback_menu.links -%}
-            {%- liquid
-              assign link_title_downcase = link.title | downcase | strip
-              assign skip_link = false
-              if link_title_downcase contains 'shop'
-                assign skip_link = true
-              endif
-            -%}
-            {%- unless skip_link -%}
-              <li class="sidebar-nav-happie__item">
-                {%- if link.links.size > 0 -%}
-                  <data-island x-data="{ expanded: false }">
-                    <button
-                      class="sidebar-nav-happie__link sidebar-nav-happie__link--parent"
-                      @click="expanded = !expanded"
-                      :aria-expanded="expanded"
-                    >
-                      <span>{{ link.title }}</span>
-                      <svg 
-                        class="sidebar-nav-happie__chevron" 
-                        :class="{ 'rotate-180': expanded }"
-                        width="16" 
-                        height="16" 
-                        viewBox="0 0 24 24" 
-                        fill="none" 
-                        stroke="currentColor" 
-                        stroke-width="2" 
-                        stroke-linecap="round" 
-                        stroke-linejoin="round"
-                      >
-                        <path d="M6 9l6 6 6-6"/>
-                      </svg>
-                    </button>
-                    <ul 
-                      class="sidebar-nav-happie__sublist"
-                      x-show="expanded" 
-                      x-collapse
-                    >
-                      {%- for child_link in link.links -%}
-                        <li>
-                          <a href="{{ child_link.url }}" class="sidebar-nav-happie__sublink">
-                            {{ child_link.title }}
-                          </a>
-                        </li>
-                      {%- endfor -%}
-                    </ul>
-                  </data-island>
-                {%- else -%}
-                  <a href="{{ link.url }}" class="sidebar-nav-happie__link">
-                    {{ link.title }}
-                  </a>
-                {%- endif -%}
-              </li>
-            {%- endunless -%}
-          {%- endfor -%}
-        {%- endif -%}
+          {%- endunless -%}
+        {%- endfor -%}
       </ul>
     </nav>
 
