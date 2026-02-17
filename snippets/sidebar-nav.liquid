@@ -125,6 +125,7 @@
       endif
     -%}
     <nav class="sidebar-nav-happie__nav" aria-label="Main navigation">
+      <!-- DEBUG: Handle={{ nav_menu_handle }}, Links={{ nav_menu.links.size }}, Title={{ nav_menu.title }} -->
       <ul class="sidebar-nav-happie__list">
         {%- for link in nav_menu.links -%}
           {%- liquid
