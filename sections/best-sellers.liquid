@@ -19,81 +19,81 @@
   <!-- Top Curve Divider -->
   {%- if section.settings.show_top_curve -%}
     <div class="best-sellers__curve best-sellers__curve--top{% if section.settings.top_curve_animate %} best-sellers__curve--animated{% endif %}">
-      <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
         {%- case section.settings.top_curve_style -%}
           {%- when 'wave' -%}
-            <path d="M0 80V60C240 20 480 0 720 20C960 40 1200 60 1440 40V80H0Z" fill="{{ section.settings.top_curve_color }}">
+            <path d="M0,120 L0,60 Q360,120 720,60 T1440,60 L1440,120 Z" fill="{{ section.settings.top_curve_color }}">
               {%- if section.settings.top_curve_animate -%}
                 <animate 
                   attributeName="d" 
                   dur="{{ section.settings.curve_animation_speed }}s"
                   repeatCount="indefinite"
                   calcMode="spline"
-                  keySplines="0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1"
+                  keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1"
                   values="
-                    M0 80V60C240 20 480 0 720 20C960 40 1200 60 1440 40V80H0Z;
-                    M0 80V40C240 60 480 20 720 0C960 20 1200 40 1440 60V80H0Z;
-                    M0 80V60C240 40 480 60 720 40C960 0 1200 20 1440 40V80H0Z;
-                    M0 80V40C240 0 480 40 720 60C960 40 1200 0 1440 20V80H0Z;
-                    M0 80V60C240 20 480 0 720 20C960 40 1200 60 1440 40V80H0Z"
+                    M0,120 L0,60 Q360,120 720,60 T1440,60 L1440,120 Z;
+                    M0,120 L0,40 Q360,80 720,50 T1440,70 L1440,120 Z;
+                    M0,120 L0,70 Q360,40 720,70 T1440,40 L1440,120 Z;
+                    M0,120 L0,50 Q360,100 720,40 T1440,60 L1440,120 Z;
+                    M0,120 L0,60 Q360,120 720,60 T1440,60 L1440,120 Z"
                 />
               {%- endif -%}
             </path>
           {%- when 'wave-smooth' -%}
-            <path d="M0 80V40C360 80 720 0 1080 40C1260 60 1350 70 1440 60V80H0Z" fill="{{ section.settings.top_curve_color }}">
+            <path d="M0,120 L0,80 Q720,20 1440,80 L1440,120 Z" fill="{{ section.settings.top_curve_color }}">
               {%- if section.settings.top_curve_animate -%}
                 <animate 
                   attributeName="d" 
                   dur="{{ section.settings.curve_animation_speed }}s"
                   repeatCount="indefinite"
                   calcMode="spline"
-                  keySplines="0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1"
+                  keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1"
                   values="
-                    M0 80V40C360 80 720 0 1080 40C1260 60 1350 70 1440 60V80H0Z;
-                    M0 80V60C360 20 720 60 1080 20C1260 40 1350 50 1440 40V80H0Z;
-                    M0 80V20C360 60 720 40 1080 60C1260 20 1350 30 1440 50V80H0Z;
-                    M0 80V50C360 40 720 80 1080 30C1260 50 1350 40 1440 30V80H0Z;
-                    M0 80V40C360 80 720 0 1080 40C1260 60 1350 70 1440 60V80H0Z"
+                    M0,120 L0,80 Q720,20 1440,80 L1440,120 Z;
+                    M0,120 L0,60 Q720,40 1440,70 L1440,120 Z;
+                    M0,120 L0,70 Q720,60 1440,50 L1440,120 Z;
+                    M0,120 L0,50 Q720,30 1440,60 L1440,120 Z;
+                    M0,120 L0,80 Q720,20 1440,80 L1440,120 Z"
                 />
               {%- endif -%}
             </path>
           {%- when 'arc' -%}
-            <path d="M0 80V60Q720 0 1440 60V80H0Z" fill="{{ section.settings.top_curve_color }}">
+            <path d="M0,120 L0,90 Q720,30 1440,90 L1440,120 Z" fill="{{ section.settings.top_curve_color }}">
               {%- if section.settings.top_curve_animate -%}
                 <animate 
                   attributeName="d" 
                   dur="{{ section.settings.curve_animation_speed }}s"
                   repeatCount="indefinite"
                   calcMode="spline"
-                  keySplines="0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1"
+                  keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1"
                   values="
-                    M0 80V60Q720 0 1440 60V80H0Z;
-                    M0 80V40Q720 40 1440 40V80H0Z;
-                    M0 80V60Q720 80 1440 20V80H0Z;
-                    M0 80V20Q720 60 1440 60V80H0Z;
-                    M0 80V60Q720 0 1440 60V80H0Z"
+                    M0,120 L0,90 Q720,30 1440,90 L1440,120 Z;
+                    M0,120 L0,70 Q720,50 1440,70 L1440,120 Z;
+                    M0,120 L0,80 Q720,70 1440,60 L1440,120 Z;
+                    M0,120 L0,60 Q720,40 1440,80 L1440,120 Z;
+                    M0,120 L0,90 Q720,30 1440,90 L1440,120 Z"
                 />
               {%- endif -%}
             </path>
           {%- when 'slope-left' -%}
-            <path d="M0 80V0L1440 60V80H0Z" fill="{{ section.settings.top_curve_color }}"/>
+            <path d="M0,120 L0,0 L1440,60 L1440,120 Z" fill="{{ section.settings.top_curve_color }}"/>
           {%- when 'slope-right' -%}
-            <path d="M0 80V60L1440 0V80H0Z" fill="{{ section.settings.top_curve_color }}"/>
+            <path d="M0,120 L0,60 L1440,0 L1440,120 Z" fill="{{ section.settings.top_curve_color }}"/>
           {%- else -%}
-            <path d="M0 80V60C240 20 480 0 720 20C960 40 1200 60 1440 40V80H0Z" fill="{{ section.settings.top_curve_color }}">
+            <path d="M0,120 L0,60 Q360,120 720,60 T1440,60 L1440,120 Z" fill="{{ section.settings.top_curve_color }}">
               {%- if section.settings.top_curve_animate -%}
                 <animate 
                   attributeName="d" 
                   dur="{{ section.settings.curve_animation_speed }}s"
                   repeatCount="indefinite"
                   calcMode="spline"
-                  keySplines="0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1"
+                  keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1"
                   values="
-                    M0 80V60C240 20 480 0 720 20C960 40 1200 60 1440 40V80H0Z;
-                    M0 80V40C240 60 480 20 720 0C960 20 1200 40 1440 60V80H0Z;
-                    M0 80V60C240 40 480 60 720 40C960 0 1200 20 1440 40V80H0Z;
-                    M0 80V40C240 0 480 40 720 60C960 40 1200 0 1440 20V80H0Z;
-                    M0 80V60C240 20 480 0 720 20C960 40 1200 60 1440 40V80H0Z"
+                    M0,120 L0,60 Q360,120 720,60 T1440,60 L1440,120 Z;
+                    M0,120 L0,40 Q360,80 720,50 T1440,70 L1440,120 Z;
+                    M0,120 L0,70 Q360,40 720,70 T1440,40 L1440,120 Z;
+                    M0,120 L0,50 Q360,100 720,40 T1440,60 L1440,120 Z;
+                    M0,120 L0,60 Q360,120 720,60 T1440,60 L1440,120 Z"
                 />
               {%- endif -%}
             </path>
@@ -206,81 +206,81 @@
   <!-- Bottom Curve Divider -->
   {%- if section.settings.show_bottom_curve -%}
     <div class="best-sellers__curve best-sellers__curve--bottom{% if section.settings.bottom_curve_animate %} best-sellers__curve--animated{% endif %}">
-      <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
         {%- case section.settings.bottom_curve_style -%}
           {%- when 'wave' -%}
-            <path d="M0 0V20C240 60 480 80 720 60C960 40 1200 20 1440 40V0H0Z" fill="{{ section.settings.bottom_curve_color }}">
+            <path d="M0,0 L0,60 Q360,120 720,60 T1440,60 L1440,0 Z" fill="{{ section.settings.bottom_curve_color }}">
               {%- if section.settings.bottom_curve_animate -%}
                 <animate 
                   attributeName="d" 
                   dur="{{ section.settings.curve_animation_speed }}s"
                   repeatCount="indefinite"
                   calcMode="spline"
-                  keySplines="0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1"
+                  keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1"
                   values="
-                    M0 0V20C240 60 480 80 720 60C960 40 1200 20 1440 40V0H0Z;
-                    M0 0V40C240 20 480 60 720 80C960 60 1200 40 1440 20V0H0Z;
-                    M0 0V20C240 40 480 20 720 40C960 80 1200 60 1440 40V0H0Z;
-                    M0 0V40C240 80 480 40 720 20C960 40 1200 80 1440 60V0H0Z;
-                    M0 0V20C240 60 480 80 720 60C960 40 1200 20 1440 40V0H0Z"
+                    M0,0 L0,60 Q360,120 720,60 T1440,60 L1440,0 Z;
+                    M0,0 L0,40 Q360,80 720,50 T1440,70 L1440,0 Z;
+                    M0,0 L0,70 Q360,40 720,70 T1440,40 L1440,0 Z;
+                    M0,0 L0,50 Q360,100 720,40 T1440,60 L1440,0 Z;
+                    M0,0 L0,60 Q360,120 720,60 T1440,60 L1440,0 Z"
                 />
               {%- endif -%}
             </path>
           {%- when 'wave-smooth' -%}
-            <path d="M0 0V40C360 0 720 80 1080 40C1260 20 1350 10 1440 20V0H0Z" fill="{{ section.settings.bottom_curve_color }}">
+            <path d="M0,0 L0,80 Q720,20 1440,80 L1440,0 Z" fill="{{ section.settings.bottom_curve_color }}">
               {%- if section.settings.bottom_curve_animate -%}
                 <animate 
                   attributeName="d" 
                   dur="{{ section.settings.curve_animation_speed }}s"
                   repeatCount="indefinite"
                   calcMode="spline"
-                  keySplines="0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1"
+                  keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1"
                   values="
-                    M0 0V40C360 0 720 80 1080 40C1260 20 1350 10 1440 20V0H0Z;
-                    M0 0V20C360 60 720 20 1080 60C1260 40 1350 30 1440 40V0H0Z;
-                    M0 0V60C360 20 720 40 1080 20C1260 60 1350 50 1440 30V0H0Z;
-                    M0 0V30C360 40 720 0 1080 50C1260 30 1350 40 1440 50V0H0Z;
-                    M0 0V40C360 0 720 80 1080 40C1260 20 1350 10 1440 20V0H0Z"
+                    M0,0 L0,80 Q720,20 1440,80 L1440,0 Z;
+                    M0,0 L0,60 Q720,40 1440,70 L1440,0 Z;
+                    M0,0 L0,70 Q720,60 1440,50 L1440,0 Z;
+                    M0,0 L0,50 Q720,30 1440,60 L1440,0 Z;
+                    M0,0 L0,80 Q720,20 1440,80 L1440,0 Z"
                 />
               {%- endif -%}
             </path>
           {%- when 'arc' -%}
-            <path d="M0 0V20Q720 80 1440 20V0H0Z" fill="{{ section.settings.bottom_curve_color }}">
+            <path d="M0,0 L0,90 Q720,30 1440,90 L1440,0 Z" fill="{{ section.settings.bottom_curve_color }}">
               {%- if section.settings.bottom_curve_animate -%}
                 <animate 
                   attributeName="d" 
                   dur="{{ section.settings.curve_animation_speed }}s"
                   repeatCount="indefinite"
                   calcMode="spline"
-                  keySplines="0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1"
+                  keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1"
                   values="
-                    M0 0V20Q720 80 1440 20V0H0Z;
-                    M0 0V40Q720 40 1440 40V0H0Z;
-                    M0 0V20Q720 0 1440 60V0H0Z;
-                    M0 0V60Q720 20 1440 20V0H0Z;
-                    M0 0V20Q720 80 1440 20V0H0Z"
+                    M0,0 L0,90 Q720,30 1440,90 L1440,0 Z;
+                    M0,0 L0,70 Q720,50 1440,70 L1440,0 Z;
+                    M0,0 L0,80 Q720,70 1440,60 L1440,0 Z;
+                    M0,0 L0,60 Q720,40 1440,80 L1440,0 Z;
+                    M0,0 L0,90 Q720,30 1440,90 L1440,0 Z"
                 />
               {%- endif -%}
             </path>
           {%- when 'slope-left' -%}
-            <path d="M0 0V80L1440 20V0H0Z" fill="{{ section.settings.bottom_curve_color }}"/>
+            <path d="M0,0 L0,80 L1440,20 L1440,0 Z" fill="{{ section.settings.bottom_curve_color }}"/>
           {%- when 'slope-right' -%}
-            <path d="M0 0V20L1440 80V0H0Z" fill="{{ section.settings.bottom_curve_color }}"/>
+            <path d="M0,0 L0,20 L1440,80 L1440,0 Z" fill="{{ section.settings.bottom_curve_color }}"/>
           {%- else -%}
-            <path d="M0 0V20C240 60 480 80 720 60C960 40 1200 20 1440 40V0H0Z" fill="{{ section.settings.bottom_curve_color }}">
+            <path d="M0,0 L0,60 Q360,120 720,60 T1440,60 L1440,0 Z" fill="{{ section.settings.bottom_curve_color }}">
               {%- if section.settings.bottom_curve_animate -%}
                 <animate 
                   attributeName="d" 
                   dur="{{ section.settings.curve_animation_speed }}s"
                   repeatCount="indefinite"
                   calcMode="spline"
-                  keySplines="0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1"
+                  keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1"
                   values="
-                    M0 0V20C240 60 480 80 720 60C960 40 1200 20 1440 40V0H0Z;
-                    M0 0V40C240 20 480 60 720 80C960 60 1200 40 1440 20V0H0Z;
-                    M0 0V20C240 40 480 20 720 40C960 80 1200 60 1440 40V0H0Z;
-                    M0 0V40C240 80 480 40 720 20C960 40 1200 80 1440 60V0H0Z;
-                    M0 0V20C240 60 480 80 720 60C960 40 1200 20 1440 40V0H0Z"
+                    M0,0 L0,60 Q360,120 720,60 T1440,60 L1440,0 Z;
+                    M0,0 L0,40 Q360,80 720,50 T1440,70 L1440,0 Z;
+                    M0,0 L0,70 Q360,40 720,70 T1440,40 L1440,0 Z;
+                    M0,0 L0,50 Q360,100 720,40 T1440,60 L1440,0 Z;
+                    M0,0 L0,60 Q360,120 720,60 T1440,60 L1440,0 Z"
                 />
               {%- endif -%}
             </path>

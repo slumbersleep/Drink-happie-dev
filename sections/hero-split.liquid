@@ -93,10 +93,10 @@
   <!-- Bottom Wave Divider -->
   {%- if section.settings.show_wave_divider -%}
     <div class="hero-split__wave{% if section.settings.wave_animate %} hero-split__wave--animated{% endif %}">
-      <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0 0V20C240 60 480 80 720 60C960 40 1200 20 1440 40V0H0Z" fill="{{ section.settings.wave_color }}">
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,0 L0,60 Q360,120 720,60 T1440,60 L1440,0 Z" fill="{{ section.settings.wave_color }}">
           {%- if section.settings.wave_animate -%}
-            <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1" values="M0 0V20C240 60 480 80 720 60C960 40 1200 20 1440 40V0H0Z;M0 0V40C240 20 480 60 720 80C960 60 1200 40 1440 20V0H0Z;M0 0V20C240 40 480 20 720 40C960 80 1200 60 1440 40V0H0Z;M0 0V40C240 80 480 40 720 20C960 40 1200 80 1440 60V0H0Z;M0 0V20C240 60 480 80 720 60C960 40 1200 20 1440 40V0H0Z"/>
+            <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,0 L0,60 Q360,120 720,60 T1440,60 L1440,0 Z;M0,0 L0,40 Q360,80 720,50 T1440,70 L1440,0 Z;M0,0 L0,70 Q360,40 720,70 T1440,40 L1440,0 Z;M0,0 L0,50 Q360,100 720,40 T1440,60 L1440,0 Z;M0,0 L0,60 Q360,120 720,60 T1440,60 L1440,0 Z"/>
           {%- endif -%}
         </path>
       </svg>
