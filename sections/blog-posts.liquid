@@ -29,7 +29,22 @@
 <section
   class="relative bg-scheme-background text-scheme-text  {% if section.settings.use_gradient_background %}bg-scheme-gradient{% endif %} relative overflow-hidden"
   data-color-scheme="{{ section.settings.color_scheme }}"
+  id="blog-posts-{{ section.id }}"
+  style="position: relative;"
 >
+  <!-- Top Wave Divider -->
+  {%- if section.settings.show_top_wave -%}
+    <div class="blog-posts__wave blog-posts__wave--top{% if section.settings.top_wave_animate %} blog-posts__wave--animated{% endif %}" style="position: absolute; top: 0; left: 0; width: 100%; height: {{ section.settings.top_wave_height }}px; z-index: 5; overflow: hidden; transform: rotate(180deg);">
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%; display: block;">
+        <path d="M0,0 L0,60 Q360,120 720,60 T1440,60 L1440,0 Z" fill="{{ section.settings.top_wave_color }}">
+          {%- if section.settings.top_wave_animate -%}
+            <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,0 L0,60 Q360,120 720,60 T1440,60 L1440,0 Z;M0,0 L0,40 Q360,80 720,50 T1440,70 L1440,0 Z;M0,0 L0,70 Q360,40 720,70 T1440,40 L1440,0 Z;M0,0 L0,50 Q360,100 720,40 T1440,60 L1440,0 Z;M0,0 L0,60 Q360,120 720,60 T1440,60 L1440,0 Z"/>
+          {%- endif -%}
+        </path>
+      </svg>
+    </div>
+  {%- endif -%}
+
   <div class="section-content relative z-10 mx-auto w-full max-w-site px-section py-section-vertical-spacing">
     {% if section.settings.logo %}
       <div class="mb-4 text-center flex justify-center">
@@ -176,6 +191,19 @@
       endcase
     endfor
   -%}
+
+  <!-- Bottom Wave Divider -->
+  {%- if section.settings.show_bottom_wave -%}
+    <div class="blog-posts__wave blog-posts__wave--bottom{% if section.settings.bottom_wave_animate %} blog-posts__wave--animated{% endif %}" style="position: absolute; bottom: 0; left: 0; width: 100%; height: {{ section.settings.bottom_wave_height }}px; z-index: 5; overflow: hidden;">
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%; display: block;">
+        <path d="M0,0 L0,60 Q360,120 720,60 T1440,60 L1440,0 Z" fill="{{ section.settings.bottom_wave_color }}">
+          {%- if section.settings.bottom_wave_animate -%}
+            <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,0 L0,60 Q360,120 720,60 T1440,60 L1440,0 Z;M0,0 L0,40 Q360,80 720,50 T1440,70 L1440,0 Z;M0,0 L0,70 Q360,40 720,70 T1440,40 L1440,0 Z;M0,0 L0,50 Q360,100 720,40 T1440,60 L1440,0 Z;M0,0 L0,60 Q360,120 720,60 T1440,60 L1440,0 Z"/>
+          {%- endif -%}
+        </path>
+      </svg>
+    </div>
+  {%- endif -%}
 </section>
 
 {%- liquid
@@ -667,6 +695,81 @@
       "type": "checkbox",
       "id": "use_gradient_background",
       "label": "t:common.settings.use_gradient_background.label"
+    },
+    {
+      "type": "header",
+      "content": "Top Wave Divider"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_top_wave",
+      "label": "Show Top Wave",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "top_wave_height",
+      "label": "Top Wave Height",
+      "min": 40,
+      "max": 150,
+      "step": 10,
+      "default": 80,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "top_wave_color",
+      "label": "Top Wave Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "checkbox",
+      "id": "top_wave_animate",
+      "label": "Animate Top Wave",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Bottom Wave Divider"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_bottom_wave",
+      "label": "Show Bottom Wave",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "bottom_wave_height",
+      "label": "Bottom Wave Height",
+      "min": 40,
+      "max": 150,
+      "step": 10,
+      "default": 80,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "bottom_wave_color",
+      "label": "Bottom Wave Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "checkbox",
+      "id": "bottom_wave_animate",
+      "label": "Animate Bottom Wave",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "wave_animation_speed",
+      "label": "Wave Animation Speed",
+      "min": 3,
+      "max": 15,
+      "step": 1,
+      "default": 8,
+      "unit": "s",
+      "info": "Duration of one wave cycle (applies to both waves)"
     }
   ],
   "blocks": [
