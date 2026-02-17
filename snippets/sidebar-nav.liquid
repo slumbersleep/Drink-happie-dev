@@ -18,8 +18,9 @@
   assign fungi_card_image = section.settings.mobile_nav_fungi_image
   assign fungi_card_link = section.settings.mobile_nav_fungi_link | default: '/collections/fungi-fusion'
   
-  # Mobile menu
-  assign mobile_menu = section.settings.mobile_nav_menu
+  # Mobile menu - access via linklists global object using the handle
+  assign mobile_menu_handle = section.settings.mobile_nav_menu
+  assign mobile_menu = linklists[mobile_menu_handle]
 -%}
 
 <template x-teleport="#left-drawer-slot">
@@ -156,9 +157,11 @@
           {%- endfor -%}
         {%- else -%}
           {%- comment -%} Fallback to default menu if none selected {%- endcomment -%}
-          {%- assign fallback_menu = section.settings.mobile_main_linklist -%}
+          {%- assign fallback_handle = section.settings.mobile_main_linklist -%}
+          {%- assign fallback_menu = linklists[fallback_handle] -%}
           {%- if fallback_menu.links.size == 0 -%}
-            {%- assign fallback_menu = section.settings.left_linklist -%}
+            {%- assign fallback_handle2 = section.settings.left_linklist -%}
+            {%- assign fallback_menu = linklists[fallback_handle2] -%}
           {%- endif -%}
           {%- for link in fallback_menu.links -%}
             {%- liquid
