@@ -22,8 +22,63 @@
     background: #ffe6cb;
     max-width: 1440px;
     margin: 0 auto;
-    padding: 60px 40px;
+    padding: 30px 40px 60px;
     font-family: 'Poppins', sans-serif;
+  }
+
+  /* BREADCRUMBS */
+  .happie-breadcrumbs {
+    margin-bottom: 20px;
+  }
+
+  .happie-breadcrumbs__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 6px;
+  }
+
+  .happie-breadcrumbs__item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--happie-dark);
+  }
+
+  .happie-breadcrumbs__link {
+    color: var(--happie-dark);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .happie-breadcrumbs__link:hover {
+    color: var(--happie-teal);
+    text-decoration: underline;
+  }
+
+  .happie-breadcrumbs__separator {
+    color: rgba(26, 26, 26, 0.5);
+    font-weight: 400;
+  }
+
+  .happie-breadcrumbs__item--current span {
+    color: rgba(26, 26, 26, 0.7);
+    font-weight: 400;
+  }
+
+  @media (max-width: 990px) {
+    .happie-breadcrumbs {
+      margin-bottom: 15px;
+    }
+
+    .happie-breadcrumbs__item {
+      font-size: 12px;
+    }
   }
 
   .happie-pdp-grid {
@@ -987,6 +1042,27 @@
 <!-- Old wave removed - use new wave controls in Image Text Block section below -->
 
 <div class="happie-pdp-section cstm-container" id="happie-product-section" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;">
+  
+  <!-- Breadcrumbs -->
+  <nav class="happie-breadcrumbs" aria-label="Breadcrumb">
+    <ol class="happie-breadcrumbs__list">
+      <li class="happie-breadcrumbs__item">
+        <a href="{{ routes.root_url }}" class="happie-breadcrumbs__link">Home</a>
+        <span class="happie-breadcrumbs__separator">/</span>
+      </li>
+      {% if product.collections.size > 0 %}
+        {% assign primary_collection = product.collections | first %}
+        <li class="happie-breadcrumbs__item">
+          <a href="{{ primary_collection.url }}" class="happie-breadcrumbs__link">{{ primary_collection.title }}</a>
+          <span class="happie-breadcrumbs__separator">/</span>
+        </li>
+      {% endif %}
+      <li class="happie-breadcrumbs__item happie-breadcrumbs__item--current">
+        <span aria-current="page">{{ product.title }}</span>
+      </li>
+    </ol>
+  </nav>
+
   <div class="happie-pdp-grid">
     <!-- LEFT SIDE: Product Images -->
     <div class="product-images-container">
@@ -1844,7 +1920,8 @@
       "step": 5,
       "unit": "px",
       "label": "Top Padding",
-      "default": 60
+      "default": 30,
+      "info": "Space above the breadcrumbs"
     },
     {
       "type": "range",
