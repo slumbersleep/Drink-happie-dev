@@ -1613,5 +1613,65 @@ body.template-page [id*="announcement-bar"] {
   z-index: 100;
 }
 
+/* ========================================
+   Custom Product Template Background Extension
+   For: updated-pdp, thc-variety-pack, fungi-pdp-updated, 10mg-thc-pdp
+   ======================================== */
+
+/* Hide the header-information trust bar on these product templates */
+body.template-product-updated-pdp [class*="header-information"],
+body.template-product-thc-variety-pack [class*="header-information"],
+body.template-product-fungi-pdp-updated [class*="header-information"],
+body.template-product-10mg-thc-pdp [class*="header-information"],
+body.updated-pdp [class*="header-information"],
+body.template-product-updated-pdp [id*="header_information"],
+body.template-product-thc-variety-pack [id*="header_information"],
+body.template-product-fungi-pdp-updated [id*="header_information"],
+body.template-product-10mg-thc-pdp [id*="header_information"],
+body.updated-pdp [id*="header_information"] {
+  display: none !important;
+}
+
+/* Also target by section type */
+body.template-product-updated-pdp .shopify-section:has([class*="header-information"]),
+body.template-product-thc-variety-pack .shopify-section:has([class*="header-information"]),
+body.template-product-fungi-pdp-updated .shopify-section:has([class*="header-information"]),
+body.template-product-10mg-thc-pdp .shopify-section:has([class*="header-information"]),
+body.updated-pdp .shopify-section:has([class*="header-information"]) {
+  display: none !important;
+}
+
+/* Extend cream background behind header for these product templates */
+body.template-product-updated-pdp,
+body.template-product-thc-variety-pack,
+body.template-product-fungi-pdp-updated,
+body.template-product-10mg-thc-pdp,
+body.updated-pdp {
+  background-color: #FFE6CB !important;
+}
+
+/* Make header transparent on these product pages */
+body.template-product-updated-pdp #shopify-section-header,
+body.template-product-updated-pdp .shopify-section-group-header-group,
+body.template-product-thc-variety-pack #shopify-section-header,
+body.template-product-thc-variety-pack .shopify-section-group-header-group,
+body.template-product-fungi-pdp-updated #shopify-section-header,
+body.template-product-fungi-pdp-updated .shopify-section-group-header-group,
+body.template-product-10mg-thc-pdp #shopify-section-header,
+body.template-product-10mg-thc-pdp .shopify-section-group-header-group,
+body.updated-pdp #shopify-section-header,
+body.updated-pdp .shopify-section-group-header-group {
+  background-color: transparent !important;
+}
+
+/* Keep nav pill styling intact but transparent container */
+body.template-product-updated-pdp .site-header,
+body.template-product-thc-variety-pack .site-header,
+body.template-product-fungi-pdp-updated .site-header,
+body.template-product-10mg-thc-pdp .site-header,
+body.updated-pdp .site-header {
+  background-color: transparent !important;
+}
+
 
 

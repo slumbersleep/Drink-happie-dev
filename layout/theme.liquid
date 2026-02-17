@@ -236,7 +236,7 @@ box-shadow: inset 0 0 0 var(--input-border-width) rgb(245 245 245);
 
 </head>
 
-  <body data-color-scheme="scheme1" class="{% if template == 'product.updated-pdp' %}updated-pdp{% endif %}{% if template.name == 'page' %} template-page{% endif %}{% if template.suffix %} template-page-{{ template.suffix }}{% endif %}">
+  <body data-color-scheme="scheme1" class="{% if template == 'product.updated-pdp' %}updated-pdp{% endif %}{% if template.name == 'page' %} template-page{% endif %}{% if template.suffix %} template-{{ template.name }}-{{ template.suffix }}{% endif %}{% if template.name == 'product' %} template-product{% endif %}">
     {%- if settings.show_on_sale_badge -%}
       {%- render 'static-sticker-defs', shape: settings.on_sale_badge_shape, id: 'on-sale' -%}
     {%- endif -%}
