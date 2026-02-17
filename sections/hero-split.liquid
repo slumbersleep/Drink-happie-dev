@@ -10,14 +10,26 @@
   assign show_social_proof = section.settings.show_social_proof
   assign social_proof_text = section.settings.social_proof_text
   assign hero_image = section.settings.hero_image
+  assign show_hero_image = section.settings.show_hero_image
+  assign enable_video_background = section.settings.enable_video_background
+  assign background_video = section.settings.background_video
+  assign overlay_opacity = section.settings.overlay_opacity
 -%}
 
 <section
   id="hero-split-{{ section.id }}"
-  class="hero-split"
+  class="hero-split{% if enable_video_background %} hero-split--has-video{% endif %}"
   data-color-scheme="{{ section.settings.color_scheme }}"
 >
-  <div class="hero-split__container">
+  <!-- Video Background -->
+  {%- if enable_video_background and background_video != blank -%}
+    <div class="hero-split__video-wrapper">
+      {{ background_video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, class: 'hero-split__video' }}
+      <div class="hero-split__overlay" style="background: {{ section.settings.overlay_color }}; opacity: {{ overlay_opacity | divided_by: 100.0 }};"></div>
+    </div>
+  {%- endif -%}
+
+  <div class="hero-split__container{% unless show_hero_image %} hero-split__container--full-width{% endunless %}">
     <!-- Left Content Column -->
     <div class="hero-split__content">
       {%- if eyebrow != blank -%}
@@ -71,23 +83,25 @@
     </div>
 
     <!-- Right Image Column -->
-    <div class="hero-split__image-wrapper">
-      {%- if hero_image != blank -%}
-        <img
-          src="{{ hero_image | image_url: width: 1200 }}"
-          alt="{{ hero_image.alt | escape }}"
-          width="{{ hero_image.width }}"
-          height="{{ hero_image.height }}"
-          loading="eager"
-          class="hero-split__image"
-        >
-      {%- else -%}
-        <div class="hero-split__image-placeholder">
-          <span>Hero Image</span>
-          <span class="hero-split__placeholder-sub">Upload your cans image</span>
-        </div>
-      {%- endif -%}
-    </div>
+    {%- if show_hero_image -%}
+      <div class="hero-split__image-wrapper">
+        {%- if hero_image != blank -%}
+          <img
+            src="{{ hero_image | image_url: width: 1200 }}"
+            alt="{{ hero_image.alt | escape }}"
+            width="{{ hero_image.width }}"
+            height="{{ hero_image.height }}"
+            loading="eager"
+            class="hero-split__image"
+          >
+        {%- else -%}
+          <div class="hero-split__image-placeholder">
+            <span>Hero Image</span>
+            <span class="hero-split__placeholder-sub">Upload your cans image</span>
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
   </div>
 
   <!-- Bottom Wave Divider -->
@@ -108,6 +122,7 @@
   #hero-split-{{ section.id }} {
     --hero-bg: {{ section.settings.background_color }};
     --hero-text: {{ section.settings.text_color }};
+    --hero-subtext: {{ section.settings.subtext_color }};
     --hero-highlight: {{ section.settings.highlight_color }};
     --hero-eyebrow-bg: {{ section.settings.eyebrow_bg_color }};
     --hero-eyebrow-text: {{ section.settings.eyebrow_text_color }};
@@ -116,6 +131,7 @@
     --hero-btn-secondary-bg: {{ section.settings.cta_2_bg_color }};
     --hero-btn-secondary-text: {{ section.settings.cta_2_text_color }};
     --hero-stars-color: {{ section.settings.stars_color }};
+    --hero-social-proof-text: {{ section.settings.social_proof_text_color }};
   }
 
   #hero-split-{{ section.id }}.hero-split {
@@ -126,6 +142,60 @@
     position: relative;
     overflow: hidden;
     padding: 120px 0 100px;
+  }
+
+  /* Video Background */
+  #hero-split-{{ section.id }} .hero-split__video-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+
+  #hero-split-{{ section.id }} .hero-split__video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #hero-split-{{ section.id }} .hero-split__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  #hero-split-{{ section.id }}.hero-split--has-video .hero-split__container {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Full width content when no hero image */
+  #hero-split-{{ section.id }} .hero-split__container--full-width {
+    grid-template-columns: 1fr !important;
+    max-width: 800px;
+    text-align: center;
+  }
+
+  #hero-split-{{ section.id }} .hero-split__container--full-width .hero-split__content {
+    max-width: 100%;
+  }
+
+  #hero-split-{{ section.id }} .hero-split__container--full-width .hero-split__text {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #hero-split-{{ section.id }} .hero-split__container--full-width .hero-split__ctas {
+    justify-content: center;
+  }
+
+  #hero-split-{{ section.id }} .hero-split__container--full-width .hero-split__social-proof {
+    justify-content: center;
   }
 
   #hero-split-{{ section.id }} .hero-split__container {
@@ -179,8 +249,7 @@
 
   #hero-split-{{ section.id }} .hero-split__text {
     font-size: 17px;
-    color: var(--hero-text);
-    opacity: 0.85;
+    color: var(--hero-subtext);
     margin-bottom: 32px;
     max-width: 440px;
     line-height: 1.7;
@@ -243,13 +312,11 @@
 
   #hero-split-{{ section.id }} .hero-split__proof-text {
     font-size: 14px;
-    color: var(--hero-text);
-    opacity: 0.7;
+    color: var(--hero-social-proof-text);
   }
 
   #hero-split-{{ section.id }} .hero-split__proof-text strong {
     font-weight: 600;
-    opacity: 1;
   }
 
   #hero-split-{{ section.id }} .hero-split__image-wrapper {
@@ -477,10 +544,51 @@
       "content": "Hero Image"
     },
     {
+      "type": "checkbox",
+      "id": "show_hero_image",
+      "label": "Show Hero Image",
+      "default": true,
+      "info": "Toggle off to hide the right-side image (useful for video background mode)"
+    },
+    {
       "type": "image_picker",
       "id": "hero_image",
       "label": "Hero Image",
       "info": "Upload your cans/product image for the right side"
+    },
+    {
+      "type": "header",
+      "content": "Background Video"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_video_background",
+      "label": "Enable Video Background",
+      "default": false,
+      "info": "Display a full-width video behind the hero content"
+    },
+    {
+      "type": "video",
+      "id": "background_video",
+      "label": "Background Video",
+      "info": "Upload a video file for the background"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Video Overlay Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay Darkness",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "default": 30,
+      "unit": "%",
+      "info": "Adjust the darkness of the overlay for text contrast"
     },
     {
       "type": "header",
@@ -528,67 +636,99 @@
     },
     {
       "type": "header",
-      "content": "Colors"
+      "content": "Colors - Background"
     },
     {
       "type": "color",
       "id": "background_color",
-      "label": "Background Color",
+      "label": "Section Background Color",
       "default": "#FFE6CB"
+    },
+    {
+      "type": "header",
+      "content": "Colors - Text"
     },
     {
       "type": "color",
       "id": "text_color",
-      "label": "Text Color",
+      "label": "Heading (H1) Color",
       "default": "#1A1A1A"
     },
     {
       "type": "color",
       "id": "highlight_color",
-      "label": "Highlight Color (Italic Text)",
+      "label": "Heading Highlight (Italic) Color",
       "default": "#4FB1BD"
     },
     {
       "type": "color",
+      "id": "subtext_color",
+      "label": "Description Text Color",
+      "default": "#1A1A1A"
+    },
+    {
+      "type": "header",
+      "content": "Colors - Badge/Eyebrow"
+    },
+    {
+      "type": "color",
       "id": "eyebrow_bg_color",
-      "label": "Eyebrow Background",
+      "label": "Badge Background",
       "default": "rgba(79, 177, 189, 0.15)"
     },
     {
       "type": "color",
       "id": "eyebrow_text_color",
-      "label": "Eyebrow Text Color",
+      "label": "Badge Text Color",
       "default": "#3A9BA6"
+    },
+    {
+      "type": "header",
+      "content": "Colors - Primary CTA Button"
     },
     {
       "type": "color",
       "id": "cta_1_bg_color",
-      "label": "Primary CTA Background",
+      "label": "Primary Button Background",
       "default": "#F7CD46"
     },
     {
       "type": "color",
       "id": "cta_1_text_color",
-      "label": "Primary CTA Text",
+      "label": "Primary Button Text",
       "default": "#1A1A1A"
+    },
+    {
+      "type": "header",
+      "content": "Colors - Secondary CTA Button"
     },
     {
       "type": "color",
       "id": "cta_2_bg_color",
-      "label": "Secondary CTA Background",
+      "label": "Secondary Button Background",
       "default": "#4FB1BD"
     },
     {
       "type": "color",
       "id": "cta_2_text_color",
-      "label": "Secondary CTA Text",
+      "label": "Secondary Button Text",
       "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Colors - Social Proof/Reviews"
     },
     {
       "type": "color",
       "id": "stars_color",
-      "label": "Stars Color",
+      "label": "Review Stars Color",
       "default": "#F7CD46"
+    },
+    {
+      "type": "color",
+      "id": "social_proof_text_color",
+      "label": "Review Text Color",
+      "default": "#1A1A1A"
     },
     {
       "type": "header",
