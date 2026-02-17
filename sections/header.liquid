@@ -1403,40 +1403,65 @@
 <script>
   (function() {
     // Scroll-to-reveal navigation - hides on scroll down, shows on scroll up
-    const SCROLL_THRESHOLD = 10;
+    const SCROLL_THRESHOLD = 15;
     const ENABLE_SCROLL_HIDE = {% if section.settings.enable_scroll_hide == false %}false{% else %}true{% endif %};
+    const SECTION_ID = 'shopify-section-{{ section.id }}';
     
     let lastScrollY = window.scrollY;
+    let isHidden = false;
     let ticking = false;
     let headerSection = null;
     
     function init() {
-      headerSection = document.getElementById('shopify-section-{{ section.id }}');
+      headerSection = document.getElementById(SECTION_ID);
       
-      if (!headerSection || !ENABLE_SCROLL_HIDE) {
-        console.log('Header scroll-hide disabled or element not found');
+      if (!headerSection) {
+        console.warn('Happie Nav: Header section not found:', SECTION_ID);
         return;
       }
       
-      console.log('Header scroll-hide initialized');
+      if (!ENABLE_SCROLL_HIDE) {
+        console.log('Happie Nav: Scroll-hide is disabled');
+        return;
+      }
+      
+      // Apply base transition style
+      headerSection.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+      headerSection.style.willChange = 'transform';
+      
+      console.log('Happie Nav: Scroll-hide initialized');
       
       window.addEventListener('scroll', onScroll, { passive: true });
       
-      // Initial state
-      if (window.scrollY < 100) {
-        headerSection.classList.add('header-visible');
+      // Initial state - ensure visible
+      showHeader();
+    }
+    
+    function showHeader() {
+      if (headerSection && isHidden) {
+        headerSection.style.transform = 'translateY(0)';
+        isHidden = false;
+      }
+    }
+    
+    function hideHeader() {
+      if (headerSection && !isHidden) {
+        headerSection.style.transform = 'translateY(-100%)';
+        isHidden = true;
       }
     }
     
     function updateHeader() {
-      if (!headerSection) return;
+      if (!headerSection) {
+        ticking = false;
+        return;
+      }
       
       const currentScrollY = window.scrollY;
       
-      // At the top of the page, always show
-      if (currentScrollY < 100) {
-        headerSection.classList.remove('header-hidden');
-        headerSection.classList.add('header-visible');
+      // At the top of the page (within 120px), always show
+      if (currentScrollY < 120) {
+        showHeader();
         lastScrollY = currentScrollY;
         ticking = false;
         return;
@@ -1444,16 +1469,14 @@
       
       const scrollDiff = currentScrollY - lastScrollY;
       
-      // Scrolling down - hide header
+      // Scrolling down past threshold - hide header
       if (scrollDiff > SCROLL_THRESHOLD) {
-        headerSection.classList.add('header-hidden');
-        headerSection.classList.remove('header-visible');
+        hideHeader();
         lastScrollY = currentScrollY;
       }
-      // Scrolling up - show header
+      // Scrolling up past threshold - show header
       else if (scrollDiff < -SCROLL_THRESHOLD) {
-        headerSection.classList.remove('header-hidden');
-        headerSection.classList.add('header-visible');
+        showHeader();
         lastScrollY = currentScrollY;
       }
       
@@ -1467,11 +1490,12 @@
       }
     }
     
-    // Initialize on DOM ready
+    // Initialize when DOM is ready
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', init);
     } else {
-      init();
+      // Small delay to ensure Shopify has rendered everything
+      setTimeout(init, 100);
     }
   })();
 </script>
