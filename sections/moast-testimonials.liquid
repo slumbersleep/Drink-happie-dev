@@ -1,0 +1,169 @@
+{%- liquid
+  assign testimonials = section.blocks | where: 'type', 'testimonial'
+-%}
+
+{%- if testimonials.size > 0 -%}
+<div class="moast-testimonials-section" style="padding-bottom: {{ section.settings.padding_bottom }}px;">
+  <div class="cstm-container-fluid">
+    <div class="moast-testimonials-wrapper">
+      <div
+        id="moast-testimonials-{{ section.id }}"
+        class="splide moast-testimonials-slider"
+      >
+        <div class="splide__track">
+          <ul class="splide__list">
+            {%- for block in testimonials -%}
+              <li class="splide__slide" {{ block.shopify_attributes }}>
+                <div class="moast-testimonial-card">
+                  {%- if block.settings.image != blank -%}
+                    <div class="moast-testimonial-image">
+                      {{ block.settings.image | image_url: width: 200 | image_tag: alt: block.settings.source, loading: 'lazy', class: 'testimonial-avatar' }}
+                    </div>
+                  {%- endif -%}
+                  <div class="moast-testimonial-content">
+                    {%- if block.settings.rating != 'none' -%}
+                      {%- assign stars = block.settings.rating | split: '_' | first | plus: 0 -%}
+                      <span class="moast-testimonial-stars">
+                        {%- for i in (1..stars) -%}
+                          ★
+                        {%- endfor -%}
+                      </span>
+                    {%- endif -%}
+                    <blockquote class="moast-testimonial-quote">
+                      {{ block.settings.quote | replace: '<p>', '<p>"' | replace: '</p>', '"</p>' }}
+                    </blockquote>
+                    {% if block.settings.source != blank %}
+                      <footer class="moast-testimonial-source">
+                        — {{ block.settings.source }}
+                      </footer>
+                    {% endif %}
+                  </div>
+                </div>
+              </li>
+            {%- endfor -%}
+          </ul>
+        </div>
+        {% if testimonials.size > 1 %}
+          <div class="splide__arrows moast-testimonials-arrows">
+            {%- render 'splide-navigation' %}
+          </div>
+        {% endif %}
+      </div>
+
+      <script class="slideshow-options" type="application/json">
+        {
+          "mediaQuery": "min",
+          "arrows": true,
+          "pagination": false,
+          "rewind": true,
+          "autoWidth": true,
+          "gap": "1.5rem",
+          "focus": "center",
+          "type": "loop",
+          "autoScroll": {
+            "autoStart": {% if section.settings.autoscroll %}true{% else %}false{% endif %},
+            "speed": 1
+          },
+          "padding": {
+            "left": "1.25rem",
+            "right": "1.25rem"
+          },
+          "clones": {{ testimonials.size | times: 2 }}
+        }
+      </script>
+    </div>
+  </div>
+</div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Moast Testimonials",
+  "tag": "section",
+  "class": "moast-testimonials-sec",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "autoscroll",
+      "label": "Auto-scroll testimonials",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 60
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "id": "image",
+          "type": "image_picker",
+          "label": "Customer Image"
+        },
+        {
+          "type": "select",
+          "id": "rating",
+          "label": "Rating",
+          "options": [
+            {
+              "value": "none",
+              "label": "No rating"
+            },
+            {
+              "value": "5_stars",
+              "label": "5 stars"
+            },
+            {
+              "value": "4_stars",
+              "label": "4 stars"
+            },
+            {
+              "value": "3_stars",
+              "label": "3 stars"
+            },
+            {
+              "value": "2_stars",
+              "label": "2 stars"
+            },
+            {
+              "value": "1_stars",
+              "label": "1 star"
+            }
+          ],
+          "default": "5_stars"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "quote",
+          "label": "Quote",
+          "default": "A quote from a customer about their experience with your product."
+        },
+        {
+          "type": "text",
+          "id": "source",
+          "label": "Customer Name",
+          "default": "Customer Name"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Moast Testimonials"
+    }
+  ]
+}
+{% endschema %}

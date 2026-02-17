@@ -1,4 +1,4 @@
-<div class="cstm-container-fluid">
+<div class="cstm-container-fluid" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;">
   <div class="common-heading-wrap text-center">
     {% if section.settings.heading_icon != blank %}
       {{ section.settings.heading_icon | image_url: width: 3000 | image_tag: alt: 'icon' }}
@@ -49,6 +49,30 @@
       "type": "text",
       "id": "heading",
       "label": "Heading"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 40
     }
   ],
   "blocks": [
