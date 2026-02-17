@@ -57,42 +57,45 @@
   {%- endif -%}
 
   <div class="variety-pack-promo__container">
-    <div class="variety-pack-promo__grid">
-      <!-- Text Content Card -->
-      <div class="variety-pack-promo__content-card">
-        <h2 class="variety-pack-promo__heading">{{ heading }}</h2>
-        
-        {%- if description != blank -%}
-          <p class="variety-pack-promo__description">{{ description }}</p>
-        {%- endif -%}
-        
-        <div class="variety-pack-promo__price-wrapper">
-          <span class="variety-pack-promo__price-label">Starting at</span>
-          <span class="variety-pack-promo__price">{{ product_price }}</span>
+    <!-- Single Unified Card -->
+    <div class="variety-pack-promo__card">
+      <div class="variety-pack-promo__grid">
+        <!-- Text Content Side -->
+        <div class="variety-pack-promo__content">
+          <h2 class="variety-pack-promo__heading">{{ heading }}</h2>
+          
+          {%- if description != blank -%}
+            <p class="variety-pack-promo__description">{{ description }}</p>
+          {%- endif -%}
+          
+          <div class="variety-pack-promo__price-wrapper">
+            <span class="variety-pack-promo__price-label">Starting at</span>
+            <span class="variety-pack-promo__price">{{ product_price }}</span>
+          </div>
+          
+          <a href="{{ product_url }}" class="variety-pack-promo__button">
+            {{ button_text }}
+          </a>
         </div>
         
-        <a href="{{ product_url }}" class="variety-pack-promo__button">
-          {{ button_text }}
-        </a>
-      </div>
-      
-      <!-- Image Card -->
-      <div class="variety-pack-promo__image-card">
-        {%- if image != blank -%}
-          <img
-            src="{{ image | image_url: width: 800 }}"
-            alt="{{ image.alt | escape | default: heading }}"
-            loading="lazy"
-            class="variety-pack-promo__image"
-            width="{{ image.width }}"
-            height="{{ image.height }}"
-          >
-        {%- else -%}
-          <div class="variety-pack-promo__placeholder">
-            <span class="variety-pack-promo__placeholder-title">Variety Pack Image</span>
-            <span class="variety-pack-promo__placeholder-subtitle">12-pack product shot</span>
-          </div>
-        {%- endif -%}
+        <!-- Image Side -->
+        <div class="variety-pack-promo__image-wrapper">
+          {%- if image != blank -%}
+            <img
+              src="{{ image | image_url: width: 800 }}"
+              alt="{{ image.alt | escape | default: heading }}"
+              loading="lazy"
+              class="variety-pack-promo__image"
+              width="{{ image.width }}"
+              height="{{ image.height }}"
+            >
+          {%- else -%}
+            <div class="variety-pack-promo__placeholder">
+              <span class="variety-pack-promo__placeholder-title">Variety Pack Image</span>
+              <span class="variety-pack-promo__placeholder-subtitle">12-pack product shot</span>
+            </div>
+          {%- endif -%}
+        </div>
       </div>
     </div>
   </div>
@@ -140,7 +143,7 @@
   #variety-pack-{{ section.id }} {
     --vp-bg: {{ section.settings.background_color }};
     --vp-card-bg: {{ section.settings.card_bg_color }};
-    --vp-image-card-bg: {{ section.settings.image_card_bg_color }};
+    --vp-image-bg: {{ section.settings.image_card_bg_color }};
     --vp-heading-color: {{ section.settings.heading_color }};
     --vp-text-color: {{ section.settings.text_color }};
     --vp-price-color: {{ section.settings.price_color }};
@@ -189,18 +192,23 @@
     padding: 0 24px;
   }
 
+  /* Unified Card */
+  #variety-pack-{{ section.id }} .variety-pack-promo__card {
+    background: var(--vp-card-bg);
+    border-radius: 32px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  }
+
   /* Grid Layout */
   #variety-pack-{{ section.id }} .variety-pack-promo__grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 24px;
     align-items: stretch;
   }
 
-  /* Content Card */
-  #variety-pack-{{ section.id }} .variety-pack-promo__content-card {
-    background: var(--vp-card-bg);
-    border-radius: 32px;
+  /* Content Side */
+  #variety-pack-{{ section.id }} .variety-pack-promo__content {
     padding: 48px;
     display: flex;
     flex-direction: column;
@@ -275,15 +283,14 @@
     font-size: 16px;
   }
 
-  /* Image Card */
-  #variety-pack-{{ section.id }} .variety-pack-promo__image-card {
-    background: var(--vp-image-card-bg);
-    border-radius: 32px;
-    overflow: hidden;
+  /* Image Side */
+  #variety-pack-{{ section.id }} .variety-pack-promo__image-wrapper {
+    background: var(--vp-image-bg);
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 400px;
+    position: relative;
   }
 
   #variety-pack-{{ section.id }} .variety-pack-promo__image {
@@ -302,6 +309,7 @@
     height: 100%;
     min-height: 350px;
     padding: 40px;
+    position: relative;
   }
 
   #variety-pack-{{ section.id }} .variety-pack-promo__placeholder-title {
@@ -329,21 +337,17 @@
     pointer-events: none;
   }
 
-  #variety-pack-{{ section.id }} .variety-pack-promo__image-card {
-    position: relative;
-  }
-
   /* Responsive */
   @media (max-width: 900px) {
     #variety-pack-{{ section.id }} .variety-pack-promo__grid {
       grid-template-columns: 1fr;
     }
 
-    #variety-pack-{{ section.id }} .variety-pack-promo__image-card {
+    #variety-pack-{{ section.id }} .variety-pack-promo__image-wrapper {
       order: -1;
     }
 
-    #variety-pack-{{ section.id }} .variety-pack-promo__content-card {
+    #variety-pack-{{ section.id }} .variety-pack-promo__content {
       text-align: center;
       align-items: center;
     }
@@ -359,13 +363,15 @@
       height: {{ section.settings.wave_height | times: 65 | divided_by: 100 }}px;
     }
 
-    #variety-pack-{{ section.id }} .variety-pack-promo__content-card {
-      padding: 32px 24px;
+    #variety-pack-{{ section.id }} .variety-pack-promo__card {
       border-radius: 24px;
     }
 
-    #variety-pack-{{ section.id }} .variety-pack-promo__image-card {
-      border-radius: 24px;
+    #variety-pack-{{ section.id }} .variety-pack-promo__content {
+      padding: 32px 24px;
+    }
+
+    #variety-pack-{{ section.id }} .variety-pack-promo__image-wrapper {
       min-height: 300px;
     }
 
