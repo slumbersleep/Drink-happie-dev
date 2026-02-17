@@ -38,12 +38,16 @@
   assign nav_bg_color = section.settings.nav_background_color | default: '#FFFFFF'
 -%}
 
-<div class="shop-mega-menu" x-data="{ isOpen: false }" @mouseenter="isOpen = true" @mouseleave="isOpen = false">
+<div class="shop-mega-menu" x-data="{ isOpen: false, closeTimeout: null }" 
+     @mouseenter="clearTimeout(closeTimeout); isOpen = true" 
+     @mouseleave="closeTimeout = setTimeout(() => isOpen = false, 100)">
   {%- comment -%} Trigger Button {%- endcomment -%}
   <button 
     class="shop-mega-menu__trigger"
     :aria-expanded="isOpen"
     aria-haspopup="true"
+    @click="isOpen = !isOpen"
+    @focus="isOpen = true"
   >
     <span>Shop</span>
     <svg class="shop-mega-menu__chevron" :class="{ 'rotate-180': isOpen }" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -51,17 +55,26 @@
     </svg>
   </button>
   
+  {%- comment -%} Hover Bridge - invisible element to bridge gap between trigger and dropdown {%- endcomment -%}
+  <div 
+    class="shop-mega-menu__bridge"
+    x-show="isOpen"
+    x-cloak
+  ></div>
+  
   {%- comment -%} Mega Menu Dropdown {%- endcomment -%}
   <div 
     class="shop-mega-menu__dropdown"
     x-show="isOpen"
     x-transition:enter="transition ease-out duration-200"
-    x-transition:enter-start="opacity-0 translate-y-1"
+    x-transition:enter-start="opacity-0 translate-y-2"
     x-transition:enter-end="opacity-100 translate-y-0"
     x-transition:leave="transition ease-in duration-150"
     x-transition:leave-start="opacity-100 translate-y-0"
-    x-transition:leave-end="opacity-0 translate-y-1"
+    x-transition:leave-end="opacity-0 translate-y-2"
     x-cloak
+    @mouseenter="clearTimeout(closeTimeout); isOpen = true"
+    @mouseleave="closeTimeout = setTimeout(() => isOpen = false, 100)"
   >
     <div class="shop-mega-menu__container">
       {%- comment -%} Left Side: Shop by Type {%- endcomment -%}
@@ -70,10 +83,10 @@
         
         <div class="shop-mega-menu__categories">
           {%- comment -%} THC Infused Category {%- endcomment -%}
-          {%- if thc_menu != blank -%}
-            <div class="shop-mega-menu__category">
-              <h4 class="shop-mega-menu__category-title">THC Infused</h4>
-              <ul class="shop-mega-menu__links">
+          <div class="shop-mega-menu__category">
+            <h4 class="shop-mega-menu__category-title">THC Infused</h4>
+            <ul class="shop-mega-menu__links">
+              {%- if thc_menu != blank and thc_menu.links.size > 0 -%}
                 {%- for link in thc_menu.links -%}
                   <li>
                     <a href="{{ link.url }}" class="shop-mega-menu__link">
@@ -81,15 +94,17 @@
                     </a>
                   </li>
                 {%- endfor -%}
-              </ul>
-            </div>
-          {%- endif -%}
+              {%- else -%}
+                <li><span class="shop-mega-menu__link shop-mega-menu__link--placeholder">Configure in theme settings</span></li>
+              {%- endif -%}
+            </ul>
+          </div>
           
           {%- comment -%} Fungi Fusion Category {%- endcomment -%}
-          {%- if fungi_menu != blank -%}
-            <div class="shop-mega-menu__category">
-              <h4 class="shop-mega-menu__category-title">Fungi Fusion</h4>
-              <ul class="shop-mega-menu__links">
+          <div class="shop-mega-menu__category">
+            <h4 class="shop-mega-menu__category-title">Fungi Fusion</h4>
+            <ul class="shop-mega-menu__links">
+              {%- if fungi_menu != blank and fungi_menu.links.size > 0 -%}
                 {%- for link in fungi_menu.links -%}
                   <li>
                     <a href="{{ link.url }}" class="shop-mega-menu__link">
@@ -97,9 +112,11 @@
                     </a>
                   </li>
                 {%- endfor -%}
-              </ul>
-            </div>
-          {%- endif -%}
+              {%- else -%}
+                <li><span class="shop-mega-menu__link shop-mega-menu__link--placeholder">Configure in theme settings</span></li>
+              {%- endif -%}
+            </ul>
+          </div>
         </div>
       </div>
       
@@ -107,85 +124,73 @@
       <div class="shop-mega-menu__right">
         <div class="shop-mega-menu__cards">
           {%- comment -%} Card 1 {%- endcomment -%}
-          {%- if card_1_image != blank or card_1_title != blank -%}
-            <a href="{{ card_1_link | default: '#' }}" class="shop-mega-menu__card">
-              <div class="shop-mega-menu__card-image">
-                {%- if card_1_image != blank -%}
-                  <img
-                    src="{{ card_1_image | image_url: width: 400 }}"
-                    alt="{{ card_1_title | escape }}"
-                    width="400"
-                    height="400"
-                    loading="lazy"
-                  >
-                {%- else -%}
-                  <div class="shop-mega-menu__card-placeholder"></div>
-                {%- endif -%}
-              </div>
-              <div class="shop-mega-menu__card-content">
-                {%- if card_1_title != blank -%}
-                  <h5 class="shop-mega-menu__card-title">{{ card_1_title }}</h5>
-                {%- endif -%}
-                {%- if card_1_subtitle != blank -%}
-                  <p class="shop-mega-menu__card-subtitle">{{ card_1_subtitle }}</p>
-                {%- endif -%}
-              </div>
-            </a>
-          {%- endif -%}
+          <a href="{{ card_1_link | default: '/collections/all' }}" class="shop-mega-menu__card">
+            <div class="shop-mega-menu__card-image">
+              {%- if card_1_image != blank -%}
+                <img
+                  src="{{ card_1_image | image_url: width: 400, height: 400, crop: 'center' }}"
+                  alt="{{ card_1_title | escape }}"
+                  width="400"
+                  height="400"
+                  loading="lazy"
+                >
+              {%- else -%}
+                <div class="shop-mega-menu__card-placeholder"></div>
+              {%- endif -%}
+            </div>
+            <div class="shop-mega-menu__card-content">
+              <h5 class="shop-mega-menu__card-title">{{ card_1_title }}</h5>
+              {%- if card_1_subtitle != blank -%}
+                <p class="shop-mega-menu__card-subtitle">{{ card_1_subtitle }}</p>
+              {%- endif -%}
+            </div>
+          </a>
           
           {%- comment -%} Card 2 {%- endcomment -%}
-          {%- if card_2_image != blank or card_2_title != blank -%}
-            <a href="{{ card_2_link | default: '#' }}" class="shop-mega-menu__card">
-              <div class="shop-mega-menu__card-image">
-                {%- if card_2_image != blank -%}
-                  <img
-                    src="{{ card_2_image | image_url: width: 400 }}"
-                    alt="{{ card_2_title | escape }}"
-                    width="400"
-                    height="400"
-                    loading="lazy"
-                  >
-                {%- else -%}
-                  <div class="shop-mega-menu__card-placeholder"></div>
-                {%- endif -%}
-              </div>
-              <div class="shop-mega-menu__card-content">
-                {%- if card_2_title != blank -%}
-                  <h5 class="shop-mega-menu__card-title">{{ card_2_title }}</h5>
-                {%- endif -%}
-                {%- if card_2_subtitle != blank -%}
-                  <p class="shop-mega-menu__card-subtitle">{{ card_2_subtitle }}</p>
-                {%- endif -%}
-              </div>
-            </a>
-          {%- endif -%}
+          <a href="{{ card_2_link | default: '/collections/all' }}" class="shop-mega-menu__card">
+            <div class="shop-mega-menu__card-image">
+              {%- if card_2_image != blank -%}
+                <img
+                  src="{{ card_2_image | image_url: width: 400, height: 400, crop: 'center' }}"
+                  alt="{{ card_2_title | escape }}"
+                  width="400"
+                  height="400"
+                  loading="lazy"
+                >
+              {%- else -%}
+                <div class="shop-mega-menu__card-placeholder"></div>
+              {%- endif -%}
+            </div>
+            <div class="shop-mega-menu__card-content">
+              <h5 class="shop-mega-menu__card-title">{{ card_2_title }}</h5>
+              {%- if card_2_subtitle != blank -%}
+                <p class="shop-mega-menu__card-subtitle">{{ card_2_subtitle }}</p>
+              {%- endif -%}
+            </div>
+          </a>
           
           {%- comment -%} Card 3 {%- endcomment -%}
-          {%- if card_3_image != blank or card_3_title != blank -%}
-            <a href="{{ card_3_link | default: '#' }}" class="shop-mega-menu__card">
-              <div class="shop-mega-menu__card-image">
-                {%- if card_3_image != blank -%}
-                  <img
-                    src="{{ card_3_image | image_url: width: 400 }}"
-                    alt="{{ card_3_title | escape }}"
-                    width="400"
-                    height="400"
-                    loading="lazy"
-                  >
-                {%- else -%}
-                  <div class="shop-mega-menu__card-placeholder"></div>
-                {%- endif -%}
-              </div>
-              <div class="shop-mega-menu__card-content">
-                {%- if card_3_title != blank -%}
-                  <h5 class="shop-mega-menu__card-title">{{ card_3_title }}</h5>
-                {%- endif -%}
-                {%- if card_3_subtitle != blank -%}
-                  <p class="shop-mega-menu__card-subtitle">{{ card_3_subtitle }}</p>
-                {%- endif -%}
-              </div>
-            </a>
-          {%- endif -%}
+          <a href="{{ card_3_link | default: '/collections/all' }}" class="shop-mega-menu__card">
+            <div class="shop-mega-menu__card-image">
+              {%- if card_3_image != blank -%}
+                <img
+                  src="{{ card_3_image | image_url: width: 400, height: 400, crop: 'center' }}"
+                  alt="{{ card_3_title | escape }}"
+                  width="400"
+                  height="400"
+                  loading="lazy"
+                >
+              {%- else -%}
+                <div class="shop-mega-menu__card-placeholder"></div>
+              {%- endif -%}
+            </div>
+            <div class="shop-mega-menu__card-content">
+              <h5 class="shop-mega-menu__card-title">{{ card_3_title }}</h5>
+              {%- if card_3_subtitle != blank -%}
+                <p class="shop-mega-menu__card-subtitle">{{ card_3_subtitle }}</p>
+              {%- endif -%}
+            </div>
+          </a>
         </div>
       </div>
     </div>
@@ -231,6 +236,17 @@
   
   .shop-mega-menu__chevron.rotate-180 {
     transform: rotate(180deg);
+  }
+  
+  /* Hover Bridge - fills the gap between trigger and dropdown */
+  .shop-mega-menu__bridge {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 72px; /* Height of the pill nav */
+    height: 24px; /* Gap to dropdown */
+    z-index: 99;
+    background: transparent;
   }
   
   /* Dropdown Container */
@@ -305,6 +321,12 @@
   
   .shop-mega-menu__link:hover {
     color: {{ accent_color }};
+  }
+  
+  .shop-mega-menu__link--placeholder {
+    font-style: italic;
+    color: rgba(0, 0, 0, 0.35);
+    cursor: default;
   }
   
   /* Right Side: Image Cards */
