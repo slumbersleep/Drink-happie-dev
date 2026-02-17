@@ -92,9 +92,13 @@
 
   <!-- Bottom Wave Divider -->
   {%- if section.settings.show_wave_divider -%}
-    <div class="hero-split__wave">
-      <svg viewBox="0 0 1200 84" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M600 39.1293C800 84.6351 1000 84.6351 1200 39.1294V84.0001H0L3.48561e-06 39.1293C200 -6.37645 400 -6.37643 600 39.1293Z" fill="{{ section.settings.wave_color }}"/>
+    <div class="hero-split__wave{% if section.settings.wave_animate %} hero-split__wave--animated{% endif %}">
+      <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 0V20C240 60 480 80 720 60C960 40 1200 20 1440 40V0H0Z" fill="{{ section.settings.wave_color }}">
+          {%- if section.settings.wave_animate -%}
+            <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1" values="M0 0V20C240 60 480 80 720 60C960 40 1200 20 1440 40V0H0Z;M0 0V40C240 20 480 60 720 80C960 60 1200 40 1440 20V0H0Z;M0 0V20C240 40 480 20 720 40C960 80 1200 60 1440 40V0H0Z;M0 0V40C240 80 480 40 720 20C960 40 1200 80 1440 60V0H0Z;M0 0V20C240 60 480 80 720 60C960 40 1200 20 1440 40V0H0Z"/>
+          {%- endif -%}
+        </path>
       </svg>
     </div>
   {%- endif -%}
@@ -292,12 +296,19 @@
     width: 100%;
     line-height: 0;
     pointer-events: none;
+    z-index: 2;
   }
 
   #hero-split-{{ section.id }} .hero-split__wave svg {
     display: block;
     width: 100%;
-    height: 80px;
+    height: {{ section.settings.wave_height }}px;
+  }
+
+  @media (max-width: 768px) {
+    #hero-split-{{ section.id }} .hero-split__wave svg {
+      height: {{ section.settings.wave_height | times: 65 | divided_by: 100 }}px;
+    }
   }
 
   /* Responsive */
@@ -482,10 +493,38 @@
       "default": true
     },
     {
+      "type": "range",
+      "id": "wave_height",
+      "label": "Wave Height",
+      "min": 40,
+      "max": 150,
+      "step": 10,
+      "default": 80,
+      "unit": "px"
+    },
+    {
       "type": "color",
       "id": "wave_color",
       "label": "Wave Color",
       "default": "#FFFFFF"
+    },
+    {
+      "type": "checkbox",
+      "id": "wave_animate",
+      "label": "Animate Wave",
+      "default": true,
+      "info": "Adds a flowing ripple wave animation"
+    },
+    {
+      "type": "range",
+      "id": "wave_animation_speed",
+      "label": "Animation Speed",
+      "min": 3,
+      "max": 15,
+      "step": 1,
+      "default": 8,
+      "unit": "s",
+      "info": "Duration of one wave cycle"
     },
     {
       "type": "header",

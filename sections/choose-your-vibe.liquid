@@ -327,7 +327,7 @@
     }
 
     #choose-vibe-{{ section.id }} .choose-vibe__curve svg {
-      height: {{ section.settings.curve_height | divided_by: 2 }}px;
+      height: {{ section.settings.curve_height | times: 65 | divided_by: 100 }}px;
     }
   }
 

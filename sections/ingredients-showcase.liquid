@@ -362,7 +362,7 @@
     }
 
     #ingredients-{{ section.id }} .ingredients-showcase__curve svg {
-      height: {{ section.settings.curve_height | divided_by: 2 }}px;
+      height: {{ section.settings.curve_height | times: 65 | divided_by: 100 }}px;
     }
 
     #ingredients-{{ section.id }} .ingredients-showcase__card {
