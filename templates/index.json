@@ -165,7 +165,12 @@
         "cta_url": "shopify://pages/shop",
         "cta_text": "Shop Now",
         "color_scheme": "scheme1",
-        "use_gradient_background": true
+        "use_gradient_background": true,
+        "show_wave_divider": false,
+        "wave_height": 80,
+        "wave_color": "#ffffff",
+        "wave_animate": true,
+        "wave_animation_speed": 8
       }
     },
     "video_with_text_overlay_TNNMbb": {
@@ -197,7 +202,12 @@
         "cta_url": "/about",
         "cta_text": "Learn More",
         "color_scheme": "",
-        "use_gradient_background": false
+        "use_gradient_background": false,
+        "show_wave_divider": false,
+        "wave_height": 80,
+        "wave_color": "#ffffff",
+        "wave_animate": true,
+        "wave_animation_speed": 8
       }
     },
     "image-with-text-overlay": {
@@ -310,7 +320,9 @@
         "heading_icon": "shopify://shop_images/happie-cloud.png",
         "rating_image": "shopify://shop_images/rating.png",
         "rating_text": "Loved by 1,200+ Happy Drinkers",
-        "heading": "Real people. Real vibes. Real results."
+        "heading": "Real people. Real vibes. Real results.",
+        "padding_top": 80,
+        "padding_bottom": 40
       }
     },
     "testimonials_DxgE8b": {
@@ -375,6 +387,81 @@
         "desktop_slide_width": 20,
         "autoscroll_mode": "1",
         "color_scheme": "scheme-4b2ebea0-b230-45ef-a163-d2110d2f932e",
+        "use_gradient_background": false,
+        "padding_top": 0,
+        "padding_bottom": 60
+      }
+    },
+    "featured_product_kBHqGC": {
+      "type": "featured-product",
+      "blocks": {
+        "title_xGqmcd": {
+          "type": "title",
+          "settings": {
+            "display_on_card": false,
+            "text_align": "text-left"
+          }
+        },
+        "price_3JUtDA": {
+          "type": "price",
+          "settings": {
+            "display_on_card": false,
+            "show_on_sale_sticker": false,
+            "text_align": "text-left"
+          }
+        },
+        "description_Q8LLf6": {
+          "type": "description",
+          "settings": {
+            "display_on_card": false,
+            "truncate_description": false,
+            "text_align": "text-left"
+          }
+        },
+        "variant_picker_3NkazH": {
+          "type": "variant_picker",
+          "settings": {
+            "display_on_card": false,
+            "option_style": "drop_down",
+            "full_width_buttons": false,
+            "hide_option_labels": true,
+            "enable_color_swatches": false
+          }
+        },
+        "buy_buttons_qKmfNK": {
+          "type": "buy_buttons",
+          "settings": {
+            "display_on_card": false,
+            "show_price": false,
+            "enable_payment_button": true,
+            "show_pickup_availability": true,
+            "show_gift_card_recipient": false
+          }
+        }
+      },
+      "block_order": [
+        "title_xGqmcd",
+        "price_3JUtDA",
+        "description_Q8LLf6",
+        "variant_picker_3NkazH",
+        "buy_buttons_qKmfNK"
+      ],
+      "name": "t:sections.featured_product.name",
+      "settings": {
+        "title": "",
+        "product": "happie-social-4-pack",
+        "crop": "",
+        "image_shape": "default",
+        "media_mobile_width": "w-full",
+        "desktop_media_width": "lg:col-span-6_lg:col-span-6",
+        "enable_video_looping": true,
+        "thumbnails_position": "left",
+        "thumbnail_crop": "aspect-w-1 aspect-h-1",
+        "thumbnail_shape": "default",
+        "hide_media_shadow": false,
+        "thumbnail_size": "standard",
+        "show_thumbnails_on_mobile": false,
+        "color_scheme": "",
         "use_gradient_background": false
       }
     },
@@ -894,7 +981,12 @@
         "cta_url": "shopify://pages/shop",
         "cta_text": "Shop Now",
         "color_scheme": "scheme1",
-        "use_gradient_background": true
+        "use_gradient_background": true,
+        "show_wave_divider": false,
+        "wave_height": 80,
+        "wave_color": "#ffffff",
+        "wave_animate": true,
+        "wave_animation_speed": 8
       }
     },
     "mixed_shape_product_grid_te4gMG": {
@@ -951,6 +1043,7 @@
     },
     "blog-posts": {
       "type": "blog-posts",
+      "disabled": true,
       "settings": {
         "display_on_card": true,
         "posts_per_row_desktop": 3,
@@ -965,7 +1058,16 @@
         "show_post_excerpt": true,
         "show_view_all": true,
         "color_scheme": "scheme-134c56c6-04d1-4111-b029-accec175db7f",
-        "use_gradient_background": false
+        "use_gradient_background": false,
+        "show_top_wave": false,
+        "top_wave_height": 80,
+        "top_wave_color": "#962f80",
+        "top_wave_animate": true,
+        "show_bottom_wave": false,
+        "bottom_wave_height": 80,
+        "bottom_wave_color": "#ffffff",
+        "bottom_wave_animate": true,
+        "wave_animation_speed": 8
       }
     },
     "scrolling-text-with-icons": {
@@ -1039,6 +1141,7 @@
     "best_sellers_mJyW9V",
     "moast_app_wxMn7C",
     "testimonials_DxgE8b",
+    "featured_product_kBHqGC",
     "ingredients_showcase_Gf3aRd",
     "featured-collection",
     "pagefly_section_bMT8Ud",
