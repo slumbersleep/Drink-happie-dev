@@ -13,13 +13,12 @@
   "sections": {
     "announcement-bar": {
       "type": "announcement-bar",
-      "disabled": true,
       "settings": {
         "home_page_only": false,
-        "display": "scrolling_text",
-        "text": "Free shipping on all orders over $100",
+        "display": "static",
+        "text": "30-Day Money-Back Guarantee",
         "link": "",
-        "color_scheme": "scheme1",
+        "color_scheme": "scheme-4b2ebea0-b230-45ef-a163-d2110d2f932e",
         "use_gradient_background": false,
         "repeat_text": true,
         "shape_between_text": "circle",
@@ -66,7 +65,19 @@
         "mobile_main_linklist": "mobile-menu",
         "sidebar_menu_font_size": "heading-secondary",
         "sidebar_show_footer_menu": false,
-        "sidebar_show_social_icons": false
+        "sidebar_show_social_icons": false,
+        "enable_shop_mega_menu": true,
+        "shop_mega_thc_menu": "",
+        "shop_mega_fungi_menu": "",
+        "shop_mega_card_1_title": "Variety Pack",
+        "shop_mega_card_1_subtitle": "Try all flavors",
+        "shop_mega_card_1_link": "",
+        "shop_mega_card_2_title": "Shop Fungi Fusion",
+        "shop_mega_card_2_subtitle": "Zero THC drinks",
+        "shop_mega_card_2_link": "",
+        "shop_mega_card_3_title": "THC Infused",
+        "shop_mega_card_3_subtitle": "Cannabis seltzers",
+        "shop_mega_card_3_link": ""
       }
     }
   },
