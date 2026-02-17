@@ -33,6 +33,7 @@
       "settings": {
         "logo": "shopify://shop_images/happie-iso-logo.svg",
         "logo_max_width": 270,
+        "mobile_logo_max_width": 300,
         "left_linklist": "main-menu",
         "right_linklist": "right-main-menu",
         "nested_nav_style": "dropdown",
