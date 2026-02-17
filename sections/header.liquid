@@ -1345,11 +1345,24 @@
     
     #shopify-section-{{ section.id }} #headerContainer {
       height: 56px !important;
+      display: flex !important;
+      align-items: center !important;
     }
     
     #shopify-section-{{ section.id }} #headerContainer > div {
       padding: 0 20px !important;
       height: 56px !important;
+      display: flex !important;
+      align-items: center !important;
+      width: 100% !important;
+    }
+    
+    /* Main flex row - center items vertically */
+    #shopify-section-{{ section.id }} #headerContainer > div > div {
+      display: flex !important;
+      align-items: center !important;
+      height: 100% !important;
+      width: 100% !important;
     }
     
     /* Text color */

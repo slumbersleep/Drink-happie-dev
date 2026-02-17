@@ -506,12 +506,13 @@
 
   @media (max-width: 768px) {
     #hero-split-{{ section.id }}.hero-split {
-      padding: 120px 0 100px;
+      padding: 120px 16px 100px;
       min-height: 70vh;
     }
 
     #hero-split-{{ section.id }} .hero-split__content {
       text-align: left;
+      max-width: 100%;
     }
 
     #hero-split-{{ section.id }} .hero-split__eyebrow {
@@ -520,12 +521,13 @@
 
     #hero-split-{{ section.id }} .hero-split__ctas {
       flex-direction: column;
-      align-items: flex-start;
+      align-items: stretch;
+      width: 100%;
     }
 
     #hero-split-{{ section.id }} .hero-split__btn {
       width: 100%;
-      max-width: 320px;
+      max-width: 100%;
     }
 
     #hero-split-{{ section.id }} .hero-split__social-proof {
@@ -544,12 +546,17 @@
 
   @media (max-width: 480px) {
     #hero-split-{{ section.id }}.hero-split {
-      padding: 110px 20px 80px;
+      padding: 110px 16px 80px;
       min-height: 77vh;
     }
 
     #hero-split-{{ section.id }} .hero-split__container {
       gap: 32px;
+    }
+
+    #hero-split-{{ section.id }} .hero-split__content {
+      padding: 0 !important;
+      max-width: 100% !important;
     }
 
     #hero-split-{{ section.id }} .hero-split__eyebrow {
@@ -561,6 +568,10 @@
     #hero-split-{{ section.id }} .hero-split__title {
       font-size: clamp(32px, 8vw, 42px);
       margin-bottom: 16px;
+    }
+    
+    #hero-split-{{ section.id }} .hero-split__btn {
+      max-width: 100%;
     }
 
     #hero-split-{{ section.id }} .hero-split__text {
