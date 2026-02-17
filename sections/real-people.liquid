@@ -32,15 +32,8 @@
     </div>
   {%- endif -%}
 
-  <div class="partical-box partical-bottom">
-    <img
-      width=""
-      height=""
-      src="https://cdn.shopify.com/s/files/1/0698/6108/1223/files/blue-partical-bottom.png?v=1762861290"
-      alt="img"
-    >
-  </div>
-  <div class="cstm-container p-relative" style="position: relative; z-index: 10;">
+  <!-- Old wave image removed - use new wave controls below -->
+  <div class="cstm-container p-relative" style="position: relative; z-index: 10; padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;">
     <div class="common-heading-wrap text-center">
       {% if section.settings.heading_icon != blank %}
         {{ section.settings.heading_icon | image_url: width: 3000 | image_tag: alt: 'icon' }}
@@ -114,6 +107,30 @@
       "id": "heading",
       "label": "Heading",
       "default": "The happie difference"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 80
     },
     {
       "type": "header",

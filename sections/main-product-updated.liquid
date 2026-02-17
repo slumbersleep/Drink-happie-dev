@@ -984,16 +984,9 @@
   }
 </style>
 
-<div class="partical-box partical-bottom">
-  <img
-    width=""
-    height=""
-    src="https://cdn.shopify.com/s/files/1/0698/6108/1223/files/Vector.png?v=1762850353"
-    alt="img"
-  >
-</div>
+<!-- Old wave removed - use new wave controls in Image Text Block section below -->
 
-<div class="happie-pdp-section cstm-container" id="happie-product-section">
+<div class="happie-pdp-section cstm-container" id="happie-product-section" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;">
   <div class="happie-pdp-grid">
     <!-- LEFT SIDE: Product Images -->
     <div class="product-images-container">
@@ -1838,6 +1831,30 @@
       "id": "background_color",
       "label": "Background Color",
       "default": "#ffe6cb"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 60
     }
   ],
   "blocks": [
