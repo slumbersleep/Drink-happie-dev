@@ -1151,6 +1151,7 @@
   assign cart_badge_text = section.settings.cart_badge_text_color | default: '#FFFFFF'
   assign nav_shadow_opacity = section.settings.nav_shadow_opacity | default: 6
   assign enable_scroll_hide = section.settings.enable_scroll_hide
+  assign mobile_logo_width = section.settings.mobile_logo_max_width | default: 80
 -%}
 <style>
   /* ========================================
@@ -1398,6 +1399,11 @@
       height: 18px !important;
     }
     
+    /* Mobile logo size */
+    #shopify-section-{{ section.id }} .logo-image {
+      max-width: {{ mobile_logo_width }}px !important;
+    }
+    
     #shopify-section-{{ section.id }} [data-open-search] {
       display: none !important;
     }
@@ -1606,6 +1612,16 @@
       "unit": "px",
       "label": "t:common.settings.logo_max_width.label",
       "default": 100
+    },
+    {
+      "type": "range",
+      "id": "mobile_logo_max_width",
+      "min": 20,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Mobile Logo Max Width",
+      "default": 80
     },
     {
       "type": "header",
