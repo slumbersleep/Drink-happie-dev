@@ -91,8 +91,8 @@
       ],
       "name": "Choose Your Vibe",
       "settings": {
-        "padding_top": 80,
-        "padding_bottom": 80,
+        "padding_top": 45,
+        "padding_bottom": 55,
         "padding_top_mobile": 60,
         "padding_bottom_mobile": 60,
         "header_icon": "shopify://shop_images/happie-cloud.png",
@@ -371,7 +371,7 @@
         "max_width": 100,
         "disable_media_style": false,
         "crop": "",
-        "image_shape": "default",
+        "image_shape": "default_pill",
         "desktop_slide_width": 20,
         "autoscroll_mode": "1",
         "color_scheme": "scheme-4b2ebea0-b230-45ef-a163-d2110d2f932e",
@@ -949,37 +949,6 @@
         "use_gradient_background": false
       }
     },
-    "curved-text": {
-      "type": "curved-text",
-      "custom_css": [],
-      "settings": {
-        "text": "Plant Powered Happiness in Every Sip",
-        "link": "",
-        "wave_height": 200,
-        "wave_width": 350,
-        "speed": 0.5,
-        "mobile_text_scale": 3,
-        "desktop_text_scale": 5,
-        "font": "font-heading",
-        "enable_animation": true,
-        "pause_on_hover": true,
-        "direction": "ltr",
-        "color_scheme": "scheme2",
-        "use_gradient_background": false
-      }
-    },
-    "newsletter": {
-      "type": "newsletter",
-      "custom_css": [],
-      "settings": {
-        "image": "shopify://shop_images/logo-white.svg",
-        "title": "Sign up to our newsletter",
-        "richtext": "<p>Receive special offers and first look at new products.</p>",
-        "display_on_card": false,
-        "color_scheme": "scheme-7d649df3-9f8c-4b8b-8a87-d5fd82fb0df3",
-        "use_gradient_background": false
-      }
-    },
     "blog-posts": {
       "type": "blog-posts",
       "settings": {
@@ -1082,8 +1051,6 @@
     "text-columns-with-images",
     "video_with_text_overlay_hRNKJB",
     "mixed_shape_product_grid_te4gMG",
-    "curved-text",
-    "newsletter",
     "blog-posts",
     "scrolling-text-with-icons"
   ]
