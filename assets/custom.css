@@ -1577,5 +1577,44 @@ body:has(.__pf) [id*="announcement-bar"] {
   z-index: 100;
 }
 
+/* ========================================
+   Default Page Template Background Extension
+   Extends cream background behind header
+   ======================================== */
+
+/* Target default page template */
+.template-page body,
+body.template-page {
+  background-color: #FFE6CB;
+}
+
+/* Alternative selectors for page templates */
+[class*="template-page"] {
+  background-color: #FFE6CB;
+}
+
+/* Make header background transparent on default pages so page bg shows through */
+.template-page #shopify-section-header,
+.template-page .shopify-section-header-group,
+body.template-page #shopify-section-header,
+body.template-page .shopify-section-header-group {
+  background-color: transparent;
+}
+
+/* Keep the nav pill/bar styling intact but transparent container */
+.template-page .site-header,
+body.template-page .site-header {
+  background-color: transparent;
+}
+
+/* Ensure announcement bar stays on top with its own color */
+.template-page #shopify-section-announcement-bar,
+.template-page [id*="announcement-bar"],
+body.template-page #shopify-section-announcement-bar,
+body.template-page [id*="announcement-bar"] {
+  position: relative;
+  z-index: 100;
+}
+
 
 
