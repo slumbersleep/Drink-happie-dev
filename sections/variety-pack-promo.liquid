@@ -116,7 +116,7 @@
   <!-- Bottom Wave Divider -->
   {%- if section.settings.show_bottom_wave -%}
     <div class="variety-pack-promo__wave variety-pack-promo__wave--bottom{% if section.settings.bottom_wave_animate %} variety-pack-promo__wave--animated{% endif %}">
-      <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="transform: scaleY(-1);">
         {%- case section.settings.bottom_wave_style -%}
           {%- when 'wave' -%}
             <path d="M0,0 L0,60 Q360,120 720,60 T1440,60 L1440,0 Z" fill="{{ section.settings.bottom_wave_color }}">
