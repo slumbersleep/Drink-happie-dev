@@ -200,20 +200,25 @@
         </div>
       </li>
       {%- endif -%}
+      
+      {%- comment -%} Custom Shop Mega Menu - renders as first nav item when enabled {%- endcomment -%}
+      {%- if section.settings.enable_shop_mega_menu -%}
+        <li class="no-js-focus-wrapper inline-block h-full max-lg:hidden">
+          {% render 'mega-menu-shop' %}
+        </li>
+      {%- endif -%}
+      
       {% for link in section.settings.left_linklist.links %}
         {%- liquid
-          assign is_shop_mega_menu_link = false
+          # Skip "Shop" link if custom mega menu is enabled (we render it separately above)
           assign link_title_downcase = link.title | downcase | strip
+          assign skip_link = false
           if section.settings.enable_shop_mega_menu and link_title_downcase == 'shop'
-            assign is_shop_mega_menu_link = true
+            assign skip_link = true
           endif
         -%}
         
-        {%- if is_shop_mega_menu_link -%}
-          <li class="no-js-focus-wrapper inline-block h-full max-lg:hidden">
-            {% render 'mega-menu-shop' %}
-          </li>
-        {%- else -%}
+        {%- unless skip_link -%}
         <li
           class="no-js-focus-wrapper inline-block h-full"
           {% if nested_nav_style == 'dropdown' %}
@@ -440,7 +445,7 @@
             </a>
           {% endif %}
         </li>
-        {%- endif -%}
+        {%- endunless -%}
       {% endfor %}
     </ul>
   </nav>
