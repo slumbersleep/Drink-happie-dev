@@ -1583,33 +1583,30 @@ body:has(.__pf) [id*="announcement-bar"] {
    ======================================== */
 
 /* Target default page template */
-.template-page body,
 body.template-page {
-  background-color: #FFE6CB;
+  background-color: #FFE6CB !important;
 }
 
-/* Alternative selectors for page templates */
-[class*="template-page"] {
-  background-color: #FFE6CB;
-}
-
-/* Make header background transparent on default pages so page bg shows through */
-.template-page #shopify-section-header,
-.template-page .shopify-section-header-group,
+/* Make header group background transparent on default pages */
 body.template-page #shopify-section-header,
-body.template-page .shopify-section-header-group {
-  background-color: transparent;
+body.template-page .shopify-section-group-header-group,
+body.template-page [id^="shopify-section-header"] {
+  background-color: transparent !important;
+}
+
+/* Target the header wrapper/container */
+body.template-page .header-wrapper,
+body.template-page .site-header-wrapper,
+body.template-page #headerContainer {
+  background-color: transparent !important;
 }
 
 /* Keep the nav pill/bar styling intact but transparent container */
-.template-page .site-header,
 body.template-page .site-header {
-  background-color: transparent;
+  background-color: transparent !important;
 }
 
 /* Ensure announcement bar stays on top with its own color */
-.template-page #shopify-section-announcement-bar,
-.template-page [id*="announcement-bar"],
 body.template-page #shopify-section-announcement-bar,
 body.template-page [id*="announcement-bar"] {
   position: relative;
