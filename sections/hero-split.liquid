@@ -14,6 +14,7 @@
   assign enable_video_background = section.settings.enable_video_background
   assign background_video = section.settings.background_video
   assign video_fallback_image = section.settings.video_fallback_image
+  assign mobile_fallback_image = section.settings.mobile_fallback_image
   assign disable_video_on_mobile = section.settings.disable_video_on_mobile
   assign overlay_opacity = section.settings.overlay_opacity
 -%}
@@ -25,7 +26,14 @@
 >
   <!-- Video Background -->
   {%- if enable_video_background -%}
-    <div class="hero-split__video-wrapper{% if disable_video_on_mobile %} hero-split__video-wrapper--hide-mobile{% endif %}">
+    {%- liquid
+      if mobile_fallback_image != blank
+        assign mobile_image = mobile_fallback_image
+      elsif video_fallback_image != blank
+        assign mobile_image = video_fallback_image
+      endif
+    -%}
+    <div class="hero-split__video-wrapper{% if disable_video_on_mobile %} hero-split__video-wrapper--hide-mobile{% endif %}" data-video-lazy="true">
       {%- if video_fallback_image != blank -%}
         <img
           src="{{ video_fallback_image | image_url: width: 1920 }}"
@@ -35,14 +43,29 @@
         >
       {%- endif -%}
       {%- if background_video != blank -%}
-        {{ background_video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, class: 'hero-split__video', preload: 'metadata' }}
+        <video 
+          class="hero-split__video" 
+          autoplay 
+          loop 
+          muted 
+          playsinline
+          preload="none"
+          data-src="{{ background_video.sources[0].url }}"
+          poster="{{ video_fallback_image | image_url: width: 1920 | default: '' }}"
+        >
+          {%- for source in background_video.sources -%}
+            <source data-src="{{ source.url }}" type="{{ source.mime_type }}">
+          {%- endfor -%}
+        </video>
       {%- endif -%}
       <div class="hero-split__overlay" style="background: {{ section.settings.overlay_color }}; opacity: {{ overlay_opacity | divided_by: 100.0 }};"></div>
     </div>
-    {%- if disable_video_on_mobile and video_fallback_image != blank -%}
+    {%- if disable_video_on_mobile and mobile_image != blank -%}
       <div class="hero-split__mobile-fallback">
         <img
-          src="{{ video_fallback_image | image_url: width: 1200 }}"
+          src="{{ mobile_image | image_url: width: 1200 }}"
+          srcset="{{ mobile_image | image_url: width: 600 }} 600w, {{ mobile_image | image_url: width: 900 }} 900w, {{ mobile_image | image_url: width: 1200 }} 1200w"
+          sizes="100vw"
           alt=""
           class="hero-split__fallback-image"
           loading="eager"
@@ -51,6 +74,51 @@
       </div>
     {%- endif -%}
   {%- endif -%}
+
+  <script>
+    (function() {
+      // Lazy load video when on good connection
+      function loadVideo() {
+        const wrapper = document.querySelector('#hero-split-{{ section.id }} [data-video-lazy]');
+        if (!wrapper) return;
+        
+        const video = wrapper.querySelector('video');
+        if (!video) return;
+
+        // Check connection type if available
+        const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+        const isSlowConnection = connection && (connection.saveData || connection.effectiveType === 'slow-2g' || connection.effectiveType === '2g');
+        
+        // Don't load video on slow connections or if save data is enabled
+        if (isSlowConnection) {
+          console.log('Slow connection detected, keeping fallback image');
+          return;
+        }
+
+        // Load video sources
+        const sources = video.querySelectorAll('source[data-src]');
+        sources.forEach(source => {
+          source.src = source.dataset.src;
+        });
+
+        // Load video
+        if (video.dataset.src) {
+          video.src = video.dataset.src;
+        }
+        
+        video.load();
+      }
+
+      // Load video after page load
+      if (document.readyState === 'complete') {
+        setTimeout(loadVideo, 100);
+      } else {
+        window.addEventListener('load', function() {
+          setTimeout(loadVideo, 100);
+        });
+      }
+    })();
+  </script>
 
   <div class="hero-split__container{% unless show_hero_image %} hero-split__container--no-image{% endunless %}">
     <!-- Left Content Column -->
@@ -622,15 +690,21 @@
     {
       "type": "image_picker",
       "id": "video_fallback_image",
-      "label": "Fallback / Placeholder Image",
-      "info": "Shows while video loads, if video fails, or on mobile when video is disabled"
+      "label": "Fallback / Placeholder Image (Desktop)",
+      "info": "Shows while video loads or if video fails to load"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_fallback_image",
+      "label": "Mobile Fallback Image",
+      "info": "Separate image optimized for mobile. If not set, uses desktop fallback image"
     },
     {
       "type": "checkbox",
       "id": "disable_video_on_mobile",
       "label": "Disable Video on Mobile",
       "default": true,
-      "info": "Show fallback image instead of video on mobile devices (better performance)"
+      "info": "Show fallback image instead of video on mobile (better performance on cellular)"
     },
     {
       "type": "color",
