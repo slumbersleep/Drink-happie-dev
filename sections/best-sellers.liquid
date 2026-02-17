@@ -28,9 +28,13 @@
                   attributeName="d" 
                   dur="{{ section.settings.curve_animation_speed }}s"
                   repeatCount="indefinite"
+                  calcMode="spline"
+                  keySplines="0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1"
                   values="
                     M0 80V60C240 20 480 0 720 20C960 40 1200 60 1440 40V80H0Z;
-                    M0 80V50C240 30 480 10 720 30C960 50 1200 40 1440 50V80H0Z;
+                    M0 80V40C240 60 480 20 720 0C960 20 1200 40 1440 60V80H0Z;
+                    M0 80V60C240 40 480 60 720 40C960 0 1200 20 1440 40V80H0Z;
+                    M0 80V40C240 0 480 40 720 60C960 40 1200 0 1440 20V80H0Z;
                     M0 80V60C240 20 480 0 720 20C960 40 1200 60 1440 40V80H0Z"
                 />
               {%- endif -%}
@@ -42,9 +46,13 @@
                   attributeName="d" 
                   dur="{{ section.settings.curve_animation_speed }}s"
                   repeatCount="indefinite"
+                  calcMode="spline"
+                  keySplines="0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1"
                   values="
                     M0 80V40C360 80 720 0 1080 40C1260 60 1350 70 1440 60V80H0Z;
-                    M0 80V50C360 60 720 20 1080 50C1260 50 1350 60 1440 50V80H0Z;
+                    M0 80V60C360 20 720 60 1080 20C1260 40 1350 50 1440 40V80H0Z;
+                    M0 80V20C360 60 720 40 1080 60C1260 20 1350 30 1440 50V80H0Z;
+                    M0 80V50C360 40 720 80 1080 30C1260 50 1350 40 1440 30V80H0Z;
                     M0 80V40C360 80 720 0 1080 40C1260 60 1350 70 1440 60V80H0Z"
                 />
               {%- endif -%}
@@ -56,9 +64,13 @@
                   attributeName="d" 
                   dur="{{ section.settings.curve_animation_speed }}s"
                   repeatCount="indefinite"
+                  calcMode="spline"
+                  keySplines="0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1"
                   values="
                     M0 80V60Q720 0 1440 60V80H0Z;
-                    M0 80V50Q720 20 1440 50V80H0Z;
+                    M0 80V40Q720 40 1440 40V80H0Z;
+                    M0 80V60Q720 80 1440 20V80H0Z;
+                    M0 80V20Q720 60 1440 60V80H0Z;
                     M0 80V60Q720 0 1440 60V80H0Z"
                 />
               {%- endif -%}
@@ -74,9 +86,13 @@
                   attributeName="d" 
                   dur="{{ section.settings.curve_animation_speed }}s"
                   repeatCount="indefinite"
+                  calcMode="spline"
+                  keySplines="0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1"
                   values="
                     M0 80V60C240 20 480 0 720 20C960 40 1200 60 1440 40V80H0Z;
-                    M0 80V50C240 30 480 10 720 30C960 50 1200 40 1440 50V80H0Z;
+                    M0 80V40C240 60 480 20 720 0C960 20 1200 40 1440 60V80H0Z;
+                    M0 80V60C240 40 480 60 720 40C960 0 1200 20 1440 40V80H0Z;
+                    M0 80V40C240 0 480 40 720 60C960 40 1200 0 1440 20V80H0Z;
                     M0 80V60C240 20 480 0 720 20C960 40 1200 60 1440 40V80H0Z"
                 />
               {%- endif -%}
@@ -199,9 +215,13 @@
                   attributeName="d" 
                   dur="{{ section.settings.curve_animation_speed }}s"
                   repeatCount="indefinite"
+                  calcMode="spline"
+                  keySplines="0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1"
                   values="
                     M0 0V20C240 60 480 80 720 60C960 40 1200 20 1440 40V0H0Z;
-                    M0 0V30C240 50 480 70 720 50C960 30 1200 40 1440 30V0H0Z;
+                    M0 0V40C240 20 480 60 720 80C960 60 1200 40 1440 20V0H0Z;
+                    M0 0V20C240 40 480 20 720 40C960 80 1200 60 1440 40V0H0Z;
+                    M0 0V40C240 80 480 40 720 20C960 40 1200 80 1440 60V0H0Z;
                     M0 0V20C240 60 480 80 720 60C960 40 1200 20 1440 40V0H0Z"
                 />
               {%- endif -%}
@@ -213,9 +233,13 @@
                   attributeName="d" 
                   dur="{{ section.settings.curve_animation_speed }}s"
                   repeatCount="indefinite"
+                  calcMode="spline"
+                  keySplines="0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1"
                   values="
                     M0 0V40C360 0 720 80 1080 40C1260 20 1350 10 1440 20V0H0Z;
-                    M0 0V30C360 20 720 60 1080 30C1260 30 1350 20 1440 30V0H0Z;
+                    M0 0V20C360 60 720 20 1080 60C1260 40 1350 30 1440 40V0H0Z;
+                    M0 0V60C360 20 720 40 1080 20C1260 60 1350 50 1440 30V0H0Z;
+                    M0 0V30C360 40 720 0 1080 50C1260 30 1350 40 1440 50V0H0Z;
                     M0 0V40C360 0 720 80 1080 40C1260 20 1350 10 1440 20V0H0Z"
                 />
               {%- endif -%}
@@ -227,9 +251,13 @@
                   attributeName="d" 
                   dur="{{ section.settings.curve_animation_speed }}s"
                   repeatCount="indefinite"
+                  calcMode="spline"
+                  keySplines="0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1"
                   values="
                     M0 0V20Q720 80 1440 20V0H0Z;
-                    M0 0V30Q720 60 1440 30V0H0Z;
+                    M0 0V40Q720 40 1440 40V0H0Z;
+                    M0 0V20Q720 0 1440 60V0H0Z;
+                    M0 0V60Q720 20 1440 20V0H0Z;
                     M0 0V20Q720 80 1440 20V0H0Z"
                 />
               {%- endif -%}
@@ -245,9 +273,13 @@
                   attributeName="d" 
                   dur="{{ section.settings.curve_animation_speed }}s"
                   repeatCount="indefinite"
+                  calcMode="spline"
+                  keySplines="0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1"
                   values="
                     M0 0V20C240 60 480 80 720 60C960 40 1200 20 1440 40V0H0Z;
-                    M0 0V30C240 50 480 70 720 50C960 30 1200 40 1440 30V0H0Z;
+                    M0 0V40C240 20 480 60 720 80C960 60 1200 40 1440 20V0H0Z;
+                    M0 0V20C240 40 480 20 720 40C960 80 1200 60 1440 40V0H0Z;
+                    M0 0V40C240 80 480 40 720 20C960 40 1200 80 1440 60V0H0Z;
                     M0 0V20C240 60 480 80 720 60C960 40 1200 20 1440 40V0H0Z"
                 />
               {%- endif -%}
@@ -877,8 +909,8 @@
       "type": "checkbox",
       "id": "top_curve_animate",
       "label": "Animate Top Curve",
-      "default": false,
-      "info": "Adds a subtle flowing wave animation"
+      "default": true,
+      "info": "Adds a flowing ripple wave animation"
     },
     {
       "type": "header",
@@ -914,8 +946,8 @@
       "type": "checkbox",
       "id": "bottom_curve_animate",
       "label": "Animate Bottom Curve",
-      "default": false,
-      "info": "Adds a subtle flowing wave animation"
+      "default": true,
+      "info": "Adds a flowing ripple wave animation"
     }
   ],
   "blocks": [
