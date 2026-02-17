@@ -225,6 +225,10 @@
       "type": "best-sellers",
       "name": "Best Sellers",
       "settings": {
+        "padding_top": 145,
+        "padding_bottom": 80,
+        "padding_top_mobile": 60,
+        "padding_bottom_mobile": 60,
         "title": "Best Sellers",
         "subtitle": "Our most-loved flavors, chosen by the Happie community.",
         "collection_1": "thc",
@@ -305,23 +309,23 @@
           "settings": {
             "icon": "droplet",
             "title": "Sparkling Water",
-            "description": "We only use the cutest little bubbles in our reverse osmosis filtered water"
+            "description": "Reverse osmosis filtered and perfectly carbonated. Crisp, clean bubbles — not the bloated kind."
           }
         },
         "ingredient_987TiQ": {
           "type": "ingredient",
           "settings": {
             "icon": "sparkle",
-            "title": "All-Natural Flavor",
-            "description": "No mysterious \"essences.\" Real stuff. We won awards for this! Awards!!!"
+            "title": "Real Fruit Flavor",
+            "description": "Real fruit flavors, no mystery 'essences.' Award-winning taste you'll actually crave — not just tolerate."
           }
         },
         "ingredient_mYc9dB": {
           "type": "ingredient",
           "settings": {
             "icon": "leaf",
-            "title": "100% Agave Nectar",
-            "description": "It's like sugar but also not? Accepting no further questions at this time"
+            "title": "100% Agave Nectar (No Can Sugar)",
+            "description": "Sweetened with organic agave instead of cane sugar. Just 30 calories per can and no sugar crash."
           }
         },
         "ingredient_xcgQhU": {
@@ -329,7 +333,7 @@
           "settings": {
             "icon": "circle-slash",
             "title": "High-Quality THC & CBD",
-            "description": "Naturally-derived and keeps its potency till you party"
+            "description": "Nano-emulsified for fast onset — feel it in 15 minutes, not 2 hours. Lab-tested, Farm Bill compliant, and consistent every single time"
           }
         }
       },
@@ -345,9 +349,9 @@
         "padding_bottom": 80,
         "padding_top_mobile": 60,
         "padding_bottom_mobile": 60,
-        "title": "Putting The High In Ridiculously High Quality Ingredients",
-        "main_image": "shopify://shop_images/pro-shot-705d4370-fbb6-40b8-9116-babd9210f9da.jpg",
-        "background_color": "#e8b931",
+        "title": "Clean Ingredients That Hit Different",
+        "main_image": "shopify://shop_images/Grapefruitfarmedacanimage-min.jpg",
+        "background_color": "#ffcb08",
         "card_bg_color": "#fff8dc",
         "title_color": "#7b3f9e",
         "item_bg_color": "#fffef5",
@@ -358,10 +362,10 @@
         "curve_height": 80,
         "show_top_curve": true,
         "top_curve_style": "wave",
-        "top_curve_color": "#fffbf5",
+        "top_curve_color": "#ffcb08",
         "show_bottom_curve": true,
         "bottom_curve_style": "wave",
-        "bottom_curve_color": "#ffffff"
+        "bottom_curve_color": "#ffcb08"
       }
     },
     "featured-collection": {
@@ -404,6 +408,7 @@
     },
     "feature-text": {
       "type": "feature-text",
+      "disabled": true,
       "custom_css": [
         "@media screen and (max-width: 600px) {.py-section-vertical-spacing {padding-bottom: 0px; padding-top:50px }"
       ],
@@ -472,6 +477,7 @@
         "icon-3",
         "icon-4"
       ],
+      "disabled": true,
       "settings": {
         "title": "",
         "max_width": 100,
@@ -481,6 +487,109 @@
         "icon_alignment_on_desktop": "md:justify-center",
         "icon_thickness": 1.3,
         "background_color": "bg-scheme-card text-scheme-card-text",
+        "show_border": false,
+        "color_scheme": "scheme2",
+        "use_gradient_background": false
+      }
+    },
+    "comparison-table": {
+      "type": "comparison-table",
+      "blocks": {
+        "row-2": {
+          "type": "row",
+          "settings": {
+            "title": "Low Calories",
+            "column_1_icon": "check_mark",
+            "column_1_text": "",
+            "column_2_icon": "check_close",
+            "column_2_text": "",
+            "column_3_icon": "check_close",
+            "column_3_text": "",
+            "column_4_icon": "check_close",
+            "column_4_text": ""
+          }
+        },
+        "row_Ue6Mzt": {
+          "type": "row",
+          "settings": {
+            "title": "Ocean Minerals",
+            "column_1_icon": "check_mark",
+            "column_1_text": "",
+            "column_2_icon": "check_close",
+            "column_2_text": "",
+            "column_3_icon": "check_close",
+            "column_3_text": "",
+            "column_4_icon": "check_close",
+            "column_4_text": ""
+          }
+        },
+        "row_h7cwq9": {
+          "type": "row",
+          "settings": {
+            "title": "No Artificial Flavors",
+            "column_1_icon": "check_mark",
+            "column_1_text": "",
+            "column_2_icon": "check_close",
+            "column_2_text": "",
+            "column_3_icon": "check_close",
+            "column_3_text": "",
+            "column_4_icon": "check_close",
+            "column_4_text": ""
+          }
+        },
+        "row_fqzpYm": {
+          "type": "row",
+          "settings": {
+            "title": "Ethically sourced ingredients",
+            "column_1_icon": "check_mark",
+            "column_1_text": "",
+            "column_2_icon": "check_close",
+            "column_2_text": "",
+            "column_3_icon": "check_close",
+            "column_3_text": "",
+            "column_4_icon": "check_close",
+            "column_4_text": ""
+          }
+        },
+        "row_rdnHit": {
+          "type": "row",
+          "settings": {
+            "title": "Agave Nectar",
+            "column_1_icon": "check_mark",
+            "column_1_text": "",
+            "column_2_icon": "check_close",
+            "column_2_text": "",
+            "column_3_icon": "check_close",
+            "column_3_text": "",
+            "column_4_icon": "check_close",
+            "column_4_text": ""
+          }
+        }
+      },
+      "block_order": [
+        "row-2",
+        "row_Ue6Mzt",
+        "row_h7cwq9",
+        "row_fqzpYm",
+        "row_rdnHit"
+      ],
+      "disabled": true,
+      "settings": {
+        "title": "How We Compare",
+        "display_on_card": false,
+        "max_width": "max-w-2xl",
+        "highlighted_column": "1",
+        "highlighted_column_color": "accent-1",
+        "show_scroll_left_to_right_on_mobile": true,
+        "column_1_title": "Aura",
+        "column_1_image": "shopify://shop_images/logo-horizontal.svg",
+        "column_2_title": "Big corporate brands",
+        "enable_column_3": false,
+        "column_3_title": "Column 3",
+        "enable_column_4": false,
+        "column_4_title": "Column 4",
+        "icon_thickness": 1.5,
+        "background_color": "bg-transparent text-scheme-text",
         "show_border": false,
         "color_scheme": "scheme2",
         "use_gradient_background": false
@@ -599,6 +708,7 @@
     },
     "pagefly_section_TwnJAJ": {
       "type": "pagefly-section",
+      "disabled": true,
       "name": "PageFly Section",
       "settings": {
         "section_id": "pf-7b70c8ee"
@@ -652,6 +762,7 @@
         "column-1",
         "column_3eCVjW"
       ],
+      "disabled": true,
       "custom_css": [
         "h2 {font-size: 45px; width: 509px; margin: 0 auto; text-align: center;}",
         "h3 {font-size: 1.5em !important;}",
@@ -755,108 +866,6 @@
         "products_per_row_mobile": "1",
         "products_per_row_desktop": 3,
         "color_scheme": "",
-        "use_gradient_background": false
-      }
-    },
-    "comparison-table": {
-      "type": "comparison-table",
-      "blocks": {
-        "row-2": {
-          "type": "row",
-          "settings": {
-            "title": "Low Calories",
-            "column_1_icon": "check_mark",
-            "column_1_text": "",
-            "column_2_icon": "check_close",
-            "column_2_text": "",
-            "column_3_icon": "check_close",
-            "column_3_text": "",
-            "column_4_icon": "check_close",
-            "column_4_text": ""
-          }
-        },
-        "row_Ue6Mzt": {
-          "type": "row",
-          "settings": {
-            "title": "Ocean Minerals",
-            "column_1_icon": "check_mark",
-            "column_1_text": "",
-            "column_2_icon": "check_close",
-            "column_2_text": "",
-            "column_3_icon": "check_close",
-            "column_3_text": "",
-            "column_4_icon": "check_close",
-            "column_4_text": ""
-          }
-        },
-        "row_h7cwq9": {
-          "type": "row",
-          "settings": {
-            "title": "No Artificial Flavors",
-            "column_1_icon": "check_mark",
-            "column_1_text": "",
-            "column_2_icon": "check_close",
-            "column_2_text": "",
-            "column_3_icon": "check_close",
-            "column_3_text": "",
-            "column_4_icon": "check_close",
-            "column_4_text": ""
-          }
-        },
-        "row_fqzpYm": {
-          "type": "row",
-          "settings": {
-            "title": "Ethically sourced ingredients",
-            "column_1_icon": "check_mark",
-            "column_1_text": "",
-            "column_2_icon": "check_close",
-            "column_2_text": "",
-            "column_3_icon": "check_close",
-            "column_3_text": "",
-            "column_4_icon": "check_close",
-            "column_4_text": ""
-          }
-        },
-        "row_rdnHit": {
-          "type": "row",
-          "settings": {
-            "title": "Agave Nectar",
-            "column_1_icon": "check_mark",
-            "column_1_text": "",
-            "column_2_icon": "check_close",
-            "column_2_text": "",
-            "column_3_icon": "check_close",
-            "column_3_text": "",
-            "column_4_icon": "check_close",
-            "column_4_text": ""
-          }
-        }
-      },
-      "block_order": [
-        "row-2",
-        "row_Ue6Mzt",
-        "row_h7cwq9",
-        "row_fqzpYm",
-        "row_rdnHit"
-      ],
-      "settings": {
-        "title": "How We Compare",
-        "display_on_card": false,
-        "max_width": "max-w-2xl",
-        "highlighted_column": "1",
-        "highlighted_column_color": "accent-1",
-        "show_scroll_left_to_right_on_mobile": true,
-        "column_1_title": "Aura",
-        "column_1_image": "shopify://shop_images/logo-horizontal.svg",
-        "column_2_title": "Big corporate brands",
-        "enable_column_3": false,
-        "column_3_title": "Column 3",
-        "enable_column_4": false,
-        "column_4_title": "Column 4",
-        "icon_thickness": 1.5,
-        "background_color": "bg-transparent text-scheme-text",
-        "show_border": false,
-        "color_scheme": "scheme2",
         "use_gradient_background": false
       }
     },
@@ -1050,13 +1059,13 @@
     "pagefly_section_bMT8Ud",
     "feature-text",
     "icon-list",
+    "comparison-table",
     "image-with-highlights",
     "custom_liquid_9p3Pey",
     "pagefly_section_TwnJAJ",
     "text-columns-with-images",
     "video_with_text_overlay_hRNKJB",
     "mixed_shape_product_grid_te4gMG",
-    "comparison-table",
     "curved-text",
     "testimonials",
     "newsletter",
