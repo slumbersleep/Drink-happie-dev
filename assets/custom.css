@@ -1549,14 +1549,14 @@ html { scroll-behavior: smooth; }
 
 /* Target PageFly pages - extend background behind navigation */
 body:has(.__pf) {
-  background-color: #F5EDE3;
+  background-color: #FFE6CB;
 }
 
 /* Ensure the main content area also has the cream background */
 .__pf,
 #__pf,
 [id^="shopify-section-pf-"] {
-  background-color: #F5EDE3;
+  background-color: #FFE6CB;
 }
 
 /* Make header background transparent on PageFly pages so page bg shows through */
