@@ -313,6 +313,137 @@
         "heading": "Real people. Real vibes. Real results."
       }
     },
+    "testimonials_DxgE8b": {
+      "type": "testimonials",
+      "blocks": {
+        "testimonial_e8ywfG": {
+          "type": "testimonial",
+          "settings": {
+            "rating": "5_stars",
+            "quote": "Just tried all the three flavors of this drink and loved all! The Grapefruit is my favorite yet – tangy and invigorating. It's the perfect treat to relax with friends or solo.",
+            "source": "Steve M."
+          }
+        },
+        "testimonial_ACJjQL": {
+          "type": "testimonial",
+          "settings": {
+            "rating": "5_stars",
+            "quote": "So happy with my purchase! The combination of flavors and the calming effects of CBD and THC make these drinks a great addition to my wellness routine.",
+            "source": "Melissa A."
+          }
+        },
+        "testimonial_MxX4tc": {
+          "type": "testimonial",
+          "settings": {
+            "rating": "5_stars",
+            "quote": "A friend recommended the Happie® drinks, and I'm so glad I tried them. The Grateful Grape is my favorite – it's like a guilt-free treat that helps me relax after work.",
+            "source": "Olivia N."
+          }
+        },
+        "testimonial_baiKrm": {
+          "type": "testimonial",
+          "settings": {
+            "rating": "5_stars",
+            "quote": "Absolutely delicious and refreshing! The balance of THC and CBD in the Grateful Grape flavor helps me relax without feeling too heavy.",
+            "source": "Sarah J."
+          }
+        },
+        "testimonial_wYUhkc": {
+          "type": "testimonial",
+          "settings": {
+            "rating": "5_stars",
+            "quote": "Tried the Sublime and it's now my go-to for unwinding. Light, tangy, and just the right amount of buzz. Plus, it's low-calorie, which is a bonus!",
+            "source": "Michael P."
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_e8ywfG",
+        "testimonial_ACJjQL",
+        "testimonial_MxX4tc",
+        "testimonial_baiKrm",
+        "testimonial_wYUhkc"
+      ],
+      "name": "t:sections.testimonials.name",
+      "settings": {
+        "display_on_card": true,
+        "title": "",
+        "max_width": 100,
+        "disable_media_style": false,
+        "crop": "",
+        "image_shape": "default",
+        "desktop_slide_width": 20,
+        "autoscroll_mode": "1",
+        "color_scheme": "scheme-4b2ebea0-b230-45ef-a163-d2110d2f932e",
+        "use_gradient_background": false
+      }
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "blocks": {
+        "testimonial-0": {
+          "type": "testimonial",
+          "settings": {
+            "rating": "5_stars",
+            "quote": "Just tried all the three flavors of this drink and loved all! The Grapefruit is my favorite yet – tangy and invigorating. It's the perfect treat to relax with friends or solo.",
+            "source": "Steve M."
+          }
+        },
+        "testimonial-1": {
+          "type": "testimonial",
+          "settings": {
+            "rating": "5_stars",
+            "quote": "So happy with my purchase! The combination of flavors and the calming effects of CBD and THC make these drinks a great addition to my wellness routine.",
+            "source": "Melissa A."
+          }
+        },
+        "testimonial-2": {
+          "type": "testimonial",
+          "settings": {
+            "rating": "5_stars",
+            "quote": "A friend recommended the Happie® drinks, and I'm so glad I tried them. The Grateful Grape is my favorite – it's like a guilt-free treat that helps me relax after work.",
+            "source": "Olivia N."
+          }
+        },
+        "testimonial-3": {
+          "type": "testimonial",
+          "settings": {
+            "rating": "5_stars",
+            "quote": "Absolutely delicious and refreshing! The balance of THC and CBD in the Grateful Grape flavor helps me relax without feeling too heavy.",
+            "source": "Sarah J."
+          }
+        },
+        "testimonial_QNf64e": {
+          "type": "testimonial",
+          "settings": {
+            "rating": "5_stars",
+            "quote": "Tried the Sublime and it's now my go-to for unwinding. Light, tangy, and just the right amount of buzz. Plus, it's low-calorie, which is a bonus!",
+            "source": "Michael P."
+          }
+        }
+      },
+      "block_order": [
+        "testimonial-0",
+        "testimonial-1",
+        "testimonial-2",
+        "testimonial-3",
+        "testimonial_QNf64e"
+      ],
+      "disabled": true,
+      "settings": {
+        "display_on_card": true,
+        "logo": "shopify://shop_images/logo-horizontal.svg",
+        "title": "Don't Just Listen To Us",
+        "max_width": 140,
+        "disable_media_style": false,
+        "crop": "",
+        "image_shape": "default",
+        "desktop_slide_width": 20,
+        "autoscroll_mode": "1",
+        "color_scheme": "scheme6",
+        "use_gradient_background": false
+      }
+    },
     "ingredients_showcase_Gf3aRd": {
       "type": "ingredients-showcase",
       "blocks": {
@@ -903,71 +1034,6 @@
         "use_gradient_background": false
       }
     },
-    "testimonials": {
-      "type": "testimonials",
-      "blocks": {
-        "testimonial-0": {
-          "type": "testimonial",
-          "settings": {
-            "rating": "5_stars",
-            "quote": "Just tried all the three flavors of this drink and loved all! The Grapefruit is my favorite yet – tangy and invigorating. It's the perfect treat to relax with friends or solo.",
-            "source": "Steve M."
-          }
-        },
-        "testimonial-1": {
-          "type": "testimonial",
-          "settings": {
-            "rating": "5_stars",
-            "quote": "So happy with my purchase! The combination of flavors and the calming effects of CBD and THC make these drinks a great addition to my wellness routine.",
-            "source": "Melissa A."
-          }
-        },
-        "testimonial-2": {
-          "type": "testimonial",
-          "settings": {
-            "rating": "5_stars",
-            "quote": "A friend recommended the Happie® drinks, and I'm so glad I tried them. The Grateful Grape is my favorite – it's like a guilt-free treat that helps me relax after work.",
-            "source": "Olivia N."
-          }
-        },
-        "testimonial-3": {
-          "type": "testimonial",
-          "settings": {
-            "rating": "5_stars",
-            "quote": "Absolutely delicious and refreshing! The balance of THC and CBD in the Grateful Grape flavor helps me relax without feeling too heavy.",
-            "source": "Sarah J."
-          }
-        },
-        "testimonial_QNf64e": {
-          "type": "testimonial",
-          "settings": {
-            "rating": "5_stars",
-            "quote": "Tried the Sublime and it's now my go-to for unwinding. Light, tangy, and just the right amount of buzz. Plus, it's low-calorie, which is a bonus!",
-            "source": "Michael P."
-          }
-        }
-      },
-      "block_order": [
-        "testimonial-0",
-        "testimonial-1",
-        "testimonial-2",
-        "testimonial-3",
-        "testimonial_QNf64e"
-      ],
-      "settings": {
-        "display_on_card": true,
-        "logo": "shopify://shop_images/logo-horizontal.svg",
-        "title": "Don't Just Listen To Us",
-        "max_width": 140,
-        "disable_media_style": false,
-        "crop": "",
-        "image_shape": "default",
-        "desktop_slide_width": 20,
-        "autoscroll_mode": "1",
-        "color_scheme": "scheme6",
-        "use_gradient_background": false
-      }
-    },
     "newsletter": {
       "type": "newsletter",
       "custom_css": [],
@@ -1069,6 +1135,7 @@
     "image-with-text-overlay",
     "best_sellers_mJyW9V",
     "moast_app_wxMn7C",
+    "testimonials_DxgE8b",
     "testimonials",
     "ingredients_showcase_Gf3aRd",
     "featured-collection",
