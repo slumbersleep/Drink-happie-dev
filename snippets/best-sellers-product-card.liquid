@@ -8,8 +8,8 @@
 {%- endcomment -%}
 
 {%- liquid
-  assign first_variant = product.selected_or_first_available_variant
-  assign product_form_id = 'product-form-' | append: section.id | append: '-' | append: product.id
+  # Find the lowest price across all variants
+  assign lowest_price = product.price_min
   
   # Check for badge
   assign badge_text = ''
@@ -29,7 +29,7 @@
     
     {%- if product.featured_image != blank -%}
       <img
-        src="{{ product.featured_image | image_url: width: 600 }}"
+        src="{{ product.featured_image | image_url: width: 800 }}"
         alt="{{ product.featured_image.alt | escape | default: product.title }}"
         width="{{ product.featured_image.width }}"
         height="{{ product.featured_image.height }}"
@@ -56,84 +56,17 @@
     {%- endif -%}
     
     <div class="best-sellers__card-footer">
-      {%- if product.variants.size > 1 -%}
-        <div class="best-sellers__variant-select">
-          <select 
-            name="id" 
-            form="{{ product_form_id }}"
-            data-variant-select
-            onchange="updatePrice_{{ section.id }}_{{ product.id }}(this)"
-          >
-            {%- for variant in product.variants -%}
-              <option 
-                value="{{ variant.id }}"
-                data-price="{{ variant.price | money }}"
-                {% if variant == first_variant %}selected{% endif %}
-                {% unless variant.available %}disabled{% endunless %}
-              >
-                {{ variant.title }}{% unless variant.available %} - Sold Out{% endunless %}
-              </option>
-            {%- endfor -%}
-          </select>
-        </div>
-      {%- else -%}
-        <input type="hidden" name="id" value="{{ first_variant.id }}" form="{{ product_form_id }}">
-      {%- endif -%}
-      
-      <span class="best-sellers__price" data-price-{{ section.id }}-{{ product.id }}>
-        {{ first_variant.price | money }}
-      </span>
+      <div class="best-sellers__price-wrapper">
+        <span class="best-sellers__price-label">Starting at</span>
+        <span class="best-sellers__price">{{ lowest_price | money }}</span>
+      </div>
     </div>
     
-    {%- form 'product', product, id: product_form_id, class: 'best-sellers__form', novalidate: 'novalidate' -%}
-      <input type="hidden" name="quantity" value="1">
-      {%- if product.variants.size == 1 -%}
-        <input type="hidden" name="id" value="{{ first_variant.id }}">
-      {%- endif -%}
-      
-      <button 
-        type="submit" 
-        name="add" 
-        class="best-sellers__add-to-cart"
-        {% unless first_variant.available %}disabled{% endunless %}
-      >
-        {%- if first_variant.available -%}
-          ADD TO CART →
-        {%- else -%}
-          SOLD OUT
-        {%- endif -%}
-      </button>
-    {%- endform -%}
+    <a href="{{ product.url }}" class="best-sellers__shop-now">
+      SHOP NOW
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14M12 5l7 7-7 7"/>
+      </svg>
+    </a>
   </div>
 </div>
-
-<script>
-  function updatePrice_{{ section.id }}_{{ product.id }}(select) {
-    const selectedOption = select.options[select.selectedIndex];
-    const priceEl = document.querySelector('[data-price-{{ section.id }}-{{ product.id }}]');
-    if (priceEl && selectedOption.dataset.price) {
-      priceEl.textContent = selectedOption.dataset.price;
-    }
-    
-    // Update form id
-    const form = document.getElementById('{{ product_form_id }}');
-    if (form) {
-      const hiddenInput = form.querySelector('input[name="id"]');
-      if (hiddenInput) {
-        hiddenInput.value = select.value;
-      }
-    }
-    
-    // Update button state
-    const button = form ? form.querySelector('.best-sellers__add-to-cart') : null;
-    if (button) {
-      if (selectedOption.disabled) {
-        button.disabled = true;
-        button.textContent = 'SOLD OUT';
-      } else {
-        button.disabled = false;
-        button.textContent = 'ADD TO CART →';
-      }
-    }
-  }
-</script>
