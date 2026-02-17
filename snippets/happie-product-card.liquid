@@ -35,13 +35,23 @@
     assign has_secondary_image = true
   endif
   
-  # Get custom tagline metafield
-  assign custom_tagline = product.metafields.custom.product_card_custom_tagline
-  if custom_tagline == blank
-    assign custom_tagline = product.metafields.custom.subheading
-  endif
-  if custom_tagline == blank
-    assign custom_tagline = product.metafields.custom.short_description
+  # Get custom tagline metafield - use the dedicated product card tagline field
+  # This is the same field used on the homepage Best Sellers cards
+  assign tagline_metafield = product.metafields.custom.product_card_custom_tagline
+  assign custom_tagline = ''
+  assign tagline_is_richtext = false
+  
+  if tagline_metafield != blank
+    # Check the metafield type
+    if tagline_metafield.type == 'rich_text_field'
+      # Richtext metafields need to be output directly (Shopify handles the rendering)
+      assign tagline_is_richtext = true
+    elsif tagline_metafield.type == 'single_line_text_field' or tagline_metafield.type == 'multi_line_text_field'
+      assign custom_tagline = tagline_metafield.value
+    else
+      # For string values, just use as-is
+      assign custom_tagline = tagline_metafield | strip_html | truncate: 150
+    endif
   endif
   
   # Loading attribute
@@ -91,7 +101,9 @@
     <div class="happie-product-card__content">
       <h3 class="happie-product-card__title">{{ product.title }}</h3>
       
-      {%- if custom_tagline != blank -%}
+      {%- if tagline_is_richtext -%}
+        <div class="happie-product-card__tagline">{{ tagline_metafield | metafield_tag }}</div>
+      {%- elsif custom_tagline != blank -%}
         <p class="happie-product-card__tagline">{{ custom_tagline }}</p>
       {%- endif -%}
       
