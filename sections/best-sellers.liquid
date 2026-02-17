@@ -133,56 +133,150 @@
       {%- endif -%}
     </div>
 
-    <!-- Products Grid - Collection 1 -->
+    <!-- Products Grid/Carousel - Collection 1 -->
     <div 
-      class="best-sellers__grid"
+      class="best-sellers__products-wrapper"
       x-show="activeTab === 'collection1'"
       x-transition:enter="transition ease-out duration-200"
       x-transition:enter-start="opacity-0"
       x-transition:enter-end="opacity-100"
     >
-      {%- if collection_1 != blank -%}
-        {%- for product in collection_1.products limit: products_to_show -%}
-          {% render 'best-sellers-product-card', product: product, index: forloop.index, section: section %}
-        {%- endfor -%}
-      {%- else -%}
-        {%- for i in (1..4) -%}
-          <div class="best-sellers__card best-sellers__card--placeholder">
-            <div class="best-sellers__card-link">
-              <div class="best-sellers__card-image">
-                <div class="best-sellers__placeholder-image">
-                  <span>Product {{ i }}</span>
+      <!-- Desktop Grid -->
+      <div class="best-sellers__grid best-sellers__grid--desktop">
+        {%- if collection_1 != blank -%}
+          {%- for product in collection_1.products limit: products_to_show -%}
+            {% render 'best-sellers-product-card', product: product, index: forloop.index, section: section %}
+          {%- endfor -%}
+        {%- else -%}
+          {%- for i in (1..4) -%}
+            <div class="best-sellers__card best-sellers__card--placeholder">
+              <div class="best-sellers__card-link">
+                <div class="best-sellers__card-image">
+                  <div class="best-sellers__placeholder-image">
+                    <span>Product {{ i }}</span>
+                  </div>
+                </div>
+                <div class="best-sellers__card-content">
+                  <h3 class="best-sellers__product-title">Product Name</h3>
+                  <p class="best-sellers__product-desc">Product description here</p>
+                  <div class="best-sellers__price-row">
+                    <span class="best-sellers__price">$18.99</span>
+                  </div>
                 </div>
               </div>
-              <div class="best-sellers__card-content">
-                <h3 class="best-sellers__product-title">Product Name</h3>
-                <p class="best-sellers__product-desc">Product description here</p>
-                <div class="best-sellers__price-row">
-                  <span class="best-sellers__price">$18.99</span>
-                </div>
+              <div class="best-sellers__card-actions">
+                <span class="best-sellers__shop-now-btn">SHOP NOW</span>
               </div>
             </div>
-            <div class="best-sellers__card-actions">
-              <span class="best-sellers__shop-now-btn">SHOP NOW</span>
-            </div>
-          </div>
-        {%- endfor -%}
-      {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+      
+      <!-- Mobile Carousel -->
+      <div class="best-sellers__carousel" x-data="{ currentSlide: 0, totalSlides: {{ collection_1.products.size | default: 4 | at_most: products_to_show }} }">
+        <div class="best-sellers__carousel-track" 
+             :style="'transform: translateX(-' + (currentSlide * 75) + '%)'"
+             @touchstart="touchStartX = $event.touches[0].clientX"
+             @touchend="
+               const diff = touchStartX - $event.changedTouches[0].clientX;
+               if (diff > 50 && currentSlide < totalSlides - 1) currentSlide++;
+               else if (diff < -50 && currentSlide > 0) currentSlide--;
+             "
+        >
+          {%- if collection_1 != blank -%}
+            {%- for product in collection_1.products limit: products_to_show -%}
+              <div class="best-sellers__carousel-slide">
+                {% render 'best-sellers-product-card', product: product, index: forloop.index, section: section %}
+              </div>
+            {%- endfor -%}
+          {%- else -%}
+            {%- for i in (1..4) -%}
+              <div class="best-sellers__carousel-slide">
+                <div class="best-sellers__card best-sellers__card--placeholder">
+                  <div class="best-sellers__card-link">
+                    <div class="best-sellers__card-image">
+                      <div class="best-sellers__placeholder-image">
+                        <span>Product {{ i }}</span>
+                      </div>
+                    </div>
+                    <div class="best-sellers__card-content">
+                      <h3 class="best-sellers__product-title">Product Name</h3>
+                      <p class="best-sellers__product-desc">Product description here</p>
+                      <div class="best-sellers__price-row">
+                        <span class="best-sellers__price">$18.99</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="best-sellers__card-actions">
+                    <span class="best-sellers__shop-now-btn">SHOP NOW</span>
+                  </div>
+                </div>
+              </div>
+            {%- endfor -%}
+          {%- endif -%}
+        </div>
+        
+        <!-- Carousel Dots -->
+        <div class="best-sellers__carousel-dots">
+          <template x-for="(dot, index) in totalSlides" :key="index">
+            <button 
+              class="best-sellers__carousel-dot"
+              :class="{ 'best-sellers__carousel-dot--active': currentSlide === index }"
+              @click="currentSlide = index"
+              :aria-label="'Go to slide ' + (index + 1)"
+            ></button>
+          </template>
+        </div>
+      </div>
     </div>
 
-    <!-- Products Grid - Collection 2 -->
+    <!-- Products Grid/Carousel - Collection 2 -->
     {%- if collection_2 != blank -%}
       <div 
-        class="best-sellers__grid"
+        class="best-sellers__products-wrapper"
         x-show="activeTab === 'collection2'"
         x-cloak
         x-transition:enter="transition ease-out duration-200"
         x-transition:enter-start="opacity-0"
         x-transition:enter-end="opacity-100"
       >
-        {%- for product in collection_2.products limit: products_to_show -%}
-          {% render 'best-sellers-product-card', product: product, index: forloop.index, section: section %}
-        {%- endfor -%}
+        <!-- Desktop Grid -->
+        <div class="best-sellers__grid best-sellers__grid--desktop">
+          {%- for product in collection_2.products limit: products_to_show -%}
+            {% render 'best-sellers-product-card', product: product, index: forloop.index, section: section %}
+          {%- endfor -%}
+        </div>
+        
+        <!-- Mobile Carousel -->
+        <div class="best-sellers__carousel" x-data="{ currentSlide: 0, totalSlides: {{ collection_2.products.size | default: 4 | at_most: products_to_show }} }">
+          <div class="best-sellers__carousel-track"
+               :style="'transform: translateX(-' + (currentSlide * 75) + '%)'"
+               @touchstart="touchStartX = $event.touches[0].clientX"
+               @touchend="
+                 const diff = touchStartX - $event.changedTouches[0].clientX;
+                 if (diff > 50 && currentSlide < totalSlides - 1) currentSlide++;
+                 else if (diff < -50 && currentSlide > 0) currentSlide--;
+               "
+          >
+            {%- for product in collection_2.products limit: products_to_show -%}
+              <div class="best-sellers__carousel-slide">
+                {% render 'best-sellers-product-card', product: product, index: forloop.index, section: section %}
+              </div>
+            {%- endfor -%}
+          </div>
+          
+          <!-- Carousel Dots -->
+          <div class="best-sellers__carousel-dots">
+            <template x-for="(dot, index) in totalSlides" :key="index">
+              <button 
+                class="best-sellers__carousel-dot"
+                :class="{ 'best-sellers__carousel-dot--active': currentSlide === index }"
+                @click="currentSlide = index"
+                :aria-label="'Go to slide ' + (index + 1)"
+              ></button>
+            </template>
+          </div>
+        </div>
       </div>
     {%- endif -%}
 
@@ -417,12 +511,21 @@
     color: var(--bs-text-color);
   }
 
-  /* Products Grid */
-  #best-sellers-{{ section.id }} .best-sellers__grid {
+  /* Products Wrapper */
+  #best-sellers-{{ section.id }} .best-sellers__products-wrapper {
+    margin-bottom: 48px;
+  }
+
+  /* Products Grid - Desktop only */
+  #best-sellers-{{ section.id }} .best-sellers__grid--desktop {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 24px;
-    margin-bottom: 48px;
+  }
+  
+  /* Mobile Carousel - Hidden on desktop */
+  #best-sellers-{{ section.id }} .best-sellers__carousel {
+    display: none;
   }
 
   /* Product Card - Clean minimal style */
@@ -603,7 +706,7 @@
 
   /* Responsive */
   @media (max-width: 1100px) {
-    #best-sellers-{{ section.id }} .best-sellers__grid {
+    #best-sellers-{{ section.id }} .best-sellers__grid--desktop {
       grid-template-columns: repeat(2, 1fr);
     }
   }
@@ -624,9 +727,62 @@
       font-size: 14px;
     }
 
-    #best-sellers-{{ section.id }} .best-sellers__grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
+    /* Hide desktop grid, show carousel on mobile */
+    #best-sellers-{{ section.id }} .best-sellers__grid--desktop {
+      display: none;
+    }
+    
+    #best-sellers-{{ section.id }} .best-sellers__carousel {
+      display: block;
+      position: relative;
+      overflow: hidden;
+      padding: 0 16px;
+      margin: 0 -16px;
+    }
+    
+    #best-sellers-{{ section.id }} .best-sellers__carousel-track {
+      display: flex;
+      transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+      padding-left: 16px;
+    }
+    
+    #best-sellers-{{ section.id }} .best-sellers__carousel-slide {
+      flex: 0 0 75%;
+      padding-right: 16px;
+      box-sizing: border-box;
+    }
+    
+    #best-sellers-{{ section.id }} .best-sellers__carousel-slide .best-sellers__card {
+      height: 100%;
+    }
+    
+    /* Carousel Dots */
+    #best-sellers-{{ section.id }} .best-sellers__carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 24px;
+      padding-bottom: 8px;
+    }
+    
+    #best-sellers-{{ section.id }} .best-sellers__carousel-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      padding: 0;
+    }
+    
+    #best-sellers-{{ section.id }} .best-sellers__carousel-dot--active {
+      background: var(--bs-accent-color);
+      transform: scale(1.2);
+    }
+    
+    #best-sellers-{{ section.id }} .best-sellers__carousel-dot:hover:not(.best-sellers__carousel-dot--active) {
+      background: rgba(0, 0, 0, 0.4);
     }
 
     #best-sellers-{{ section.id }} .best-sellers__card {
@@ -665,9 +821,8 @@
   }
 
   @media (max-width: 480px) {
-    #best-sellers-{{ section.id }} .best-sellers__grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
+    #best-sellers-{{ section.id }} .best-sellers__carousel-slide {
+      flex: 0 0 80%;
     }
   }
 
