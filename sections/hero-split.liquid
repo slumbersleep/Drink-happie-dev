@@ -13,6 +13,8 @@
   assign show_hero_image = section.settings.show_hero_image
   assign enable_video_background = section.settings.enable_video_background
   assign background_video = section.settings.background_video
+  assign video_fallback_image = section.settings.video_fallback_image
+  assign disable_video_on_mobile = section.settings.disable_video_on_mobile
   assign overlay_opacity = section.settings.overlay_opacity
 -%}
 
@@ -22,14 +24,35 @@
   data-color-scheme="{{ section.settings.color_scheme }}"
 >
   <!-- Video Background -->
-  {%- if enable_video_background and background_video != blank -%}
-    <div class="hero-split__video-wrapper">
-      {{ background_video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, class: 'hero-split__video' }}
+  {%- if enable_video_background -%}
+    <div class="hero-split__video-wrapper{% if disable_video_on_mobile %} hero-split__video-wrapper--hide-mobile{% endif %}">
+      {%- if video_fallback_image != blank -%}
+        <img
+          src="{{ video_fallback_image | image_url: width: 1920 }}"
+          alt=""
+          class="hero-split__fallback-image"
+          loading="eager"
+        >
+      {%- endif -%}
+      {%- if background_video != blank -%}
+        {{ background_video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, class: 'hero-split__video', preload: 'metadata' }}
+      {%- endif -%}
       <div class="hero-split__overlay" style="background: {{ section.settings.overlay_color }}; opacity: {{ overlay_opacity | divided_by: 100.0 }};"></div>
     </div>
+    {%- if disable_video_on_mobile and video_fallback_image != blank -%}
+      <div class="hero-split__mobile-fallback">
+        <img
+          src="{{ video_fallback_image | image_url: width: 1200 }}"
+          alt=""
+          class="hero-split__fallback-image"
+          loading="eager"
+        >
+        <div class="hero-split__overlay" style="background: {{ section.settings.overlay_color }}; opacity: {{ overlay_opacity | divided_by: 100.0 }};"></div>
+      </div>
+    {%- endif -%}
   {%- endif -%}
 
-  <div class="hero-split__container{% unless show_hero_image %} hero-split__container--full-width{% endunless %}">
+  <div class="hero-split__container{% unless show_hero_image %} hero-split__container--no-image{% endunless %}">
     <!-- Left Content Column -->
     <div class="hero-split__content">
       {%- if eyebrow != blank -%}
@@ -145,7 +168,8 @@
   }
 
   /* Video Background */
-  #hero-split-{{ section.id }} .hero-split__video-wrapper {
+  #hero-split-{{ section.id }} .hero-split__video-wrapper,
+  #hero-split-{{ section.id }} .hero-split__mobile-fallback {
     position: absolute;
     top: 0;
     left: 0;
@@ -158,6 +182,18 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    position: relative;
+    z-index: 2;
+  }
+
+  #hero-split-{{ section.id }} .hero-split__fallback-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
   }
 
   #hero-split-{{ section.id }} .hero-split__overlay {
@@ -167,6 +203,7 @@
     width: 100%;
     height: 100%;
     pointer-events: none;
+    z-index: 3;
   }
 
   #hero-split-{{ section.id }}.hero-split--has-video .hero-split__container {
@@ -174,28 +211,28 @@
     z-index: 1;
   }
 
-  /* Full width content when no hero image */
-  #hero-split-{{ section.id }} .hero-split__container--full-width {
-    grid-template-columns: 1fr !important;
-    max-width: 800px;
-    text-align: center;
+  /* Mobile fallback - hidden by default, shown on mobile when video is disabled */
+  #hero-split-{{ section.id }} .hero-split__mobile-fallback {
+    display: none;
   }
 
-  #hero-split-{{ section.id }} .hero-split__container--full-width .hero-split__content {
-    max-width: 100%;
+  @media (max-width: 768px) {
+    #hero-split-{{ section.id }} .hero-split__video-wrapper--hide-mobile {
+      display: none;
+    }
+
+    #hero-split-{{ section.id }} .hero-split__mobile-fallback {
+      display: block;
+    }
   }
 
-  #hero-split-{{ section.id }} .hero-split__container--full-width .hero-split__text {
-    margin-left: auto;
-    margin-right: auto;
+  /* Keep text left-aligned when no hero image - just remove the image column */
+  #hero-split-{{ section.id }} .hero-split__container--no-image {
+    grid-template-columns: 1fr;
   }
 
-  #hero-split-{{ section.id }} .hero-split__container--full-width .hero-split__ctas {
-    justify-content: center;
-  }
-
-  #hero-split-{{ section.id }} .hero-split__container--full-width .hero-split__social-proof {
-    justify-content: center;
+  #hero-split-{{ section.id }} .hero-split__container--no-image .hero-split__content {
+    max-width: 560px;
   }
 
   #hero-split-{{ section.id }} .hero-split__container {
@@ -572,6 +609,19 @@
       "id": "background_video",
       "label": "Background Video",
       "info": "Upload a video file for the background"
+    },
+    {
+      "type": "image_picker",
+      "id": "video_fallback_image",
+      "label": "Fallback / Placeholder Image",
+      "info": "Shows while video loads, if video fails, or on mobile when video is disabled"
+    },
+    {
+      "type": "checkbox",
+      "id": "disable_video_on_mobile",
+      "label": "Disable Video on Mobile",
+      "default": true,
+      "info": "Show fallback image instead of video on mobile devices (better performance)"
     },
     {
       "type": "color",
