@@ -181,25 +181,20 @@
         isSwiping: false,
         isMobile: window.innerWidth < 768,
         get slideWidth() { return this.isMobile ? 80 : 33.333; },
-        get maxSlide() { return this.isMobile ? this.totalSlides - 1 : Math.max(0, this.totalSlides - 3); }
+        get maxSlide() { return this.isMobile ? this.totalSlides - 1 : Math.max(0, this.totalSlides - 3); },
+        nextSlide() {
+          if (this.currentSlide >= this.maxSlide) {
+            this.currentSlide = 0;
+          } else {
+            this.currentSlide++;
+          }
+        }
       }" x-init="window.addEventListener('resize', () => { isMobile = window.innerWidth < 768 })">
         
-        <!-- Navigation Arrows (Desktop) -->
-        <button 
-          class="best-sellers__carousel-nav best-sellers__carousel-nav--prev"
-          @click="currentSlide = Math.max(0, currentSlide - 1)"
-          :disabled="currentSlide === 0"
-          aria-label="Previous products"
-        >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M15 18l-6-6 6-6"/>
-          </svg>
-        </button>
-        
+        <!-- Navigation Arrow (Right only - infinite loop) -->
         <button 
           class="best-sellers__carousel-nav best-sellers__carousel-nav--next"
-          @click="currentSlide = Math.min(maxSlide, currentSlide + 1)"
-          :disabled="currentSlide >= maxSlide"
+          @click="nextSlide()"
           aria-label="Next products"
         >
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -218,8 +213,11 @@
              @touchend="
                if (!isSwiping) return;
                const diff = touchStartX - $event.changedTouches[0].clientX;
-               if (diff > 40 && currentSlide < maxSlide) currentSlide++;
-               else if (diff < -40 && currentSlide > 0) currentSlide--;
+               if (diff > 40) {
+                 currentSlide = currentSlide >= maxSlide ? 0 : currentSlide + 1;
+               } else if (diff < -40) {
+                 currentSlide = currentSlide <= 0 ? maxSlide : currentSlide - 1;
+               }
              "
         >
           {%- if collection_1 != blank -%}
@@ -295,25 +293,20 @@
           isSwiping: false,
           isMobile: window.innerWidth < 768,
           get slideWidth() { return this.isMobile ? 80 : 33.333; },
-          get maxSlide() { return this.isMobile ? this.totalSlides - 1 : Math.max(0, this.totalSlides - 3); }
+          get maxSlide() { return this.isMobile ? this.totalSlides - 1 : Math.max(0, this.totalSlides - 3); },
+          nextSlide() {
+            if (this.currentSlide >= this.maxSlide) {
+              this.currentSlide = 0;
+            } else {
+              this.currentSlide++;
+            }
+          }
         }" x-init="window.addEventListener('resize', () => { isMobile = window.innerWidth < 768 })">
           
-          <!-- Navigation Arrows (Desktop) -->
-          <button 
-            class="best-sellers__carousel-nav best-sellers__carousel-nav--prev"
-            @click="currentSlide = Math.max(0, currentSlide - 1)"
-            :disabled="currentSlide === 0"
-            aria-label="Previous products"
-          >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M15 18l-6-6 6-6"/>
-            </svg>
-          </button>
-          
+          <!-- Navigation Arrow (Right only - infinite loop) -->
           <button 
             class="best-sellers__carousel-nav best-sellers__carousel-nav--next"
-            @click="currentSlide = Math.min(maxSlide, currentSlide + 1)"
-            :disabled="currentSlide >= maxSlide"
+            @click="nextSlide()"
             aria-label="Next products"
           >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -332,8 +325,11 @@
                @touchend="
                  if (!isSwiping) return;
                  const diff = touchStartX - $event.changedTouches[0].clientX;
-                 if (diff > 40 && currentSlide < maxSlide) currentSlide++;
-                 else if (diff < -40 && currentSlide > 0) currentSlide--;
+                 if (diff > 40) {
+                   currentSlide = currentSlide >= maxSlide ? 0 : currentSlide + 1;
+                 } else if (diff < -40) {
+                   currentSlide = currentSlide <= 0 ? maxSlide : currentSlide - 1;
+                 }
                "
           >
             {%- for product in collection_2.products limit: products_to_show -%}
