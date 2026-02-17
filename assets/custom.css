@@ -1673,5 +1673,46 @@ body.updated-pdp .site-header {
   background-color: transparent !important;
 }
 
+/* ========================================
+   Collection Pages Background Extension
+   Extends cream background behind header
+   ======================================== */
+
+/* Target all collection pages */
+body.template-collection {
+  background-color: #FFE6CB !important;
+}
+
+/* Make header transparent on collection pages */
+body.template-collection #shopify-section-header,
+body.template-collection .shopify-section-group-header-group,
+body.template-collection [id^="shopify-section-header"] {
+  background-color: transparent !important;
+}
+
+/* Target the header wrapper/container */
+body.template-collection .header-wrapper,
+body.template-collection .site-header-wrapper,
+body.template-collection #headerContainer {
+  background-color: transparent !important;
+}
+
+/* Keep the nav pill/bar styling intact but transparent container */
+body.template-collection .site-header {
+  background-color: transparent !important;
+}
+
+/* Ensure announcement bar stays on top with its own color */
+body.template-collection #shopify-section-announcement-bar,
+body.template-collection [id*="announcement-bar"] {
+  position: relative;
+  z-index: 100;
+}
+
+/* Ensure the main collection content blends with the background */
+body.template-collection .main-content,
+body.template-collection main {
+  background-color: transparent;
+}
 
 
