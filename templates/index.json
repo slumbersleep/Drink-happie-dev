@@ -76,12 +76,6 @@
           "settings": {
             "benefit_text": "Ocean minerals for natural hydration"
           }
-        },
-        "card_2_benefit_7TQYeW": {
-          "type": "card_2_benefit",
-          "settings": {
-            "benefit_text": "Perfect for any time of day"
-          }
         }
       },
       "block_order": [
@@ -90,8 +84,7 @@
         "card_1_benefit_NQE9HJ",
         "card_2_benefit_GNanKw",
         "card_2_benefit_p6UeqW",
-        "card_2_benefit_4LhR4K",
-        "card_2_benefit_7TQYeW"
+        "card_2_benefit_4LhR4K"
       ],
       "name": "Choose Your Vibe",
       "settings": {
@@ -109,14 +102,12 @@
         "card_1_subtitle": "5mg THC + 5mg CBD or 10mg THC + 5mg CBD",
         "card_1_cta_text": "Shop THC Seltzers",
         "card_1_cta_url": "",
-        "card_1_price": "$19.99",
         "card_2_badge": "ZERO THC",
         "card_2_image": "shopify://shop_images/Happie_A_Creatives_17.png",
         "card_2_title": "Fungi Fusion",
         "card_2_subtitle": "Functional mushrooms + adaptogens",
         "card_2_cta_text": "Shop Fungi Fusion",
         "card_2_cta_url": "",
-        "card_2_price": "$23.99",
         "trust_1_text": "Lab tested for purity",
         "trust_2_text": "Free shipping on orders $50+",
         "trust_3_text": "30-day guarantee — love it or return it",
@@ -356,21 +347,21 @@
         "padding_bottom_mobile": 60,
         "title": "Putting The High In Ridiculously High Quality Ingredients",
         "main_image": "shopify://shop_images/pro-shot-705d4370-fbb6-40b8-9116-babd9210f9da.jpg",
-        "background_color": "#E8B931",
-        "card_bg_color": "#FFF8DC",
-        "title_color": "#7B3F9E",
-        "item_bg_color": "#FFFEF5",
-        "item_title_color": "#7B3F9E",
+        "background_color": "#e8b931",
+        "card_bg_color": "#fff8dc",
+        "title_color": "#7b3f9e",
+        "item_bg_color": "#fffef5",
+        "item_title_color": "#7b3f9e",
         "item_text_color": "#666666",
-        "icon_color": "#7B3F9E",
-        "icon_bg_color": "rgba(123, 63, 158, 0.08)",
+        "icon_color": "#7b3f9e",
+        "icon_bg_color": "#7b3f9e14",
         "curve_height": 80,
         "show_top_curve": true,
         "top_curve_style": "wave",
-        "top_curve_color": "#FFFBF5",
+        "top_curve_color": "#fffbf5",
         "show_bottom_curve": true,
         "bottom_curve_style": "wave",
-        "bottom_curve_color": "#FFFFFF"
+        "bottom_curve_color": "#ffffff"
       }
     },
     "featured-collection": {
