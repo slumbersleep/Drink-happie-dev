@@ -2,16 +2,24 @@
   Mobile Sidebar Navigation - Optimized for CRO & UX
   - Clean, modern design matching Happie brand
   - Prominent Shop CTAs
-  - Featured collection cards
+  - Featured collection cards with images
   - Easy touch navigation
+  - Trust badges and account access
 {%- endcomment -%}
-
-{%- assign base_font_class = base_font_class | replace: 'font-heading', 'font-main' -%}
 
 {%- liquid
   # Get accent color from header settings or default
   assign accent_color = section.settings.nav_text_hover_color | default: '#4FB1BD'
   assign text_color = section.settings.nav_text_color | default: '#1A1A1A'
+  
+  # Featured card settings
+  assign thc_card_image = section.settings.mobile_nav_thc_image
+  assign thc_card_link = section.settings.mobile_nav_thc_link | default: '/collections/thc-seltzers'
+  assign fungi_card_image = section.settings.mobile_nav_fungi_image
+  assign fungi_card_link = section.settings.mobile_nav_fungi_link | default: '/collections/fungi-fusion'
+  
+  # Mobile menu
+  assign mobile_menu = section.settings.mobile_nav_menu
 -%}
 
 <template x-teleport="#left-drawer-slot">
@@ -53,19 +61,45 @@
       </a>
     </div>
 
-    {%- comment -%} Featured Collection Cards {%- endcomment -%}
+    {%- comment -%} Featured Collection Cards with Images {%- endcomment -%}
     <div class="sidebar-nav-happie__featured">
       <div class="sidebar-nav-happie__featured-grid">
         {%- comment -%} THC Seltzers Card {%- endcomment -%}
-        <a href="/collections/thc-seltzers" class="sidebar-nav-happie__featured-card sidebar-nav-happie__featured-card--thc">
-          <span class="sidebar-nav-happie__featured-label">THC Infused</span>
-          <span class="sidebar-nav-happie__featured-title">Seltzers</span>
+        <a href="{{ thc_card_link }}" class="sidebar-nav-happie__featured-card sidebar-nav-happie__featured-card--thc">
+          {%- if thc_card_image != blank -%}
+            <div class="sidebar-nav-happie__featured-image">
+              <img 
+                src="{{ thc_card_image | image_url: width: 300, height: 200, crop: 'center' }}"
+                alt="THC Infused Seltzers"
+                width="300"
+                height="200"
+                loading="lazy"
+              >
+            </div>
+          {%- endif -%}
+          <div class="sidebar-nav-happie__featured-content">
+            <span class="sidebar-nav-happie__featured-label">THC Infused</span>
+            <span class="sidebar-nav-happie__featured-title">Seltzers</span>
+          </div>
         </a>
         
         {%- comment -%} Fungi Fusion Card {%- endcomment -%}
-        <a href="/collections/fungi-fusion" class="sidebar-nav-happie__featured-card sidebar-nav-happie__featured-card--fungi">
-          <span class="sidebar-nav-happie__featured-label">Zero THC</span>
-          <span class="sidebar-nav-happie__featured-title">Fungi Fusion</span>
+        <a href="{{ fungi_card_link }}" class="sidebar-nav-happie__featured-card sidebar-nav-happie__featured-card--fungi">
+          {%- if fungi_card_image != blank -%}
+            <div class="sidebar-nav-happie__featured-image">
+              <img 
+                src="{{ fungi_card_image | image_url: width: 300, height: 200, crop: 'center' }}"
+                alt="Fungi Fusion"
+                width="300"
+                height="200"
+                loading="lazy"
+              >
+            </div>
+          {%- endif -%}
+          <div class="sidebar-nav-happie__featured-content">
+            <span class="sidebar-nav-happie__featured-label">Zero THC</span>
+            <span class="sidebar-nav-happie__featured-title">Fungi Fusion</span>
+          </div>
         </a>
       </div>
     </div>
@@ -73,25 +107,8 @@
     {%- comment -%} Navigation Links {%- endcomment -%}
     <nav class="sidebar-nav-happie__nav" aria-label="Main navigation">
       <ul class="sidebar-nav-happie__list">
-        {%- liquid
-          if section.settings.mobile_main_linklist != blank
-            assign menu = section.settings.mobile_main_linklist
-          else
-            assign menu = section.settings.left_linklist
-          endif
-        -%}
-        
-        {%- for link in menu.links -%}
-          {%- liquid
-            # Skip "Shop" or "Shop All" since we have featured cards above
-            assign link_title_downcase = link.title | downcase | strip
-            assign skip_link = false
-            if link_title_downcase contains 'shop'
-              assign skip_link = true
-            endif
-          -%}
-          
-          {%- unless skip_link -%}
+        {%- if mobile_menu != blank -%}
+          {%- for link in mobile_menu.links -%}
             <li class="sidebar-nav-happie__item">
               {%- if link.links.size > 0 -%}
                 <data-island x-data="{ expanded: false }">
@@ -136,48 +153,113 @@
                 </a>
               {%- endif -%}
             </li>
-          {%- endunless -%}
-        {%- endfor -%}
+          {%- endfor -%}
+        {%- else -%}
+          {%- comment -%} Fallback to default menu if none selected {%- endcomment -%}
+          {%- assign fallback_menu = section.settings.mobile_main_linklist | default: section.settings.left_linklist -%}
+          {%- for link in fallback_menu.links -%}
+            {%- liquid
+              assign link_title_downcase = link.title | downcase | strip
+              assign skip_link = false
+              if link_title_downcase contains 'shop'
+                assign skip_link = true
+              endif
+            -%}
+            {%- unless skip_link -%}
+              <li class="sidebar-nav-happie__item">
+                {%- if link.links.size > 0 -%}
+                  <data-island x-data="{ expanded: false }">
+                    <button
+                      class="sidebar-nav-happie__link sidebar-nav-happie__link--parent"
+                      @click="expanded = !expanded"
+                      :aria-expanded="expanded"
+                    >
+                      <span>{{ link.title }}</span>
+                      <svg 
+                        class="sidebar-nav-happie__chevron" 
+                        :class="{ 'rotate-180': expanded }"
+                        width="16" 
+                        height="16" 
+                        viewBox="0 0 24 24" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        stroke-width="2" 
+                        stroke-linecap="round" 
+                        stroke-linejoin="round"
+                      >
+                        <path d="M6 9l6 6 6-6"/>
+                      </svg>
+                    </button>
+                    <ul 
+                      class="sidebar-nav-happie__sublist"
+                      x-show="expanded" 
+                      x-collapse
+                    >
+                      {%- for child_link in link.links -%}
+                        <li>
+                          <a href="{{ child_link.url }}" class="sidebar-nav-happie__sublink">
+                            {{ child_link.title }}
+                          </a>
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                  </data-island>
+                {%- else -%}
+                  <a href="{{ link.url }}" class="sidebar-nav-happie__link">
+                    {{ link.title }}
+                  </a>
+                {%- endif -%}
+              </li>
+            {%- endunless -%}
+          {%- endfor -%}
+        {%- endif -%}
       </ul>
     </nav>
 
-    {%- comment -%} Trust Badge / Value Prop {%- endcomment -%}
+    {%- comment -%} Account Button {%- endcomment -%}
+    <div class="sidebar-nav-happie__account">
+      <a href="{{ routes.account_url }}" class="sidebar-nav-happie__account-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+        <span>My Account</span>
+      </a>
+    </div>
+
+    {%- comment -%} Trust Badges {%- endcomment -%}
     <div class="sidebar-nav-happie__trust">
       <div class="sidebar-nav-happie__trust-item">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M5 12l5 5L20 7"/>
         </svg>
         <span>Free Shipping $50+</span>
       </div>
       <div class="sidebar-nav-happie__trust-item">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
         </svg>
         <span>Lab Tested</span>
       </div>
+      <div class="sidebar-nav-happie__trust-item">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+          <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+        <span>30-Day Guarantee</span>
+      </div>
     </div>
 
-    {%- comment -%} Footer Section {%- endcomment -%}
+    {%- comment -%} Footer with Instagram {%- endcomment -%}
     <div class="sidebar-nav-happie__footer">
-      {%- comment -%} Secondary Links {%- endcomment -%}
-      {%- if section.settings.sidebar_show_footer_menu -%}
-        <nav class="sidebar-nav-happie__secondary" aria-label="Secondary">
-          <ul>
-            {%- for link in linklists.footer.links -%}
-              <li>
-                <a href="{{ link.url }}">{{ link.title }}</a>
-              </li>
-            {%- endfor -%}
-          </ul>
-        </nav>
-      {%- endif -%}
-
-      {%- comment -%} Social Icons {%- endcomment -%}
-      {%- if section.settings.sidebar_show_social_icons -%}
-        <div class="sidebar-nav-happie__social">
-          {%- render 'social-icons', list_class: 'justify-center' -%}
-        </div>
-      {%- endif -%}
+      <a href="https://instagram.com/live_happie" target="_blank" rel="noopener noreferrer" class="sidebar-nav-happie__instagram">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+        </svg>
+        <span>@live_happie</span>
+      </a>
     </div>
   </div>
 </template>
@@ -239,7 +321,7 @@
   
   /* Primary CTA */
   .sidebar-nav-happie__cta {
-    padding: 20px 24px;
+    padding: 20px 24px 16px;
   }
   
   .sidebar-nav-happie__cta-btn {
@@ -265,7 +347,7 @@
   
   /* Featured Cards */
   .sidebar-nav-happie__featured {
-    padding: 0 24px 24px;
+    padding: 0 24px 20px;
   }
   
   .sidebar-nav-happie__featured-grid {
@@ -277,11 +359,9 @@
   .sidebar-nav-happie__featured-card {
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    padding: 16px;
-    min-height: 100px;
     border-radius: 16px;
     text-decoration: none;
+    overflow: hidden;
     transition: transform 0.25s ease, box-shadow 0.25s ease;
   }
   
@@ -300,8 +380,25 @@
     color: #FFFFFF;
   }
   
+  .sidebar-nav-happie__featured-image {
+    width: 100%;
+    aspect-ratio: 3/2;
+    overflow: hidden;
+  }
+  
+  .sidebar-nav-happie__featured-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .sidebar-nav-happie__featured-content {
+    padding: 12px 14px 14px;
+  }
+  
   .sidebar-nav-happie__featured-label {
-    font-size: 11px;
+    display: block;
+    font-size: 10px;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -310,7 +407,8 @@
   }
   
   .sidebar-nav-happie__featured-title {
-    font-size: 18px;
+    display: block;
+    font-size: 16px;
     font-weight: 800;
   }
   
@@ -345,6 +443,7 @@
     border: none;
     cursor: pointer;
     transition: background 0.2s ease;
+    text-align: left;
   }
   
   .sidebar-nav-happie__link:hover,
@@ -383,11 +482,40 @@
     color: {{ accent_color }};
   }
   
+  /* Account Button */
+  .sidebar-nav-happie__account {
+    padding: 16px 24px;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+  }
+  
+  .sidebar-nav-happie__account-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 14px 20px;
+    background: transparent;
+    border: 2px solid rgba(0, 0, 0, 0.12);
+    border-radius: 999px;
+    color: {{ text_color }};
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  
+  .sidebar-nav-happie__account-btn:hover {
+    border-color: {{ accent_color }};
+    color: {{ accent_color }};
+  }
+  
   /* Trust Badges */
   .sidebar-nav-happie__trust {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    gap: 24px;
+    gap: 16px 24px;
     padding: 20px 24px;
     background: rgba(0, 0, 0, 0.02);
     border-top: 1px solid rgba(0, 0, 0, 0.06);
@@ -396,55 +524,39 @@
   .sidebar-nav-happie__trust-item {
     display: flex;
     align-items: center;
-    gap: 8px;
-    font-size: 12px;
+    gap: 6px;
+    font-size: 11px;
     font-weight: 600;
     color: rgba(0, 0, 0, 0.6);
   }
   
   .sidebar-nav-happie__trust-item svg {
     color: {{ accent_color }};
+    flex-shrink: 0;
   }
   
   /* Footer */
   .sidebar-nav-happie__footer {
     padding: 20px 24px;
     border-top: 1px solid rgba(0, 0, 0, 0.06);
-  }
-  
-  .sidebar-nav-happie__secondary ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    gap: 8px 16px;
   }
   
-  .sidebar-nav-happie__secondary a {
-    font-size: 13px;
-    color: rgba(0, 0, 0, 0.5);
+  .sidebar-nav-happie__instagram {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    color: rgba(0, 0, 0, 0.6);
     text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
     transition: color 0.2s ease;
+    border-radius: 999px;
   }
   
-  .sidebar-nav-happie__secondary a:hover {
-    color: {{ accent_color }};
-  }
-  
-  .sidebar-nav-happie__social {
-    margin-top: 16px;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .sidebar-nav-happie__social a {
-    color: rgba(0, 0, 0, 0.4);
-    transition: color 0.2s ease;
-  }
-  
-  .sidebar-nav-happie__social a:hover {
+  .sidebar-nav-happie__instagram:hover {
     color: {{ accent_color }};
   }
 </style>
