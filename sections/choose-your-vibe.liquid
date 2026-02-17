@@ -10,7 +10,6 @@
   assign card_1_benefits = section.settings.card_1_benefits
   assign card_1_cta_text = section.settings.card_1_cta_text
   assign card_1_cta_url = section.settings.card_1_cta_url
-  assign card_1_price = section.settings.card_1_price
   
   assign card_2_badge = section.settings.card_2_badge
   assign card_2_title = section.settings.card_2_title
@@ -19,7 +18,6 @@
   assign card_2_benefits = section.settings.card_2_benefits
   assign card_2_cta_text = section.settings.card_2_cta_text
   assign card_2_cta_url = section.settings.card_2_cta_url
-  assign card_2_price = section.settings.card_2_price
   
   assign trust_1_text = section.settings.trust_1_text
   assign trust_2_text = section.settings.trust_2_text
@@ -129,15 +127,9 @@
             {%- endfor -%}
           </ul>
           
-          <div class="choose-vibe__card-footer">
-            <a href="{{ card_1_cta_url }}" class="choose-vibe__cta choose-vibe__cta--thc">
-              {{ card_1_cta_text }}
-            </a>
-            <div class="choose-vibe__price">
-              <span class="choose-vibe__price-label">Starting at</span>
-              <span class="choose-vibe__price-value">{{ card_1_price }}</span>
-            </div>
-          </div>
+          <a href="{{ card_1_cta_url }}" class="choose-vibe__cta choose-vibe__cta--thc">
+            {{ card_1_cta_text }}
+          </a>
         </div>
       </div>
 
@@ -192,15 +184,9 @@
             {%- endfor -%}
           </ul>
           
-          <div class="choose-vibe__card-footer">
-            <a href="{{ card_2_cta_url }}" class="choose-vibe__cta choose-vibe__cta--fungi">
-              {{ card_2_cta_text }}
-            </a>
-            <div class="choose-vibe__price">
-              <span class="choose-vibe__price-label">Starting at</span>
-              <span class="choose-vibe__price-value">{{ card_2_price }}</span>
-            </div>
-          </div>
+          <a href="{{ card_2_cta_url }}" class="choose-vibe__cta choose-vibe__cta--fungi">
+            {{ card_2_cta_text }}
+          </a>
         </div>
       </div>
     </div>
@@ -519,32 +505,18 @@
     color: var(--vibe-fungi-accent);
   }
 
-  /* Card Footer */
-  #choose-vibe-{{ section.id }} .choose-vibe__card-footer {
+  /* CTA Button */
+  #choose-vibe-{{ section.id }} .choose-vibe__cta {
     display: flex;
     align-items: center;
-    gap: 16px;
-  }
-
-  #choose-vibe-{{ section.id }} .choose-vibe__cta {
-    flex: 1;
-    display: inline-flex;
-    align-items: center;
     justify-content: center;
+    width: 100%;
     padding: 16px 24px;
     border-radius: 999px;
     font-weight: 600;
     font-size: 15px;
     text-decoration: none;
     transition: all 0.3s ease;
-  }
-
-  #choose-vibe-{{ section.id }} .choose-vibe__cta--thc {
-    background: var(--vibe-cta-bg);
-    color: var(--vibe-cta-text);
-  }
-
-  #choose-vibe-{{ section.id }} .choose-vibe__cta--fungi {
     background: var(--vibe-cta-bg);
     color: var(--vibe-cta-text);
   }
@@ -552,24 +524,6 @@
   #choose-vibe-{{ section.id }} .choose-vibe__cta:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 24px rgba(247, 205, 70, 0.3);
-  }
-
-  #choose-vibe-{{ section.id }} .choose-vibe__price {
-    text-align: right;
-  }
-
-  #choose-vibe-{{ section.id }} .choose-vibe__price-label {
-    display: block;
-    font-size: 12px;
-    color: var(--vibe-text);
-    opacity: 0.6;
-  }
-
-  #choose-vibe-{{ section.id }} .choose-vibe__price-value {
-    display: block;
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--vibe-text);
   }
 
   /* Trust Bar */
@@ -613,19 +567,6 @@
 
     #choose-vibe-{{ section.id }} .choose-vibe__card {
       padding: 20px;
-    }
-
-    #choose-vibe-{{ section.id }} .choose-vibe__card-footer {
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    #choose-vibe-{{ section.id }} .choose-vibe__cta {
-      width: 100%;
-    }
-
-    #choose-vibe-{{ section.id }} .choose-vibe__price {
-      text-align: center;
     }
 
     #choose-vibe-{{ section.id }} .choose-vibe__trust-bar {
@@ -757,12 +698,6 @@
       "label": "Button Link"
     },
     {
-      "type": "text",
-      "id": "card_1_price",
-      "label": "Starting Price",
-      "default": "$19.99"
-    },
-    {
       "type": "header",
       "content": "Card 2: Fungi Fusion"
     },
@@ -799,12 +734,6 @@
       "type": "url",
       "id": "card_2_cta_url",
       "label": "Button Link"
-    },
-    {
-      "type": "text",
-      "id": "card_2_price",
-      "label": "Starting Price",
-      "default": "$23.99"
     },
     {
       "type": "header",
@@ -1035,12 +964,6 @@
           "type": "card_2_benefit",
           "settings": {
             "benefit_text": "Ocean minerals for natural hydration"
-          }
-        },
-        {
-          "type": "card_2_benefit",
-          "settings": {
-            "benefit_text": "Perfect for any time of day"
           }
         }
       ]
