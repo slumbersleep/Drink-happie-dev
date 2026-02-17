@@ -77,7 +77,12 @@
         "shop_mega_card_2_link": "",
         "shop_mega_card_3_title": "THC Infused",
         "shop_mega_card_3_subtitle": "Cannabis seltzers",
-        "shop_mega_card_3_link": ""
+        "shop_mega_card_3_link": "",
+        "mobile_nav_menu": "mobile-menu",
+        "mobile_nav_thc_image": "shopify://shop_images/Happie_Thc_collection.jpg",
+        "mobile_nav_thc_link": "",
+        "mobile_nav_fungi_image": "shopify://shop_images/Fungie_Fusion_Collections.jpg",
+        "mobile_nav_fungi_link": ""
       }
     }
   },
