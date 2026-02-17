@@ -1542,5 +1542,40 @@ html { scroll-behavior: smooth; }
   margin-top: -100px;     /* negative of the height */
 }
 
+/* ========================================
+   PageFly Page Background Extension
+   Extends cream background behind header
+   ======================================== */
+
+/* Target PageFly pages - extend background behind navigation */
+body:has(.__pf) {
+  background-color: #F5EDE3;
+}
+
+/* Ensure the main content area also has the cream background */
+.__pf,
+#__pf,
+[id^="shopify-section-pf-"] {
+  background-color: #F5EDE3;
+}
+
+/* Make header background transparent on PageFly pages so page bg shows through */
+body:has(.__pf) #shopify-section-header,
+body:has(.__pf) .shopify-section-header-group {
+  background-color: transparent;
+}
+
+/* Keep the nav pill/bar styling intact but transparent container */
+body:has(.__pf) .site-header {
+  background-color: transparent;
+}
+
+/* Ensure announcement bar stays on top with its own color */
+body:has(.__pf) #shopify-section-announcement-bar,
+body:has(.__pf) [id*="announcement-bar"] {
+  position: relative;
+  z-index: 100;
+}
+
 
 
