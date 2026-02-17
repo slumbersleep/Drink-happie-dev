@@ -173,14 +173,20 @@
       </div>
       
       <!-- Mobile Carousel -->
-      <div class="best-sellers__carousel" x-data="{ currentSlide: 0, totalSlides: {{ collection_1.products.size | default: 4 | at_most: products_to_show }} }">
+      <div class="best-sellers__carousel" x-data="{ currentSlide: 0, totalSlides: {{ collection_1.products.size | default: 4 | at_most: products_to_show }}, touchStartX: 0, touchStartY: 0, isSwiping: false }">
         <div class="best-sellers__carousel-track" 
              :style="'transform: translateX(-' + (currentSlide * 75) + '%)'"
-             @touchstart="touchStartX = $event.touches[0].clientX"
+             @touchstart="touchStartX = $event.touches[0].clientX; touchStartY = $event.touches[0].clientY; isSwiping = false"
+             @touchmove="
+               const diffX = Math.abs($event.touches[0].clientX - touchStartX);
+               const diffY = Math.abs($event.touches[0].clientY - touchStartY);
+               if (diffX > diffY && diffX > 10) { isSwiping = true; $event.preventDefault(); }
+             "
              @touchend="
+               if (!isSwiping) return;
                const diff = touchStartX - $event.changedTouches[0].clientX;
-               if (diff > 50 && currentSlide < totalSlides - 1) currentSlide++;
-               else if (diff < -50 && currentSlide > 0) currentSlide--;
+               if (diff > 40 && currentSlide < totalSlides - 1) currentSlide++;
+               else if (diff < -40 && currentSlide > 0) currentSlide--;
              "
         >
           {%- if collection_1 != blank -%}
@@ -248,14 +254,20 @@
         </div>
         
         <!-- Mobile Carousel -->
-        <div class="best-sellers__carousel" x-data="{ currentSlide: 0, totalSlides: {{ collection_2.products.size | default: 4 | at_most: products_to_show }} }">
+        <div class="best-sellers__carousel" x-data="{ currentSlide: 0, totalSlides: {{ collection_2.products.size | default: 4 | at_most: products_to_show }}, touchStartX: 0, touchStartY: 0, isSwiping: false }">
           <div class="best-sellers__carousel-track"
                :style="'transform: translateX(-' + (currentSlide * 75) + '%)'"
-               @touchstart="touchStartX = $event.touches[0].clientX"
+               @touchstart="touchStartX = $event.touches[0].clientX; touchStartY = $event.touches[0].clientY; isSwiping = false"
+               @touchmove="
+                 const diffX = Math.abs($event.touches[0].clientX - touchStartX);
+                 const diffY = Math.abs($event.touches[0].clientY - touchStartY);
+                 if (diffX > diffY && diffX > 10) { isSwiping = true; $event.preventDefault(); }
+               "
                @touchend="
+                 if (!isSwiping) return;
                  const diff = touchStartX - $event.changedTouches[0].clientX;
-                 if (diff > 50 && currentSlide < totalSlides - 1) currentSlide++;
-                 else if (diff < -50 && currentSlide > 0) currentSlide--;
+                 if (diff > 40 && currentSlide < totalSlides - 1) currentSlide++;
+                 else if (diff < -40 && currentSlide > 0) currentSlide--;
                "
           >
             {%- for product in collection_2.products limit: products_to_show -%}
