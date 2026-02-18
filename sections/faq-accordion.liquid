@@ -1,8 +1,8 @@
 <section id="faq-section-{{ section.id }}" class="faq-section-wrapper" style="position: relative; overflow: visible;">
   <!-- Top Wave Divider - Points UP into section above -->
   {%- if section.settings.show_top_wave -%}
-    <div class="faq-section__wave faq-section__wave--top" style="position: absolute; top: 0; left: 0; width: 100%; height: {{ section.settings.wave_height }}px; z-index: 5; overflow: visible; transform: translateY(-100%);">
-      <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%; display: block; transform: rotate(180deg);">
+    <div class="faq-section__wave faq-section__wave--top" style="position: absolute; top: 0; left: 0; width: 100%; height: {{ section.settings.wave_height }}px; z-index: 5; overflow: visible; transform: translateY(-100%) scaleY(-1);;">
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%; display: block;">
         {%- case section.settings.top_wave_style -%}
           {%- when 'wave' -%}
             <path d="M0,0 L0,60 Q360,120 720,60 T1440,60 L1440,0 Z" fill="{{ section.settings.top_wave_color }}">
@@ -61,7 +61,7 @@
   <!-- Bottom Wave Divider - Points DOWN into section below -->
   {%- if section.settings.show_bottom_wave -%}
     <div class="faq-section__wave faq-section__wave--bottom" style="position: absolute; bottom: 0; left: 0; width: 100%; height: {{ section.settings.wave_height }}px; z-index: 5; overflow: visible; transform: translateY(100%);">
-      <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%; display: block; transform: scaleY(-1);">
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%; display: block;">
         {%- case section.settings.bottom_wave_style -%}
           {%- when 'wave' -%}
             <path d="M0,0 L0,60 Q360,120 720,60 T1440,60 L1440,0 Z" fill="{{ section.settings.bottom_wave_color }}">
