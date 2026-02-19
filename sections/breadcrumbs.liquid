@@ -20,6 +20,21 @@
   {%- capture separator -%}
   <span class="inline-block" role="presentation">{{ section.settings.separator }}</span>
 {%- endcapture -%}
+
+  <style>
+    /* Extend breadcrumbs background under header */
+    #shopify-section-{{ section.id }} {
+      margin-top: calc(-1 * var(--header-height, 60px));
+      padding-top: var(--header-height, 60px);
+    }
+    
+    /* Ensure proper z-index so header stays on top */
+    #shopify-section-{{ section.id }} section {
+      position: relative;
+      z-index: 1;
+    }
+  </style>
+
   <section
     class="relative overflow-hidden bg-scheme-background text-scheme-text"
     data-color-scheme="{{ section.settings.color_scheme }}"
