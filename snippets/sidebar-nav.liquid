@@ -12,9 +12,6 @@
   assign accent_color = section.settings.nav_text_hover_color | default: '#4FB1BD'
   assign text_color = section.settings.nav_text_color | default: '#1A1A1A'
   
-  # Mobile menu logo size - use header setting
-  assign mobile_menu_logo_width = section.settings.mobile_logo_max_width | default: 100
-  
   # Featured card settings
   assign thc_card_image = section.settings.mobile_nav_thc_image
   assign thc_card_link = section.settings.mobile_nav_thc_link | default: '/collections/thc-seltzers'
@@ -34,19 +31,18 @@
   >
     {%- comment -%} Header with Close Button {%- endcomment -%}
     <div class="sidebar-nav-happie__header">
-      <a href="{{ routes.root_url }}" class="sidebar-nav-happie__logo" style="max-width: {{ mobile_menu_logo_width }}px;">
+      <a href="{{ routes.root_url }}" class="sidebar-nav-happie__logo">
         {%- if section.settings.logo != blank -%}
+          {%- assign mobile_logo_size = section.settings.mobile_logo_max_width | default: 150 -%}
+          {%- assign mobile_logo_size_2x = mobile_logo_size | times: 2 -%}
           <img
-            src="{{ section.settings.logo | image_url: width: mobile_menu_logo_width }}"
-            srcset="
-              {{- section.settings.logo | image_url: width: mobile_menu_logo_width | append: ' 1x,' -}}
-              {{- section.settings.logo | image_url: width: mobile_menu_logo_width | times: 2 | append: ' 2x' -}}
-            "
+            src="{{ section.settings.logo | image_url: width: mobile_logo_size_2x }}"
+            srcset="{{ section.settings.logo | image_url: width: mobile_logo_size }} 1x, {{ section.settings.logo | image_url: width: mobile_logo_size_2x }} 2x"
             alt="{{ shop.name }}"
-            width="{{ mobile_menu_logo_width }}"
+            width="{{ mobile_logo_size }}"
             height="auto"
             loading="eager"
-            style="width: {{ mobile_menu_logo_width }}px; max-width: 100%; height: auto;"
+            class="sidebar-nav-logo-img"
           >
         {%- else -%}
           <span class="sidebar-nav-happie__logo-text">{{ shop.name }}</span>
@@ -274,14 +270,15 @@
   
   .sidebar-nav-happie__logo {
     display: block;
-    flex: 1;
+    flex: 1 1 auto;
     min-width: 0;
   }
   
-  .sidebar-nav-happie__logo img {
-    width: {{ mobile_menu_logo_width }}px;
-    max-width: 100%;
-    height: auto;
+  .sidebar-nav-happie__logo img,
+  .sidebar-nav-happie__logo img.sidebar-nav-logo-img {
+    width: {{ section.settings.mobile_logo_max_width | default: 150 }}px !important;
+    max-width: calc(100vw - 120px) !important;
+    height: auto !important;
   }
   
   .sidebar-nav-happie__logo-text {
