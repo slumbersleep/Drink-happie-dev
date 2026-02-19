@@ -590,12 +590,12 @@
     margin-bottom: 48px;
   }
 
-  /* Desktop Grid - Hidden, using carousel instead */
+  /* Desktop Grid - Show 4 columns at 1440px+ */
   #best-sellers-{{ section.id }} .best-sellers__grid--desktop {
     display: none;
   }
   
-  /* Desktop Carousel */
+  /* Desktop Carousel - Show by default (below 1440px) */
   #best-sellers-{{ section.id }} .best-sellers__carousel {
     display: block;
     position: relative;
@@ -907,6 +907,19 @@
 
   #best-sellers-{{ section.id }} .best-sellers__shop-all-btn:hover svg {
     transform: translateX(4px);
+  }
+
+  /* Large Desktop (1440px+) - Show 4-column grid, hide carousel */
+  @media (min-width: 1440px) {
+    #best-sellers-{{ section.id }} .best-sellers__grid--desktop {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    
+    #best-sellers-{{ section.id }} .best-sellers__carousel {
+      display: none;
+    }
   }
 
   /* Responsive */
