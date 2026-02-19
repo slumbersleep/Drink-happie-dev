@@ -58,10 +58,10 @@
       "settings": {
         "show_title": true,
         "show_description": true,
-        "background_image": "shopify://shop_images/Happie_-_Desktop_Hero.jpg",
+        "background_image": "shopify://shop_images/Happie_-_Collection_Hero_1.jpg",
         "background_color": "#fff2e4",
         "overlay_color": "#000000",
-        "overlay_opacity": 30,
+        "overlay_opacity": 45,
         "title_color": "#ffffff",
         "description_color": "#4a4a4a",
         "show_filters": true,
