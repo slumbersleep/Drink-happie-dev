@@ -1,3 +1,17 @@
+<style>
+  #shopify-section-{{ section.id }},
+  .shopify-section:has(#real-people-{{ section.id }}) {
+    overflow: visible !important;
+    position: relative;
+  }
+  #real-people-{{ section.id }}.real-people-section,
+  .people-sec#real-people-{{ section.id }},
+  section.people-sec.real-people-section,
+  .people-sec {
+    position: relative;
+    overflow: visible !important;
+  }
+</style>
 <section id="real-people-{{ section.id }}" class="real-people-section" style="position: relative; overflow: visible;">
   <!-- Top Wave Divider - Points OUTWARD (up into section above) -->
   {%- if section.settings.show_top_wave -%}

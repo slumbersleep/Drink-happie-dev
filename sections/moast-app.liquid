@@ -1,3 +1,17 @@
+<style>
+  #shopify-section-{{ section.id }},
+  .shopify-section:has(#moast-app-{{ section.id }}) {
+    overflow: visible !important;
+    position: relative;
+  }
+  #moast-app-{{ section.id }}.moast-app-section,
+  .app-sec#moast-app-{{ section.id }},
+  section.app-sec.moast-app-section,
+  .app-sec {
+    position: relative;
+    overflow: visible !important;
+  }
+</style>
 <section id="moast-app-{{ section.id }}" class="moast-app-section" style="position: relative; overflow: visible;">
   <!-- Top Wave Divider - Points OUTWARD (up into section above) -->
   {%- if section.settings.show_top_wave -%}

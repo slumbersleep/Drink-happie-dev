@@ -1,3 +1,17 @@
+<style>
+  #shopify-section-{{ section.id }},
+  .shopify-section:has(#faq-section-{{ section.id }}) {
+    overflow: visible !important;
+    position: relative;
+  }
+  #faq-section-{{ section.id }}.faq-section-wrapper,
+  .faq-sec#faq-section-{{ section.id }},
+  section.faq-sec.faq-section-wrapper,
+  .faq-sec {
+    position: relative;
+    overflow: visible !important;
+  }
+</style>
 <section id="faq-section-{{ section.id }}" class="faq-section-wrapper" style="position: relative; overflow: visible;">
   <!-- Top Wave Divider - Points OUTWARD (up into section above) -->
   {%- if section.settings.show_top_wave -%}

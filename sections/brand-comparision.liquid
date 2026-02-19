@@ -1,3 +1,17 @@
+<style>
+  #shopify-section-{{ section.id }},
+  .shopify-section:has(#brand-comparison-{{ section.id }}) {
+    overflow: visible !important;
+    position: relative;
+  }
+  #brand-comparison-{{ section.id }}.brand-comparison-section,
+  .why-happie-sec#brand-comparison-{{ section.id }},
+  section.why-happie-sec.brand-comparison-section,
+  .why-happie-sec {
+    position: relative;
+    overflow: visible !important;
+  }
+</style>
 <section id="brand-comparison-{{ section.id }}" class="brand-comparison-section" style="position: relative; overflow: visible;">
   <!-- Top Wave Divider - Points OUTWARD (up into section above) -->
   {%- if section.settings.show_top_wave -%}

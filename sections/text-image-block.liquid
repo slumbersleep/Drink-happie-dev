@@ -1,3 +1,17 @@
+<style>
+  #shopify-section-{{ section.id }},
+  .shopify-section:has(#text-image-block-{{ section.id }}) {
+    overflow: visible !important;
+    position: relative;
+  }
+  #text-image-block-{{ section.id }}.text-image-block-section,
+  .difference-sec#text-image-block-{{ section.id }},
+  section.difference-sec.text-image-block-section,
+  .difference-sec {
+    position: relative;
+    overflow: visible !important;
+  }
+</style>
 <section id="text-image-block-{{ section.id }}" class="text-image-block-section" style="position: relative; overflow: visible;">
   <!-- Top Wave Divider - Points OUTWARD (up into section above) -->
   {%- if section.settings.show_top_wave -%}
