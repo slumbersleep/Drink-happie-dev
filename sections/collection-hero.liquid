@@ -1,7 +1,9 @@
 <style>
   .collection-hero {
     position: relative;
-    overflow: hidden;
+    overflow: visible;
+    margin-top: -160px;
+    padding-top: 160px;
   }
   
   .collection-hero__background {
@@ -30,6 +32,13 @@
     margin: 0 auto;
     padding: 60px 20px 40px;
     text-align: center;
+  }
+  
+  /* Ensure section wrapper doesn't clip */
+  #shopify-section-collection_hero,
+  .shopify-section:has(.collection-hero) {
+    overflow: visible !important;
+    margin-top: 0 !important;
   }
   
   .collection-hero__title {
@@ -99,6 +108,11 @@
   
   /* Mobile: Horizontal scroll */
   @media (max-width: 767px) {
+    .collection-hero {
+      margin-top: -120px;
+      padding-top: 120px;
+    }
+    
     .collection-hero__content {
       padding: 40px 16px 24px;
     }
@@ -139,6 +153,11 @@
   
   /* Tablet adjustments */
   @media (min-width: 768px) and (max-width: 1023px) {
+    .collection-hero {
+      margin-top: -140px;
+      padding-top: 140px;
+    }
+    
     .collection-hero__content {
       padding: 50px 24px 32px;
     }
