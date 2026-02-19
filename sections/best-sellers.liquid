@@ -201,11 +201,13 @@
         }
       }" x-init="window.addEventListener('resize', () => { isMobile = window.innerWidth < 768; isTablet = window.innerWidth >= 768 && window.innerWidth < 1024; })">
         
-        <!-- Navigation Arrow (Right only - infinite loop) -->
+        <!-- Navigation Arrow (Right only - only show if more products than visible) -->
         <button 
           class="best-sellers__carousel-nav best-sellers__carousel-nav--next"
           @click="nextSlide()"
           aria-label="Next products"
+          x-show="maxSlide > 0"
+          x-transition
         >
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M9 18l6-6-6-6"/>
@@ -328,6 +330,8 @@
             class="best-sellers__carousel-nav best-sellers__carousel-nav--next"
             @click="nextSlide()"
             aria-label="Next products"
+            x-show="maxSlide > 0"
+            x-transition
           >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <path d="M9 18l6-6-6-6"/>
@@ -619,7 +623,15 @@
   #best-sellers-{{ section.id }} .best-sellers__carousel {
     display: block;
     position: relative;
-    overflow: hidden;
+    overflow: visible;
+    padding-top: 20px;
+    margin-top: -20px;
+  }
+  
+  /* Clip only horizontally, allow vertical overflow for hover */
+  #best-sellers-{{ section.id }} .best-sellers__products-wrapper {
+    overflow-x: clip;
+    overflow-y: visible;
   }
   
   #best-sellers-{{ section.id }} .best-sellers__carousel-track {
