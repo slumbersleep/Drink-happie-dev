@@ -12,6 +12,9 @@
   assign accent_color = section.settings.nav_text_hover_color | default: '#4FB1BD'
   assign text_color = section.settings.nav_text_color | default: '#1A1A1A'
   
+  # Mobile menu logo size - use header setting
+  assign mobile_menu_logo_width = section.settings.mobile_logo_max_width | default: 100
+  
   # Featured card settings
   assign thc_card_image = section.settings.mobile_nav_thc_image
   assign thc_card_link = section.settings.mobile_nav_thc_link | default: '/collections/thc-seltzers'
@@ -34,9 +37,13 @@
       <a href="{{ routes.root_url }}" class="sidebar-nav-happie__logo">
         {%- if section.settings.logo != blank -%}
           <img
-            src="{{ section.settings.logo | image_url: width: 120 }}"
+            src="{{ section.settings.logo | image_url: width: mobile_menu_logo_width }}"
+            srcset="
+              {{- section.settings.logo | image_url: width: mobile_menu_logo_width | append: ' 1x,' -}}
+              {{- section.settings.logo | image_url: width: mobile_menu_logo_width | times: 2 | append: ' 2x' -}}
+            "
             alt="{{ shop.name }}"
-            width="120"
+            width="{{ mobile_menu_logo_width }}"
             height="auto"
             loading="eager"
           >
@@ -268,7 +275,7 @@
   }
   
   .sidebar-nav-happie__logo img {
-    max-width: 100px;
+    max-width: {{ mobile_menu_logo_width }}px;
     height: auto;
   }
   
