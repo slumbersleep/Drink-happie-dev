@@ -9,42 +9,62 @@
  */
 {
   "sections": {
-    "rich_text_E4Mej7": {
-      "type": "rich-text",
-      "name": "t:sections.rich_text.name",
+    "collection_hero": {
+      "type": "collection-hero",
+      "blocks": {
+        "filter_1": {
+          "type": "filter_link",
+          "settings": {
+            "label": "Shop All",
+            "link": "/collections/all"
+          }
+        },
+        "filter_2": {
+          "type": "filter_link",
+          "settings": {
+            "label": "THC Beverages",
+            "link": "/collections/thc-beverages"
+          }
+        },
+        "filter_3": {
+          "type": "filter_link",
+          "settings": {
+            "label": "Fungi Fusion",
+            "link": "/collections/fungi-fusion"
+          }
+        },
+        "filter_4": {
+          "type": "filter_link",
+          "settings": {
+            "label": "Variety Packs",
+            "link": "/collections/variety-packs"
+          }
+        },
+        "filter_5": {
+          "type": "filter_link",
+          "settings": {
+            "label": "Merch",
+            "link": "/collections/merch"
+          }
+        }
+      },
+      "block_order": ["filter_1", "filter_2", "filter_3", "filter_4", "filter_5"],
       "settings": {
-        "title": "{{ collection.title }}",
-        "heading_size": "heading-standard",
-        "rich_text": "{{ collection.description }}",
-        "display_on_card": false,
-        "content_width_desktop": "lg:w-2/3",
-        "button_link": "",
-        "button_label": "Shop Now",
-        "color_scheme": "",
-        "use_gradient_background": false
-      }
-    },
-    "breadcrumbs": {
-      "type": "breadcrumbs",
-      "disabled": true,
-      "settings": {
-        "separator": "/",
-        "text_alignment": "justify-center",
-        "font_size": "text-base",
-        "active_text_color": "text",
-        "color_scheme": ""
-      }
-    },
-    "banner": {
-      "type": "main-collection-banner",
-      "disabled": true,
-      "settings": {
-        "display_on_card": false,
-        "show_collection_title": true,
-        "show_collection_description": true,
-        "linklist": "main-menu",
-        "color_scheme": "scheme1",
-        "use_gradient_background": false
+        "show_title": true,
+        "show_description": true,
+        "background_color": "#FFF2E4",
+        "overlay_opacity": 0,
+        "title_color": "#1a1a1a",
+        "description_color": "#4a4a4a",
+        "show_filters": true,
+        "filter_bar_background": "transparent",
+        "pill_background_color": "#ffffff",
+        "pill_text_color": "#1a1a1a",
+        "pill_border_color": "#e5e5e5",
+        "pill_hover_background": "#f5f5f5",
+        "pill_hover_border": "#50B2BD",
+        "pill_active_background": "#50B2BD",
+        "pill_active_text": "#ffffff"
       }
     },
     "product-grid": {
@@ -67,16 +87,13 @@
     },
     "wavy_divier_Qhxkg7": {
       "type": "wavy-divier",
-      "name": "Wavy Divider",
       "settings": {
         "image": "shopify://shop_images/divider-top-cream-bottom-dark-purple.svg"
       }
     }
   },
   "order": [
-    "rich_text_E4Mej7",
-    "breadcrumbs",
-    "banner",
+    "collection_hero",
     "product-grid",
     "wavy_divier_Qhxkg7"
   ]
