@@ -16,7 +16,7 @@
           "type": "filter_link",
           "settings": {
             "label": "Shop All",
-            "link": "/collections/all"
+            "link": "shopify://collections/shop-all"
           }
         },
         "filter_2": {
