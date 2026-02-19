@@ -257,7 +257,7 @@
         "padding_bottom_mobile": 60,
         "title": "Best Sellers",
         "subtitle": "Our most-loved flavors, chosen by the Happie community.",
-        "collection_1": "thc",
+        "collection_1": "frontpage",
         "collection_1_label": "THC Seltzers",
         "collection_2": "homepage-shrine",
         "collection_2_label": "Fungi Fusion",
@@ -339,10 +339,12 @@
         "top_wave_style": "wave",
         "top_wave_color": "#ffe6cb",
         "top_wave_animate": true,
+        "invert_top_wave": false,
         "show_bottom_wave": false,
         "bottom_wave_style": "wave",
         "bottom_wave_color": "#ffe6cb",
-        "bottom_wave_animate": true
+        "bottom_wave_animate": true,
+        "invert_bottom_wave": false
       }
     },
     "testimonials_DxgE8b": {
