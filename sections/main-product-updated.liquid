@@ -466,6 +466,45 @@
     border: 4px solid var(--happie-teal);
   }
 
+  /* THC STRENGTH SELECTOR */
+  .thc-strength-section {
+    margin-bottom: 30px;
+  }
+
+  .thc-strength-label {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--happie-black);
+    line-height: 1.4;
+    margin-bottom: 10px;
+  }
+
+  .thc-strength-selector {
+    display: flex;
+    gap: 12px;
+    position: relative;
+  }
+
+  .thc-strength-option {
+    flex: 1;
+    max-width: 160px;
+    height: 53px;
+    border-radius: 9px;
+    border: 1px solid rgba(0, 0, 0, 0.36);
+    background: var(--happie-cream);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--happie-black);
+    letter-spacing: -1.3371px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .thc-strength-option.active {
+    background: var(--happie-orange);
+    border: 4px solid var(--happie-teal);
+  }
+
   .save-badge {
     position: absolute;
     top: -14px;
@@ -982,6 +1021,24 @@
       box-sizing: border-box;
     }
 
+    /* THC Strength selector - side by side on mobile */
+    .thc-strength-section {
+      width: 100%;
+      margin-bottom: 30px;
+    }
+
+    .thc-strength-selector {
+      display: flex;
+      gap: 12px;
+      width: 100%;
+    }
+
+    .thc-strength-option {
+      flex: 1;
+      max-width: none;
+      box-sizing: border-box;
+    }
+
     /* Subscription containers - ensure mobile fit */
     .subscription-container,
     .onetime-container {
@@ -1280,33 +1337,90 @@
               </div>
             </div>
 
-            <!-- Size Selector Block -->
-          {% when 'size_selector' %}
-            <div class="size-section" {{ block.shopify_attributes }}>
-              <div class="size-label">Quantity</div>
-              <div class="size-selector">
-                {% for option in product.options_with_values %}
-                  {% for value in option.values %}
-                    {% assign variant_id = '' %}
-                    {% for variant in product.variants %}
-                      {% if variant.option1 == value or variant.option2 == value or variant.option3 == value %}
-                        {% assign variant_id = variant.id %}
-                        {% assign variant_price = variant.price | money %}
-                        {% break %}
-                      {% endif %}
-                    {% endfor %}
+            <!-- THC Strength Selector Block -->
+          {% when 'thc_strength_selector' %}
+            {% assign has_thc_strength = false %}
+            {% for option in product.options_with_values %}
+              {% if option.name == 'THC Strength' %}
+                {% assign has_thc_strength = true %}
+                {% assign thc_option = option %}
+              {% endif %}
+            {% endfor %}
+            
+            {% if has_thc_strength %}
+              <div class="thc-strength-section" {{ block.shopify_attributes }}>
+                <div class="thc-strength-label">THC Strength</div>
+                <div class="thc-strength-selector">
+                  {% for value in thc_option.values %}
+                    {% assign is_default = false %}
+                    {% if value == '5 mg' or value == '5mg' %}
+                      {% assign is_default = true %}
+                    {% endif %}
                     <button
-                      class="size-option {% if option.selected_value == value %}active{% endif %}"
+                      class="thc-strength-option {% if thc_option.selected_value == value %}active{% elsif is_default and thc_option.selected_value == blank %}active{% endif %}"
                       type="button"
-                      data-variant-id="{{ variant_id }}"
-                      data-variant-price="{{ variant_price }}"
+                      data-strength-value="{{ value }}"
                     >
                       {{ value }}
                     </button>
                   {% endfor %}
-                {% endfor %}
+                </div>
               </div>
-            </div>
+            {% endif %}
+
+            <!-- Size Selector Block -->
+          {% when 'size_selector' %}
+            {% assign has_size_option = false %}
+            {% for option in product.options_with_values %}
+              {% if option.name == 'Size' %}
+                {% assign has_size_option = true %}
+                {% assign size_option = option %}
+              {% endif %}
+            {% endfor %}
+            
+            {% if has_size_option %}
+              <div class="size-section" {{ block.shopify_attributes }}>
+                <div class="size-label">Quantity</div>
+                <div class="size-selector">
+                  {% for value in size_option.values %}
+                    <button
+                      class="size-option {% if size_option.selected_value == value %}active{% endif %}"
+                      type="button"
+                      data-size-value="{{ value }}"
+                    >
+                      {{ value }}
+                    </button>
+                  {% endfor %}
+                </div>
+              </div>
+            {% else %}
+              <!-- Fallback: show all options if no "Size" option exists -->
+              <div class="size-section" {{ block.shopify_attributes }}>
+                <div class="size-label">Quantity</div>
+                <div class="size-selector">
+                  {% for option in product.options_with_values %}
+                    {% for value in option.values %}
+                      {% assign variant_id = '' %}
+                      {% for variant in product.variants %}
+                        {% if variant.option1 == value or variant.option2 == value or variant.option3 == value %}
+                          {% assign variant_id = variant.id %}
+                          {% assign variant_price = variant.price | money %}
+                          {% break %}
+                        {% endif %}
+                      {% endfor %}
+                      <button
+                        class="size-option {% if option.selected_value == value %}active{% endif %}"
+                        type="button"
+                        data-variant-id="{{ variant_id }}"
+                        data-variant-price="{{ variant_price }}"
+                      >
+                        {{ value }}
+                      </button>
+                    {% endfor %}
+                  {% endfor %}
+                </div>
+              </div>
+            {% endif %}
 
             <!-- Subscription Block -->
           {% when 'subscription' %}
@@ -1815,30 +1929,95 @@
       setTimeout(wrapPriceElements, 500);
     }
 
+    // Product variants data for JavaScript
+    const productVariants = {{ product.variants | json }};
+    const cartInput = document.getElementById('variant-id');
+    
+    // Function to find variant by selected options
+    function findVariantByOptions(selectedSize, selectedStrength) {
+      return productVariants.find(function(variant) {
+        const matchesSize = !selectedSize || variant.option1 === selectedSize || variant.option2 === selectedSize || variant.option3 === selectedSize;
+        const matchesStrength = !selectedStrength || variant.option1 === selectedStrength || variant.option2 === selectedStrength || variant.option3 === selectedStrength;
+        return matchesSize && matchesStrength;
+      });
+    }
+    
+    // Function to get currently selected options
+    function getSelectedOptions() {
+      const activeSizeOption = document.querySelector('.size-option.active');
+      const activeStrengthOption = document.querySelector('.thc-strength-option.active');
+      
+      return {
+        size: activeSizeOption ? activeSizeOption.getAttribute('data-size-value') : null,
+        strength: activeStrengthOption ? activeStrengthOption.getAttribute('data-strength-value') : null
+      };
+    }
+    
+    // Function to update variant and trigger price update
+    function updateSelectedVariant() {
+      const selected = getSelectedOptions();
+      const variant = findVariantByOptions(selected.size, selected.strength);
+      
+      if (variant && cartInput) {
+        cartInput.value = variant.id;
+        
+        // Update price displays
+        const priceFormatted = Shopify.formatMoney ? Shopify.formatMoney(variant.price) : '$' + (variant.price / 100).toFixed(2);
+        const cartPrice = document.getElementById('cart-price');
+        const onetimePrice = document.getElementById('onetime-display-price');
+        const dynamicPrice = document.getElementById('dynamic-price');
+        
+        if (cartPrice) cartPrice.textContent = priceFormatted;
+        if (onetimePrice) onetimePrice.textContent = priceFormatted;
+        if (dynamicPrice) dynamicPrice.textContent = priceFormatted;
+        
+        // Trigger Appstle subscription update
+        setTimeout(function () {
+          attachSubscriptionListeners();
+          const checkedOption = document.querySelector('input[name="selling_plan"]:checked');
+          if (checkedOption) {
+            checkedOption.dispatchEvent(new Event('change'));
+          }
+          setTimeout(wrapPriceElements, 200);
+        }, 500);
+      }
+    }
+    
     // Size/Quantity selection
     const sizeOptions = document.querySelectorAll('.size-option');
-    const cartInput = document.getElementById('variant-id');
-
     if (sizeOptions.length) {
       sizeOptions.forEach(function (option) {
         option.addEventListener('click', function () {
-          const variant_id = this.getAttribute('data-variant-id');
-          if (cartInput) cartInput.value = variant_id;
           sizeOptions.forEach(function (opt) {
             opt.classList.remove('active');
           });
           this.classList.add('active');
-          setTimeout(function () {
-            attachSubscriptionListeners();
-            const checkedOption = document.querySelector('input[name="selling_plan"]:checked');
-            if (checkedOption) {
-              checkedOption.dispatchEvent(new Event('change'));
-            }
-            setTimeout(wrapPriceElements, 200);
-          }, 500);
+          updateSelectedVariant();
         });
       });
     }
+    
+    // THC Strength selection
+    const strengthOptions = document.querySelectorAll('.thc-strength-option');
+    if (strengthOptions.length) {
+      strengthOptions.forEach(function (option) {
+        option.addEventListener('click', function () {
+          strengthOptions.forEach(function (opt) {
+            opt.classList.remove('active');
+          });
+          this.classList.add('active');
+          updateSelectedVariant();
+        });
+      });
+    }
+    
+    // Initialize: Set default variant based on current selections
+    (function initializeDefaultVariant() {
+      const selected = getSelectedOptions();
+      if (selected.size || selected.strength) {
+        updateSelectedVariant();
+      }
+    })();
 
     // Accordion functionality
     const accordionTabs = document.querySelectorAll('.accordion-tab');
@@ -2053,9 +2232,26 @@
       ]
     },
     {
+      "type": "thc_strength_selector",
+      "name": "THC Strength Selector",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "This block automatically displays THC Strength options (5 mg / 10 mg) if the product has a 'THC Strength' variant option. It will not appear for products without this option (e.g., Fungi products)."
+        }
+      ]
+    },
+    {
       "type": "size_selector",
       "name": "Size Selector",
-      "limit": 1
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Displays the 'Size' variant option (8-pack, 12-pack, 24-pack) as Quantity buttons."
+        }
+      ]
     },
     {
       "type": "subscription",
