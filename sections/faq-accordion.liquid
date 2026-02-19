@@ -15,30 +15,30 @@
 <section id="faq-section-{{ section.id }}" class="faq-section-wrapper" style="position: relative; overflow: visible;">
   <!-- Top Wave Divider -->
   {%- if section.settings.show_top_wave -%}
-    <div class="faq-section__wave faq-section__wave--top" style="position: absolute; top: 0; left: 0; width: 100%; height: {{ section.settings.wave_height }}px; z-index: 5; overflow: visible; transform: translateY(-100%){% if section.settings.invert_top_wave %} scaleY(-1){% endif %};">
-      <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%; display: block;">
+    <div class="faq-section__wave faq-section__wave--top" style="position: absolute; top: 0; left: 0; width: 100%; height: {{ section.settings.wave_height }}px; z-index: 5; overflow: hidden; transform: translateY(-99%){% if section.settings.invert_top_wave %} scaleY(-1){% endif %};">
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%; display: block; min-width: 100%;">
         {%- case section.settings.top_wave_style -%}
           {%- when 'wave' -%}
-            <path d="M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z" fill="{{ section.settings.top_wave_color }}">
+            <path d="M0,120 L0,60 Q360,120 720,60 Q1080,0 1440,60 L1440,120 Z" fill="{{ section.settings.top_wave_color }}">
               {%- if section.settings.top_wave_animate -%}
-                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z;M0,120 L0,120 Q360,30 720,80 T1440,40 L1440,120 Z;M0,120 L0,120 Q360,90 720,20 T1440,90 L1440,120 Z;M0,120 L0,120 Q360,10 720,70 T1440,50 L1440,120 Z;M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z"/>
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,60 Q360,120 720,60 Q1080,0 1440,60 L1440,120 Z;M0,120 L0,80 Q360,20 720,80 Q1080,120 1440,40 L1440,120 Z;M0,120 L0,40 Q360,100 720,40 Q1080,0 1440,80 L1440,120 Z;M0,120 L0,70 Q360,10 720,70 Q1080,110 1440,50 L1440,120 Z;M0,120 L0,60 Q360,120 720,60 Q1080,0 1440,60 L1440,120 Z"/>
               {%- endif -%}
             </path>
           {%- when 'double-ripple' -%}
-            <path d="M0,120 L0,120 Q360,20 720,50 T1440,50 L1440,120 Z" fill="{{ section.settings.top_wave_color }}">
+            <path d="M0,120 L0,50 Q360,100 720,50 Q1080,0 1440,50 L1440,120 Z" fill="{{ section.settings.top_wave_color }}">
               {%- if section.settings.top_wave_animate -%}
-                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,120 Q360,20 720,50 T1440,50 L1440,120 Z;M0,120 L0,120 Q360,40 720,70 T1440,35 L1440,120 Z;M0,120 L0,120 Q360,10 720,40 T1440,70 L1440,120 Z;M0,120 L0,120 Q360,50 720,30 T1440,55 L1440,120 Z;M0,120 L0,120 Q360,20 720,50 T1440,50 L1440,120 Z"/>
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,50 Q360,100 720,50 Q1080,0 1440,50 L1440,120 Z;M0,120 L0,70 Q360,30 720,70 Q1080,100 1440,35 L1440,120 Z;M0,120 L0,40 Q360,80 720,40 Q1080,10 1440,70 L1440,120 Z;M0,120 L0,55 Q360,20 720,55 Q1080,90 1440,45 L1440,120 Z;M0,120 L0,50 Q360,100 720,50 Q1080,0 1440,50 L1440,120 Z"/>
               {%- endif -%}
             </path>
-            <path d="M0,120 L0,120 Q540,30 1080,35 T1440,30 L1440,120 Z" fill="{{ section.settings.top_wave_color }}" opacity="0.6">
+            <path d="M0,120 L0,35 Q540,80 1080,35 Q1260,10 1440,30 L1440,120 Z" fill="{{ section.settings.top_wave_color }}" opacity="0.6">
               {%- if section.settings.top_wave_animate -%}
-                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed | times: 1.2 }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,120 Q540,30 1080,35 T1440,30 L1440,120 Z;M0,120 L0,120 Q540,45 1080,50 T1440,25 L1440,120 Z;M0,120 L0,120 Q540,20 1080,25 T1440,45 L1440,120 Z;M0,120 L0,120 Q540,40 1080,30 T1440,35 L1440,120 Z;M0,120 L0,120 Q540,30 1080,35 T1440,30 L1440,120 Z"/>
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed | times: 1.2 }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,35 Q540,80 1080,35 Q1260,10 1440,30 L1440,120 Z;M0,120 L0,50 Q540,20 1080,50 Q1260,70 1440,25 L1440,120 Z;M0,120 L0,25 Q540,60 1080,25 Q1260,5 1440,45 L1440,120 Z;M0,120 L0,40 Q540,10 1080,40 Q1260,60 1440,35 L1440,120 Z;M0,120 L0,35 Q540,80 1080,35 Q1260,10 1440,30 L1440,120 Z"/>
               {%- endif -%}
             </path>
           {%- else -%}
-            <path d="M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z" fill="{{ section.settings.top_wave_color }}">
+            <path d="M0,120 L0,60 Q360,120 720,60 Q1080,0 1440,60 L1440,120 Z" fill="{{ section.settings.top_wave_color }}">
               {%- if section.settings.top_wave_animate -%}
-                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z;M0,120 L0,120 Q360,30 720,80 T1440,40 L1440,120 Z;M0,120 L0,120 Q360,90 720,20 T1440,90 L1440,120 Z;M0,120 L0,120 Q360,10 720,70 T1440,50 L1440,120 Z;M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z"/>
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,60 Q360,120 720,60 Q1080,0 1440,60 L1440,120 Z;M0,120 L0,80 Q360,20 720,80 Q1080,120 1440,40 L1440,120 Z;M0,120 L0,40 Q360,100 720,40 Q1080,0 1440,80 L1440,120 Z;M0,120 L0,70 Q360,10 720,70 Q1080,110 1440,50 L1440,120 Z;M0,120 L0,60 Q360,120 720,60 Q1080,0 1440,60 L1440,120 Z"/>
               {%- endif -%}
             </path>
         {%- endcase -%}
