@@ -154,7 +154,13 @@
     border-radius: 20px 20px 0 0;
     padding: 24px 20px 20px !important;
     margin: 0 -20px;
-    box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.04);
+  }
+
+  /* Hide the heavy gradient overlay above footer */
+  [data-cart-drawer] .pointer-events-none.bg-gradient-to-t {
+    opacity: 0.3 !important;
+    height: 8px !important;
   }
 
   [data-cart-footer] > div {
