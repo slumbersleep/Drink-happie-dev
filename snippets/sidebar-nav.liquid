@@ -268,14 +268,18 @@
     justify-content: space-between;
     padding: 20px 24px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    gap: 16px;
   }
   
   .sidebar-nav-happie__logo {
     display: block;
+    flex: 1;
+    min-width: 0;
   }
   
   .sidebar-nav-happie__logo img {
-    max-width: {{ mobile_menu_logo_width }}px;
+    width: {{ mobile_menu_logo_width }}px;
+    max-width: 100%;
     height: auto;
   }
   
