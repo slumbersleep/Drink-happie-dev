@@ -22,29 +22,22 @@
         "filter_2": {
           "type": "filter_link",
           "settings": {
-            "label": "THC Beverages",
-            "link": "/collections/thc-beverages"
+            "label": "THC Seltzers",
+            "link": "shopify://collections/frontpage"
           }
         },
         "filter_3": {
           "type": "filter_link",
           "settings": {
             "label": "Fungi Fusion",
-            "link": "/collections/fungi-fusion"
-          }
-        },
-        "filter_4": {
-          "type": "filter_link",
-          "settings": {
-            "label": "Variety Packs",
-            "link": "/collections/variety-packs"
+            "link": "shopify://collections/homepage-shrine"
           }
         },
         "filter_5": {
           "type": "filter_link",
           "settings": {
             "label": "Merch",
-            "link": "/collections/merch"
+            "link": "shopify://collections/merch"
           }
         }
       },
@@ -52,7 +45,6 @@
         "filter_1",
         "filter_2",
         "filter_3",
-        "filter_4",
         "filter_5"
       ],
       "settings": {
