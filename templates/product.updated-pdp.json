@@ -86,6 +86,10 @@
             "flavor_product_4": "sublime"
           }
         },
+        "thc_strength_selector_MRJGga": {
+          "type": "thc_strength_selector",
+          "settings": {}
+        },
         "size_selector": {
           "type": "size_selector",
           "settings": {}
@@ -148,6 +152,7 @@
         "description",
         "product_details",
         "flavor_selector",
+        "thc_strength_selector_MRJGga",
         "size_selector",
         "subscription",
         "onetime",
