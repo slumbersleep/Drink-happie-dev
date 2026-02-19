@@ -175,13 +175,23 @@
       <!-- Carousel (Desktop & Mobile) -->
       <div class="best-sellers__carousel" x-data="{ 
         currentSlide: 0, 
-        totalSlides: {{ collection_1.products.size | default: 4 | at_most: products_to_show }}, 
+        totalSlides: {{ collection_1.products.size | default: 5 | at_most: products_to_show }}, 
         touchStartX: 0, 
         touchStartY: 0, 
         isSwiping: false,
         isMobile: window.innerWidth < 768,
-        get slideWidth() { return this.isMobile ? 80 : 33.333; },
-        get maxSlide() { return this.isMobile ? this.totalSlides - 1 : Math.max(0, this.totalSlides - 3); },
+        isTablet: window.innerWidth >= 768 && window.innerWidth < 1024,
+        get slideWidth() { 
+          if (this.isMobile) return 80;
+          if (this.isTablet) return 33.333;
+          return 23;
+        },
+        get visibleSlides() {
+          if (this.isMobile) return 1;
+          if (this.isTablet) return 3;
+          return 4;
+        },
+        get maxSlide() { return Math.max(0, this.totalSlides - this.visibleSlides); },
         nextSlide() {
           if (this.currentSlide >= this.maxSlide) {
             this.currentSlide = 0;
@@ -189,7 +199,7 @@
             this.currentSlide++;
           }
         }
-      }" x-init="window.addEventListener('resize', () => { isMobile = window.innerWidth < 768 })">
+      }" x-init="window.addEventListener('resize', () => { isMobile = window.innerWidth < 768; isTablet = window.innerWidth >= 768 && window.innerWidth < 1024; })">
         
         <!-- Navigation Arrow (Right only - infinite loop) -->
         <button 
@@ -287,13 +297,23 @@
         <!-- Carousel (Desktop & Mobile) -->
         <div class="best-sellers__carousel" x-data="{ 
           currentSlide: 0, 
-          totalSlides: {{ collection_2.products.size | default: 4 | at_most: products_to_show }}, 
+          totalSlides: {{ collection_2.products.size | default: 5 | at_most: products_to_show }}, 
           touchStartX: 0, 
           touchStartY: 0, 
           isSwiping: false,
           isMobile: window.innerWidth < 768,
-          get slideWidth() { return this.isMobile ? 80 : 33.333; },
-          get maxSlide() { return this.isMobile ? this.totalSlides - 1 : Math.max(0, this.totalSlides - 3); },
+          isTablet: window.innerWidth >= 768 && window.innerWidth < 1024,
+          get slideWidth() { 
+            if (this.isMobile) return 80;
+            if (this.isTablet) return 33.333;
+            return 23;
+          },
+          get visibleSlides() {
+            if (this.isMobile) return 1;
+            if (this.isTablet) return 3;
+            return 4;
+          },
+          get maxSlide() { return Math.max(0, this.totalSlides - this.visibleSlides); },
           nextSlide() {
             if (this.currentSlide >= this.maxSlide) {
               this.currentSlide = 0;
@@ -301,7 +321,7 @@
               this.currentSlide++;
             }
           }
-        }" x-init="window.addEventListener('resize', () => { isMobile = window.innerWidth < 768 })">
+        }" x-init="window.addEventListener('resize', () => { isMobile = window.innerWidth < 768; isTablet = window.innerWidth >= 768 && window.innerWidth < 1024; })">
           
           <!-- Navigation Arrow (Right only - infinite loop) -->
           <button 
@@ -590,16 +610,14 @@
     margin-bottom: 48px;
   }
 
-  /* Desktop Grid - Show 4 columns by default */
+  /* Desktop Grid - Hidden, using carousel instead */
   #best-sellers-{{ section.id }} .best-sellers__grid--desktop {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
+    display: none;
   }
   
-  /* Desktop Carousel - Hidden on desktop, only shows on tablet/mobile */
+  /* Desktop Carousel - Show 4 products with 5th peeking */
   #best-sellers-{{ section.id }} .best-sellers__carousel {
-    display: none;
+    display: block;
     position: relative;
     overflow: hidden;
   }
@@ -609,8 +627,9 @@
     transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
   }
   
+  /* Each slide takes ~23% so 4 fit with 5th peeking (~8% visible) */
   #best-sellers-{{ section.id }} .best-sellers__carousel-slide {
-    flex: 0 0 33.333%;
+    flex: 0 0 23%;
     padding: 0 12px;
     box-sizing: border-box;
   }
@@ -911,18 +930,10 @@
     transform: translateX(4px);
   }
 
-  /* Tablet - Switch to carousel, hide grid */
+  /* Tablet - 3 products visible with 4th peeking */
   @media (max-width: 1024px) {
-    #best-sellers-{{ section.id }} .best-sellers__grid--desktop {
-      display: none;
-    }
-    
-    #best-sellers-{{ section.id }} .best-sellers__carousel {
-      display: block;
-    }
-    
     #best-sellers-{{ section.id }} .best-sellers__carousel-slide {
-      flex: 0 0 33.333%;
+      flex: 0 0 31%;
     }
   }
 
@@ -1158,7 +1169,8 @@
       "min": 2,
       "max": 8,
       "step": 1,
-      "default": 4
+      "default": 5,
+      "info": "Shows 4 products with the 5th peeking on desktop"
     },
     {
       "type": "header",
