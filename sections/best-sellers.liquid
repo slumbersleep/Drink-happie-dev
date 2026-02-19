@@ -183,8 +183,8 @@
         isTablet: window.innerWidth >= 768 && window.innerWidth < 1024,
         get slideWidth() { 
           if (this.isMobile) return 80;
-          if (this.isTablet) return 31;
-          return 22;
+          if (this.isTablet) return 30;
+          return 20;
         },
         get visibleSlides() {
           if (this.isMobile) return 1;
@@ -305,8 +305,8 @@
           isTablet: window.innerWidth >= 768 && window.innerWidth < 1024,
           get slideWidth() { 
             if (this.isMobile) return 80;
-            if (this.isTablet) return 31;
-            return 22;
+            if (this.isTablet) return 30;
+            return 20;
           },
           get visibleSlides() {
             if (this.isMobile) return 1;
@@ -627,10 +627,11 @@
     transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
   }
   
-  /* Each slide takes ~22% so 4 fit with 5th peeking (~12% visible) */
+  /* Each slide takes 20% so 4 fit (80%) with 5th peeking (20% visible) */
   #best-sellers-{{ section.id }} .best-sellers__carousel-slide {
-    flex: 0 0 22%;
-    padding: 0 12px;
+    flex: 0 0 20%;
+    min-width: 20%;
+    padding: 0 8px;
     box-sizing: border-box;
   }
   
