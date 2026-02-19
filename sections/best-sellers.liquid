@@ -590,14 +590,16 @@
     margin-bottom: 48px;
   }
 
-  /* Desktop Grid - Show 4 columns at 1440px+ */
+  /* Desktop Grid - Show 4 columns by default */
   #best-sellers-{{ section.id }} .best-sellers__grid--desktop {
-    display: none;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
   }
   
-  /* Desktop Carousel - Show by default (below 1440px) */
+  /* Desktop Carousel - Hidden on desktop, only shows on tablet/mobile */
   #best-sellers-{{ section.id }} .best-sellers__carousel {
-    display: block;
+    display: none;
     position: relative;
     overflow: hidden;
   }
@@ -909,23 +911,18 @@
     transform: translateX(4px);
   }
 
-  /* Large Desktop (1440px+) - Show 4-column grid, hide carousel */
-  @media (min-width: 1440px) {
+  /* Tablet - Switch to carousel, hide grid */
+  @media (max-width: 1024px) {
     #best-sellers-{{ section.id }} .best-sellers__grid--desktop {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
+      display: none;
     }
     
     #best-sellers-{{ section.id }} .best-sellers__carousel {
-      display: none;
+      display: block;
     }
-  }
-
-  /* Responsive */
-  @media (max-width: 1100px) {
-    #best-sellers-{{ section.id }} .best-sellers__grid--desktop {
-      grid-template-columns: repeat(2, 1fr);
+    
+    #best-sellers-{{ section.id }} .best-sellers__carousel-slide {
+      flex: 0 0 33.333%;
     }
   }
 
