@@ -2041,19 +2041,63 @@
       });
     }
 
-    // Form submission
+    // Form submission - AJAX to trigger cart drawer
     const productForm = document.getElementById('product-form');
     const addToCartBtn = document.getElementById('add-to-cart-btn');
     if (productForm && addToCartBtn) {
       productForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        
         const addToCartText = document.getElementById('add-to-cart-text');
-        addToCartBtn.disabled = true;
         const originalText = addToCartText ? addToCartText.textContent : '';
+        addToCartBtn.disabled = true;
         if (addToCartText) addToCartText.textContent = 'ADDING...';
-        setTimeout(function () {
+        
+        const formData = new FormData(productForm);
+        
+        // Check if cart type is modal (for cart drawer)
+        const isModalCart = window.theme && window.theme.settings && window.theme.settings.cartType === 'modal';
+        
+        if (isModalCart) {
+          formData.append('sections', 'cart-items,cart-footer,cart-item-count');
+          formData.append('sections_url', window.location.pathname);
+        }
+        
+        fetch('/cart/add.js', {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+          }
+        })
+        .then(function(response) {
+          return response.json();
+        })
+        .then(function(data) {
           addToCartBtn.disabled = false;
-          if (addToCartText && originalText) addToCartText.textContent = originalText;
-        }, 2000);
+          if (addToCartText) addToCartText.textContent = originalText;
+          
+          if (data.status) {
+            // Error occurred
+            console.error('Add to cart error:', data.description || data.message);
+            alert(data.description || data.message || 'Could not add to cart');
+            return;
+          }
+          
+          // Success - dispatch event to open cart drawer
+          document.body.dispatchEvent(
+            new CustomEvent('shapes:cart:afteradditem', {
+              bubbles: true,
+              detail: { response: data }
+            })
+          );
+        })
+        .catch(function(error) {
+          console.error('Add to cart error:', error);
+          addToCartBtn.disabled = false;
+          if (addToCartText) addToCartText.textContent = originalText;
+          alert('Could not add to cart. Please try again.');
+        });
       });
     }
 
