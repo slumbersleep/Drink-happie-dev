@@ -1737,4 +1737,55 @@ body.template-collection .collection-hero {
   }
 }
 
+/* ========================================
+   Default Product Template Background Extension
+   For: product.json (no template suffix)
+   ======================================== */
+
+/* Target default product template - sets cream background on body */
+body.template-product {
+  background-color: #FFE6CB !important;
+}
+
+/* Make header group transparent so body background shows through */
+body.template-product #shopify-section-header,
+body.template-product .shopify-section-group-header-group,
+body.template-product [id^="shopify-section-header"] {
+  background-color: transparent !important;
+}
+
+/* Target the header wrapper/container */
+body.template-product .header-wrapper,
+body.template-product .site-header-wrapper,
+body.template-product #headerContainer {
+  background-color: transparent !important;
+}
+
+/* Keep the nav pill/bar styling intact but transparent container */
+body.template-product .site-header {
+  background-color: transparent !important;
+}
+
+/* Ensure announcement bar stays on top with its own color */
+body.template-product #shopify-section-announcement-bar,
+body.template-product [id*="announcement-bar"] {
+  position: relative;
+  z-index: 100;
+}
+
+/* Ensure main content blends with the background */
+body.template-product .main-content,
+body.template-product main {
+  background-color: transparent;
+}
+
+/* Allow first section to extend under the navigation */
+body.template-product #MainContent {
+  overflow: visible !important;
+}
+
+body.template-product .shopify-section:first-of-type {
+  overflow: visible !important;
+}
+
 
