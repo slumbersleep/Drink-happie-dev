@@ -34,7 +34,7 @@
   >
     {%- comment -%} Header with Close Button {%- endcomment -%}
     <div class="sidebar-nav-happie__header">
-      <a href="{{ routes.root_url }}" class="sidebar-nav-happie__logo">
+      <a href="{{ routes.root_url }}" class="sidebar-nav-happie__logo" style="max-width: {{ mobile_menu_logo_width }}px;">
         {%- if section.settings.logo != blank -%}
           <img
             src="{{ section.settings.logo | image_url: width: mobile_menu_logo_width }}"
@@ -46,6 +46,7 @@
             width="{{ mobile_menu_logo_width }}"
             height="auto"
             loading="eager"
+            style="width: {{ mobile_menu_logo_width }}px; max-width: 100%; height: auto;"
           >
         {%- else -%}
           <span class="sidebar-nav-happie__logo-text">{{ shop.name }}</span>
