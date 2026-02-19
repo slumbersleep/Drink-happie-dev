@@ -332,6 +332,7 @@
         "highlight-5",
         "shape-divider-image-with-highlights-0"
       ],
+      "disabled": true,
       "settings": {
         "title": "Why You'll Love Happie THC Beverages",
         "block_alignment_on_desktop": "justify-between",
@@ -351,6 +352,7 @@
     },
     "featured_collection_6j46tJ": {
       "type": "featured-collection",
+      "disabled": true,
       "custom_css": [
         "/* Hide product description in Featured Collection cards */.product-description {display: none !important;}",
         " /* Optional: tighten spacing where the description used to be */.section-featured-collection .card__information,.section-featured-collection .card__content {gap: 0.25rem;}"
