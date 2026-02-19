@@ -48,22 +48,30 @@
           }
         }
       },
-      "block_order": ["filter_1", "filter_2", "filter_3", "filter_4", "filter_5"],
+      "block_order": [
+        "filter_1",
+        "filter_2",
+        "filter_3",
+        "filter_4",
+        "filter_5"
+      ],
       "settings": {
         "show_title": true,
         "show_description": true,
-        "background_color": "#FFF2E4",
-        "overlay_opacity": 0,
-        "title_color": "#1a1a1a",
+        "background_image": "shopify://shop_images/Happie_-_Desktop_Hero.jpg",
+        "background_color": "#fff2e4",
+        "overlay_color": "#000000",
+        "overlay_opacity": 30,
+        "title_color": "#ffffff",
         "description_color": "#4a4a4a",
         "show_filters": true,
-        "filter_bar_background": "transparent",
+        "filter_bar_background": "rgba(0,0,0,0)",
         "pill_background_color": "#ffffff",
         "pill_text_color": "#1a1a1a",
         "pill_border_color": "#e5e5e5",
         "pill_hover_background": "#f5f5f5",
-        "pill_hover_border": "#50B2BD",
-        "pill_active_background": "#50B2BD",
+        "pill_hover_border": "#50b2bd",
+        "pill_active_background": "#50b2bd",
         "pill_active_text": "#ffffff"
       }
     },
