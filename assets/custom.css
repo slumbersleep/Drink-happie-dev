@@ -1715,4 +1715,26 @@ body.template-collection main {
   background-color: transparent;
 }
 
+/* Allow collection hero to extend under the navigation */
+body.template-collection #MainContent {
+  overflow: visible !important;
+}
+
+body.template-collection .shopify-section:first-of-type {
+  overflow: visible !important;
+}
+
+/* Pull collection hero up under the header */
+body.template-collection .collection-hero {
+  margin-top: calc(-1 * var(--header-group-height, 160px)) !important;
+  padding-top: var(--header-group-height, 160px) !important;
+}
+
+@media (max-width: 767px) {
+  body.template-collection .collection-hero {
+    margin-top: calc(-1 * var(--header-group-height, 120px)) !important;
+    padding-top: var(--header-group-height, 120px) !important;
+  }
+}
+
 
