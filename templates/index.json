@@ -440,7 +440,7 @@
         "wave_animation_speed": 8,
         "show_top_wave": true,
         "top_wave_style": "wave",
-        "top_wave_color": "#f0e6db",
+        "top_wave_color": "#ffcb08",
         "top_wave_animate": true,
         "show_bottom_wave": true,
         "bottom_wave_style": "wave",
