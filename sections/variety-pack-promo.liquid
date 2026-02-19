@@ -18,50 +18,50 @@
   id="variety-pack-{{ section.id }}"
   class="variety-pack-promo"
 >
-  <!-- Top Wave Divider -->
+  <!-- Top Wave Divider - Points OUTWARD (up into section above) -->
   {%- if section.settings.show_top_wave -%}
     <div class="variety-pack-promo__wave variety-pack-promo__wave--top{% if section.settings.top_wave_animate %} variety-pack-promo__wave--animated{% endif %}">
       <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
         {%- case section.settings.top_wave_style -%}
           {%- when 'wave' -%}
-            <path d="M0,120 L0,60 Q360,120 720,60 T1440,60 L1440,120 Z" fill="{{ section.settings.top_wave_color }}">
+            <path d="M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z" fill="{{ section.settings.top_wave_color }}">
               {%- if section.settings.top_wave_animate -%}
-                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,60 Q360,120 720,60 T1440,60 L1440,120 Z;M0,120 L0,30 Q360,90 720,40 T1440,80 L1440,120 Z;M0,120 L0,80 Q360,30 720,80 T1440,30 L1440,120 Z;M0,120 L0,40 Q360,110 720,30 T1440,70 L1440,120 Z;M0,120 L0,60 Q360,120 720,60 T1440,60 L1440,120 Z"/>
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z;M0,120 L0,120 Q360,30 720,80 T1440,40 L1440,120 Z;M0,120 L0,120 Q360,90 720,20 T1440,90 L1440,120 Z;M0,120 L0,120 Q360,10 720,70 T1440,50 L1440,120 Z;M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z"/>
               {%- endif -%}
             </path>
           {%- when 'wave-smooth' -%}
-            <path d="M0,120 L0,80 Q720,20 1440,80 L1440,120 Z" fill="{{ section.settings.top_wave_color }}">
+            <path d="M0,120 L0,120 Q720,0 1440,120 L1440,120 Z" fill="{{ section.settings.top_wave_color }}">
               {%- if section.settings.top_wave_animate -%}
-                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,80 Q720,20 1440,80 L1440,120 Z;M0,120 L0,50 Q720,35 1440,75 L1440,120 Z;M0,120 L0,75 Q720,55 1440,40 L1440,120 Z;M0,120 L0,40 Q720,25 1440,55 L1440,120 Z;M0,120 L0,80 Q720,20 1440,80 L1440,120 Z"/>
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,120 Q720,0 1440,120 L1440,120 Z;M0,120 L0,120 Q720,40 1440,120 L1440,120 Z;M0,120 L0,120 Q720,20 1440,120 L1440,120 Z;M0,120 L0,120 Q720,60 1440,120 L1440,120 Z;M0,120 L0,120 Q720,0 1440,120 L1440,120 Z"/>
               {%- endif -%}
             </path>
           {%- when 'arc' -%}
-            <path d="M0,120 L0,90 Q720,30 1440,90 L1440,120 Z" fill="{{ section.settings.top_wave_color }}">
+            <path d="M0,120 L0,120 Q720,0 1440,120 L1440,120 Z" fill="{{ section.settings.top_wave_color }}">
               {%- if section.settings.top_wave_animate -%}
-                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,90 Q720,30 1440,90 L1440,120 Z;M0,120 L0,60 Q720,45 1440,75 L1440,120 Z;M0,120 L0,85 Q720,65 1440,50 L1440,120 Z;M0,120 L0,50 Q720,35 1440,85 L1440,120 Z;M0,120 L0,90 Q720,30 1440,90 L1440,120 Z"/>
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,120 Q720,0 1440,120 L1440,120 Z;M0,120 L0,120 Q720,30 1440,120 L1440,120 Z;M0,120 L0,120 Q720,10 1440,120 L1440,120 Z;M0,120 L0,120 Q720,50 1440,120 L1440,120 Z;M0,120 L0,120 Q720,0 1440,120 L1440,120 Z"/>
               {%- endif -%}
             </path>
           {%- when 'double-ripple' -%}
-            <!-- Primary wave -->
-            <path d="M0,120 L0,70 Q360,100 720,70 T1440,70 L1440,120 Z" fill="{{ section.settings.top_wave_color }}">
+            <!-- Primary wave - pointing outward -->
+            <path d="M0,120 L0,120 Q360,20 720,50 T1440,50 L1440,120 Z" fill="{{ section.settings.top_wave_color }}">
               {%- if section.settings.top_wave_animate -%}
-                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,70 Q360,100 720,70 T1440,70 L1440,120 Z;M0,120 L0,50 Q360,85 720,45 T1440,80 L1440,120 Z;M0,120 L0,85 Q360,45 720,80 T1440,40 L1440,120 Z;M0,120 L0,55 Q360,95 720,50 T1440,75 L1440,120 Z;M0,120 L0,70 Q360,100 720,70 T1440,70 L1440,120 Z"/>
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,120 Q360,20 720,50 T1440,50 L1440,120 Z;M0,120 L0,120 Q360,40 720,70 T1440,35 L1440,120 Z;M0,120 L0,120 Q360,10 720,40 T1440,70 L1440,120 Z;M0,120 L0,120 Q360,50 720,30 T1440,55 L1440,120 Z;M0,120 L0,120 Q360,20 720,50 T1440,50 L1440,120 Z"/>
               {%- endif -%}
             </path>
             <!-- Secondary wave (smaller, offset) -->
-            <path d="M0,120 L0,85 Q540,105 1080,85 T1440,90 L1440,120 Z" fill="{{ section.settings.top_wave_color }}" opacity="0.6">
+            <path d="M0,120 L0,120 Q540,30 1080,35 T1440,30 L1440,120 Z" fill="{{ section.settings.top_wave_color }}" opacity="0.6">
               {%- if section.settings.top_wave_animate -%}
-                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed | times: 1.2 }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,85 Q540,105 1080,85 T1440,90 L1440,120 Z;M0,120 L0,75 Q540,95 1080,70 T1440,95 L1440,120 Z;M0,120 L0,95 Q540,70 1080,90 T1440,75 L1440,120 Z;M0,120 L0,70 Q540,100 1080,75 T1440,90 L1440,120 Z;M0,120 L0,85 Q540,105 1080,85 T1440,90 L1440,120 Z"/>
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed | times: 1.2 }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,120 Q540,30 1080,35 T1440,30 L1440,120 Z;M0,120 L0,120 Q540,45 1080,50 T1440,25 L1440,120 Z;M0,120 L0,120 Q540,20 1080,25 T1440,45 L1440,120 Z;M0,120 L0,120 Q540,40 1080,30 T1440,35 L1440,120 Z;M0,120 L0,120 Q540,30 1080,35 T1440,30 L1440,120 Z"/>
               {%- endif -%}
             </path>
           {%- when 'slope-left' -%}
-            <path d="M0,120 L0,0 L1440,60 L1440,120 Z" fill="{{ section.settings.top_wave_color }}"/>
+            <path d="M0,120 L0,120 L1440,0 L1440,120 Z" fill="{{ section.settings.top_wave_color }}"/>
           {%- when 'slope-right' -%}
-            <path d="M0,120 L0,60 L1440,0 L1440,120 Z" fill="{{ section.settings.top_wave_color }}"/>
+            <path d="M0,120 L0,0 L1440,120 L1440,120 Z" fill="{{ section.settings.top_wave_color }}"/>
           {%- else -%}
-            <path d="M0,120 L0,60 Q360,120 720,60 T1440,60 L1440,120 Z" fill="{{ section.settings.top_wave_color }}">
+            <path d="M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z" fill="{{ section.settings.top_wave_color }}">
               {%- if section.settings.top_wave_animate -%}
-                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,60 Q360,120 720,60 T1440,60 L1440,120 Z;M0,120 L0,30 Q360,90 720,40 T1440,80 L1440,120 Z;M0,120 L0,80 Q360,30 720,80 T1440,30 L1440,120 Z;M0,120 L0,40 Q360,110 720,30 T1440,70 L1440,120 Z;M0,120 L0,60 Q360,120 720,60 T1440,60 L1440,120 Z"/>
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z;M0,120 L0,120 Q360,30 720,80 T1440,40 L1440,120 Z;M0,120 L0,120 Q360,90 720,20 T1440,90 L1440,120 Z;M0,120 L0,120 Q360,10 720,70 T1440,50 L1440,120 Z;M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z"/>
               {%- endif -%}
             </path>
         {%- endcase -%}
@@ -113,50 +113,50 @@
     </div>
   </div>
 
-  <!-- Bottom Wave Divider -->
+  <!-- Bottom Wave Divider - Points OUTWARD (down into section below) -->
   {%- if section.settings.show_bottom_wave -%}
     <div class="variety-pack-promo__wave variety-pack-promo__wave--bottom{% if section.settings.bottom_wave_animate %} variety-pack-promo__wave--animated{% endif %}">
       <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
         {%- case section.settings.bottom_wave_style -%}
           {%- when 'wave' -%}
-            <path d="M0,0 L0,60 Q360,120 720,60 T1440,60 L1440,0 Z" fill="{{ section.settings.bottom_wave_color }}">
+            <path d="M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z" fill="{{ section.settings.bottom_wave_color }}">
               {%- if section.settings.bottom_wave_animate -%}
-                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,0 L0,60 Q360,120 720,60 T1440,60 L1440,0 Z;M0,0 L0,30 Q360,90 720,40 T1440,80 L1440,0 Z;M0,0 L0,80 Q360,30 720,80 T1440,30 L1440,0 Z;M0,0 L0,40 Q360,110 720,30 T1440,70 L1440,0 Z;M0,0 L0,60 Q360,120 720,60 T1440,60 L1440,0 Z"/>
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z;M0,0 L0,0 Q360,90 720,80 T1440,40 L1440,0 Z;M0,0 L0,0 Q360,30 720,100 T1440,90 L1440,0 Z;M0,0 L0,0 Q360,110 720,50 T1440,70 L1440,0 Z;M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z"/>
               {%- endif -%}
             </path>
           {%- when 'wave-smooth' -%}
-            <path d="M0,0 L0,80 Q720,20 1440,80 L1440,0 Z" fill="{{ section.settings.bottom_wave_color }}">
+            <path d="M0,0 L0,0 Q720,120 1440,0 L1440,0 Z" fill="{{ section.settings.bottom_wave_color }}">
               {%- if section.settings.bottom_wave_animate -%}
-                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,0 L0,80 Q720,20 1440,80 L1440,0 Z;M0,0 L0,50 Q720,35 1440,75 L1440,0 Z;M0,0 L0,75 Q720,55 1440,40 L1440,0 Z;M0,0 L0,40 Q720,25 1440,55 L1440,0 Z;M0,0 L0,80 Q720,20 1440,80 L1440,0 Z"/>
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,0 L0,0 Q720,120 1440,0 L1440,0 Z;M0,0 L0,0 Q720,80 1440,0 L1440,0 Z;M0,0 L0,0 Q720,100 1440,0 L1440,0 Z;M0,0 L0,0 Q720,60 1440,0 L1440,0 Z;M0,0 L0,0 Q720,120 1440,0 L1440,0 Z"/>
               {%- endif -%}
             </path>
           {%- when 'arc' -%}
-            <path d="M0,0 L0,90 Q720,30 1440,90 L1440,0 Z" fill="{{ section.settings.bottom_wave_color }}">
+            <path d="M0,0 L0,0 Q720,120 1440,0 L1440,0 Z" fill="{{ section.settings.bottom_wave_color }}">
               {%- if section.settings.bottom_wave_animate -%}
-                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,0 L0,90 Q720,30 1440,90 L1440,0 Z;M0,0 L0,60 Q720,45 1440,75 L1440,0 Z;M0,0 L0,85 Q720,65 1440,50 L1440,0 Z;M0,0 L0,50 Q720,35 1440,85 L1440,0 Z;M0,0 L0,90 Q720,30 1440,90 L1440,0 Z"/>
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,0 L0,0 Q720,120 1440,0 L1440,0 Z;M0,0 L0,0 Q720,90 1440,0 L1440,0 Z;M0,0 L0,0 Q720,110 1440,0 L1440,0 Z;M0,0 L0,0 Q720,70 1440,0 L1440,0 Z;M0,0 L0,0 Q720,120 1440,0 L1440,0 Z"/>
               {%- endif -%}
             </path>
           {%- when 'double-ripple' -%}
-            <!-- Primary wave -->
-            <path d="M0,0 L0,70 Q360,100 720,70 T1440,70 L1440,0 Z" fill="{{ section.settings.bottom_wave_color }}">
+            <!-- Primary wave - pointing outward (down) -->
+            <path d="M0,0 L0,0 Q360,100 720,70 T1440,70 L1440,0 Z" fill="{{ section.settings.bottom_wave_color }}">
               {%- if section.settings.bottom_wave_animate -%}
-                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,0 L0,70 Q360,100 720,70 T1440,70 L1440,0 Z;M0,0 L0,50 Q360,85 720,45 T1440,80 L1440,0 Z;M0,0 L0,85 Q360,45 720,80 T1440,40 L1440,0 Z;M0,0 L0,55 Q360,95 720,50 T1440,75 L1440,0 Z;M0,0 L0,70 Q360,100 720,70 T1440,70 L1440,0 Z"/>
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,0 L0,0 Q360,100 720,70 T1440,70 L1440,0 Z;M0,0 L0,0 Q360,80 720,50 T1440,85 L1440,0 Z;M0,0 L0,0 Q360,110 720,80 T1440,50 L1440,0 Z;M0,0 L0,0 Q360,70 720,90 T1440,65 L1440,0 Z;M0,0 L0,0 Q360,100 720,70 T1440,70 L1440,0 Z"/>
               {%- endif -%}
             </path>
             <!-- Secondary wave (smaller, offset) -->
-            <path d="M0,0 L0,85 Q540,105 1080,85 T1440,90 L1440,0 Z" fill="{{ section.settings.bottom_wave_color }}" opacity="0.6">
+            <path d="M0,0 L0,0 Q540,90 1080,85 T1440,90 L1440,0 Z" fill="{{ section.settings.bottom_wave_color }}" opacity="0.6">
               {%- if section.settings.bottom_wave_animate -%}
-                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed | times: 1.2 }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,0 L0,85 Q540,105 1080,85 T1440,90 L1440,0 Z;M0,0 L0,75 Q540,95 1080,70 T1440,95 L1440,0 Z;M0,0 L0,95 Q540,70 1080,90 T1440,75 L1440,0 Z;M0,0 L0,70 Q540,100 1080,75 T1440,90 L1440,0 Z;M0,0 L0,85 Q540,105 1080,85 T1440,90 L1440,0 Z"/>
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed | times: 1.2 }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,0 L0,0 Q540,90 1080,85 T1440,90 L1440,0 Z;M0,0 L0,0 Q540,75 1080,70 T1440,95 L1440,0 Z;M0,0 L0,0 Q540,100 1080,95 T1440,80 L1440,0 Z;M0,0 L0,0 Q540,80 1080,90 T1440,85 L1440,0 Z;M0,0 L0,0 Q540,90 1080,85 T1440,90 L1440,0 Z"/>
               {%- endif -%}
             </path>
           {%- when 'slope-left' -%}
-            <path d="M0,0 L0,80 L1440,20 L1440,0 Z" fill="{{ section.settings.bottom_wave_color }}"/>
+            <path d="M0,0 L0,0 L1440,100 L1440,0 Z" fill="{{ section.settings.bottom_wave_color }}"/>
           {%- when 'slope-right' -%}
-            <path d="M0,0 L0,20 L1440,80 L1440,0 Z" fill="{{ section.settings.bottom_wave_color }}"/>
+            <path d="M0,0 L0,100 L1440,0 L1440,0 Z" fill="{{ section.settings.bottom_wave_color }}"/>
           {%- else -%}
-            <path d="M0,0 L0,60 Q360,120 720,60 T1440,60 L1440,0 Z" fill="{{ section.settings.bottom_wave_color }}">
+            <path d="M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z" fill="{{ section.settings.bottom_wave_color }}">
               {%- if section.settings.bottom_wave_animate -%}
-                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,0 L0,60 Q360,120 720,60 T1440,60 L1440,0 Z;M0,0 L0,30 Q360,90 720,40 T1440,80 L1440,0 Z;M0,0 L0,80 Q360,30 720,80 T1440,30 L1440,0 Z;M0,0 L0,40 Q360,110 720,30 T1440,70 L1440,0 Z;M0,0 L0,60 Q360,120 720,60 T1440,60 L1440,0 Z"/>
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z;M0,0 L0,0 Q360,90 720,80 T1440,40 L1440,0 Z;M0,0 L0,0 Q360,30 720,100 T1440,90 L1440,0 Z;M0,0 L0,0 Q360,110 720,50 T1440,70 L1440,0 Z;M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z"/>
               {%- endif -%}
             </path>
         {%- endcase -%}
@@ -203,12 +203,12 @@
 
   #variety-pack-{{ section.id }} .variety-pack-promo__wave--top {
     top: 0;
-    transform: translateY(-99%) scaleY(-1);
+    transform: translateY(-100%);
   }
 
   #variety-pack-{{ section.id }} .variety-pack-promo__wave--bottom {
     bottom: 0;
-    transform: translateY(99%);
+    transform: translateY(100%);
   }
 
   /* Container */
@@ -645,8 +645,8 @@
       "type": "color",
       "id": "top_wave_color",
       "label": "Top Wave Color",
-      "default": "#E8B931",
-      "info": "Should match the section above"
+      "default": "#FFE6CB",
+      "info": "Use this section's background color - wave extends UP into section above"
     },
     {
       "type": "checkbox",
@@ -682,8 +682,8 @@
       "type": "color",
       "id": "bottom_wave_color",
       "label": "Bottom Wave Color",
-      "default": "#FFFFFF",
-      "info": "Should match the section below"
+      "default": "#FFE6CB",
+      "info": "Use this section's background color - wave extends DOWN into section below"
     },
     {
       "type": "checkbox",

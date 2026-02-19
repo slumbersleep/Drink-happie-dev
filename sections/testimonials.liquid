@@ -15,6 +15,38 @@
   data-color-scheme="{{ section.settings.color_scheme }}"
   style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;"
 >
+  <!-- Top Wave Divider - Points OUTWARD (up into section above) -->
+  {%- if section.settings.show_top_wave -%}
+    <div class="testimonials__wave testimonials__wave--top" style="position: absolute; top: 0; left: 0; width: 100%; height: {{ section.settings.wave_height }}px; z-index: 5; overflow: visible; transform: translateY(-100%);">
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%; display: block;">
+        {%- case section.settings.top_wave_style -%}
+          {%- when 'wave' -%}
+            <path d="M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z" fill="{{ section.settings.top_wave_color }}">
+              {%- if section.settings.top_wave_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z;M0,120 L0,120 Q360,30 720,80 T1440,40 L1440,120 Z;M0,120 L0,120 Q360,90 720,20 T1440,90 L1440,120 Z;M0,120 L0,120 Q360,10 720,70 T1440,50 L1440,120 Z;M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z"/>
+              {%- endif -%}
+            </path>
+          {%- when 'double-ripple' -%}
+            <path d="M0,120 L0,120 Q360,20 720,50 T1440,50 L1440,120 Z" fill="{{ section.settings.top_wave_color }}">
+              {%- if section.settings.top_wave_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,120 Q360,20 720,50 T1440,50 L1440,120 Z;M0,120 L0,120 Q360,40 720,70 T1440,35 L1440,120 Z;M0,120 L0,120 Q360,10 720,40 T1440,70 L1440,120 Z;M0,120 L0,120 Q360,50 720,30 T1440,55 L1440,120 Z;M0,120 L0,120 Q360,20 720,50 T1440,50 L1440,120 Z"/>
+              {%- endif -%}
+            </path>
+            <path d="M0,120 L0,120 Q540,30 1080,35 T1440,30 L1440,120 Z" fill="{{ section.settings.top_wave_color }}" opacity="0.6">
+              {%- if section.settings.top_wave_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed | times: 1.2 }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,120 Q540,30 1080,35 T1440,30 L1440,120 Z;M0,120 L0,120 Q540,45 1080,50 T1440,25 L1440,120 Z;M0,120 L0,120 Q540,20 1080,25 T1440,45 L1440,120 Z;M0,120 L0,120 Q540,40 1080,30 T1440,35 L1440,120 Z;M0,120 L0,120 Q540,30 1080,35 T1440,30 L1440,120 Z"/>
+              {%- endif -%}
+            </path>
+          {%- else -%}
+            <path d="M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z" fill="{{ section.settings.top_wave_color }}">
+              {%- if section.settings.top_wave_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z;M0,120 L0,120 Q360,30 720,80 T1440,40 L1440,120 Z;M0,120 L0,120 Q360,90 720,20 T1440,90 L1440,120 Z;M0,120 L0,120 Q360,10 720,70 T1440,50 L1440,120 Z;M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z"/>
+              {%- endif -%}
+            </path>
+        {%- endcase -%}
+      </svg>
+    </div>
+  {%- endif -%}
   {% if section.settings.logo != blank %}
     <div class="mb-4 text-center">
       <img
@@ -163,6 +195,39 @@
       endcase
     endfor
   -%}
+
+  <!-- Bottom Wave Divider - Points OUTWARD (down into section below) -->
+  {%- if section.settings.show_bottom_wave -%}
+    <div class="testimonials__wave testimonials__wave--bottom" style="position: absolute; bottom: 0; left: 0; width: 100%; height: {{ section.settings.wave_height }}px; z-index: 5; overflow: visible; transform: translateY(100%);">
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%; display: block;">
+        {%- case section.settings.bottom_wave_style -%}
+          {%- when 'wave' -%}
+            <path d="M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z" fill="{{ section.settings.bottom_wave_color }}">
+              {%- if section.settings.bottom_wave_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z;M0,0 L0,0 Q360,90 720,80 T1440,40 L1440,0 Z;M0,0 L0,0 Q360,30 720,100 T1440,90 L1440,0 Z;M0,0 L0,0 Q360,110 720,50 T1440,70 L1440,0 Z;M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z"/>
+              {%- endif -%}
+            </path>
+          {%- when 'double-ripple' -%}
+            <path d="M0,0 L0,0 Q360,100 720,70 T1440,70 L1440,0 Z" fill="{{ section.settings.bottom_wave_color }}">
+              {%- if section.settings.bottom_wave_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,0 L0,0 Q360,100 720,70 T1440,70 L1440,0 Z;M0,0 L0,0 Q360,80 720,50 T1440,85 L1440,0 Z;M0,0 L0,0 Q360,110 720,80 T1440,50 L1440,0 Z;M0,0 L0,0 Q360,70 720,90 T1440,65 L1440,0 Z;M0,0 L0,0 Q360,100 720,70 T1440,70 L1440,0 Z"/>
+              {%- endif -%}
+            </path>
+            <path d="M0,0 L0,0 Q540,90 1080,85 T1440,90 L1440,0 Z" fill="{{ section.settings.bottom_wave_color }}" opacity="0.6">
+              {%- if section.settings.bottom_wave_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed | times: 1.2 }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,0 L0,0 Q540,90 1080,85 T1440,90 L1440,0 Z;M0,0 L0,0 Q540,75 1080,70 T1440,95 L1440,0 Z;M0,0 L0,0 Q540,100 1080,95 T1440,80 L1440,0 Z;M0,0 L0,0 Q540,80 1080,90 T1440,85 L1440,0 Z;M0,0 L0,0 Q540,90 1080,85 T1440,90 L1440,0 Z"/>
+              {%- endif -%}
+            </path>
+          {%- else -%}
+            <path d="M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z" fill="{{ section.settings.bottom_wave_color }}">
+              {%- if section.settings.bottom_wave_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z;M0,0 L0,0 Q360,90 720,80 T1440,40 L1440,0 Z;M0,0 L0,0 Q360,30 720,100 T1440,90 L1440,0 Z;M0,0 L0,0 Q360,110 720,50 T1440,70 L1440,0 Z;M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z"/>
+              {%- endif -%}
+            </path>
+        {%- endcase -%}
+      </svg>
+    </div>
+  {%- endif -%}
 </section>
 
 {%- liquid
@@ -678,6 +743,97 @@
       "unit": "px",
       "label": "Bottom Padding",
       "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Wave Dividers"
+    },
+    {
+      "type": "range",
+      "id": "wave_height",
+      "label": "Wave Height",
+      "min": 40,
+      "max": 150,
+      "step": 10,
+      "default": 80,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "wave_animation_speed",
+      "label": "Animation Speed",
+      "min": 3,
+      "max": 15,
+      "step": 1,
+      "default": 8,
+      "unit": "s",
+      "info": "Duration of one wave cycle"
+    },
+    {
+      "type": "header",
+      "content": "Top Wave"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_top_wave",
+      "label": "Show Top Wave",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "top_wave_style",
+      "label": "Top Wave Style",
+      "options": [
+        { "value": "wave", "label": "Wave One" },
+        { "value": "double-ripple", "label": "Double Ripple" }
+      ],
+      "default": "wave"
+    },
+    {
+      "type": "color",
+      "id": "top_wave_color",
+      "label": "Top Wave Color",
+      "default": "#FFE6CB",
+      "info": "Use this section's background color - wave extends UP into section above"
+    },
+    {
+      "type": "checkbox",
+      "id": "top_wave_animate",
+      "label": "Animate Top Wave",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Bottom Wave"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_bottom_wave",
+      "label": "Show Bottom Wave",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "bottom_wave_style",
+      "label": "Bottom Wave Style",
+      "options": [
+        { "value": "wave", "label": "Wave One" },
+        { "value": "double-ripple", "label": "Double Ripple" }
+      ],
+      "default": "wave"
+    },
+    {
+      "type": "color",
+      "id": "bottom_wave_color",
+      "label": "Bottom Wave Color",
+      "default": "#FFE6CB",
+      "info": "Use this section's background color - wave extends DOWN into section below"
+    },
+    {
+      "type": "checkbox",
+      "id": "bottom_wave_animate",
+      "label": "Animate Bottom Wave",
+      "default": true
     }
   ],
   "blocks": [
