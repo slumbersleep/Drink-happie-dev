@@ -160,7 +160,9 @@
         "coa_button"
       ],
       "settings": {
-        "background_color": "#ffe6cb"
+        "background_color": "#ffe6cb",
+        "padding_top": 4,
+        "padding_bottom": 25
       }
     },
     "text_image_block_bYnbUx": {
@@ -206,7 +208,21 @@
         "heading_icon": "shopify://shop_images/happie-cloud.png",
         "heading": "The happie difference",
         "image": "shopify://shop_images/5f8260cd-ba14-4ba1-a42f-fe426dc8a7df_1.png",
-        "button_text": "Ready to Drink happie?"
+        "button_text": "Ready to Drink happie?",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "wave_height": 80,
+        "wave_animation_speed": 8,
+        "show_top_wave": true,
+        "top_wave_style": "wave",
+        "top_wave_color": "#50b2bd",
+        "top_wave_animate": true,
+        "invert_top_wave": false,
+        "show_bottom_wave": false,
+        "bottom_wave_style": "wave",
+        "bottom_wave_color": "#ffe6cb",
+        "bottom_wave_animate": true,
+        "invert_bottom_wave": false
       }
     },
     "real_people_TNHp8z": {
@@ -258,7 +274,21 @@
       "name": "Real People",
       "settings": {
         "heading_icon": "shopify://shop_images/happie-cloud.png",
-        "heading": "Everything You Want, Nothing You Don't"
+        "heading": "Everything You Want, Nothing You Don't",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "wave_height": 80,
+        "wave_animation_speed": 8,
+        "show_top_wave": true,
+        "top_wave_style": "wave",
+        "top_wave_color": "#50b2bd",
+        "top_wave_animate": true,
+        "invert_top_wave": true,
+        "show_bottom_wave": false,
+        "bottom_wave_style": "wave",
+        "bottom_wave_color": "#50b2bd",
+        "bottom_wave_animate": true,
+        "invert_bottom_wave": true
       }
     },
     "moast_app_jtWhEE": {
@@ -299,7 +329,21 @@
         "heading_icon": "shopify://shop_images/happie-cloud.png",
         "rating_image": "shopify://shop_images/rating.png",
         "rating_text": "Loved by 1,200+ Happy Drinkers",
-        "heading": "Real people. Real vibes. Real results."
+        "heading": "Real people. Real vibes. Real results.",
+        "padding_top": 80,
+        "padding_bottom": 40,
+        "wave_height": 80,
+        "wave_animation_speed": 8,
+        "show_top_wave": false,
+        "top_wave_style": "wave",
+        "top_wave_color": "#50b2bd",
+        "top_wave_animate": true,
+        "invert_top_wave": false,
+        "show_bottom_wave": false,
+        "bottom_wave_style": "wave",
+        "bottom_wave_color": "#ffe6cb",
+        "bottom_wave_animate": true,
+        "invert_bottom_wave": false
       }
     },
     "brand_comparision_ywGiYK": {
@@ -369,7 +413,21 @@
         "button_text": "Shop Happie Now",
         "button_link": "#happie-product-section",
         "own_brand": "shopify://shop_images/logo_svg.png",
-        "other_brand_text": "Other Brands"
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "other_brand_text": "Other Brands",
+        "wave_height": 80,
+        "wave_animation_speed": 8,
+        "show_top_wave": false,
+        "top_wave_style": "wave",
+        "top_wave_color": "#ffe6cb",
+        "top_wave_animate": true,
+        "invert_top_wave": false,
+        "show_bottom_wave": false,
+        "bottom_wave_style": "wave",
+        "bottom_wave_color": "#ffe6cb",
+        "bottom_wave_animate": true,
+        "invert_bottom_wave": false
       }
     },
     "faq_accordion_EBYNyN": {
@@ -428,7 +486,21 @@
       ],
       "name": "FAQ Section",
       "settings": {
-        "heading": "Questions? We got you"
+        "heading": "Questions? We got you",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "wave_height": 80,
+        "wave_animation_speed": 8,
+        "show_top_wave": true,
+        "top_wave_style": "wave",
+        "top_wave_color": "#ffe6cb",
+        "top_wave_animate": true,
+        "invert_top_wave": false,
+        "show_bottom_wave": false,
+        "bottom_wave_style": "wave",
+        "bottom_wave_color": "#ffe6cb",
+        "bottom_wave_animate": true,
+        "invert_bottom_wave": false
       }
     },
     "related_products_r8i9PW": {
@@ -475,6 +547,7 @@
       "type": "product-feature-collection",
       "name": "Product Collection",
       "settings": {
+        "use_happie_cards": true,
         "title": "Find Your happie",
         "subheading": "",
         "collection": "thc",
@@ -492,7 +565,19 @@
         "product_tiles_aspect_ratio": "",
         "image_shape": "",
         "color_scheme": "scheme2",
-        "use_gradient_background": false
+        "use_gradient_background": false,
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "wave_height": 80,
+        "wave_animation_speed": 8,
+        "show_top_wave": false,
+        "top_wave_style": "wave",
+        "top_wave_color": "#ffe6cb",
+        "top_wave_animate": true,
+        "show_bottom_wave": false,
+        "bottom_wave_style": "wave",
+        "bottom_wave_color": "#ffe6cb",
+        "bottom_wave_animate": true
       }
     }
   },
