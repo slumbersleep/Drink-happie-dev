@@ -424,7 +424,7 @@
         "top_wave_color": "#ffe6cb",
         "top_wave_animate": true,
         "invert_top_wave": false,
-        "show_bottom_wave": true,
+        "show_bottom_wave": false,
         "bottom_wave_style": "wave",
         "bottom_wave_color": "#ad8bb3",
         "bottom_wave_animate": true,
@@ -655,6 +655,7 @@
       "block_order": [
         "judge_me_reviews_cards_carousel_ytdycf"
       ],
+      "disabled": true,
       "settings": {
         "apply_vertical_spacing": true,
         "apply_horizontal_spacing": true,
