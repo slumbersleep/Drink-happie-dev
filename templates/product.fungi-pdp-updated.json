@@ -340,11 +340,11 @@
         "top_wave_color": "#50b2bd",
         "top_wave_animate": true,
         "invert_top_wave": false,
-        "show_bottom_wave": true,
+        "show_bottom_wave": false,
         "bottom_wave_style": "wave",
         "bottom_wave_color": "#ffe6cb",
         "bottom_wave_animate": true,
-        "invert_bottom_wave": false
+        "invert_bottom_wave": true
       }
     },
     "brand_comparision_ywGiYK": {
@@ -419,12 +419,12 @@
         "other_brand_text": "Other Brands",
         "wave_height": 80,
         "wave_animation_speed": 8,
-        "show_top_wave": false,
+        "show_top_wave": true,
         "top_wave_style": "wave",
         "top_wave_color": "#ffe6cb",
         "top_wave_animate": true,
         "invert_top_wave": false,
-        "show_bottom_wave": true,
+        "show_bottom_wave": false,
         "bottom_wave_style": "wave",
         "bottom_wave_color": "#ad8bb3",
         "bottom_wave_animate": true,
@@ -524,7 +524,7 @@
         "padding_bottom": 80,
         "wave_height": 80,
         "wave_animation_speed": 8,
-        "show_top_wave": false,
+        "show_top_wave": true,
         "top_wave_style": "wave",
         "top_wave_color": "#ad8bb3",
         "top_wave_animate": true,
@@ -655,6 +655,7 @@
       "block_order": [
         "judge_me_reviews_cards_carousel_ytdycf"
       ],
+      "disabled": true,
       "settings": {
         "apply_vertical_spacing": true,
         "apply_horizontal_spacing": true,
