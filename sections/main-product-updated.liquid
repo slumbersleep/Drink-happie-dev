@@ -1135,7 +1135,7 @@
               <div class="main-product-image desktop-image-view">
                 <img
                   id="main-image"
-                  src="{% if product.handle == 'happie-social-4-pack' %}{{ product.featured_image | image_url: width: 1200 }}{% elsif product.images.size > 1 %}{{ product.images[1] | image_url: width: 1200 }}{% else %}{{ product.featured_image | image_url: width: 1200 }}{% endif %}"
+                  src="{{ product.featured_image | image_url: width: 1200 }}"
                   alt="{{ product.title }}"
                   width=""
                   height=""
@@ -1146,29 +1146,11 @@
               <div class="main-product-image mobile-carousel-view" style="display: none;">
                 <div class="carousel-container">
                   <div class="carousel-track" id="carousel-track">
-                    {% if product.handle == 'happie-social-4-pack' %}
-                      {% comment %} THC Variety Pack: Show featured image first, then other images {% endcomment %}
+                    {% for image in product.images %}
                       <div class="carousel-slide">
-                        <img src="{{ product.featured_image | image_url: width: 1200 }}" alt="{{ product.title }}" width="" height="" class="zoom-icon" data-image-index="0">
+                        <img src="{{ image | image_url: width: 1200 }}" alt="{{ product.title }}" width="" height="" class="zoom-icon" data-image-index="{{ forloop.index0 }}">
                       </div>
-                      {% for image in product.images offset: 1 %}
-                        <div class="carousel-slide">
-                          <img src="{{ image | image_url: width: 1200 }}" alt="{{ product.title }}" width="" height="" class="zoom-icon" data-image-index="{{ forloop.index }}">
-                        </div>
-                      {% endfor %}
-                    {% elsif product.images.size > 1 %}
-                      {% comment %} Other products: Skip featured image (index 0), start from second image {% endcomment %}
-                      {% for image in product.images offset: 1 %}
-                        <div class="carousel-slide">
-                          <img src="{{ image | image_url: width: 1200 }}" alt="{{ product.title }}" width="" height="" class="zoom-icon" data-image-index="{{ forloop.index0 }}">
-                        </div>
-                      {% endfor %}
-                    {% else %}
-                      {% comment %} Fallback: if only 1 image, show the featured image {% endcomment %}
-                      <div class="carousel-slide">
-                        <img src="{{ product.featured_image | image_url: width: 1200 }}" alt="{{ product.title }}" width="" height="" class="zoom-icon" data-image-index="0">
-                      </div>
-                    {% endif %}
+                    {% endfor %}
                   </div>
                   <button class="carousel-nav carousel-prev" aria-label="Previous image">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1186,19 +1168,11 @@
 
               <!-- Thumbnails (Desktop only) -->
               <div class="thumbnail-grid">
-                {% comment %} Skip featured image (index 0), start from second image {% endcomment %}
-                {% if product.images.size > 1 %}
-                  {% for image in product.images offset: 1 %}
-                    <div class="thumbnail-item {% if forloop.index0 == 0 %}active{% endif %}" data-image-url="{{ image | image_url: width: 1200 }}" data-thumbnail-index="{{ forloop.index0 }}">
-                      <img src="{{ image | image_url: width: 600 }}" alt="{{ product.title }}" width="" height="" class="zoom-icon" data-image-index="{{ forloop.index0 }}" aria-label="View full size image">
-                    </div>
-                  {% endfor %}
-                {% else %}
-                  {% comment %} Fallback: if only 1 image, show the featured image {% endcomment %}
-                  <div class="thumbnail-item active" data-image-url="{{ product.featured_image | image_url: width: 1200 }}" data-thumbnail-index="0">
-                    <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title }}" width="" height="" class="zoom-icon" data-image-index="0" aria-label="View full size image">
+                {% for image in product.images %}
+                  <div class="thumbnail-item {% if forloop.first %}active{% endif %}" data-image-url="{{ image | image_url: width: 1200 }}" data-thumbnail-index="{{ forloop.index0 }}">
+                    <img src="{{ image | image_url: width: 600 }}" alt="{{ product.title }}" width="" height="" class="zoom-icon" data-image-index="{{ forloop.index0 }}" aria-label="View full size image">
                   </div>
-                {% endif %}
+                {% endfor %}
               </div>
             </div>
         {% endcase %}
@@ -1591,26 +1565,14 @@
     </svg>
   </button>
   <div class="lightbox-counter">
-    <span id="current-image">1</span> / <span id="total-images">{% if product.handle == 'happie-social-4-pack' %}{{ product.images.size }}{% elsif product.images.size > 1 %}{{ product.images.size | minus: 1 }}{% else %}1{% endif %}</span>
+    <span id="current-image">1</span> / <span id="total-images">{{ product.images.size }}</span>
   </div>
 </div>
 
 <div id="product-images-data" style="display: none;">
-  {% if product.handle == 'happie-social-4-pack' %}
-    {% comment %} THC Variety Pack: Include featured image first, then other images {% endcomment %}
-    <span data-image-url="{{ product.featured_image | image_url: width: 1200 }}"></span>
-    {% for image in product.images offset: 1 %}
-      <span data-image-url="{{ image | image_url: width: 1200 }}"></span>
-    {% endfor %}
-  {% elsif product.images.size > 1 %}
-    {% comment %} Other products: Skip featured image (index 0), start from second image {% endcomment %}
-    {% for image in product.images offset: 1 %}
-      <span data-image-url="{{ image | image_url: width: 1200 }}"></span>
-    {% endfor %}
-  {% else %}
-    {% comment %} Fallback: if only 1 image, show the featured image {% endcomment %}
-    <span data-image-url="{{ product.featured_image | image_url: width: 1200 }}"></span>
-  {% endif %}
+  {% for image in product.images %}
+    <span data-image-url="{{ image | image_url: width: 1200 }}"></span>
+  {% endfor %}
 </div>
 
 <script>
