@@ -1,0 +1,701 @@
+{%- liquid
+  assign section_title = section.settings.title
+  assign main_image = section.settings.main_image
+-%}
+
+<section
+  id="ingredients-{{ section.id }}"
+  class="ingredients-showcase"
+>
+  <!-- Top Wave Divider - Points OUTWARD (up into section above) -->
+  {%- if section.settings.show_top_curve -%}
+    <div class="ingredients-showcase__curve ingredients-showcase__curve--top{% if section.settings.top_curve_animate %} ingredients-showcase__curve--animated{% endif %}" style="position: absolute; top: 0; left: 0; width: 100%; height: {{ section.settings.curve_height }}px; z-index: 5; overflow: visible; transform: translateY(-100%);">
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%; display: block;">
+        {%- case section.settings.top_curve_style -%}
+          {%- when 'wave' -%}
+            <path d="M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z" fill="{{ section.settings.top_curve_color }}">
+              {%- if section.settings.top_curve_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.curve_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z;M0,120 L0,120 Q360,30 720,80 T1440,40 L1440,120 Z;M0,120 L0,120 Q360,90 720,20 T1440,90 L1440,120 Z;M0,120 L0,120 Q360,10 720,70 T1440,50 L1440,120 Z;M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z"/>
+              {%- endif -%}
+            </path>
+          {%- when 'wave-smooth' -%}
+            <path d="M0,120 L0,120 Q720,0 1440,60 L1440,120 Z" fill="{{ section.settings.top_curve_color }}">
+              {%- if section.settings.top_curve_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.curve_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,120 Q720,0 1440,60 L1440,120 Z;M0,120 L0,120 Q720,40 1440,80 L1440,120 Z;M0,120 L0,120 Q720,60 1440,40 L1440,120 Z;M0,120 L0,120 Q720,20 1440,70 L1440,120 Z;M0,120 L0,120 Q720,0 1440,60 L1440,120 Z"/>
+              {%- endif -%}
+            </path>
+          {%- when 'arc' -%}
+            <path d="M0,120 L0,120 Q720,0 1440,120 L1440,120 Z" fill="{{ section.settings.top_curve_color }}">
+              {%- if section.settings.top_curve_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.curve_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,120 Q720,0 1440,120 L1440,120 Z;M0,120 L0,120 Q720,30 1440,120 L1440,120 Z;M0,120 L0,120 Q720,50 1440,120 L1440,120 Z;M0,120 L0,120 Q720,20 1440,120 L1440,120 Z;M0,120 L0,120 Q720,0 1440,120 L1440,120 Z"/>
+              {%- endif -%}
+            </path>
+          {%- when 'slope-left' -%}
+            <path d="M0,120 L0,0 L1440,120 L1440,120 Z" fill="{{ section.settings.top_curve_color }}"/>
+          {%- when 'slope-right' -%}
+            <path d="M0,120 L0,120 L1440,0 L1440,120 Z" fill="{{ section.settings.top_curve_color }}"/>
+          {%- else -%}
+            <path d="M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z" fill="{{ section.settings.top_curve_color }}">
+              {%- if section.settings.top_curve_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.curve_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z;M0,120 L0,120 Q360,30 720,80 T1440,40 L1440,120 Z;M0,120 L0,120 Q360,90 720,20 T1440,90 L1440,120 Z;M0,120 L0,120 Q360,10 720,70 T1440,50 L1440,120 Z;M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z"/>
+              {%- endif -%}
+            </path>
+        {%- endcase -%}
+      </svg>
+    </div>
+  {%- endif -%}
+
+  <div class="ingredients-showcase__container">
+    <!-- Main Card -->
+    <div class="ingredients-showcase__card">
+      <!-- Title -->
+      <h2 class="ingredients-showcase__title">{{ section_title }}</h2>
+
+      <!-- Content Grid -->
+      <div class="ingredients-showcase__content">
+        <!-- Image Side -->
+        <div class="ingredients-showcase__image-wrapper">
+          {%- if main_image != blank -%}
+            <img
+              src="{{ main_image | image_url: width: 800 }}"
+              alt="{{ main_image.alt | escape | default: section_title }}"
+              loading="lazy"
+              class="ingredients-showcase__image"
+              width="{{ main_image.width }}"
+              height="{{ main_image.height }}"
+            >
+          {%- else -%}
+            <div class="ingredients-showcase__placeholder">
+              <span>Product Image</span>
+            </div>
+          {%- endif -%}
+        </div>
+
+        <!-- Ingredients Grid -->
+        <div class="ingredients-showcase__grid">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'ingredient' -%}
+              <div class="ingredients-showcase__item" {{ block.shopify_attributes }}>
+                <div class="ingredients-showcase__icon">
+                  {%- if block.settings.custom_icon != blank -%}
+                    <img
+                      src="{{ block.settings.custom_icon | image_url: width: 120 }}"
+                      alt="{{ block.settings.title }}"
+                      width="48"
+                      height="48"
+                      loading="lazy"
+                    >
+                  {%- else -%}
+                    {%- case block.settings.icon -%}
+                      {%- when 'droplet' -%}
+                        <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5">
+                          <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+                        </svg>
+                      {%- when 'sparkle' -%}
+                        <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5">
+                          <path d="M12 3v18M3 12h18M5.636 5.636l12.728 12.728M18.364 5.636L5.636 18.364"/>
+                          <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                      {%- when 'leaf' -%}
+                        <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5">
+                          <path d="M6.5 12c.94-3.46 4.94-6 8.5-6 1.63 0 3.44.5 5 1.5-.17 3-1.5 6-3.5 8-1.39 1.39-3.23 2.5-5.5 2.5-2.19 0-4.11-.77-5.5-2.5"/>
+                          <path d="M6 15c-1.5-2.5-1-4.5.5-6.5"/>
+                        </svg>
+                      {%- when 'circle-slash' -%}
+                        <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5">
+                          <circle cx="12" cy="12" r="10"/>
+                          <path d="M4.93 4.93l14.14 14.14"/>
+                        </svg>
+                      {%- when 'flask' -%}
+                        <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5">
+                          <path d="M9 3h6M10 3v6.5L4.5 18.5c-.8 1.1-.1 2.5 1.2 2.5h12.6c1.3 0 2-1.4 1.2-2.5L14 9.5V3"/>
+                          <path d="M8 14h8"/>
+                        </svg>
+                      {%- when 'heart' -%}
+                        <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5">
+                          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                        </svg>
+                      {%- when 'sun' -%}
+                        <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5">
+                          <circle cx="12" cy="12" r="5"/>
+                          <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+                          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                          <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+                          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                        </svg>
+                      {%- when 'zap' -%}
+                        <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5">
+                          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                        </svg>
+                      {%- else -%}
+                        <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5">
+                          <circle cx="12" cy="12" r="10"/>
+                          <path d="M12 6v6l4 2"/>
+                        </svg>
+                    {%- endcase -%}
+                  {%- endif -%}
+                </div>
+                <h3 class="ingredients-showcase__item-title">{{ block.settings.title }}</h3>
+                <p class="ingredients-showcase__item-desc">{{ block.settings.description }}</p>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Wave Divider - Points OUTWARD (down into section below) -->
+  {%- if section.settings.show_bottom_curve -%}
+    <div class="ingredients-showcase__curve ingredients-showcase__curve--bottom{% if section.settings.bottom_curve_animate %} ingredients-showcase__curve--animated{% endif %}" style="position: absolute; bottom: 0; left: 0; width: 100%; height: {{ section.settings.curve_height }}px; z-index: 5; overflow: visible; transform: translateY(100%);">
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%; display: block;">
+        {%- case section.settings.bottom_curve_style -%}
+          {%- when 'wave' -%}
+            <path d="M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z" fill="{{ section.settings.bottom_curve_color }}">
+              {%- if section.settings.bottom_curve_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.curve_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z;M0,0 L0,0 Q360,90 720,80 T1440,40 L1440,0 Z;M0,0 L0,0 Q360,30 720,100 T1440,90 L1440,0 Z;M0,0 L0,0 Q360,110 720,50 T1440,70 L1440,0 Z;M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z"/>
+              {%- endif -%}
+            </path>
+          {%- when 'wave-smooth' -%}
+            <path d="M0,0 L0,0 Q720,120 1440,60 L1440,0 Z" fill="{{ section.settings.bottom_curve_color }}">
+              {%- if section.settings.bottom_curve_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.curve_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,0 L0,0 Q720,120 1440,60 L1440,0 Z;M0,0 L0,0 Q720,80 1440,40 L1440,0 Z;M0,0 L0,0 Q720,60 1440,80 L1440,0 Z;M0,0 L0,0 Q720,100 1440,50 L1440,0 Z;M0,0 L0,0 Q720,120 1440,60 L1440,0 Z"/>
+              {%- endif -%}
+            </path>
+          {%- when 'arc' -%}
+            <path d="M0,0 L0,0 Q720,120 1440,0 L1440,0 Z" fill="{{ section.settings.bottom_curve_color }}">
+              {%- if section.settings.bottom_curve_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.curve_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,0 L0,0 Q720,120 1440,0 L1440,0 Z;M0,0 L0,0 Q720,90 1440,0 L1440,0 Z;M0,0 L0,0 Q720,70 1440,0 L1440,0 Z;M0,0 L0,0 Q720,100 1440,0 L1440,0 Z;M0,0 L0,0 Q720,120 1440,0 L1440,0 Z"/>
+              {%- endif -%}
+            </path>
+          {%- when 'slope-left' -%}
+            <path d="M0,0 L0,120 L1440,0 L1440,0 Z" fill="{{ section.settings.bottom_curve_color }}"/>
+          {%- when 'slope-right' -%}
+            <path d="M0,0 L0,0 L1440,120 L1440,0 Z" fill="{{ section.settings.bottom_curve_color }}"/>
+          {%- else -%}
+            <path d="M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z" fill="{{ section.settings.bottom_curve_color }}">
+              {%- if section.settings.bottom_curve_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.curve_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z;M0,0 L0,0 Q360,90 720,80 T1440,40 L1440,0 Z;M0,0 L0,0 Q360,30 720,100 T1440,90 L1440,0 Z;M0,0 L0,0 Q360,110 720,50 T1440,70 L1440,0 Z;M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z"/>
+              {%- endif -%}
+            </path>
+        {%- endcase -%}
+      </svg>
+    </div>
+  {%- endif -%}
+</section>
+
+<style>
+  #ingredients-{{ section.id }} {
+    --ing-bg: {{ section.settings.background_color }};
+    --ing-card-bg: {{ section.settings.card_bg_color }};
+    --ing-title-color: {{ section.settings.title_color }};
+    --ing-item-bg: {{ section.settings.item_bg_color }};
+    --ing-item-title-color: {{ section.settings.item_title_color }};
+    --ing-item-text-color: {{ section.settings.item_text_color }};
+    --ing-icon-color: {{ section.settings.icon_color }};
+    --ing-icon-bg: {{ section.settings.icon_bg_color }};
+  }
+
+  #ingredients-{{ section.id }}.ingredients-showcase {
+    background: var(--ing-bg);
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    position: relative;
+  }
+
+  /* Curve Dividers */
+  #ingredients-{{ section.id }} .ingredients-showcase__curve {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    line-height: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  #ingredients-{{ section.id }} .ingredients-showcase__curve svg {
+    display: block;
+    width: 100%;
+    height: {{ section.settings.curve_height }}px;
+  }
+
+  #ingredients-{{ section.id }} .ingredients-showcase__curve--top {
+    top: 0;
+    transform: translateY(-99%);
+  }
+
+  #ingredients-{{ section.id }} .ingredients-showcase__curve--bottom {
+    bottom: 0;
+    transform: translateY(99%);
+  }
+
+  #ingredients-{{ section.id }} .ingredients-showcase__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Main Card */
+  #ingredients-{{ section.id }} .ingredients-showcase__card {
+    background: var(--ing-card-bg);
+    border-radius: 32px;
+    padding: 48px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  }
+
+  /* Title */
+  #ingredients-{{ section.id }} .ingredients-showcase__title {
+    font-family: var(--font-heading-family, inherit);
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 700;
+    color: var(--ing-title-color);
+    text-align: center;
+    margin: 0 0 40px;
+    letter-spacing: -0.5px;
+    line-height: 1.15;
+  }
+
+  /* Content Grid */
+  #ingredients-{{ section.id }} .ingredients-showcase__content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+
+  /* Image Side */
+  #ingredients-{{ section.id }} .ingredients-showcase__image-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #ingredients-{{ section.id }} .ingredients-showcase__image {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  #ingredients-{{ section.id }} .ingredients-showcase__placeholder {
+    width: 100%;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.03);
+    border: 2px dashed rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    color: var(--ing-title-color);
+    font-weight: 500;
+    opacity: 0.6;
+  }
+
+  /* Ingredients Grid */
+  #ingredients-{{ section.id }} .ingredients-showcase__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  /* Ingredient Item */
+  #ingredients-{{ section.id }} .ingredients-showcase__item {
+    background: var(--ing-item-bg);
+    border-radius: 16px;
+    padding: 24px;
+    text-align: center;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+  }
+
+  #ingredients-{{ section.id }} .ingredients-showcase__icon {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--ing-icon-bg);
+    border-radius: 50%;
+    color: var(--ing-icon-color);
+  }
+
+  #ingredients-{{ section.id }} .ingredients-showcase__icon img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+  }
+
+  #ingredients-{{ section.id }} .ingredients-showcase__item-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ing-item-title-color);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0 0 8px;
+  }
+
+  #ingredients-{{ section.id }} .ingredients-showcase__item-desc {
+    font-size: 13px;
+    color: var(--ing-item-text-color);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    #ingredients-{{ section.id }} .ingredients-showcase__content {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    #ingredients-{{ section.id }} .ingredients-showcase__image-wrapper {
+      order: -1;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+  }
+
+  @media (max-width: 768px) {
+    #ingredients-{{ section.id }}.ingredients-showcase {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    }
+
+    #ingredients-{{ section.id }} .ingredients-showcase__curve svg {
+      height: {{ section.settings.curve_height | times: 65 | divided_by: 100 }}px;
+    }
+
+    #ingredients-{{ section.id }} .ingredients-showcase__card {
+      padding: 32px 20px;
+      border-radius: 24px;
+    }
+
+    #ingredients-{{ section.id }} .ingredients-showcase__title {
+      margin-bottom: 32px;
+    }
+
+    #ingredients-{{ section.id }} .ingredients-showcase__grid {
+      gap: 12px;
+    }
+
+    #ingredients-{{ section.id }} .ingredients-showcase__item {
+      padding: 20px 16px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    #ingredients-{{ section.id }} .ingredients-showcase__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Ingredients Showcase",
+  "tag": "section",
+  "class": "ingredients-showcase-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top (Desktop)",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "default": 80,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom (Desktop)",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "default": 80,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Padding Top (Mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 60,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Padding Bottom (Mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 60,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Putting The High In Ridiculously High Quality Ingredients"
+    },
+    {
+      "type": "image_picker",
+      "id": "main_image",
+      "label": "Main Image",
+      "info": "Product or ingredient image on the left side"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Section Background",
+      "default": "#E8B931"
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color",
+      "label": "Card Background",
+      "default": "#FFF8DC"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#7B3F9E"
+    },
+    {
+      "type": "color",
+      "id": "item_bg_color",
+      "label": "Ingredient Card Background",
+      "default": "#FFFEF5"
+    },
+    {
+      "type": "color",
+      "id": "item_title_color",
+      "label": "Ingredient Title Color",
+      "default": "#7B3F9E"
+    },
+    {
+      "type": "color",
+      "id": "item_text_color",
+      "label": "Ingredient Description Color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon Color",
+      "default": "#7B3F9E"
+    },
+    {
+      "type": "color",
+      "id": "icon_bg_color",
+      "label": "Icon Background",
+      "default": "rgba(123, 63, 158, 0.08)"
+    },
+    {
+      "type": "header",
+      "content": "Curve Dividers"
+    },
+    {
+      "type": "range",
+      "id": "curve_height",
+      "label": "Curve Height",
+      "min": 30,
+      "max": 150,
+      "step": 10,
+      "default": 80,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "curve_animation_speed",
+      "label": "Animation Speed",
+      "min": 3,
+      "max": 15,
+      "step": 1,
+      "default": 8,
+      "unit": "s",
+      "info": "Duration of one wave cycle (slower = more subtle)"
+    },
+    {
+      "type": "header",
+      "content": "Top Curve"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_top_curve",
+      "label": "Show Top Curve",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "top_curve_style",
+      "label": "Top Curve Style",
+      "options": [
+        { "value": "wave", "label": "Wave" },
+        { "value": "wave-smooth", "label": "Wave (Smooth)" },
+        { "value": "arc", "label": "Arc" },
+        { "value": "slope-left", "label": "Slope (Left to Right)" },
+        { "value": "slope-right", "label": "Slope (Right to Left)" }
+      ],
+      "default": "wave"
+    },
+    {
+      "type": "color",
+      "id": "top_curve_color",
+      "label": "Top Curve Color",
+      "default": "#FFFBF5",
+      "info": "Should match the section above"
+    },
+    {
+      "type": "checkbox",
+      "id": "top_curve_animate",
+      "label": "Animate Top Curve",
+      "default": true,
+      "info": "Adds a flowing ripple wave animation"
+    },
+    {
+      "type": "header",
+      "content": "Bottom Curve"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_bottom_curve",
+      "label": "Show Bottom Curve",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "bottom_curve_style",
+      "label": "Bottom Curve Style",
+      "options": [
+        { "value": "wave", "label": "Wave" },
+        { "value": "wave-smooth", "label": "Wave (Smooth)" },
+        { "value": "arc", "label": "Arc" },
+        { "value": "slope-left", "label": "Slope (Left to Right)" },
+        { "value": "slope-right", "label": "Slope (Right to Left)" }
+      ],
+      "default": "wave"
+    },
+    {
+      "type": "color",
+      "id": "bottom_curve_color",
+      "label": "Bottom Curve Color",
+      "default": "#FFFFFF",
+      "info": "Should match the section below"
+    },
+    {
+      "type": "checkbox",
+      "id": "bottom_curve_animate",
+      "label": "Animate Bottom Curve",
+      "default": true,
+      "info": "Adds a flowing ripple wave animation"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "ingredient",
+      "name": "Ingredient",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "droplet", "label": "Droplet (Water)" },
+            { "value": "sparkle", "label": "Sparkle (Flavor)" },
+            { "value": "leaf", "label": "Leaf (Natural)" },
+            { "value": "circle-slash", "label": "Circle Slash (No/Free)" },
+            { "value": "flask", "label": "Flask (Science)" },
+            { "value": "heart", "label": "Heart (Health)" },
+            { "value": "sun", "label": "Sun (Energy)" },
+            { "value": "zap", "label": "Zap (Power)" }
+          ],
+          "default": "droplet"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_icon",
+          "label": "Custom Icon",
+          "info": "Optional: Upload a custom icon image to override the default"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Ingredient Name"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "A short description of this ingredient and its benefits."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ingredients Showcase",
+      "settings": {
+        "title": "Putting The High In Ridiculously High Quality Ingredients",
+        "show_top_curve": true,
+        "show_bottom_curve": true
+      },
+      "blocks": [
+        {
+          "type": "ingredient",
+          "settings": {
+            "icon": "droplet",
+            "title": "Sparkling Water",
+            "description": "We only use the cutest little bubbles in our reverse osmosis filtered water"
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "icon": "sparkle",
+            "title": "All-Natural Flavor",
+            "description": "No mysterious \"essences.\" Real stuff. We won awards for this! Awards!!!"
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "icon": "leaf",
+            "title": "100% Agave Nectar",
+            "description": "It's like sugar but also not? Accepting no further questions at this time"
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "icon": "circle-slash",
+            "title": "High-Quality THC & CBD",
+            "description": "Naturally-derived and keeps its potency till you party"
+          }
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["header", "footer", "aside"]
+  }
+}
+{% endschema %}

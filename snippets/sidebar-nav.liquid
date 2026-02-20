@@ -1,113 +1,574 @@
-{%- assign base_font_class = base_font_class | replace: 'font-heading', 'font-main' %}
+{%- comment -%}
+  Mobile Sidebar Navigation - Optimized for CRO & UX
+  - Clean, modern design matching Happie brand
+  - Prominent Shop CTAs
+  - Featured collection cards with images
+  - Easy touch navigation
+  - Trust badges and account access
+{%- endcomment -%}
+
+{%- liquid
+  # Get accent color from header settings or default
+  assign accent_color = section.settings.nav_text_hover_color | default: '#4FB1BD'
+  assign text_color = section.settings.nav_text_color | default: '#1A1A1A'
+  
+  # Featured card settings
+  assign thc_card_image = section.settings.mobile_nav_thc_image
+  assign thc_card_link = section.settings.mobile_nav_thc_link | default: '/collections/thc-seltzers'
+  assign fungi_card_image = section.settings.mobile_nav_fungi_image
+  assign fungi_card_link = section.settings.mobile_nav_fungi_link | default: '/collections/fungi-fusion'
+  
+  # Mobile menu - access via linklists global object using the handle
+  assign mobile_menu_handle = section.settings.mobile_nav_menu
+  assign mobile_menu = linklists[mobile_menu_handle]
+-%}
+
 <template x-teleport="#left-drawer-slot">
   <div
     :data-modal-label="$store.modals.leftDrawer.contents === 'nav' ? '{{ section.settings.main_linklist.title }}' : false"
     x-show="$store.modals.leftDrawer.contents === 'nav'"
-    class="sidebar-nav px-section py-5 {% if settings.enable_sidebar_nav_animation %} sidebar-nav--enable-transitions {% endif %}"
+    class="sidebar-nav-happie {% if settings.enable_sidebar_nav_animation %} sidebar-nav--enable-transitions {% endif %}"
   >
-    <div class="relative flex items-center justify-between pb-5">
-      <h2 class="sr-only" class="" tabindex="-1">
-        {{ section.settings.main_linklist.title }}
-      </h2>
-      <button @click.prevent="$store.modals.close('nav')" class="top-0 block">
-        <span class="sr-only">
-          {{- 'general.accessibility.close_modal' | t -}}
-        </span>
-        <span class="inline-block h-5 w-5">{% render 'icon-close' %}</span>
+    {%- comment -%} Header with Close Button {%- endcomment -%}
+    <div class="sidebar-nav-happie__header">
+      <a href="{{ routes.root_url }}" class="sidebar-nav-happie__logo">
+        {%- if section.settings.logo != blank -%}
+          {%- assign mobile_logo_size = section.settings.mobile_logo_max_width | default: 150 -%}
+          {%- assign mobile_logo_size_2x = mobile_logo_size | times: 2 -%}
+          <img
+            src="{{ section.settings.logo | image_url: width: mobile_logo_size_2x }}"
+            srcset="{{ section.settings.logo | image_url: width: mobile_logo_size }} 1x, {{ section.settings.logo | image_url: width: mobile_logo_size_2x }} 2x"
+            alt="{{ shop.name }}"
+            width="{{ mobile_logo_size }}"
+            height="auto"
+            loading="eager"
+            class="sidebar-nav-logo-img"
+          >
+        {%- else -%}
+          <span class="sidebar-nav-happie__logo-text">{{ shop.name }}</span>
+        {%- endif -%}
+      </a>
+      <button @click.prevent="$store.modals.close('nav')" class="sidebar-nav-happie__close">
+        <span class="sr-only">{{ 'general.accessibility.close_modal' | t }}</span>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
       </button>
     </div>
-    <ul class="mt-5">
-      {%- liquid
-        if section.settings.mobile_main_linklist != blank
-          assign menu = section.settings.mobile_main_linklist
-        else
-          assign menu = section.settings.main_linklist
-        endif
-        for link in menu.links
-          render 'sidebar-nav-list-item', link: link
-        endfor
-      -%}
-    </ul>
 
-    <div class="mt-5 space-y-5">
-      {%- if section.settings.sidebar_show_footer_menu -%}
-        <nav aria-label="Secondary">
-          <ul class="space-y-1.5">
-            {%- for link in linklists.footer.links -%}
-              <li>
-                <a class="inline-block py-1" href="{{ link.url }}">
+    {%- comment -%} Primary CTA - Shop Now {%- endcomment -%}
+    <div class="sidebar-nav-happie__cta">
+      <a href="/collections/all" class="sidebar-nav-happie__cta-btn">
+        Shop All Products
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+
+    {%- comment -%} Featured Collection Cards with Images {%- endcomment -%}
+    <div class="sidebar-nav-happie__featured">
+      <div class="sidebar-nav-happie__featured-grid">
+        {%- comment -%} THC Seltzers Card {%- endcomment -%}
+        <a href="{{ thc_card_link }}" class="sidebar-nav-happie__featured-card sidebar-nav-happie__featured-card--thc">
+          {%- if thc_card_image != blank -%}
+            <div class="sidebar-nav-happie__featured-image">
+              <img 
+                src="{{ thc_card_image | image_url: width: 300, height: 200, crop: 'center' }}"
+                alt="THC Infused Seltzers"
+                width="300"
+                height="200"
+                loading="lazy"
+              >
+            </div>
+          {%- endif -%}
+          <div class="sidebar-nav-happie__featured-content">
+            <span class="sidebar-nav-happie__featured-label">THC Infused</span>
+            <span class="sidebar-nav-happie__featured-title">Seltzers</span>
+          </div>
+        </a>
+        
+        {%- comment -%} Fungi Fusion Card {%- endcomment -%}
+        <a href="{{ fungi_card_link }}" class="sidebar-nav-happie__featured-card sidebar-nav-happie__featured-card--fungi">
+          {%- if fungi_card_image != blank -%}
+            <div class="sidebar-nav-happie__featured-image">
+              <img 
+                src="{{ fungi_card_image | image_url: width: 300, height: 200, crop: 'center' }}"
+                alt="Fungi Fusion"
+                width="300"
+                height="200"
+                loading="lazy"
+              >
+            </div>
+          {%- endif -%}
+          <div class="sidebar-nav-happie__featured-content">
+            <span class="sidebar-nav-happie__featured-label">Zero THC</span>
+            <span class="sidebar-nav-happie__featured-title">Fungi Fusion</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    {%- comment -%} Navigation Links {%- endcomment -%}
+    {%- liquid
+      # Get the menu handle from settings and access via linklists global
+      assign nav_menu_handle = section.settings.mobile_nav_menu
+      assign nav_menu = linklists[nav_menu_handle]
+      
+      # Fallback chain if no menu selected or menu is empty
+      if nav_menu.links.size == 0
+        assign nav_menu = linklists['left-main-menu']
+      endif
+      
+      if nav_menu.links.size == 0
+        assign nav_menu = linklists['main-menu']
+      endif
+      
+      if nav_menu.links.size == 0
+        assign nav_menu = linklists['footer']
+      endif
+    -%}
+    <nav class="sidebar-nav-happie__nav" aria-label="Main navigation">
+      <ul class="sidebar-nav-happie__list">
+        {%- for link in nav_menu.links -%}
+          {%- liquid
+            assign link_title_downcase = link.title | downcase | strip
+            assign skip_link = false
+            if link_title_downcase contains 'shop'
+              assign skip_link = true
+            endif
+          -%}
+          {%- unless skip_link -%}
+            <li class="sidebar-nav-happie__item">
+              {%- if link.links.size > 0 -%}
+                <div x-data="{ expanded: false }">
+                  <button
+                    class="sidebar-nav-happie__link sidebar-nav-happie__link--parent"
+                    @click="expanded = !expanded"
+                    :aria-expanded="expanded"
+                    type="button"
+                  >
+                    <span>{{ link.title }}</span>
+                    <svg 
+                      class="sidebar-nav-happie__chevron" 
+                      :class="{ 'rotate-180': expanded }"
+                      width="16" 
+                      height="16" 
+                      viewBox="0 0 24 24" 
+                      fill="none" 
+                      stroke="currentColor" 
+                      stroke-width="2" 
+                      stroke-linecap="round" 
+                      stroke-linejoin="round"
+                    >
+                      <path d="M6 9l6 6 6-6"/>
+                    </svg>
+                  </button>
+                  <ul 
+                    class="sidebar-nav-happie__sublist"
+                    x-show="expanded" 
+                    x-collapse
+                  >
+                    {%- for child_link in link.links -%}
+                      <li>
+                        <a href="{{ child_link.url }}" class="sidebar-nav-happie__sublink">
+                          {{ child_link.title }}
+                        </a>
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                </div>
+              {%- else -%}
+                <a href="{{ link.url }}" class="sidebar-nav-happie__link">
                   {{ link.title }}
                 </a>
-              </li>
-            {%- endfor -%}
-          </ul>
-        </nav>
-      {%- endif -%}
+              {%- endif -%}
+            </li>
+          {%- endunless -%}
+        {%- endfor -%}
+      </ul>
+    </nav>
 
-      {% comment %}
-        {% if shop.customer_accounts_enabled %}
-          <ul class="space-y-1.5">
-            {% if customer %}
-              <li>
-                <a href="{{ routes.account_url }}">
-                  {{- 'layout.customer.account' | t -}}
-                </a>
-              </li>
-              <li>
-                {{ 'layout.customer.log_out' | t | customer_logout_link }}
-              </li>
-            {% else %}
-              <li>
-                {{ 'layout.customer.log_in' | t | customer_login_link }}
-              </li>
-              <li>
-                {{
-                  'layout.customer.create_account'
-                  | t
-                  | customer_register_link
-                }}
-              </li>
-            {% endif %}
-          </ul>
-        {% endif %}
-      {% endcomment %}
+    {%- comment -%} Account Button {%- endcomment -%}
+    <div class="sidebar-nav-happie__account">
+      <a href="{{ routes.account_url }}" class="sidebar-nav-happie__account-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+        <span>My Account</span>
+      </a>
+    </div>
 
-      {%- if section.settings.header_show_search -%}
-        <form
-          class="relative mx-auto mt-10 block max-w-2xl"
-          action="/search"
-          method="get"
-          role="search"
-        >
-          <label for="Search" class="visually-hidden">
-            {{ 'general.search.placeholder' | t }}
-          </label>
-          <input
-            type="search"
-            name="q"
-            id="Search"
-            class="input w-full pr-12 placeholder-current"
-            value="{{ search.terms | escape }}"
-            placeholder="{{ 'general.search.placeholder' | t }}"
-          >
-          <button
-            class="absolute right-2 top-1/2 flex -translate-y-1/2 transform p-1"
-            type="submit"
-            class="button"
-          >
-            <span class="inline-block h-5 w-5 shrink-0">
-              {%- render 'icon-search' -%}
-            </span>
-            <span class="visually-hidden">
-              {{- 'general.search.submit' | t -}}
-            </span>
-          </button>
-        </form>
-      {%- endif -%}
+    {%- comment -%} Trust Badges {%- endcomment -%}
+    <div class="sidebar-nav-happie__trust">
+      <div class="sidebar-nav-happie__trust-item">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12l5 5L20 7"/>
+        </svg>
+        <span>Free Shipping $50+</span>
+      </div>
+      <div class="sidebar-nav-happie__trust-item">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+        <span>Lab Tested</span>
+      </div>
+      <div class="sidebar-nav-happie__trust-item">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+          <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+        <span>30-Day Guarantee</span>
+      </div>
+    </div>
 
-      {%- if section.settings.sidebar_show_social_icons -%}
-        {%- render 'social-icons', list_class: 'justify-start' -%}
-      {%- endif -%}
+    {%- comment -%} Footer with Instagram {%- endcomment -%}
+    <div class="sidebar-nav-happie__footer">
+      <a href="https://instagram.com/live_happie" target="_blank" rel="noopener noreferrer" class="sidebar-nav-happie__instagram">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+        </svg>
+        <span>@live_happie</span>
+      </a>
     </div>
   </div>
 </template>
+
+<style>
+  /* ========================================
+     HAPPIE MOBILE NAVIGATION - Premium Design
+     ======================================== */
+  
+  .sidebar-nav-happie {
+    display: flex !important;
+    flex-direction: column;
+    min-height: 100%;
+    height: auto;
+    padding: 0;
+    background: #FFFFFF;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  
+  /* Ensure all children are visible on all screen sizes */
+  .sidebar-nav-happie * {
+    visibility: visible;
+  }
+  
+  /* Header */
+  .sidebar-nav-happie__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    gap: 16px;
+  }
+  
+  .sidebar-nav-happie__logo {
+    display: block;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  
+  .sidebar-nav-happie__logo img,
+  .sidebar-nav-happie__logo img.sidebar-nav-logo-img {
+    width: {{ section.settings.mobile_logo_max_width | default: 150 }}px !important;
+    max-width: calc(100vw - 120px) !important;
+    height: auto !important;
+  }
+  
+  .sidebar-nav-happie__logo-text {
+    font-size: 20px;
+    font-weight: 700;
+    color: {{ text_color }};
+  }
+  
+  .sidebar-nav-happie__close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: rgba(0, 0, 0, 0.04);
+    border-radius: 50%;
+    color: {{ text_color }};
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .sidebar-nav-happie__close:hover {
+    background: rgba(0, 0, 0, 0.08);
+  }
+  
+  /* Primary CTA */
+  .sidebar-nav-happie__cta {
+    padding: 20px 24px 16px;
+  }
+  
+  .sidebar-nav-happie__cta-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 16px 24px;
+    background: {{ accent_color }};
+    color: #FFFFFF;
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 999px;
+    transition: all 0.25s ease;
+  }
+  
+  .sidebar-nav-happie__cta-btn:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+  }
+  
+  /* Featured Cards */
+  .sidebar-nav-happie__featured {
+    padding: 0 24px 20px;
+  }
+  
+  .sidebar-nav-happie__featured-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  
+  .sidebar-nav-happie__featured-card {
+    display: flex;
+    flex-direction: column;
+    border-radius: 16px;
+    text-decoration: none;
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  
+  .sidebar-nav-happie__featured-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+  
+  .sidebar-nav-happie__featured-card--thc {
+    background: linear-gradient(135deg, #E8956D 0%, #D4764A 100%);
+    color: #FFFFFF;
+  }
+  
+  .sidebar-nav-happie__featured-card--fungi {
+    background: linear-gradient(135deg, #8B7EC8 0%, #6B5CA5 100%);
+    color: #FFFFFF;
+  }
+  
+  .sidebar-nav-happie__featured-image {
+    width: 100%;
+    aspect-ratio: 3/2;
+    overflow: hidden;
+  }
+  
+  .sidebar-nav-happie__featured-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .sidebar-nav-happie__featured-content {
+    padding: 12px 14px 14px;
+  }
+  
+  .sidebar-nav-happie__featured-label {
+    display: block;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    opacity: 0.85;
+    margin-bottom: 2px;
+  }
+  
+  .sidebar-nav-happie__featured-title {
+    display: block;
+    font-size: 16px;
+    font-weight: 800;
+  }
+  
+  /* Navigation List */
+  .sidebar-nav-happie__nav {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    flex: 1;
+    padding: 8px 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    min-height: auto;
+    overflow: visible;
+  }
+  
+  .sidebar-nav-happie__list {
+    display: block !important;
+    visibility: visible !important;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .sidebar-nav-happie__item {
+    display: list-item !important;
+    visibility: visible !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+  }
+  
+  .sidebar-nav-happie__link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 16px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #1A1A1A !important;
+    text-decoration: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    text-align: left;
+  }
+  
+  .sidebar-nav-happie__link span {
+    color: #1A1A1A;
+  }
+  
+  .sidebar-nav-happie__link:hover,
+  .sidebar-nav-happie__link:focus {
+    background: rgba(0, 0, 0, 0.02);
+  }
+  
+  .sidebar-nav-happie__chevron {
+    transition: transform 0.25s ease;
+    color: rgba(0, 0, 0, 0.4);
+  }
+  
+  .sidebar-nav-happie__chevron.rotate-180 {
+    transform: rotate(180deg);
+  }
+  
+  /* Sublist */
+  .sidebar-nav-happie__sublist {
+    list-style: none;
+    margin: 0;
+    padding: 0 0 12px 0;
+    background: rgba(0, 0, 0, 0.02);
+  }
+  
+  .sidebar-nav-happie__sublink {
+    display: block;
+    padding: 12px 24px 12px 40px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #333333 !important;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  
+  .sidebar-nav-happie__sublink:hover {
+    color: {{ accent_color }} !important;
+  }
+  
+  /* Account Button */
+  .sidebar-nav-happie__account {
+    padding: 16px 24px;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+  }
+  
+  .sidebar-nav-happie__account-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 14px 20px;
+    background: #FFFFFF;
+    border: 2px solid rgba(0, 0, 0, 0.15);
+    border-radius: 999px;
+    color: #1A1A1A !important;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  
+  .sidebar-nav-happie__account-btn svg {
+    color: #1A1A1A;
+  }
+  
+  .sidebar-nav-happie__account-btn span {
+    color: #1A1A1A;
+  }
+  
+  .sidebar-nav-happie__account-btn:hover {
+    border-color: {{ accent_color }};
+    color: {{ accent_color }} !important;
+  }
+  
+  .sidebar-nav-happie__account-btn:hover svg,
+  .sidebar-nav-happie__account-btn:hover span {
+    color: {{ accent_color }};
+  }
+  
+  /* Trust Badges */
+  .sidebar-nav-happie__trust {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px 24px;
+    padding: 20px 24px;
+    background: rgba(0, 0, 0, 0.02);
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+  }
+  
+  .sidebar-nav-happie__trust-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.6);
+  }
+  
+  .sidebar-nav-happie__trust-item svg {
+    color: {{ accent_color }};
+    flex-shrink: 0;
+  }
+  
+  /* Footer */
+  .sidebar-nav-happie__footer {
+    padding: 20px 24px;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    display: flex;
+    justify-content: center;
+  }
+  
+  .sidebar-nav-happie__instagram {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    color: rgba(0, 0, 0, 0.6);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s ease;
+    border-radius: 999px;
+  }
+  
+  .sidebar-nav-happie__instagram:hover {
+    color: {{ accent_color }};
+  }
+</style>

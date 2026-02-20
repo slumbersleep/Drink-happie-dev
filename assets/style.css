@@ -70,9 +70,28 @@
 .people-sec .sm-box-wrapper img { max-width: 75px; margin: 0 auto 10px; min-height: 100px; }
 .people-sec .sm-box-wrapper h4 { font-weight: 600; font-size: 25px; color: #1A1A1A; }
 
-.app-sec { padding: 80px 0; background-color: #50b2bd; }
+.app-sec { background-color: #50b2bd; }
 .app-sec .common-heading-wrap p { display: flex; justify-content: center; align-items: center; }
 .app-sec .common-heading-wrap p span.start-icon img { margin-bottom: 0; margin-right: 15px; max-width: 90px;}
+
+/* Moast Testimonials Section */
+.moast-testimonials-sec { background-color: #50b2bd; margin-top: -1px; }
+.moast-testimonials-section { padding: 0; }
+
+/* Moast Testimonials Slider */
+.moast-testimonials-wrapper { padding: 0 20px; }
+.moast-testimonials-slider .splide__slide { width: 320px; }
+.moast-testimonial-card { background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: 16px; padding: 24px; text-align: center; height: 100%; display: flex; flex-direction: column; border: 1px solid rgba(255, 255, 255, 0.2); }
+.moast-testimonial-image { margin-bottom: 16px; }
+.moast-testimonial-image .testimonial-avatar { width: 70px; height: 70px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(255, 255, 255, 0.5); }
+.moast-testimonial-content { flex: 1; display: flex; flex-direction: column; }
+.moast-testimonial-stars { color: #F7CD46; font-size: 18px; letter-spacing: 2px; margin-bottom: 12px; display: block; }
+.moast-testimonial-quote { color: #fff; font-size: 15px; line-height: 1.6; margin-bottom: 16px; flex: 1; }
+.moast-testimonial-quote p { margin: 0; }
+.moast-testimonial-source { color: rgba(255, 255, 255, 0.9); font-size: 14px; font-weight: 600; }
+.moast-testimonials-arrows { display: flex; justify-content: center; gap: 16px; margin-top: 24px; }
+.moast-testimonials-arrows .splide__arrow { background: rgba(255, 255, 255, 0.2); border: 1px solid rgba(255, 255, 255, 0.3); color: #fff; }
+.moast-testimonials-arrows .splide__arrow:hover { background: rgba(255, 255, 255, 0.3); }
 
 .why-happie-sec { background-color: #FFE6CB; padding: 100px 0 200px; position: relative; }
 .why-happie-sec .why-happie-left-text h2 { font-size: clamp(1.75rem,.5rem + 3.333vw,3.5rem); font-weight: 700; margin-bottom: 15px; }
@@ -202,6 +221,9 @@ footer form button[type='submit']:hover span.push-btn__surface { color: #962f80 
     .happie-product-section .product-images-container { width: 100% !important; max-width: 100% !important; padding: 0 !important; }
     .difference-sec { padding: 0 0 40px; }
     .people-sec, .app-sec { padding: 40px 0; }
+    .moast-testimonials-slider .splide__slide { width: 280px; }
+    .moast-testimonial-card { padding: 20px; }
+    .moast-testimonials-wrapper { margin-top: 30px; padding: 0 10px; }
     .cstm-col-20 { width: 33%;}
     .why-happie-sec { padding: 40px 0 90px; }
     .faq-sec { padding: 20px 0 10px; }

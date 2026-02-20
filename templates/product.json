@@ -9,16 +9,6 @@
  */
 {
   "sections": {
-    "breadcrumbs": {
-      "type": "breadcrumbs",
-      "settings": {
-        "separator": "/",
-        "text_alignment": "justify-center",
-        "font_size": "text-base",
-        "active_text_color": "text",
-        "color_scheme": ""
-      }
-    },
     "main": {
       "type": "main-product",
       "blocks": {
@@ -57,6 +47,7 @@
         },
         "appstle_subscription_appstle_subscription_product_page_widget_TLP88p": {
           "type": "shopify://apps/appstle-subscription/blocks/appstle-subscription-product-page-widget/fe257d39-6f88-4f35-ab08-bd437e3aa94e",
+          "disabled": true,
           "settings": {}
         },
         "buy-buttons": {
@@ -221,9 +212,9 @@
       ],
       "name": "t:sections.featured_collection.name",
       "settings": {
-        "title": "Featured Flavors",
+        "title": "More Happie Merch",
         "subheading": "",
-        "collection": "thc",
+        "collection": "merch",
         "no_products": 8,
         "show_view_all": true,
         "enable_quick_buy": true,
@@ -332,6 +323,7 @@
         "highlight-5",
         "shape-divider-image-with-highlights-0"
       ],
+      "disabled": true,
       "settings": {
         "title": "Why You'll Love Happie THC Beverages",
         "block_alignment_on_desktop": "justify-between",
@@ -351,6 +343,7 @@
     },
     "featured_collection_6j46tJ": {
       "type": "featured-collection",
+      "disabled": true,
       "custom_css": [
         "/* Hide product description in Featured Collection cards */.product-description {display: none !important;}",
         " /* Optional: tighten spacing where the description used to be */.section-featured-collection .card__information,.section-featured-collection .card__content {gap: 0.25rem;}"
@@ -447,7 +440,6 @@
     }
   },
   "order": [
-    "breadcrumbs",
     "main",
     "feature-text",
     "featured_collection_xHiXEY",

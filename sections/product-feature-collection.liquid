@@ -17,25 +17,48 @@
   endif
 -%}
 <section
-  class="relative overflow-hidden bg-scheme-background  text-scheme-text {% if section.settings.use_gradient_background %}bg-scheme-gradient{% endif %} overflow-hidden product-feature-collection-wrapper"
+  id="product-collection-{{ section.id }}"
+  class="relative bg-scheme-background  text-scheme-text {% if section.settings.use_gradient_background %}bg-scheme-gradient{% endif %} product-feature-collection-wrapper"
   data-color-scheme="{{ section.settings.color_scheme }}"
+  style="position: relative; overflow: visible;"
 >
-  <div class="partical-box partical-top">
-    <img
-      width=""
-      height=""
-      src="https://cdn.shopify.com/s/files/1/0640/2431/3942/files/product-sec-top.png?v=1762938331"
-      alt="img"
-    >
-  </div>
+  <!-- Top Wave Divider - Points OUTWARD (up into section above) -->
+  {%- if section.settings.show_top_wave -%}
+    <div class="product-collection__wave product-collection__wave--top" style="position: absolute; top: 0; left: 0; width: 100%; height: {{ section.settings.wave_height }}px; z-index: 15; overflow: visible; transform: translateY(-100%);">
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%; display: block;">
+        {%- case section.settings.top_wave_style -%}
+          {%- when 'wave' -%}
+            <path d="M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z" fill="{{ section.settings.top_wave_color }}">
+              {%- if section.settings.top_wave_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z;M0,120 L0,120 Q360,30 720,80 T1440,40 L1440,120 Z;M0,120 L0,120 Q360,90 720,20 T1440,90 L1440,120 Z;M0,120 L0,120 Q360,10 720,70 T1440,50 L1440,120 Z;M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z"/>
+              {%- endif -%}
+            </path>
+          {%- when 'double-ripple' -%}
+            <path d="M0,120 L0,120 Q360,20 720,50 T1440,50 L1440,120 Z" fill="{{ section.settings.top_wave_color }}">
+              {%- if section.settings.top_wave_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,120 Q360,20 720,50 T1440,50 L1440,120 Z;M0,120 L0,120 Q360,40 720,70 T1440,35 L1440,120 Z;M0,120 L0,120 Q360,10 720,40 T1440,70 L1440,120 Z;M0,120 L0,120 Q360,50 720,30 T1440,55 L1440,120 Z;M0,120 L0,120 Q360,20 720,50 T1440,50 L1440,120 Z"/>
+              {%- endif -%}
+            </path>
+            <path d="M0,120 L0,120 Q540,30 1080,35 T1440,30 L1440,120 Z" fill="{{ section.settings.top_wave_color }}" opacity="0.6">
+              {%- if section.settings.top_wave_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed | times: 1.2 }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,120 Q540,30 1080,35 T1440,30 L1440,120 Z;M0,120 L0,120 Q540,45 1080,50 T1440,25 L1440,120 Z;M0,120 L0,120 Q540,20 1080,25 T1440,45 L1440,120 Z;M0,120 L0,120 Q540,40 1080,30 T1440,35 L1440,120 Z;M0,120 L0,120 Q540,30 1080,35 T1440,30 L1440,120 Z"/>
+              {%- endif -%}
+            </path>
+          {%- else -%}
+            <path d="M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z" fill="{{ section.settings.top_wave_color }}">
+              {%- if section.settings.top_wave_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z;M0,120 L0,120 Q360,30 720,80 T1440,40 L1440,120 Z;M0,120 L0,120 Q360,90 720,20 T1440,90 L1440,120 Z;M0,120 L0,120 Q360,10 720,70 T1440,50 L1440,120 Z;M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z"/>
+              {%- endif -%}
+            </path>
+        {%- endcase -%}
+      </svg>
+    </div>
+  {%- endif -%}
 
-  <div class="section-content relative z-10 py-section-vertical-spacing {% unless section.settings.layout == 'carousel' %}px-section w-full max-w-site mx-auto{% endunless %}">
+  <!-- Old top wave image removed - use new wave controls -->
+
+  <div class="section-content relative z-10 py-section-vertical-spacing px-section w-full max-w-site mx-auto" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;">
     {% if section.settings.title != '' %}
-      {% comment %}
-        <h2 class="inline-heading-rte font-heading heading-standard  heading-style break-words text-center {{ settings.heading_drop_shadow_style }}">
-          {{ section.settings.title }}
-        </h2>
-      {% endcomment %}
       <div class="common-heading-wrap text-center" bis_skin_checked="1">
         <h2>{{ section.settings.title }}</h2>
       </div>
@@ -47,7 +70,53 @@
       </div>
     {%- endif -%}
 
-    {%- render 'featured-collection', item: section, collection: collection, image_shape: image_shape -%}
+    {%- if section.settings.use_happie_cards -%}
+      <!-- Happie Standardized Product Cards Carousel -->
+      {%- render 'happie-product-card-styles' -%}
+      <div class="happie-product-carousel" x-data="{ scrollPosition: 0 }">
+        <div class="happie-product-carousel__track" x-ref="track">
+          {%- for product in collection.products limit: section.settings.no_products -%}
+            <div class="happie-product-carousel__slide">
+              {%- render 'happie-product-card',
+                product: product,
+                lazy_load: true
+              -%}
+            </div>
+          {%- endfor -%}
+        </div>
+        
+        <!-- Navigation Arrows -->
+        <button 
+          class="happie-product-carousel__nav happie-product-carousel__nav--prev"
+          @click="$refs.track.scrollBy({ left: -320, behavior: 'smooth' })"
+          aria-label="Previous products"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+        <button 
+          class="happie-product-carousel__nav happie-product-carousel__nav--next"
+          @click="$refs.track.scrollBy({ left: 320, behavior: 'smooth' })"
+          aria-label="Next products"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      </div>
+      
+      {%- if section.settings.show_view_all and collection.url != blank -%}
+        <div class="text-center mt-8">
+          <a href="{{ collection.url }}" class="happie-product-card__btn" style="display: inline-block; width: auto; padding: 14px 40px;">
+            View All {{ collection.title }}
+          </a>
+        </div>
+      {%- endif -%}
+    {%- else -%}
+      <!-- Original Featured Collection -->
+      {%- render 'featured-collection', item: section, collection: collection, image_shape: image_shape -%}
+    {%- endif -%}
   </div>
 
   {%- liquid
@@ -61,14 +130,40 @@
     endfor
   -%}
 
-  <div class="partical-box partical-bottom">
-    <img
-      width=""
-      height=""
-      src="https://cdn.shopify.com/s/files/1/0640/2431/3942/files/footer-bg.png?v=1762937117"
-      alt="img"
-    >
-  </div>
+  <!-- Old bottom wave image removed - use new wave controls -->
+
+  <!-- Bottom Wave Divider - Points OUTWARD (down into section below) -->
+  {%- if section.settings.show_bottom_wave -%}
+    <div class="product-collection__wave product-collection__wave--bottom" style="position: absolute; bottom: 0; left: 0; width: 100%; height: {{ section.settings.wave_height }}px; z-index: 15; overflow: visible; transform: translateY(100%);">
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%; display: block;">
+        {%- case section.settings.bottom_wave_style -%}
+          {%- when 'wave' -%}
+            <path d="M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z" fill="{{ section.settings.bottom_wave_color }}">
+              {%- if section.settings.bottom_wave_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z;M0,0 L0,0 Q360,90 720,80 T1440,40 L1440,0 Z;M0,0 L0,0 Q360,30 720,100 T1440,90 L1440,0 Z;M0,0 L0,0 Q360,110 720,50 T1440,70 L1440,0 Z;M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z"/>
+              {%- endif -%}
+            </path>
+          {%- when 'double-ripple' -%}
+            <path d="M0,0 L0,0 Q360,100 720,70 T1440,70 L1440,0 Z" fill="{{ section.settings.bottom_wave_color }}">
+              {%- if section.settings.bottom_wave_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,0 L0,0 Q360,100 720,70 T1440,70 L1440,0 Z;M0,0 L0,0 Q360,80 720,50 T1440,85 L1440,0 Z;M0,0 L0,0 Q360,110 720,80 T1440,50 L1440,0 Z;M0,0 L0,0 Q360,70 720,90 T1440,65 L1440,0 Z;M0,0 L0,0 Q360,100 720,70 T1440,70 L1440,0 Z"/>
+              {%- endif -%}
+            </path>
+            <path d="M0,0 L0,0 Q540,90 1080,85 T1440,90 L1440,0 Z" fill="{{ section.settings.bottom_wave_color }}" opacity="0.6">
+              {%- if section.settings.bottom_wave_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed | times: 1.2 }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,0 L0,0 Q540,90 1080,85 T1440,90 L1440,0 Z;M0,0 L0,0 Q540,75 1080,70 T1440,95 L1440,0 Z;M0,0 L0,0 Q540,100 1080,95 T1440,80 L1440,0 Z;M0,0 L0,0 Q540,80 1080,90 T1440,85 L1440,0 Z;M0,0 L0,0 Q540,90 1080,85 T1440,90 L1440,0 Z"/>
+              {%- endif -%}
+            </path>
+          {%- else -%}
+            <path d="M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z" fill="{{ section.settings.bottom_wave_color }}">
+              {%- if section.settings.bottom_wave_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z;M0,0 L0,0 Q360,90 720,80 T1440,40 L1440,0 Z;M0,0 L0,0 Q360,30 720,100 T1440,90 L1440,0 Z;M0,0 L0,0 Q360,110 720,50 T1440,70 L1440,0 Z;M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z"/>
+              {%- endif -%}
+            </path>
+        {%- endcase -%}
+      </svg>
+    </div>
+  {%- endif -%}
 </section>
 
 {%- liquid
@@ -86,6 +181,13 @@
 {
   "name": "Product Collection",
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "use_happie_cards",
+      "label": "Use Happie Product Cards",
+      "default": true,
+      "info": "Enable the standardized Happie product card design with teal Shop Now buttons"
+    },
     {
       "type": "inline_richtext",
       "id": "title",
@@ -670,6 +772,121 @@
       "type": "checkbox",
       "id": "use_gradient_background",
       "label": "t:common.settings.use_gradient_background.label"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Wave Dividers"
+    },
+    {
+      "type": "range",
+      "id": "wave_height",
+      "label": "Wave Height",
+      "min": 30,
+      "max": 150,
+      "step": 10,
+      "default": 80,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "wave_animation_speed",
+      "label": "Animation Speed",
+      "min": 3,
+      "max": 15,
+      "step": 1,
+      "default": 8,
+      "unit": "s",
+      "info": "Duration of one wave cycle"
+    },
+    {
+      "type": "header",
+      "content": "Top Wave"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_top_wave",
+      "label": "Show Top Wave",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "top_wave_style",
+      "label": "Top Wave Style",
+      "options": [
+        { "value": "wave", "label": "Wave One" },
+        { "value": "double-ripple", "label": "Double Ripple" }
+      ],
+      "default": "wave"
+    },
+    {
+      "type": "color",
+      "id": "top_wave_color",
+      "label": "Top Wave Color",
+      "default": "#FFE6CB",
+      "info": "Should match the section above"
+    },
+    {
+      "type": "checkbox",
+      "id": "top_wave_animate",
+      "label": "Animate Top Wave",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Bottom Wave"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_bottom_wave",
+      "label": "Show Bottom Wave",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "bottom_wave_style",
+      "label": "Bottom Wave Style",
+      "options": [
+        { "value": "wave", "label": "Wave One" },
+        { "value": "double-ripple", "label": "Double Ripple" }
+      ],
+      "default": "wave"
+    },
+    {
+      "type": "color",
+      "id": "bottom_wave_color",
+      "label": "Bottom Wave Color",
+      "default": "#FFE6CB",
+      "info": "Should match the section below"
+    },
+    {
+      "type": "checkbox",
+      "id": "bottom_wave_animate",
+      "label": "Animate Bottom Wave",
+      "default": true
     }
   ],
   "blocks": [

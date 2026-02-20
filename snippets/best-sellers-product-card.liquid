@@ -1,0 +1,109 @@
+{%- comment -%}
+  Best Sellers Product Card - Premium Design
+  Large cards with image swap on hover
+  
+  Accepts:
+  - product: Product object
+  - index: Position in grid
+  - section: Section object for settings
+{%- endcomment -%}
+
+{%- liquid
+  # Find the lowest price across all variants
+  assign lowest_price = product.price_min
+  
+  # Check for badge
+  assign badge_text = ''
+  for block in section.blocks
+    if block.type == 'product_badge' and block.settings.product == product
+      assign badge_text = block.settings.badge_text
+      break
+    endif
+  endfor
+  
+  # Check if product is sold out
+  assign is_sold_out = true
+  for variant in product.variants
+    if variant.available
+      assign is_sold_out = false
+      break
+    endif
+  endfor
+  
+  # Get primary and secondary images
+  assign primary_image = product.featured_image
+  assign secondary_image = product.images[1]
+  assign has_secondary_image = false
+  if secondary_image != blank and secondary_image != primary_image
+    assign has_secondary_image = true
+  endif
+  
+  # Get custom tagline metafield
+  assign custom_tagline = product.metafields.custom.product_card_custom_tagline
+-%}
+
+<div class="best-sellers__card{% if has_secondary_image %} best-sellers__card--has-hover-image{% endif %}" data-product-id="{{ product.id }}">
+  <a href="{{ product.url }}" class="best-sellers__card-link">
+    <!-- Image Container with Hover Swap -->
+    <div class="best-sellers__card-image">
+      {%- if badge_text != blank -%}
+        <span class="best-sellers__badge">{{ badge_text }}</span>
+      {%- endif -%}
+      
+      {%- if is_sold_out -%}
+        <span class="best-sellers__badge best-sellers__badge--soldout">Sold out</span>
+      {%- endif -%}
+      
+      {%- if primary_image != blank -%}
+        <!-- Primary Image - Full bleed -->
+        <img
+          src="{{ primary_image | image_url: width: 800, height: 800, crop: 'center' }}"
+          alt="{{ primary_image.alt | escape | default: product.title }}"
+          width="800"
+          height="800"
+          loading="lazy"
+          class="best-sellers__product-image best-sellers__product-image--primary"
+        >
+        
+        {%- if has_secondary_image -%}
+          <!-- Secondary Image (shown on hover) -->
+          <img
+            src="{{ secondary_image | image_url: width: 800, height: 800, crop: 'center' }}"
+            alt="{{ secondary_image.alt | escape | default: product.title }}"
+            width="800"
+            height="800"
+            loading="lazy"
+            class="best-sellers__product-image best-sellers__product-image--secondary"
+          >
+        {%- endif -%}
+      {%- else -%}
+        <div class="best-sellers__placeholder-image">
+          <span>{{ product.title }}</span>
+        </div>
+      {%- endif -%}
+    </div>
+    
+    <!-- Content -->
+    <div class="best-sellers__card-content">
+      <h3 class="best-sellers__product-title">{{ product.title }}</h3>
+      
+      {%- if custom_tagline != blank -%}
+        <p class="best-sellers__product-tagline">{{ custom_tagline }}</p>
+      {%- elsif product.metafields.custom.subheading != blank -%}
+        <p class="best-sellers__product-tagline">{{ product.metafields.custom.subheading }}</p>
+      {%- endif -%}
+      
+      <div class="best-sellers__price-row">
+        <span class="best-sellers__price-label">Starting at</span>
+        <span class="best-sellers__price">{{ lowest_price | money }}</span>
+      </div>
+    </div>
+  </a>
+  
+  <!-- Shop Now Button -->
+  <div class="best-sellers__card-actions">
+    <a href="{{ product.url }}" class="best-sellers__shop-now-btn">
+      SHOP NOW
+    </a>
+  </div>
+</div>

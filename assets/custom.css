@@ -1542,5 +1542,250 @@ html { scroll-behavior: smooth; }
   margin-top: -100px;     /* negative of the height */
 }
 
+/* ========================================
+   PageFly Page Background Extension
+   Extends cream background behind header
+   ======================================== */
+
+/* Target PageFly pages - extend background behind navigation */
+body:has(.__pf) {
+  background-color: #FFE6CB;
+}
+
+/* Ensure the main content area also has the cream background */
+.__pf,
+#__pf,
+[id^="shopify-section-pf-"] {
+  background-color: #FFE6CB;
+}
+
+/* Make header background transparent on PageFly pages so page bg shows through */
+body:has(.__pf) #shopify-section-header,
+body:has(.__pf) .shopify-section-header-group {
+  background-color: transparent;
+}
+
+/* Keep the nav pill/bar styling intact but transparent container */
+body:has(.__pf) .site-header {
+  background-color: transparent;
+}
+
+/* Ensure announcement bar stays on top with its own color */
+body:has(.__pf) #shopify-section-announcement-bar,
+body:has(.__pf) [id*="announcement-bar"] {
+  position: relative;
+  z-index: 100;
+}
+
+/* ========================================
+   Default Page Template Background Extension
+   Extends cream background behind header
+   ======================================== */
+
+/* Target default page template */
+body.template-page {
+  background-color: #FFE6CB !important;
+}
+
+/* Make header group background transparent on default pages */
+body.template-page #shopify-section-header,
+body.template-page .shopify-section-group-header-group,
+body.template-page [id^="shopify-section-header"] {
+  background-color: transparent !important;
+}
+
+/* Target the header wrapper/container */
+body.template-page .header-wrapper,
+body.template-page .site-header-wrapper,
+body.template-page #headerContainer {
+  background-color: transparent !important;
+}
+
+/* Keep the nav pill/bar styling intact but transparent container */
+body.template-page .site-header {
+  background-color: transparent !important;
+}
+
+/* Ensure announcement bar stays on top with its own color */
+body.template-page #shopify-section-announcement-bar,
+body.template-page [id*="announcement-bar"] {
+  position: relative;
+  z-index: 100;
+}
+
+/* ========================================
+   Custom Product Template Background Extension
+   For: updated-pdp, thc-variety-pack, fungi-pdp-updated, 10mg-thc-pdp
+   ======================================== */
+
+/* Hide the header-information trust bar on these product templates */
+body.template-product-updated-pdp [class*="header-information"],
+body.template-product-thc-variety-pack [class*="header-information"],
+body.template-product-fungi-pdp-updated [class*="header-information"],
+body.template-product-10mg-thc-pdp [class*="header-information"],
+body.updated-pdp [class*="header-information"],
+body.template-product-updated-pdp [id*="header_information"],
+body.template-product-thc-variety-pack [id*="header_information"],
+body.template-product-fungi-pdp-updated [id*="header_information"],
+body.template-product-10mg-thc-pdp [id*="header_information"],
+body.updated-pdp [id*="header_information"] {
+  display: none !important;
+}
+
+/* Also target by section type */
+body.template-product-updated-pdp .shopify-section:has([class*="header-information"]),
+body.template-product-thc-variety-pack .shopify-section:has([class*="header-information"]),
+body.template-product-fungi-pdp-updated .shopify-section:has([class*="header-information"]),
+body.template-product-10mg-thc-pdp .shopify-section:has([class*="header-information"]),
+body.updated-pdp .shopify-section:has([class*="header-information"]) {
+  display: none !important;
+}
+
+/* Extend cream background behind header for these product templates */
+body.template-product-updated-pdp,
+body.template-product-thc-variety-pack,
+body.template-product-fungi-pdp-updated,
+body.template-product-10mg-thc-pdp,
+body.updated-pdp {
+  background-color: #FFE6CB !important;
+}
+
+/* Make header transparent on these product pages */
+body.template-product-updated-pdp #shopify-section-header,
+body.template-product-updated-pdp .shopify-section-group-header-group,
+body.template-product-thc-variety-pack #shopify-section-header,
+body.template-product-thc-variety-pack .shopify-section-group-header-group,
+body.template-product-fungi-pdp-updated #shopify-section-header,
+body.template-product-fungi-pdp-updated .shopify-section-group-header-group,
+body.template-product-10mg-thc-pdp #shopify-section-header,
+body.template-product-10mg-thc-pdp .shopify-section-group-header-group,
+body.updated-pdp #shopify-section-header,
+body.updated-pdp .shopify-section-group-header-group {
+  background-color: transparent !important;
+}
+
+/* Keep nav pill styling intact but transparent container */
+body.template-product-updated-pdp .site-header,
+body.template-product-thc-variety-pack .site-header,
+body.template-product-fungi-pdp-updated .site-header,
+body.template-product-10mg-thc-pdp .site-header,
+body.updated-pdp .site-header {
+  background-color: transparent !important;
+}
+
+/* ========================================
+   Collection Pages Background Extension
+   Extends cream background behind header
+   ======================================== */
+
+/* Target all collection pages */
+body.template-collection {
+  background-color: #FFE6CB !important;
+}
+
+/* Make header transparent on collection pages */
+body.template-collection #shopify-section-header,
+body.template-collection .shopify-section-group-header-group,
+body.template-collection [id^="shopify-section-header"] {
+  background-color: transparent !important;
+}
+
+/* Target the header wrapper/container */
+body.template-collection .header-wrapper,
+body.template-collection .site-header-wrapper,
+body.template-collection #headerContainer {
+  background-color: transparent !important;
+}
+
+/* Keep the nav pill/bar styling intact but transparent container */
+body.template-collection .site-header {
+  background-color: transparent !important;
+}
+
+/* Ensure announcement bar stays on top with its own color */
+body.template-collection #shopify-section-announcement-bar,
+body.template-collection [id*="announcement-bar"] {
+  position: relative;
+  z-index: 100;
+}
+
+/* Ensure the main collection content blends with the background */
+body.template-collection .main-content,
+body.template-collection main {
+  background-color: transparent;
+}
+
+/* Allow collection hero to extend under the navigation */
+body.template-collection #MainContent {
+  overflow: visible !important;
+}
+
+body.template-collection .shopify-section:first-of-type {
+  overflow: visible !important;
+}
+
+/* Pull collection hero up under the header */
+body.template-collection .collection-hero {
+  margin-top: calc(-1 * var(--header-group-height, 160px)) !important;
+  padding-top: var(--header-group-height, 160px) !important;
+}
+
+@media (max-width: 767px) {
+  body.template-collection .collection-hero {
+    margin-top: calc(-1 * var(--header-group-height, 120px)) !important;
+    padding-top: var(--header-group-height, 120px) !important;
+  }
+}
+
+/* ========================================
+   Default Product Template Background Extension
+   For: product.json (no template suffix)
+   ======================================== */
+
+/* Target default product template - sets cream background on body */
+body.template-product {
+  background-color: #FFE6CB !important;
+}
+
+/* Make header group transparent so body background shows through */
+body.template-product #shopify-section-header,
+body.template-product .shopify-section-group-header-group,
+body.template-product [id^="shopify-section-header"] {
+  background-color: transparent !important;
+}
+
+/* Target the header wrapper/container */
+body.template-product .header-wrapper,
+body.template-product .site-header-wrapper,
+body.template-product #headerContainer {
+  background-color: transparent !important;
+}
+
+/* Keep the nav pill/bar styling intact but transparent container */
+body.template-product .site-header {
+  background-color: transparent !important;
+}
+
+/* Ensure announcement bar stays on top with its own color */
+body.template-product #shopify-section-announcement-bar,
+body.template-product [id*="announcement-bar"] {
+  position: relative;
+  z-index: 100;
+}
+
+/* Ensure main content blends with the background */
+body.template-product .main-content,
+body.template-product main {
+  background-color: transparent;
+}
+
+/* Allow first section to extend under the navigation */
+body.template-product #MainContent {
+  overflow: visible !important;
+}
+
+body.template-product .shopify-section:first-of-type {
+  overflow: visible !important;
+}
 
 

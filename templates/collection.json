@@ -1,1 +1,100 @@
-{"sections":{"breadcrumbs":{"type":"breadcrumbs","settings":{"separator":"\/","text_alignment":"justify-center","font_size":"text-base","active_text_color":"text","color_scheme":""}},"banner":{"type":"main-collection-banner","disabled":true,"settings":{"display_on_card":false,"show_collection_title":true,"show_collection_description":true,"linklist":"main-menu","color_scheme":"scheme1","use_gradient_background":false}},"product-grid":{"type":"main-collection-product-grid","settings":{"no_products":24,"display_on_card":true,"enable_quick_buy":true,"products_per_row_mobile":"2","products_per_row_desktop":4,"enable_filtering":false,"enable_sorting":false,"expand_filters":true,"show_filter_count":true,"enable_color_swatch_filters":false,"color_scheme":"scheme1","use_gradient_background":false}},"wavy_divier_Qhxkg7":{"type":"wavy-divier","name":"Wavy Divider","settings":{"image":"shopify:\/\/shop_images\/divider-top-cream-bottom-dark-purple.svg"}}},"order":["breadcrumbs","banner","product-grid","wavy_divier_Qhxkg7"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "collection_hero": {
+      "type": "collection-hero",
+      "blocks": {
+        "filter_1": {
+          "type": "filter_link",
+          "settings": {
+            "label": "Shop All",
+            "link": "shopify://collections/shop-all"
+          }
+        },
+        "filter_2": {
+          "type": "filter_link",
+          "settings": {
+            "label": "THC Seltzers",
+            "link": "shopify://collections/frontpage"
+          }
+        },
+        "filter_3": {
+          "type": "filter_link",
+          "settings": {
+            "label": "Fungi Fusion",
+            "link": "shopify://collections/homepage-shrine"
+          }
+        },
+        "filter_5": {
+          "type": "filter_link",
+          "settings": {
+            "label": "Merch",
+            "link": "shopify://collections/merch"
+          }
+        }
+      },
+      "block_order": [
+        "filter_1",
+        "filter_2",
+        "filter_3",
+        "filter_5"
+      ],
+      "settings": {
+        "show_title": true,
+        "show_description": true,
+        "background_image": "shopify://shop_images/Happie_-_Collection_Hero_1.jpg",
+        "background_color": "#fff2e4",
+        "overlay_color": "#000000",
+        "overlay_opacity": 45,
+        "title_color": "#ffffff",
+        "description_color": "#4a4a4a",
+        "show_filters": true,
+        "filter_bar_background": "rgba(0,0,0,0)",
+        "pill_background_color": "#ffffff",
+        "pill_text_color": "#1a1a1a",
+        "pill_border_color": "#e5e5e5",
+        "pill_hover_background": "#f5f5f5",
+        "pill_hover_border": "#50b2bd",
+        "pill_active_background": "#50b2bd",
+        "pill_active_text": "#ffffff"
+      }
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "settings": {
+        "use_happie_cards": true,
+        "no_products": 24,
+        "display_on_card": true,
+        "enable_quick_buy": true,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 4,
+        "enable_filtering": false,
+        "enable_sorting": false,
+        "expand_filters": true,
+        "show_filter_count": true,
+        "enable_color_swatch_filters": false,
+        "color_scheme": "scheme1",
+        "use_gradient_background": false
+      }
+    },
+    "wavy_divier_Qhxkg7": {
+      "type": "wavy-divier",
+      "settings": {
+        "image": "shopify://shop_images/divider-top-cream-bottom-dark-purple.svg"
+      }
+    }
+  },
+  "order": [
+    "collection_hero",
+    "product-grid",
+    "wavy_divier_Qhxkg7"
+  ]
+}
