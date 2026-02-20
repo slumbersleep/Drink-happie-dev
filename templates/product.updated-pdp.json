@@ -226,7 +226,7 @@
         "bottom_wave_style": "wave",
         "bottom_wave_color": "#ffe6cb",
         "bottom_wave_animate": true,
-        "invert_bottom_wave": false
+        "invert_bottom_wave": true
       }
     },
     "real_people_TNHp8z": {
@@ -429,7 +429,7 @@
         "invert_top_wave": false,
         "show_bottom_wave": false,
         "bottom_wave_style": "wave",
-        "bottom_wave_color": "#ffe6cb",
+        "bottom_wave_color": "#5b414a",
         "bottom_wave_animate": true,
         "invert_bottom_wave": false
       }
