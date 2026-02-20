@@ -6,10 +6,11 @@
   }
   #faq-section-{{ section.id }}.faq-section-wrapper,
   .faq-sec#faq-section-{{ section.id }},
-  section.faq-sec.faq-section-wrapper,
-  .faq-sec {
+  section.faq-sec.faq-section-wrapper {
     position: relative;
     overflow: visible !important;
+    /* Override the default .faq-sec padding since we control padding via inline styles */
+    padding: 0 !important;
   }
 </style>
 <section id="faq-section-{{ section.id }}" class="faq-section-wrapper" style="position: relative; overflow: visible;">

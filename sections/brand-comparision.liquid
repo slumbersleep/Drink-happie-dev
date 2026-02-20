@@ -6,10 +6,11 @@
   }
   #brand-comparison-{{ section.id }}.brand-comparison-section,
   .why-happie-sec#brand-comparison-{{ section.id }},
-  section.why-happie-sec.brand-comparison-section,
-  .why-happie-sec {
+  section.why-happie-sec.brand-comparison-section {
     position: relative;
     overflow: visible !important;
+    /* Override the default .why-happie-sec padding since we control padding via inline styles */
+    padding: 0 !important;
   }
 </style>
 <section id="brand-comparison-{{ section.id }}" class="brand-comparison-section" style="position: relative; overflow: visible;">
