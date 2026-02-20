@@ -6,10 +6,11 @@
   }
   #moast-app-{{ section.id }}.moast-app-section,
   .app-sec#moast-app-{{ section.id }},
-  section.app-sec.moast-app-section,
-  .app-sec {
+  section.app-sec.moast-app-section {
     position: relative;
     overflow: visible !important;
+    /* Override the default .app-sec padding since we control padding via inline styles */
+    padding: 0 !important;
   }
 </style>
 <section id="moast-app-{{ section.id }}" class="moast-app-section" style="position: relative; overflow: visible;">

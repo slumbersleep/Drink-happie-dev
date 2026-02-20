@@ -6,10 +6,11 @@
   }
   #real-people-{{ section.id }}.real-people-section,
   .people-sec#real-people-{{ section.id }},
-  section.people-sec.real-people-section,
-  .people-sec {
+  section.people-sec.real-people-section {
     position: relative;
     overflow: visible !important;
+    /* Override the default .people-sec padding since we control padding via inline styles */
+    padding: 0 !important;
   }
 </style>
 <section id="real-people-{{ section.id }}" class="real-people-section" style="position: relative; overflow: visible;">
