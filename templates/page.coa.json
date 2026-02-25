@@ -28,7 +28,7 @@
     "coa_anchor_nav": {
       "type": "coa-anchor-nav",
       "settings": {
-        "background_color": "#FFFBF5",
+        "background_color": "#fffbf5",
         "button_background_color": "#50b2bd",
         "button_text_color": "#ffffff",
         "button_hover_background_color": "#3d9aa4",
@@ -52,7 +52,7 @@
           "type": "ai_gen_block_25e3737",
           "settings": {
             "heading": "Happie 5mg THC COA",
-            "background_color": "#FFFBF5",
+            "background_color": "#fffbf5",
             "header_background_color": "#50b2bd",
             "header_text_color": "#ffffff",
             "text_color": "#1a1a1a",
@@ -88,7 +88,7 @@
           "type": "ai_gen_block_25e3737",
           "settings": {
             "heading": "Happie 10mg THC COA",
-            "background_color": "#FFFBF5",
+            "background_color": "#fffbf5",
             "header_background_color": "#962f80",
             "header_text_color": "#ffffff",
             "text_color": "#1a1a1a",
@@ -98,13 +98,13 @@
             "button_text_color": "#ffffff",
             "button_hover_background_color": "#7a2669",
             "product_1": "groovy-grapefruit",
-            "coa_link_1": "https://cdn.shopify.com/s/files/1/0640/2431/3942/files/SA-251124-73139_PPK_Investments_Happie_Grapefruit.pdf?v=1766908739",
+            "coa_link_1": "https://cdn.shopify.com/s/files/1/0640/2431/3942/files/SA-251204-73683_PPK_Investments_Happie_Grapefruit_-_10mg.pdf?v=1771975327",
             "product_2": "cheery-cherry",
-            "coa_link_2": "https://cdn.shopify.com/s/files/1/0640/2431/3942/files/SA-251124-73142_PPK_Investments_Happie_Cherry.pdf?v=1766799761",
+            "coa_link_2": "https://cdn.shopify.com/s/files/1/0640/2431/3942/files/SA-251124-73142_PPK_Investments_Happie_10MG_-_Cheery_Cherry_0e7de605-1c90-4ade-836b-8076dd000720.pdf?v=1771975327",
             "product_3": "grateful-grape",
-            "coa_link_3": "https://cdn.shopify.com/s/files/1/0640/2431/3942/files/SA-250616-63591_PPK_Investments_Grateful_Grape_de6a17fd-bdfa-41da-af0d-ba61b41a4845.pdf?v=1766908867",
+            "coa_link_3": "https://cdn.shopify.com/s/files/1/0640/2431/3942/files/SA-251204-73684_PPK_Investments_Happie_Grape_-_10mg.pdf?v=1771975327",
             "product_4": "sublime",
-            "coa_link_4": "https://cdn.shopify.com/s/files/1/0640/2431/3942/files/SA-251124-73141_PPK_Investments_Happie_Lime.pdf?v=1766799732",
+            "coa_link_4": "https://cdn.shopify.com/s/files/1/0640/2431/3942/files/SA-251124-73141_PPK_Investments_Happie_10MG_-_SubLime_552467bb-076f-4d16-a919-748799d18202.pdf?v=1771975327",
             "product_5": "",
             "coa_link_5": "",
             "product_6": "",
@@ -124,7 +124,7 @@
           "type": "ai_gen_block_25e3737",
           "settings": {
             "heading": "Fungi Fusion COA",
-            "background_color": "#FFFBF5",
+            "background_color": "#fffbf5",
             "header_background_color": "#d8826e",
             "header_text_color": "#ffffff",
             "text_color": "#1a1a1a",
