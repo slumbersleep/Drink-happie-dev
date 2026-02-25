@@ -1,0 +1,237 @@
+{% doc %}
+  COA Anchor Navigation
+  A simple navigation bar with anchor links to jump to different COA sections on the page.
+{% enddoc %}
+
+{% style %}
+  .coa-anchor-nav {
+    padding: 20px 0 40px;
+    background-color: {{ section.settings.background_color }};
+  }
+
+  .coa-anchor-nav__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .coa-anchor-nav__links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .coa-anchor-nav__link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    background-color: {{ section.settings.button_background_color }};
+    color: {{ section.settings.button_text_color }};
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 500;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    border: 2px solid {{ section.settings.button_background_color }};
+  }
+
+  .coa-anchor-nav__link:hover {
+    background-color: {{ section.settings.button_hover_background_color }};
+    border-color: {{ section.settings.button_hover_background_color }};
+    color: {{ section.settings.button_hover_text_color }};
+    transform: translateY(-2px);
+  }
+
+  @media screen and (max-width: 749px) {
+    .coa-anchor-nav__links {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .coa-anchor-nav__link {
+      text-align: center;
+    }
+  }
+{% endstyle %}
+
+<div class="coa-anchor-nav">
+  <div class="coa-anchor-nav__container">
+    <nav class="coa-anchor-nav__links" aria-label="Jump to COA section">
+      {% if section.settings.link_1_label != blank and section.settings.link_1_anchor != blank %}
+        <a href="#{{ section.settings.link_1_anchor }}" class="coa-anchor-nav__link">
+          {{ section.settings.link_1_label }}
+        </a>
+      {% endif %}
+      {% if section.settings.link_2_label != blank and section.settings.link_2_anchor != blank %}
+        <a href="#{{ section.settings.link_2_anchor }}" class="coa-anchor-nav__link">
+          {{ section.settings.link_2_label }}
+        </a>
+      {% endif %}
+      {% if section.settings.link_3_label != blank and section.settings.link_3_anchor != blank %}
+        <a href="#{{ section.settings.link_3_anchor }}" class="coa-anchor-nav__link">
+          {{ section.settings.link_3_label }}
+        </a>
+      {% endif %}
+      {% if section.settings.link_4_label != blank and section.settings.link_4_anchor != blank %}
+        <a href="#{{ section.settings.link_4_anchor }}" class="coa-anchor-nav__link">
+          {{ section.settings.link_4_label }}
+        </a>
+      {% endif %}
+      {% if section.settings.link_5_label != blank and section.settings.link_5_anchor != blank %}
+        <a href="#{{ section.settings.link_5_anchor }}" class="coa-anchor-nav__link">
+          {{ section.settings.link_5_label }}
+        </a>
+      {% endif %}
+    </nav>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('.coa-anchor-nav__link').forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href').substring(1);
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        const headerOffset = 100;
+        const elementPosition = targetElement.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "COA Anchor Navigation",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_background_color",
+      "label": "Button background",
+      "default": "#50b2bd"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_background_color",
+      "label": "Button hover background",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text_color",
+      "label": "Button hover text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Link 1"
+    },
+    {
+      "type": "text",
+      "id": "link_1_label",
+      "label": "Label",
+      "default": "Happy 5mg COA"
+    },
+    {
+      "type": "text",
+      "id": "link_1_anchor",
+      "label": "Anchor ID",
+      "default": "happie-5mg-thc-coa",
+      "info": "The ID of the section to scroll to (no # symbol)"
+    },
+    {
+      "type": "header",
+      "content": "Link 2"
+    },
+    {
+      "type": "text",
+      "id": "link_2_label",
+      "label": "Label",
+      "default": "Happy 10mg COA"
+    },
+    {
+      "type": "text",
+      "id": "link_2_anchor",
+      "label": "Anchor ID",
+      "default": "happie-10mg-thc-coa",
+      "info": "The ID of the section to scroll to (no # symbol)"
+    },
+    {
+      "type": "header",
+      "content": "Link 3"
+    },
+    {
+      "type": "text",
+      "id": "link_3_label",
+      "label": "Label",
+      "default": "Fungi Fusion COAs"
+    },
+    {
+      "type": "text",
+      "id": "link_3_anchor",
+      "label": "Anchor ID",
+      "default": "fungi-fusion-coa",
+      "info": "The ID of the section to scroll to (no # symbol)"
+    },
+    {
+      "type": "header",
+      "content": "Link 4"
+    },
+    {
+      "type": "text",
+      "id": "link_4_label",
+      "label": "Label"
+    },
+    {
+      "type": "text",
+      "id": "link_4_anchor",
+      "label": "Anchor ID",
+      "info": "The ID of the section to scroll to (no # symbol)"
+    },
+    {
+      "type": "header",
+      "content": "Link 5"
+    },
+    {
+      "type": "text",
+      "id": "link_5_label",
+      "label": "Label"
+    },
+    {
+      "type": "text",
+      "id": "link_5_anchor",
+      "label": "Anchor ID",
+      "info": "The ID of the section to scroll to (no # symbol)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "COA Anchor Navigation"
+    }
+  ]
+}
+{% endschema %}

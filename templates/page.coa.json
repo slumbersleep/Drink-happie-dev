@@ -25,6 +25,26 @@
         "use_gradient_background": false
       }
     },
+    "coa_anchor_nav": {
+      "type": "coa-anchor-nav",
+      "settings": {
+        "background_color": "#ffffff",
+        "button_background_color": "#50b2bd",
+        "button_text_color": "#ffffff",
+        "button_hover_background_color": "#333333",
+        "button_hover_text_color": "#ffffff",
+        "link_1_label": "Happy 5mg COA",
+        "link_1_anchor": "happie-5mg-thc-coa",
+        "link_2_label": "Happy 10mg COA",
+        "link_2_anchor": "happie-10mg-thc-coa",
+        "link_3_label": "Fungi Fusion COAs",
+        "link_3_anchor": "fungi-fusion-coa",
+        "link_4_label": "",
+        "link_4_anchor": "",
+        "link_5_label": "",
+        "link_5_anchor": ""
+      }
+    },
     "17631604056ddcd710": {
       "type": "_blocks",
       "blocks": {
@@ -222,6 +242,7 @@
   },
   "order": [
     "feature_text_nnkbad",
+    "coa_anchor_nav",
     "17631604056ddcd710",
     "main"
   ]

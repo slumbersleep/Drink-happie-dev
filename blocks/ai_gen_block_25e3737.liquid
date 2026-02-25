@@ -156,7 +156,10 @@
   }
 {% endstyle %}
 
-<div class="ai-coa-table-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+{% liquid
+  assign anchor_id = block.settings.heading | handleize
+%}
+<div class="ai-coa-table-{{ ai_gen_id }}" id="{{ anchor_id }}" {{ block.shopify_attributes }}>
   <div class="ai-coa-table-container-{{ ai_gen_id }}">
     {% if block.settings.heading != blank %}
       <h2 class="ai-coa-table-heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
